@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="layui/css/layui.css" th:href="@{static/layui/css/layui.css}">
+		<link rel="stylesheet" type="text/css" href="css/header.css" th:href="@{static/css/header.css}"/>
+		<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"/>
+		<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+		
+		
+		<link rel="stylesheet" type="text/css" href="css/examMng.css" th:href="@{static/css/examMng.css}"/> 
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" th:href="@{static/css/bootstrap.css}"/>
+		<link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{static/css/common.css}"/>
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" th:href="@{static/css/font-awesome.min.css}"/>
+		<link rel="stylesheet" type="text/css" href="css/core.css" th:href="@{static/css/core.css}"/>
+		
+		
+		<title>题库添加界面</title>
+	</head>
+
+	<body class="layui-view-body">
+		
+
+		<div th:replace="teacherHead :: html"></div>
+		     <div class="layui-container">  
+		  <div class="layui-row">
+		    <div class="layui-col-md3">
+	        	<ul class="layui-nav layui-nav-tree" lay-filter="test">
+				<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+				  <li class="layui-nav-item layui-nav-itemed">
+				    <a href="javascript:;">我的题库</a>
+<!-- 				    <dl class="layui-nav-child"> -->
+<!-- 				      <dd><a href="javascript:;">选项1</a></dd> -->
+<!-- 				      <dd><a href="javascript:;">选项2</a></dd> -->
+				     
+<!-- 				    </dl> -->
+				  </li>
+<!-- 				  <li class="layui-nav-item"> -->
+<!-- 				    <a href="javascript:;">我的考试</a> -->
+<!-- 				    <dl class="layui-nav-child"> -->
+<!-- 				      <dd><a href="">未开始</a></dd> -->
+<!-- 				      <dd><a href="">进行中</a></dd> -->
+<!-- 				      <dd><a href="">已结束</a></dd> -->
+<!-- 				    </dl> -->
+<!-- 				  </li> -->
+				</ul>
+		    </div>
+		    <div class="layui-col-md8">
+		    	
+		 <!--body begin-->
+		<div class="main-container">
+			<div class="container body-box">
+				<div class="info-add-box">题库信息录入：</div>
+				<div class="content-box">
+					<div class="overflow">
+						<div class="col-lg-10 col-md-10" style="padding:0">
+							<div class="input-group input-group-lg tk-title">
+								<span class="input-group-addon" id="sizing-addon1">题库名称</span>
+								<input type="text" id="bankname" class="form-control" placeholder="请输入题库名称" aria-describedby="sizing-addon1" onblur="tijiao(this)">
+							</div>
+							<div class="input-group input-group-lg tk-title">
+								<span class="input-group-addon" id="sizing-addon1">题库标签</span>
+								<div class="btn-group btn-group-lg" role="group">
+								   <select  class="form-control" id = "banklabel"> 
+								   	<option>历史</option>
+								   	<option>数学</option>
+								   	<option>英语</option>
+								   	<option>编程</option>
+								   	<option>算法</option>
+								   </select>
+								</div>
+							</div>
+							<div class="input-group input-group-lg tk-title tk-introduction">
+								<span class="input-group-addon" id="sizing-addon1">题库简介</span>
+								<textarea type="text" id ="bankdescription" class="form-control" placeholder="请输入题库名称" aria-describedby="sizing-addon1" onblur="tijiao(this)"></textarea>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-2" style="padding-right:0">
+							<a href="javascript:file_upload.click()">
+								<div class="info-add-photo"><img src="img/shujujiegou.jsp"></div>
+								<div class="info-add-text text-center">
+									<a href="javascript:file_upload.click()">点击上传题库封面图片</a>
+									<input id="file_upload" class="info-choose" type="file" style="display: none;">
+								</div>
+							</a>
+						</div>	
+					</div>
+					<div class="line-bottom"></div>
+					<div class="tipbox">
+						<span class="tip">提示：</span>
+						<span>题库信息保存后，只能修改不能删除，请仔细检查确认信息的准确性</span>
+					</div>
+					<div class="anniu-group">
+						<button class="btn btn-danger" role="button">取消</button>
+						
+							<button class="btn btn-success" id="creatbank">创建题库</button>
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--body end-->
+		
+		    	
+		 <script src="js/jqeury.js" th:src="@{static/js/jquery-2.0.3.min.js}"></script>
+		<script src="layui/layui.js" th:src="@{static/layui/layui.js}"></script>
+		<script src="js/index.js" data-main="home" th:src="@{static/js/index.js}"></script>
+	   
+		 
+		<script>
+		//Demo
+		layui.use('form', function(){
+		  var form = layui.form;
+		  form.render();
+		  //监听提交
+		  form.on('submit(formDemo)', function(data){
+		    layer.msg(JSON.stringify(data.field));
+		    return false;
+		  });
+		});
+		</script>
+		    </div>
+		  </div>
+
+	</body>
+	<script>
+		//注意：导航 依赖 element 模块，否则无法进行功能性操作
+		layui.use('element', function() {
+			var element = layui.element;
+
+			//…
+		});
+		
+		
+		
+	</script>
+	
+	<script>
+		
+			$(document).ready(function(){
+				nums = $(".main-container .info-add").length;
+				footer_position();
+				//当浏览器窗口大小改变时，设置显示内容的高度  
+				$(window).resize(function(){
+					footer_position();
+				});
+			});
+			function footer_position(){
+				var winHeight = $(window).height();
+				var myHeight = winHeight-60-82-20;
+				//alert(myHeight+"-"+$(".main").height());
+				if($(".main-container").height() <= myHeight){
+					$(".kw-footer").css("position","fixed");
+					$(".kw-footer").css("bottom","0");
+					$(".main-container").css("min-height",myHeight+"px");
+				}else{
+					$(".kw-footer").css("position","initial");
+				}
+			}
+			
+			
+			
+			
+			
+		</script>
+		
+		<script>
+		$(function() {
+		$('#creatbank').click(function(){
+// 			alert("22222");
+			var p1 = $('#bankname').val();
+			var p2 = $('#banklabel').val();
+			var p3 = $('#bankdescription').val();
+			var p4 = 1;
+			var b = {'bankname':p1,'banklabel':p2,'bankdescription':p3,"userid":p4};//包装成一个js对象
+			$.ajax({
+				url:'/addbank',
+				type:'post',
+				contentType:'application/json;charset=utf-8',//请求的字符编码
+				data:JSON.stringify(b),//转换成json格式字符串
+				dateType:"text",//返回类型
+				success:function(e){
+					alert(e);
+// 					window.location.href="teacherBank/bankdetail";
+
+				},
+				error:function(){
+					alert('异步提交失败');
+				
+
+				}
+			});
+		})
+		})
+		</script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html >
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css" th:href="@{static/layui/css/layui.css}">
+    <link rel="stylesheet" href="css/view.css" th:href="@{static/css/view.css}"/>
+  
+    <title>待开始</title>
+</head>
+<body class="layui-view-body" style="height: 1000px; background-color:white;" >
+    <div class="layui-content">
+        
+        <div class="layui-row">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="form-box">
+                         <table id="demo2"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="layui/layui.all.js" th:src="@{static/layui/layui.all.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+     
+	  var waitingToStart=[[${waitingToStart}]];
+	  var json2="[]";
+	  var jsonarray2=eval('('+json2+')');
+	  if(waitingToStart!=null){
+		   for(var i=0;i<waitingToStart.length;i++){
+		  var arr={
+				  "id":i,
+				  "papername":'<a href="toPaperDetail1/'+waitingToStart[i].paperid+'">'+waitingToStart[i].papername+'</a>',
+		          "startTime":waitingToStart[i].begintime,
+		          "endTime":waitingToStart[i].endtime,
+		          "paperWriter":waitingToStart[i].winder
+		  }
+		   jsonarray2.push(arr);  
+	    }
+	  }
+	  
+  var element2 = layui.element;
+  var table2 = layui.table;
+  var form2 = layui.form;
+  
+  //展示已知数据
+  table2.render({
+    elem: '#demo2'
+    ,cols: [
+    	[ //标题栏
+       {field: 'id', title: 'ID', width: 200, sort: true}
+      ,{field: 'papername', title: '试卷名称', width: 200}
+      ,{field: 'startTime', title: '答题开启时间', width: 200}
+      ,{field: 'endTime', title: '答题关闭时间', width: 200}
+      ,{field: 'paperWriter', title: '出题人', width: 200}
+      
+    ]
+    	]
+    ,data: jsonarray2
+    ,skin: 'line' //表格风格
+    ,even: true
+    ,page: true //是否显示分页
+    ,limits: [5, 7, 10]
+    ,limit: 5 //每页默认显示的数量
+  });
+    </script>
+</html>

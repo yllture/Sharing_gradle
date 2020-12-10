@@ -1,0 +1,70 @@
+<!DOCTYPE html >
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css" th:href="@{static/layui/css/layui.css}">
+     <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css"  th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"/>
+    <link rel="stylesheet" href="css/view.css" th:href="@{static/css/view.css}"/>
+    <title>已完成</title>
+</head>
+<body class="layui-view-body" style="background-color: white;">
+    <div class="layui-content">
+         <div class="layui-row">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="form-box">
+                         <table id="demo1"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="layui/layui.all.js" th:src="@{static/layui/layui.all.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+      var finished=[[${finished}]];
+      
+      
+      var json1="[]";
+	  var jsonarray1=eval('('+json1+')');
+	  if(finished!=null){
+	     for(var i=0;i<finished.length;i++){
+		  var arr={
+				  "id":i+1,
+				  "questiontitle":'<a href="toPaperDetail1/'+finished[i].paperid+'">'+finished[i].papername+'</a>',
+		          "number":finished[i].questionnum,
+		          "score":finished[i].finscore,
+		          "check":'<a href="toPaperReport/'+ finished[i].paperid+'"><i class="fa fa-file-text"></i></a>'
+		  }
+		jsonarray1.push(arr);  
+	  }
+	  }
+      var element1 = layui.element;
+      var table1 = layui.table;
+      var form1 = layui.form;
+  
+  //展示已知数据
+  table1.render({
+    elem: '#demo1'
+    ,cols: [[ //标题栏
+       {field: 'id', title: 'ID', width: 200, sort: true}
+      ,{field: 'questiontitle', title: '试卷题目', width: 300}
+      ,{field: 'number', title: '题目数量', width: 200}
+      ,{field: 'score', title: '分数', width: 200, sort: true}
+      ,{field: 'check', title: '查看报告', width: 200}
+     ]]
+    ,data: jsonarray1
+    ,skin: 'line' //表格风格
+    ,even: true
+    ,page: true //是否显示分页
+    ,limits: [5, 7, 10]
+    ,limit: 5 //每页默认显示的数量
+  });
+  
+    </script>
+    
+    
+
+</html>

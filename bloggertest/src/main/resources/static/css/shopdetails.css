@@ -1,0 +1,134 @@
+.choose-item div{
+	display:inline;
+}
+.p-rating-review{
+	float: right;
+}
+.product-details-text div,h4{
+	display: inline;
+}
+.buy-btn{
+	line-height: 33px;
+    padding: 0 30px;
+    font-weight: 550;
+    margin-left: 20px;
+}
+.product-detials-area{
+	border-bottom: solid 3px #78a206;
+	margin-right: 165px;
+	margin-left: 165px;
+}
+.comment-btn{
+	line-height: 33px;
+    padding: 0 30px;
+    font-weight: 550;
+    margin-left: 20px;
+}
+.product-topics-display{
+	margin-left: 165px;
+	margin-right: 165px;
+	border-bottom: solid 3px #78a206;
+}
+.q-item .q-head-wrapper > div {
+    display: inline-block;
+    /* width: 600px; */
+    height: 30px;
+    line-height: 30px;
+}
+.q-item .q-type {
+    color: #656D78;
+}
+.q-item .skill-label {
+    margin-left: 10px;
+    font-weight: normal;
+    font-size: 13px;
+    color: #FFF;
+    background-color: #8CADCA;
+    display: inline-block;
+    vertical-align: middle;
+        border-radius: 5px;
+    padding: 0px 4px;
+}
+@media screen and (min-width: 1200px)
+.question-label {
+    max-width: 400px;
+}
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.q-item .difficult-label {
+    margin-left: 10px;
+    font-weight: normal;
+    font-size: 13px;
+    color: #FFF;
+    background-color: #FFA400;
+    display: inline-block;
+    vertical-align: middle;
+        border-radius: 5px;
+    padding: 0px 4px;
+}
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    tab-size: 2;
+}
+
+.sets-question-item pre {
+    display: inline;
+    outline: none;
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: 1em;
+    white-space: pre-wrap;
+}
+.ml10 {
+    margin-left: 10px;
+}
+.mt20 {
+    margin-top: 20px;
+}
+.q-item .q-option {
+    color: #656D78;
+    margin-bottom: 5px;
+}
+.q-item .q-choice-icon {
+    cursor: default;
+    margin-right: 5px;
+}
+label.sets-radio {
+    font-weight: 400;
+    padding: 0;
+    color: #656d78;
+    border-color: transparent;
+    background: 0 0;
+    box-shadow: none;
+}
+.q-item .q-option .option-index {
+    color: #656D78;
+    margin-right: 5px;
+    display: inline-block;
+    width: 10px;
+}
+.sets-question-item{
+	border-bottom: 1px dashed #e3e3e3;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.content-more a{
+	font-size: 15px;
+}
+.single-review-item img{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+.report-product{
+	padding-left:20px;
+	padding-right:20px;
+}
+.p-d-name{
+	color: #78a206;
+}

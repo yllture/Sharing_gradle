@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>table模块快速使用</title>
+  <link rel="stylesheet" th:href="@{static/css/groupbootstrapstyle.css}">
+  <style>
+   img{
+    		width: 40px;
+		    height: 40px;
+		    border-radius: 50%;
+		    margin-right: 4px;
+		    margin-bottom: 4px;
+    	}
+  </style>
+</head>
+<body>
+ 	<div class="row" style="margin-left:10px;">
+			<div class="col-lg-12">
+				<div class="card transparent-card">
+					<div class="card-header pb-0">
+						<h4 class="card-title mt-2"> Recent Orders List</h4>
+						<div class="table-action float-sm-right mt-4 mt-sm-0">
+							<form action="#">
+								<div class="form-row">
+									<div class="form-group mr-3">
+										<select class="selectpicker show-tick" data-width="auto">
+											<option selected="selected">Russia</option>
+											<option>USA</option>
+											<option>Canada</option>
+											<option>Australia</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<select class="selectpicker show-tick" data-width="auto">
+											<option selected="selected">Last 30 Days</option>
+											<option>Last 1 MOnth</option>
+											<option>Last 6 MOnth</option>
+											<option>Last Year</option>
+										</select>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+					<div class="card-body p-0">
+						<div class="table-responsive" style="width:98%;">
+							<table class="table table-padded recent-order-list-table table-responsive-fix-big">
+								<thead>
+									<tr>
+										<th>序号</th>
+										<th>用户名称</th>
+										<th>开始时间</th>
+										<th>结束时间</th>
+										<th>总分数</th>
+										
+										<!-- <th>Amount</th> -->
+										<!-- <th>申请状态</th> -->
+									</tr>
+								</thead>
+								<tbody class="tbody-list">
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+ 	
+
+
+	<script th:src="@{static/layui/layui.js}"></script>
+    <script src="js/jquery.min.js" th:src="@{static/js/jquery.min.js}"></script>
+    <script>
+    $(function(){
+    	$.ajax({
+			url:'AdminDoneList',
+			type:'post',
+			dataType:'text',
+			success:function(res){
+				var obj=JSON.parse(res);
+			    var paperdone=obj.paperdone;
+			    var userdone=obj.userdone;
+			    alert(userdone.length);
+			    alert(paperdone.length);
+			    for(var i=0;i<userdone.length;i++){
+			    	var joinbar=' ';
+			    	var useri=userdone[i].icon.replace(/\\/g,"/");
+			    	var userimg="static/"+useri;
+			    	joinbar+="<tr><td>"+(i+1)+"</td><td><a href='javascript;' class='mr-2 bg-primary rounded-circle text-center text-uppercase d-inline-block' id='";
+			    	joinbar+=userdone[i].userid+"'>"+"<img src='"+userimg+"'/></a><span class='text-pale-sky'>"+uslist[i].username+"</span></td>";
+			    	joinbar+="<td class='text-muted'>"+paperdone[i].c1+"</td>";
+			    	joinbar+="<td class='text-muted'>"+userdone[i].c1+"</td>";
+			    	joinbar+="<td class='text-muted'>"+paperdone[i].finscore+"</td>";
+			    	joinbar+="<td style='width: 10px;'><span class='label label-xl label-rounded label-success'>查看报告</span></td>";
+			    	joinbar+="</tr>";
+			    	$(".tbody-list").append(joinbar);
+			    }
+			}
+		}); 
+    });
+    </script>
+</body>
+</html>

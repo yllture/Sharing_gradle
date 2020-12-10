@@ -1,0 +1,512 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>试卷详情</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Favicon -->
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+ 
+		<!-- All css here -->
+		<link rel="stylesheet" href="../../css/papershop.css" th:href="@{static/css/papershop.css}">
+		<link rel="stylesheet" href="../../css/font-awesome.min.css" th:href="@{static/css/font-awesome.min.css}">
+		<link rel="stylesheet" href="../../css/ie7.css" th:href="@{static/css/ie7.css}">
+		<link rel="stylesheet" href="../../css/plugins.css" th:href="@{static/css/plugins.css}">
+		<link href="../../css/icons.css" th:href="@{static/css/icons.css}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="../../css/shopstyle.css" th:href="@{static/css/shopstyle.css}">
+		<link href="../../css/shopdetails.css" th:href="@{static/css/shopdetails.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/setcore.css" th:href="@{static/css/setcore.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/bootstrap.min.css" th:href="@{static/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="../../css/folder.css" th:href="@{static/css/folder.css}">
+		<link rel="stylesheet" type="text/css" href="../../css/bankTeacher.css" th:href="@{static/css/bankTeacher.css}">
+		<link rel="stylesheet" href="../../css/ImgCropping.css" th:href="@{static/css/ImgCropping.css}">
+		<link rel="stylesheet" type="text/css" href="../../css/alert.css" th:href="@{static/css/alert.css}">
+		
+		<script src="../../js/modernizr-3.5.0.min.js" th:src="@{static/js/modernizr-3.5.0.min.js}"></script>
+
+	</head>
+
+	<body>
+		<!-- 头部导航栏开始 -->
+		<header class="header-area header-sticky">
+			<div class="header-container">
+
+				<div class="row">
+					<div class="col-lg-5 display-none-md display-none-xs">
+
+						<div class="ht-main-menu">
+							<nav>
+								<ul>
+									<li class="active">
+										<a href="index.html">首页</a>
+									</li>
+									<li>
+										<a href="shop.html">商店</a>
+									</li>
+									<li>
+										<a href="shop.html">考试中心</a>
+									</li>
+									<li>
+										<a href="contact.html">联系我们</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<div class="col-lg-2 col-sm-4">
+						<div class="logo text-center">
+							<a href="index.html"><img src="../../img/logo_black.png" th:src="@{static/img/logo_black.png}" alt="NatureCircle"></a>
+						</div>
+					</div>
+					<div class="col-lg-5 col-sm-8">
+						<div class="header-content d-flex justify-content-end">
+							<div class="search-wrapper">
+								<a href="#"><span class="icon icon-Search"></span></a>
+								<form action="#" class="search-form">
+									<input type="text" placeholder="输入关键字搜一搜">
+									<button type="button">搜索</button>
+								</form>
+							</div>
+							<div class="inform-wrapper">
+								<a href="#"><i class="fa fa-bell"></i>
+									<span>2</span>
+								</a>
+
+								<!-- <div class="settings-content">
+									<h4>用户设置<i class="fa fa-angle-down"></i></h4>
+									<ul>
+										<li>
+											<a href="#" class="modal-view button" data-toggle="modal" data-target="#register_box">切换身份</a>
+										</li>
+										<li>
+											<a href="#" class="modal-view button" data-toggle="modal" data-target="#register_box">我的设置</a>
+										</li>
+										<li>
+											<a href="#" class="modal-view button" data-toggle="modal" data-target="#login_box">退出登录</a>
+										</li>
+									</ul>
+									<h4>我的账户<i class="fa fa-angle-down"></i></h4>
+									<ul>
+										<li>
+											<a href="#">€ Euro</a>
+										</li>
+										<li>
+											<a href="#">£ Pound Sterling</a>
+										</li>
+										<li>
+											<a href="#">$ Us Dollar</a>
+										</li>
+									</ul>
+									<h4>Language: en-gb <i class="fa fa-angle-down"></i></h4>
+									<ul>
+										<li>
+											<a href="#"><img src="../../img/box.png"  th:src="@{static/img/box.png}" alt="">English</a>
+										</li>
+										<li>
+											<a href="#"><img src="../../img/box.png"  th:src="@{static/img/box.png}" alt="">Germany</a>
+										</li>
+									</ul>
+								</div> -->
+							</div>
+							<div class="cart-wrapper">
+								<a href="#" class="headerUserIcon">
+									<img class='img-circle' src="assets/img/banner/2.jpg" th:src="@{static/img/box.png}">
+								</a>
+								<div class="cart-item-wrapper">
+									<div class="single-cart-item">
+										<ul class="dropdown-menu">
+											<li>
+												<a href="javascript:void(0)"><i class="fa fa-pencil nvaIcon2"></i> 考试入口</a>
+											</li>
+											<li>
+												<a href="javascript:void(0)"><i class="md md-settings nvaIcon2"></i> 我的设置</a>
+											</li>
+											<li>
+												<a href="javascript:void(0)"><i class="fa fa-exchange nvaIcon2"></i> 切换身份</a>
+											</li>
+											<li>
+												<a href="toLogout"><i class="md md-settings-power nvaIcon2"></i> 退出登录</a>
+											</li>
+										</ul>
+									</div>
+
+									<div class="cart-links">
+										<a href="cart.html"><i class="md md-settings nvaIcon2"></i>我的设置</a>
+										<a href="checkout.html"><i class="fa fa-exchange nvaIcon2"></i>切换身份</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 头部导航栏结束 -->
+		</header>
+		<!-- 头部导航栏结束 -->
+		<!-- 头部背景字幕导航 -->
+		<div class="breadcrumb-area text-center detailsnav">
+
+			<div class="container">
+
+				<nav aria-label="breadcrumb">
+					<ul class="breadcrumb">
+						<!--<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Shop</li>-->
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- 头部背景字幕导航结束 -->
+
+		<!-- 试卷基本信息开始 -->
+		<div class="product-detials-area bg-gray pt-110">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-5 col-md-5">
+						<div class="product-image-slider d-flex flex-column">
+							<div class="product-details-text">
+								<!-- 试卷题目 -->
+								<h3 th:text="${paper.papername}"></h3>
+
+							</div>
+							<div class="product-tag-cat">
+								<div class="single-tag-cat">
+									<span class="p-d-name" th:text="${user.username}"></span>
+									于
+									<span class="p-d-time" th:text="${#dates.format(paper.time,'yyyy-MM-dd HH:mm:ss')}"></span>
+									<span class="p-d-title">发布</span>
+								</div>
+							</div>
+							<div class="product-tag-cat">
+								<div class="single-tag-cat">
+									<span class="p-d-title">标签:</span>
+									<a href="#" th:text="${paper.paperlabel}"></a>
+								</div>
+							</div>
+							<div class="product-tag-cat">
+								<div class="single-tag-cat">
+									<span class="p-d-title"><i class="fa fa-shopping-cart"></i>已售：</span>
+									<a href="#" th:text="${paper.paynum}"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-7 col-md-7">
+						<div class="product-details-text">
+							<div class="p-rating-review">
+
+								<!-- 试卷评分星级 -->
+								
+												<div class="product-rating" th:if="${paper.avgevaluate} eq '4'">
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+									     			<i class="fa fa-star-o"></i>													
+												</div>
+												<div class="product-rating" th:if="${paper.avgevaluate} eq '3'">
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="product-rating" th:if="${paper.avgevaluate} eq '2'">
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+														<i class="fa fa-star-o"></i>
+														<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="product-rating" th:if="${paper.avgevaluate} eq '1'">
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												    <i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="product-rating" th:if="${paper.avgevaluate} eq '0'">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												    <i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="product-rating" th:if="${paper.avgevaluate} eq '5'">
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+												</div>
+
+							</div>
+							<h4><i class="fa fa-diamond"></i>积分：
+							<a th:text="${paper.price}"></a>
+							</h4>
+							<div class="add-cart-product">
+								
+								<button type="button" id="purchasebtn"  class="default-btn buy-btn" th:if="${isbuy==0}">购买试卷</button>
+								<button type="button" class="default-btn buy-btn" th:if="${isbuy==1}">已购买</button>
+							</div>
+							<!--<p>题目描述:这是一个带有魔力的题库它可以帮助你获得升学的力量</p>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 试卷基本信息结束 -->
+		<!-- 试卷内容开始 -->
+		<div class="product-topics-display bg-gray pb-30">
+			
+			
+				
+			
+			<div class="report-product" th:each="single:${paper_singles}">
+			<div class="q-item sets-question-item">
+				<div class="q-head-wrapper">
+					<div class="q-skill col-xs-12">
+						<span class="q-sequence">
+
+                        <a href="/store/open/question/1/1257632/21042879" target="_blank" th:text="${singleStat.count}">
+                         
+                        </a>
+                                </span>
+						<span class="q-type">[</span>
+						<span class="q-type p0">单选题</span>
+						<span class="q-type">]</span>
+		
+						<span class="label label-info skill-label text-ellipsis question-label" title="未指定技能" th:text="${single.qKnowledge}">
+          
+            </span>
+
+						<span class="label label-info difficult-label" th:if="${single.qDifficulty==0}">
+                   		 	易
+              		  	</span>
+              		  	<span class="label label-info difficult-label" th:if="${single.qDifficulty==1}">
+                   			 中
+              		  	</span>
+              		  	<span class="label label-info difficult-label" th:if="${single.qDifficulty==2}">
+                   			 难
+              		  	</span>
+					</div>
+				</div>
+
+				<div class="q-subject">
+
+					<pre th:text="${single.qTitle}"></pre>
+				</div>
+
+				<ul class="q-options-wrapper mt20 ml10 " data-part-index="" id="q-options-1">
+					<li class="q-option" th:each="singlechoice: ${single.singlelist}">
+						<div>
+							<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i></span></label>
+							<span class="option-index" th:if="${singlechoiceStat.count==1}">A</span>
+							<span class="option-index" th:if="${singlechoiceStat.count==2}">B</span>
+							<span class="option-index" th:if="${singlechoiceStat.count==3}">C</span>
+							<span class="option-index" th:if="${singlechoiceStat.count==4}">D</span>
+							<span class="option-index" th:if="${singlechoiceStat.count==5}">E</span>
+							
+							<!-- @formatter:off -->
+							<pre><pre th:text="${singlechoice.content}"></pre></pre>
+							<!-- @formatter:on -->
+						</div>
+					</li>
+					
+				</ul>
+
+			</div>
+			
+			</div>
+			
+			
+			<!-- 可展示试卷内容结束 -->
+			<div class="content-more"><center><a>购买后查看全部试题</a></center></div>
+		</div>
+		<!-- 试卷内容结束 -->
+		<!-- 试卷评论开始 -->
+		<div class="product-review-tab-area bg-gray pt-90 pb-105">
+			<div class="container scroll-area">
+				<div class="p-d-tab-container">
+					<div class="p-tab-btn">
+						<div class="nav" role="tablist">
+							<a class="active" href="#tab2" data-toggle="tab" role="tab" aria-selected="false" aria-controls="tab2">评论数：
+							
+							<span  th:text="${paper.paynum}">  </span>
+							</a>
+						</div>
+					</div>
+					<div class="p-d-tab tab-content">
+
+						<div class="tab-pane active scroll-area" id="tab2" role="tabpanel">
+							<div class="tab-items">
+								<div class="p-review-wrapper">
+									<h3>最新评论</h3>
+									
+									
+									<div class="single-review-item" th:each="record :${recordlist}">
+										<div class="review-logo">
+											<img src="../../img/defalutIcon.png" th:src="@{static/img/box.png}" alt="">
+										</div>
+										<div class="p-review-text">
+											<!-- 试卷评分星级 -->
+												<div class="rating-number" th:if="${record.commentscore} eq '4'">
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+									     			<i class="fa fa-star-o"></i>													
+												</div>
+												<div class="rating-number" th:if="${record.commentscore} eq '3'">
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="rating-number" th:if="${record.commentscore} eq '2'">
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+														<i class="fa fa-star-o"></i>
+														<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="rating-number" th:if="${record.commentscore} eq '1'">
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												    <i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="rating-number" th:if="${record.commentscore} eq '0'">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												    <i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="rating-number" th:if="${record.commentscore} eq '5'">
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+												</div>
+											
+											<span class="p-review-info" th:text="${record.buyuser.username}">
+												<span></span>
+											</span>
+											<p th:text="${record.c3}"></p>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 试卷评论结束 -->
+		
+		<!--警告提示框-->
+		<div class="alert"></div>
+		<!--购买试卷 -->
+		<div class="modal fade" id="purchase-paperModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">购买试卷</h4>
+					</div>
+					
+					
+					<div class="modal-body" >
+						<label for="recipient-name" class="control-label"><b class="ftx04"></b>你拥有的积分： </label>
+						<!--<h4 th:text="${session.currentuser.integral}"></h4>-->
+						<h4 id = "ownintegal"  text="30">10</h4>
+					</div>
+					<div class="modal-body" >
+						
+						<label for="recipient-name" class="control-label"><b class="ftx04"></b>购买试卷花费： </label>
+						<h4 th:text="${paper.price}" id="payintegal"></h4>
+					</div>
+
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-danger" id="purchasepaper">确认</button>
+
+				</div>
+			</div>
+		</div>	
+		<!-- 所有的js -->
+		<script src="../../js/jquery-2.0.3.min.js" th:src="@{static/js/jquery-2.0.3.min.js}"></script>
+		<script src="../../js/popper.min.js" th:src="@{static/js/popper.min.js}"></script>
+		<script src="../../js/bootstrap.min.js" th:src="@{static/js/bootstrap.min.js}"></script>
+		<script src="../../js/plugins.js" th:src="@{static/js/plugins.js}"></script>
+		<script src="../../js/ajax-mail.js" th:src="@{static/js/ajax-mail.js}"></script>
+		<script src="../../js/papershop.js" th:src="@{static/js/papershop.js}"></script>
+		<script type="text/javascript">
+			$(function(){
+				
+				$('#purchasebtn').click(function(){
+//					alert("11");
+					$('#purchase-paperModal').modal('show');
+					 
+				})
+				
+				$('#purchasepaper').click(function(){
+					
+					var ownintegal = $('#ownintegal').text();
+					var payintegal = $('#payintegal').text();
+//					alert(ownintegal+"**"+payintegal);
+//					alert(Number(ownintegal));
+					if(Number(ownintegal)<Number(payintegal)){
+						
+						$('.alert').html('积分余额不足，请充值！').addClass('alert-warning').show().delay(2000).fadeOut();
+						return;
+					}
+					
+					var paperid='[[${paper.paperid}]]';
+					
+					var paper = {'paperid':paperid,'price':payintegal};
+					
+					$.ajax({
+						url: 'buypaper',
+						type: 'post',
+						contentType: 'application/json;charset=utf-8', //请求的字符编码
+						data: JSON.stringify(paper), //转换成json格式字符串
+						dateType: "text", //返回类型
+						success: function(e) {
+							//				alert(e);
+							$('.alert').html('购买成功！').addClass('alert-success').show().delay(1000).fadeOut();
+
+								window.location.href = "bankshopdetail?shop_paperid=" + paperid;
+							
+						},
+						error: function() {
+							$('.alert').html('购买失败！').addClass('alert-warning').show().delay(1000).fadeOut();
+
+						}
+					});
+					
+					
+					
+				})
+				
+				
+				
+			})
+			
+			
+			
+			
+			
+		</script>
+	
+	
+	</body>
+
+</html>

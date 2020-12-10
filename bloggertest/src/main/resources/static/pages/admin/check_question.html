@@ -1,0 +1,187 @@
+
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css" th:href="@{static/layui/css/layui.css}"/>
+    <link rel="stylesheet" href="css/amazeui.min.css" th:href="@{static/css/amazeui.min.css}"/>
+	<link rel="stylesheet" href="css/admin.css" th:href="@{static/css/admin.css}"/>
+	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"/>
+    <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}" />
+    
+   
+    <title>试卷审核</title>
+</head>
+<body class="layui-view-body">
+    <div class="layui-content">
+        
+        <div class="layui-row">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="form-box">
+                         <table id="demo"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+  <!-- 详情页弹窗 -->
+  
+    
+</body>
+<script src="js/jquery-1.8.3.min.js" th:src="@{static/js/jquery-1.8.3.min.js}"></script>
+<script src="layui/layui.all.js" th:src="@{static/layui/layui.all.js}"></script>
+<script>
+$(function(){
+	//ajax 异步刷新
+	 var data;
+	 var obj;
+	 update();
+	 function update(){
+	   $.ajax({
+		type : 'post',
+		url : 'updateCheck_paper',
+		dataType : 'text',
+		success : function(res) {
+			
+			obj=JSON.parse(res);
+		    data=obj.notCheckedList;
+		    console.log(data.length);
+		    //动态加入json属性以及属性值
+		    for(var i=0;i<data.length;i++){
+		    	(data[i])['check']='<div class="am-btn-toolbar" ><div class="am-btn-group am-btn-group-xs "><button class="am-btn am-btn-default am-btn-xs am-text-secondary pizhun" id='+data[i]["paperid"]+'><span class="am-icon-pencil-square-o"></span> 批准</button><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only bupizhun" id='+data[i]["paperid"]+'><span class="am-icon-trash-o"></span> 不批准</button></div></div>';
+		    	(data[i])['show']='<a class="showDetail"  href="showPaperDetail/'+data[i]["paperid"]+'" style="padding-top:10px;padding-left:10px"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+		    }
+			var element = layui.element;
+		    var table = layui.table;
+		    var form = layui.form;
+
+		   //展示已知数据
+			   table.render({
+					     elem: '#demo'
+					    ,cols: [
+					    	[ 
+					    	
+					     //标题栏
+					     
+					       {field: 'id', title: 'ID', width: 80, sort: true}
+					      ,{field: 'title', title: '试卷标题', width: 200}
+					      ,{field: 'writer', title: '试卷作者', width: 150}
+					      ,{field: 'questionNumber', title: '试题数量', width: 100 ,sort :true}
+					      ,{field: 'public_date', title: '发布时间', width: 200}
+					      ,{field: 'money', title: '积分', width: 100}
+					      ,{field: 'show',title:"查看详情",width:100}
+					      ,{field: 'check', title: '是否批准', width: 300}
+					     
+					        ]
+					    ]
+					    ,data:data
+					    ,skin: 'line' //表格风格
+					    ,even: true
+					    ,page: true //是否显示分页
+					    ,limits: [5, 7, 10]
+					    ,limit: 5 //每页默认显示的数量
+					  });
+		 }
+	
+	 });
+	  }
+    
+    
+	 
+	 
+	 //批准操作
+	
+	 $('div[class="form-box"]').on("click",'button[class="am-btn am-btn-default am-btn-xs am-text-secondary pizhun"]', function(){
+		
+		 var  paperid=$(this).attr("id");
+		 var state;
+		 $.ajax({
+			
+			    type : 'post',
+				url : 'approve_paper',
+				async:false,
+				data:{"paperid":paperid},
+				dataType : 'text',
+				success : function(res) {
+					 state=res;
+					
+			    }
+			 
+			 
+		 })
+		alert(state);
+		 if(state==1){
+				alert("批准成功");
+				
+				$(this).parents('tr').remove();
+			}
+			else if(state==2) {
+				alert("已下架，批准失败");
+			}
+		 
+	 })
+	
+	 
+	 //不批准操作
+	 $('div[class="form-box"]').on("click",'button[class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only bupizhun"]', function(){
+			
+		 var  paperid=$(this).attr("id");
+		 var state;
+		 $.ajax({
+			
+			    type : 'post',
+				url : ' notApprove_paper',
+				async:false,
+				data:{"paperid":paperid},
+				dataType : 'text',
+				success : function(res) {
+					 state=res;
+					
+			    }
+			 
+			 
+		 })
+	
+		 if(state==1){
+				alert("成功不批准");
+			
+				$(this).parents('tr').remove();
+			}
+			else if (state==2) {
+				alert("已下架，不批准失败");
+			}
+		 
+	 })
+	 
+	 
+	 //查看详情点击查看详情
+	 /*  $('div[class="form-box"]').on('click', 'div[class="showDetail"]' ,function(){
+		  var  bankid=$(this).attr("id");
+		  //将bankid传进去
+		   $.ajax({
+				
+			    type : 'post',
+				url : ' watchBankDetail',
+				async:false,
+				data:{"bankid":bankid},
+				dataType : 'text',
+				success : function(res) {
+					
+					
+			   }
+			 
+			 
+		 });
+		 
+		  
+	  })
+     
+	    */
+	
+	
+})
+</script>
+</html>

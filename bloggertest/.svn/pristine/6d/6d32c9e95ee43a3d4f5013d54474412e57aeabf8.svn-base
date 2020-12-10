@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.dao.GroupsMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.entity.Groups" >
+    <id column="groupid" property="groupid" jdbcType="INTEGER" />
+    <result column="groupname" property="groupname" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="owner" property="owner" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="limitationnum" property="limitationnum" jdbcType="INTEGER" />
+    <result column="c1" property="c1" jdbcType="VARCHAR" />
+    <result column="groupnum" property="groupnum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    groupid, groupname, type, icon, owner, num, limitationnum, c1, groupnum
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.entity.GroupsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from groups
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from groups
+    where groupid = #{groupid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from groups
+    where groupid = #{groupid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.entity.GroupsExample" >
+    delete from groups
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.entity.Groups" >
+    insert into groups (groupid, groupname, type, 
+      icon, owner, num, limitationnum, 
+      c1, groupnum)
+    values (#{groupid,jdbcType=INTEGER}, #{groupname,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{icon,jdbcType=VARCHAR}, #{owner,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{limitationnum,jdbcType=INTEGER}, 
+      #{c1,jdbcType=VARCHAR}, #{groupnum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.entity.Groups" >
+    insert into groups
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupid != null" >
+        groupid,
+      </if>
+      <if test="groupname != null" >
+        groupname,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="owner != null" >
+        owner,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="limitationnum != null" >
+        limitationnum,
+      </if>
+      <if test="c1 != null" >
+        c1,
+      </if>
+      <if test="groupnum != null" >
+        groupnum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupid != null" >
+        #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="groupname != null" >
+        #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="limitationnum != null" >
+        #{limitationnum,jdbcType=INTEGER},
+      </if>
+      <if test="c1 != null" >
+        #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="groupnum != null" >
+        #{groupnum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.entity.GroupsExample" resultType="java.lang.Integer" >
+    select count(*) from groups
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update groups
+    <set >
+      <if test="record.groupid != null" >
+        groupid = #{record.groupid,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupname != null" >
+        groupname = #{record.groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.icon != null" >
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.owner != null" >
+        owner = #{record.owner,jdbcType=INTEGER},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.limitationnum != null" >
+        limitationnum = #{record.limitationnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.c1 != null" >
+        c1 = #{record.c1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupnum != null" >
+        groupnum = #{record.groupnum,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update groups
+    set groupid = #{record.groupid,jdbcType=INTEGER},
+      groupname = #{record.groupname,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      owner = #{record.owner,jdbcType=INTEGER},
+      num = #{record.num,jdbcType=INTEGER},
+      limitationnum = #{record.limitationnum,jdbcType=INTEGER},
+      c1 = #{record.c1,jdbcType=VARCHAR},
+      groupnum = #{record.groupnum,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.entity.Groups" >
+    update groups
+    <set >
+      <if test="groupname != null" >
+        groupname = #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        owner = #{owner,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="limitationnum != null" >
+        limitationnum = #{limitationnum,jdbcType=INTEGER},
+      </if>
+      <if test="c1 != null" >
+        c1 = #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="groupnum != null" >
+        groupnum = #{groupnum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where groupid = #{groupid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.entity.Groups" >
+    update groups
+    set groupname = #{groupname,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      owner = #{owner,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      limitationnum = #{limitationnum,jdbcType=INTEGER},
+      c1 = #{c1,jdbcType=VARCHAR},
+      groupnum = #{groupnum,jdbcType=INTEGER}
+    where groupid = #{groupid,jdbcType=INTEGER}
+  </update>
+</mapper>

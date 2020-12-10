@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+		<meta name="author" content="Coderthemes">
+
+		<link rel="shortcut icon" href="../../img/favicon_1.ico" th:src="@{static/img/favicon_1.ico}">
+
+		<title>试卷</title>
+
+		<link href="../../css/bootstrap.min.css" th:href="@{static/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/setcore.css" th:href="@{static/css/setcore.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/icons.css" th:href="@{static/css/icons.css}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="../../css/ie7.css" th:href="@{static/css/ie7.css}">
+		<link href="../../css/components.css" th:href="@{static/css/components.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/pages.css" th:href="@{static/css/pages.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/menu.css" th:href="@{static/css/menu.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/responsive.css" th:href="@{static/css/responsive.css}" rel="stylesheet" type="text/css">
+		<link href="../../font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+		<link rel="stylesheet" href="../../css/cropper.min.css" th:href="@{static/css/cropper.min.css}">
+		<link rel="stylesheet" href="../../css/ImgCropping.css" th:href="@{static/css/ImgCropping.css}">
+		<link rel="stylesheet" href="../../css/option-radio.css" th:href="@{static/css/option-radio.css}">
+		<link rel="stylesheet" href="../../css/sets.min.css" th:href="@{static/css/sets.min.css}">
+		
+		<link rel="stylesheet" type="text/css" href="../../css/alert.css" th:href="@{static/css/alert.css}">
+		<link rel="stylesheet" type="text/css" href="../../css/bankTeacher.css" th:href="@{static/css/bankTeacher.css}">
+		<link rel="stylesheet" href="../../css/folder.css" th:href="@{static/css/folder.css}">
+		<link rel="stylesheet" type="text/css" href="../../css/bankteachefolder.css" th:href="@{static/css/bankteachefolder.css}" />
+		<script src="../../js/jquery.min.js" th:src="@{static/js/jquery.min.js}"></script>
+		<script src="../../js/modernizr.min.js" th:src="@{static/js/modernizr.min.js}"></script>
+		
+		
+
+	</head>
+
+
+
+
+	<body class="fixed-left">
+		
+		
+
+		<!-- 大的页面 -->
+		<div id="wrapper">
+
+			<!-- 导航栏开始 -->
+			 <div class="topbar">
+				<!-- LOGO -->
+				<div class="topbar-left">
+					<div class="text-center">
+						<a href="toindex" class="logo"><img src="../../img/logo.png" th:src="@{static/img/logo.png}" width="60px" /><span>飞马测试 </span></a>
+					</div>
+				</div>
+
+				<div class="navbar navbar-default" role="navigation">
+					<div class="container">
+						<div class="">
+							<div class="pull-left">
+								<button class="button-menu-mobile open-left">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+								<span class="clearfix"></span>
+							</div>
+							<ul class="nav navbar-nav navbar-left pull-left">
+								<li class="hidden-xs">
+									<a th:href="tounpublishteacherPaper" id="" class="waves-effect"><i class="glyphicon glyphicon-education nvaIcon"></i>试卷</a>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="tobankTeacher" id="" class="waves-effect"><i class="glyphicon glyphicon-folder-open nvaIcon"></i>题库</a>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="toGroup" id="" class="waves-effect"><i class="fa fa-users nvaIcon"></i>群组</a>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="tobankshop" id="" class="waves-effect"><i class="fa fa-shopping-basket nvaIcon"></i>题库商城</a>
+								</li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right pull-right">
+								<li class="dropdown hidden-xs">
+									<a href="#" data-target="#" class="dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="true">
+										<i class="md md-notifications"></i> <span class="badge badge-xs badge-danger">3</span>
+									</a>
+									<ul class="dropdown-menu dropdown-menu-lg">
+										<li class="text-center notifi-title">通知</li>
+
+										<li class="list-group">
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-user-plus fa-2x text-info"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">New user registered</div>
+														<p class="m-0">
+															<small>You have 10 unread messages</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-diamond fa-2x text-primary"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">New settings</div>
+														<p class="m-0">
+															<small>There are new settings available</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-bell-o fa-2x text-danger"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">Updates</div>
+														<p class="m-0">
+															<small>There are
+                                                          <span class="text-primary">2</span> new updates available</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- last list item -->
+											<a th:href="inform" class="list-group-item">
+												<small>See all notifications</small>
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="hidden-xs">
+									<a href="#" id="btn-fullscreen" class="waves-effect"><i class="md md-crop-free"></i></a>
+								</li>
+								<li class="hidden-xs">
+									<a href="#" class="right-bar-toggle waves-effect"><i class="md md-chat"></i></a>
+								</li>
+								<li class="dropdown">
+									<a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="../../img/defalutIcon.png" th:src="@{static/img/defalutIcon.png}" alt="user-img" class="img-circle"> </a>
+									<ul class="dropdown-menu" style=" BACKGROUND-COLOR: white;">
+										<li>
+											<a th:href="toExamEntrance"><i class="fa fa-pencil nvaIcon2"></i> 考试入口</a>
+										</li>
+										<li>
+											<a th:href="tochangeUserInfor"><i class="md md-settings nvaIcon2"></i> 我的设置</a>
+										</li>
+										<li>
+											<a th:href="switchIdentity"><i class="fa fa-exchange nvaIcon2"></i> 切换身份</a>
+										</li>
+										<li>
+											<a href="javascript:void(0)"><i class="md md-settings-power nvaIcon2"></i> 退出登录</a>
+										</li>
+									</ul>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="switchIdentity" class="right-bar-toggle waves-effect"><i class="fa fa-exchange"></i></a>
+								</li>
+							</ul>
+						</div>
+						<!--用户选项 -->
+					</div>
+				</div>
+			</div>
+			<!-- 导航栏结束 -->
+
+			<div class="left side-menu">
+				<div class="sidebar-inner slimscrollleft">
+					<div class="user-details">
+						<center><button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-paperModal"><i class="fa fa-plus"></i><span>新增试卷</span></button></center>
+					</div>
+					<!--- Divider -->
+					<div id="sidebar-menu">
+						<ul>
+
+							<li class="has_sub" >
+								<a class="waves-effect waves-light" onclick="unpublishpaper()" style="color:#ffffff;">
+									<i class="fa fa-folder-open"></i>
+									<span>未发布试卷</span><span class="pull-right"></span>
+								</a>
+
+							</li>
+						
+							<li class="has_sub" >
+								<a class="waves-effect waves-light"  onclick="publishpaper()">
+									<i class="fa fa-folder-open"></i>
+									<span >已发布试卷</span><span class="pull-right"></span>
+								</a>
+
+							</li>
+						
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<!-- 左边bar结束 -->
+
+			<!-- ============================================================== -->
+			<!-- 中间信息显示开始 ->
+			<!-- ============================================================== -->
+			<div class="content-page">
+				<!-- 内容开始 -->
+				<div class="content">
+					<div class="container">
+
+						<!-- 页面名称 -->
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="pull-left page-title">
+								<span
+									style="color: green; background-color: green; width: 10px; margin-right: 15px;"><b>|</b></span>
+							</h4>
+							
+							<div class="modal-name" ></i>
+										<a style="font-size: 17px;">未发布试卷</a>
+									</div>
+								<!--<div class="file-operater"><button type="button" id="add-folder" class="btn btn-dark" data-toggle="modal" data-target="#add-folderModal"><i class="fa fa-plus"></i><span>增加文件夹</span></button></div>
+								<div class="file-operater"><button type="button" id="delete-folder" class="btn btn-dark"><i class="fa fa-trash"></i><span>删除文件夹</span></button></div>
+								<div class="file-operater"><button type="button" id="editor-folder" class="btn btn-dark"><i class="fa fa-pencil"></i><span>重命名文件夹</span></button></div>
+								<div class="file-operater"><button type="button" id="open-folder" class="btn btn-dark"><i class="fa fa-folder-open"></i><span>打开文件夹</span></button></div>-->
+
+							</div>
+						</div>
+
+						<!-- 页面详情-->
+						<div style="height: auto; background: #FFFFFF;">
+							<div class="inforContainer">
+
+								<div class="bank-container">
+									<div class="modal-name"><i class="fa fa-bookmark fa-2x"></i></i>
+										<a>未发布试卷</a>
+									</div>
+
+									<!-- 已上架试卷例子 -->
+									<p1 th:each="uploadpaper:${uploadlist}">
+										<div class="custom-col" th:paperid="${uploadpaper.paperid}">
+											<div class="single-product-item" style="width: 250px;height: 160px;">
+												
+												<div class="bank-label flag-left">试卷</div>
+												<div class="product-image">
+													<div class="product-hover">
+														<div class="product-mask" ></div>
+														<ul class="hover-icon-list">
+
+															<li>
+																<a th:href="@{tounpublishpaperinfo?paperid={paperid}(paperid=${uploadpaper.paperid})}"  data-toggle="tooltip" title="查看"><i class="icon icon-Search"></i></a>
+															</li>
+															<li>
+																<a data-toggle="tooltip" title="试卷信息修改"  onclick="edit2(this)"> <i class="icon icon-Pencil"></i></a>
+															</li>
+															<li>
+																<a href="" data-toggle="tooltip" title="查看上架情况"><i class="icon icon-UploadCLoud"></i></a>
+															</li>
+															<li>
+																<a data-toggle="tooltip" title="发布试卷"   onclick="publish2(this)" ><i class="icon icon-Forward"></i></a>
+															</li>
+															
+															<li>
+																<a data-toggle="tooltip" title="删除" class="delete-paper" id="这里放入paperid"><i class="icon icon-Delete"></i></a>
+															</li>
+														</ul>
+
+													</div>
+												</div>
+												<div class="product-text">
+													<!-- 试卷看题目 -->
+													<h5><a href="product-details.html" th:text="${uploadpaper.papername}">小升初高级数学模拟题</a></h5>
+													 <!--最近更新于--> 
+													<!--<h6><i class="fa fa-pencil-square-o"></i>
+														<a th:text="${#dates.format(uploadpaper.updatetime,'yyyy-MM-dd HH:mm:ss')}">2019-10-12 12:12:12</a>
+														
+													</h6>-->
+													<!-- 试卷描述 -->
+													<!--<h6 class="c-blue"> 试卷描述：<a th:text="${uploadpaper.c1}">这是用来给小学生做的这是用来给小学生做的这是用来给小学生做的这是用来给小学生做的</a></h6>-->
+
+													<div class="product-number">
+														<!-- 题量(题目总数量) -->
+														<span class="new-info" title="题量">试卷共有：<h4 th:text="${uploadpaper.questionnum}"></h4>道题</span>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+									</p1>
+
+									<p1 th:each="unuploadpaper:${unuploadlist}">
+										<!-- 未上架试卷例子 -->
+										<div class="custom-col" th:paperid="${unuploadpaper.paperid}">
+											<div class="single-product-item" style="width: 250px;height: 160px;">
+												<div class="bank-label flag-left">试卷</div>
+												<div class="product-image">
+													<div class="product-hover">
+														<div class="product-mask"></div>
+														<ul class="hover-icon-list">
+															<li>
+																<a th:href="@{editorPaper?paperid={paperid}(paperid=${unuploadpaper.paperid})}" data-toggle="tooltip" title="查看/编辑"><i class="icon icon-Search"></i></a>
+															</li>
+
+															<li>
+																<a data-toggle="tooltip" title="试卷信息修改"  th:value="${unuploadpaper.paperid}" th:name="${unuploadpaper.papername}" th:duration="${unuploadpaper.duration}" onclick="edit(this)"><i class="icon icon-Pencil"></i></a>
+															</li>
+															<li>
+																<a data-toggle="tooltip" title="上架" th:value="${unuploadpaper.paperid}" th:question="${unuploadpaper.questionnum}" onclick="upload(this)"><i class="icon icon-Share"></i></a>
+															</li>
+															
+															<li>
+																<a data-toggle="tooltip" title="发布试卷" th:value="${unuploadpaper.paperid}" th:question="${unuploadpaper.questionnum}" onclick="publish(this)" ><i class="icon icon-Forward"></i></a>
+															</li>
+															<li>
+																<a data-toggle="tooltip" title="删除" class="delete-paper" ><i class="icon icon-Delete"></i></a>
+															</li>
+														</ul>
+
+													</div>
+												</div>
+												<div class="product-text">
+													<!-- 试卷看题目 -->
+													<h5><a href="product-details.html" th:text="${unuploadpaper.papername}">小升初高级数学模拟题</a></h5>
+													<!-- 最近更新于 -->
+													<!--<h6><i class="fa fa-pencil-square-o"></i><a th:text="${#dates.format(unuploadedBank.updatetime,'yyyy-MM-dd HH:mm:ss')}">2019-10-12 12:12:12</a></h6>-->
+													<!-- 试卷描述 -->
+													<!--<h6 class="c-blue">试卷描述：<a th:text="${unuploadpaper.c1}">这是用来给小学生做的</a></h6>-->
+
+													<div class="product-number">
+														<!-- 题量(题目总数量) -->
+														<span class="new-info" title="题量">试卷共有：<h4 th:text="${unuploadpaper.questionnum}">330</h4>道题</span>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</p1>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<!-- 内容结束 -->
+
+				</div>
+				<!-- 内容容器结束 -->
+
+			</div>
+
+			<!-- <!-- 右边通讯录滑页 -->
+			<!-- <div class="side-bar right-bar nicescroll">
+				<h4 class="text-center">通讯录</h4>
+				<div class="contact-list nicescroll">
+					<ul class="list-group contacts-list">
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="../../img/users/avatar-1.jpg" th:src="@{static/img/users/avatar-1.jpg}" alt="">
+								</div> <span class="name">郭力源</span> <i class="fa fa-circle online"></i>
+							</a> <span class="clearfix"></span></li>
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="../../img/users/avatar-2.jpg" th:src="@{static/img/users/avatar-2.jpg}" alt="">
+								</div> <span class="name">郑娇</span> <i class="fa fa-circle online"></i>
+							</a> <span class="clearfix"></span></li>
+
+					</ul>
+				</div>
+			</div> -->
+		
+
+		</div>
+		<!-- 页面结束 -->
+		<!--图片裁剪框 start-->
+		<!-- <div style="display: none" class="tailoring-container">
+			<div class="black-cloth" onClick="closeTailor(this)"></div>
+			<div class="tailoring-content">
+				<div class="tailoring-content-one">
+					<label id="imageKTitle">上传头像</label>
+					<div class="close-tailoring" onclick="closeTailor(this)">×</div>
+				</div>
+				<div class="tailoring-content-two">
+					<div class="tailoring-box-parcel">
+						<img id="tailoringImg">
+					</div>
+					<div class="preview-box-parcel">
+
+						<div class="square previewImg"></div>
+						<center>
+							<div class="circular previewImg"></div>
+							<p>
+								图片预览<br />108px × 108px
+							</p>
+							<br /> <label title="上传图片" for="chooseImg" class="l-btn choose-btn"> <input type="file"
+							accept="image/jpg,image/jpeg,image/png" name="file"
+							id="chooseImg" class="hidden" onChange="selectImg(this)" /> 选择图片
+						</label>
+						</center>
+					</div>
+				</div>
+				<div class="tailoring-content-three">
+					<button class="l-btn cropper-reset-btn">复位</button>
+					<button class="l-btn cropper-rotate-btn">旋转</button>
+					<button class="l-btn cropper-scaleX-btn">换向</button>
+					<button class="l-btn sureCut" id="sureCut">确认上传</button>
+				</div>
+			</div>
+		</div> -->
+		<!--图片裁剪框 end-->
+		<!-- Main  -->
+
+		<!--警告提示框-->
+		<div class="alert"></div>
+
+		<!-- 增加试卷 -->
+		<div class="modal fade" id="add-paperModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">新增试卷</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="recipient-name" class="control-label"><b class="ftx04"></b>试卷名称：</label>
+								<input type="text" class="form-control" id="paper-name" />
+							</div>
+							<!--<div class="form-group">
+								<label for="recipient-name" class="control-label"><b class="ftx04"></b>试卷描述：</label>
+								<input type="text" class="form-control" id="paper-describe">
+							</div>-->
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" id="addpaperbut">确认</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 试卷信息修改 -->
+		<div class="modal fade" id="editor-paperModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">编辑试卷</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<input id="clickpaperid" type="hidden" value="" />
+							<div class="form-group">
+								<label for="recipient-name" class="control-label"><b class="ftx04"></b>试卷名称：</label>
+								<input type="text" class="form-control" id="new-paper-name" />
+								<label for="recipient-name" class="control-label"><b class="ftx04"></b>考试时长：(分钟)</label>
+								<input type="text" class="form-control" id="new-paper-time" />
+							</div>
+							
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button id="editor-sure-btn" type="button" class="btn btn-success">确认</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 上传试卷 -->
+		<div class="modal fade" id="upload-paperModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">上架试卷</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<input id="uploadclickpaper" type="hidden" value="" />
+							<div class="form-group">
+								<label for="recipient-name" class="control-label"><b class="ftx04"></b>试卷标签：</label>
+								<!--<input type="text" class="form-control" id="uploadpaper-name"/>-->
+								<select class="form-control" id="paperlabel">
+									<option>小学</option>
+									<option>初中</option>
+									<option>高中</option>
+									<option>大学</option>
+									<option>研究生</option>
+									<option>互联网/软件</option>
+									<option>通信/电子</option>
+									<option>软件开发</option>
+									<option>测试/运维</option>
+									<option>产品/运营</option>
+									<option>综合能力</option>
+									<option>性格气质</option>
+									<option>职业发展</option>
+
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="recipient-name" class="control-label"><b class="ftx04"></b>下载所需积分：</label>
+								<form>
+								   <input type="radio" id="option-0-1" name="mode" value = "0" class="option-radio" checked />
+								   <label for="public"></label>
+								   <span class="">免费</span>    
+								   <input type="radio" id="option-0-2" name="mode" value = "1" class="option-radio" />
+								   <label for="private"></label>
+								   <span class="">收费</span>    
+								 </form>
+								<input type="text" class="form-control" id="uploadprice" placeholder="仅收费时需要填写">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" id="uploadpaper">确认</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<!-- 发布试卷 -->
+		<div class="modal fade" id="publish-paperModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">发布试卷</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<input id="publishclickpaper" type="hidden" value="" />
+							<div class="form-group">
+								<label for="recipient-name" class="control-label"><b class="ftx04"></b>考试设置：</label><br />
+								<!--<input type="text" class="form-control" id="uploadpaper-name"/>-->
+								
+								测试时间从<input type="datetime-local" id ="begintime" />至<input type="datetime-local" id = "endtime" value=""/><br />
+								<br />
+								<label for="recipient-name" class="control-label"><b class="ftx04"></b>权限设置：</label><br />
+								
+								<form>
+								   <input type="radio" id="option-0-1" name="mode" value = "1" class="option-radio" checked />
+								   <label for="public"></label>
+								   <span class="">公有</span>    
+								   <input type="radio" id="option-0-2" name="mode" value = "0" class="option-radio" />
+								   <label for="private"></label>
+								   <span class="">私有</span>    
+								</form><br /><br />
+								 <label for="recipient-name" class="control-label"><b class="ftx04"></b>允许切出次数：</label><br />
+								 	<select class="form-control" id="outnum">
+									<option>0</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									<option>9</option>
+									<option>10</option>
+									
+
+								</select>
+								
+								
+							</div>
+							
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" id="publishpaper">下一步</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 添加考生 -->
+		<div class="modal fade" id="addperson-paperModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">发布试卷</h4>
+					</div>
+					<div class="modal-body">
+						<!--<form>-->
+							<input id="addpersonclickpaper" type="hidden" value="" />
+							
+							<div class="form-group">
+								
+								
+								<label for="recipient-name" class="control-label"><b class="ftx04"></b>考生录入：</label><br />
+								
+								<ul class="nav nav-tabs" id="myTab">
+								  <li class="active"><a href="#home">单个录入</a></li>
+								  <li><a href="#profile">表单录入</a></li>
+							
+								</ul>
+								
+								<div class="tab-content">
+								  <div class="tab-pane active" id="home">
+								  	姓名：<input type="text" class="form-control" id="name"><br />
+									手机号码：<input type="text" class="form-control" id="tel">
+								  	<div class="modal-footer">
+										<button type="button" class="btn btn-success" id="addperson">确认</button>
+									</div>
+								  </div>
+								  <div class="tab-pane" id="profile">
+								  	<p>重要提示：</p>
+								  	<ul style="padding-left: 20px;">
+								  		<li style="list-style: unset;">如果有多个考生，您可以先
+								  			<a href="/static/download/inviteexaminee.xlsx" class="text-primary" download="inviteexaminee.xlsx">下载模板</a>
+								  			输入后再导入。
+								  		</li>
+								  		<li style="list-style: unset;">
+								  			建议每个模板不要超过500人，如考生数量多，可拆分多个模板分批次导入。
+								  		
+								  		</li>
+								  		
+								  	</ul>
+								  	<form method="post" action="addStudentByExcel" enctype="multipart/form-data">
+	    								<input type="file" name="file" accept=".xls,.xlsx"><br>
+	    								<input type="hidden" name = "paperid" id="hhh">
+	    								<input type="submit" value="提交">
+									</form>
+								  </div>
+								 
+								</div>
+
+							
+							</div>
+						<!--</form>-->
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+
+
+		<!--删除试卷 -->
+		<div class="modal fade" id="delete-paperModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">删除试卷</h4>
+					</div>
+					<div class="modal-body">
+						删除试卷将无法找回，确认删除？
+					</div>
+
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-danger" id="deletepaper">确认删除</button>
+
+				</div>
+			</div>
+		</div>	
+		<script src="../../js/jquery-2.0.3.min.js" th:src="@{static/js/jquery-2.0.3.min.js}"></script>
+		<script src="../../js/bootstrap.min.js" th:src="@{static/js/bootstrap.min.js}"></script>
+		<script src="../../js/fastclick.js" th:src="@{static/js/fastclick.js}"></script>
+		<script src="../../js/waves.js" th:src="@{static/js/waves.js}"></script>
+		<script src="../../js/wow.min.js" th:src="@{static/js/wow.min.js}"></script>
+		<script src="../../js/jquery.nicescroll.js" th:src="@{static/js/jquery.nicescroll.js}"></script>
+		<script src="../../js/jquery.scrollTo.min.js" th:src="@{static/js/jquery.scrollTo.min.js}"></script>
+		<script src="../../js/jquery.app.js" th:src="@{static/js/jquery.app.js}"></script>
+		<script type="text/javascript" src="../../js/cropper.min.js" th:src="@{static/js/cropper.min.js}"></script>
+		<script src="../../js/jquery-ui.js" th:src="@{static/js/jquery-ui.js}"></script>
+		<!--<script src="../../js/script.js" th:src="@{static/js/script.js}"></script>-->
+		<script src="../../js/anime.min.js" th:src="@{static/js/anime.min.js}"></script>
+		<script src="../../js/bankTeacherFolder.js" th:src="@{static/js/bankTeacherFolder.js}"></script>
+		<script src="../../js/charming.min.js" th:src="@{static/js/charming.min.js}"></script>
+		<script type="text/javascript">
+			//弹出框水平垂直居中
+			(window.onresize = function() {
+				var win_height = $(window).height();
+				var win_width = $(window).width();
+				if(win_width <= 768) {
+					$(".tailoring-content").css({
+						"top": (win_height - $(".tailoring-content").outerHeight()) / 2,
+						"left": 0
+					});
+				} else {
+					$(".tailoring-content").css({
+						"top": (win_height - $(".tailoring-content").outerHeight()) / 2,
+						"left": (win_width - $(".tailoring-content").outerWidth()) / 2
+					});
+				}
+			})();
+
+			//弹出图片裁剪框
+			/*    $("#replaceImg").on("click",function () {
+			       $(".tailoring-container").toggle();
+			   }); */
+			//图像上传
+			function selectImgupload(file) {
+				$(".tailoring-container").toggle();
+				if(!file.files || !file.files[0]) {
+					return;
+				}
+				var reader = new FileReader();
+				reader.onload = function(evt) {
+					var replaceSrc = evt.target.result;
+					//更换cropper的图片
+					$('#tailoringImg').cropper('replace', replaceSrc, false); //默认false，适应高度，不失真
+				}
+				reader.readAsDataURL(file.files[0]);
+			}
+			//图像上传
+			function selectImg(file) {
+				if(!file.files || !file.files[0]) {
+					return;
+				}
+				var reader = new FileReader();
+				reader.onload = function(evt) {
+					var replaceSrc = evt.target.result;
+					//更换cropper的图片
+					$('#tailoringImg').cropper('replace', replaceSrc, false); //默认false，适应高度，不失真
+				}
+				reader.readAsDataURL(file.files[0]);
+			};
+			//cropper图片裁剪
+			$('#tailoringImg').cropper({
+				aspectRatio: 1 / 1, //默认比例
+				preview: '.previewImg', //预览视图
+				guides: false, //裁剪框的虚线(九宫格)
+				autoCropArea: 0.5, //0-1之间的数值，定义自动剪裁区域的大小，默认0.8
+				movable: false, //是否允许移动图片
+				dragCrop: true, //是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域
+				movable: true, //是否允许移动剪裁框
+				resizable: true, //是否允许改变裁剪框的大小
+				zoomable: false, //是否允许缩放图片大小
+				mouseWheelZoom: false, //是否允许通过鼠标滚轮来缩放图片
+				touchDragZoom: true, //是否允许通过触摸移动来缩放图片
+				rotatable: true, //是否允许旋转图片
+				crop: function(e) {
+					// 输出结果数据裁剪图像。
+				}
+			});
+			//旋转
+			$(".cropper-rotate-btn").on("click", function() {
+				$('#tailoringImg').cropper("rotate", 45);
+			});
+			//复位
+			$(".cropper-reset-btn").on("click", function() {
+				$('#tailoringImg').cropper("reset");
+			});
+			//换向
+			var flagX = true;
+			$(".cropper-scaleX-btn").on("click", function() {
+				if(flagX) {
+					$('#tailoringImg').cropper("scaleX", -1);
+					flagX = false;
+				} else {
+					$('#tailoringImg').cropper("scaleX", 1);
+					flagX = true;
+				}
+				flagX != flagX;
+			});
+
+			//裁剪后的处理
+			$("#sureCut").on("click", function() {
+				if($("#tailoringImg").attr("src") == null) {
+					return false;
+				} else {
+					var cas = $('#tailoringImg').cropper('getCroppedCanvas'); //获取被裁剪后的canvas
+					var base64url = cas.toDataURL('image/png'); //转换为base64地址形式
+					$("#finalImg").prop("src", base64url); //显示为图片的形式
+					var start = base64url.indexOf('base64,') + 7;
+					base64url = base64url.substring(start, base64url.length);
+					base64url = base64url.replace(/\+/g, "%2B");
+
+					$.ajax({
+						contentType: "application/x-www-form-urlencoded; charset=utf-8",
+						type: "post",
+						url: "uploadUserAuatarImg",
+						data: {
+							image: base64url
+						},
+						dataType: 'text',
+						success: function(res) {
+							//console.log(res);
+							var data = JSON.parse(res);
+							if(data.flag == '0000') {
+								$('.alert').html('头像上传成功').addClass('alert-success').show().delay(1000).fadeOut();
+							}
+						}
+					})
+					//关闭裁剪框
+					closeTailor();
+				}
+			});
+			//关闭裁剪框
+			function closeTailor() {
+				$(".tailoring-container").toggle();
+			}
+		</script>
+		<script>
+			var resizefunc = [];
+
+			$(function() {
+				//为所有的文件夹绑定事件,注意新建的时候要重新绑定
+				var folders = $('.folder-report');
+				var banks = $('.custom-col');
+				var i = 0;
+				for(i = 0; i < folders.length; i++) {
+					new DurgaFx(folders[i]);
+				}
+				//				for(i = 0; i < banks.length; i++) {
+				//					new DurgaFx(banks[i]);
+				//				}
+
+				$("[data-toggle='tooltip']").tooltip();
+
+				$('.single-product-item').hover(function() {
+					$(this).find('.product-image').show();
+				}, function() {
+					$(this).find('.product-image').hide();
+				})
+
+				$('.hover-icon-list a').hover(function() {
+					//					alert('11');
+				})
+				$('.folder__thumb').click(function() {
+					alert(11);
+				})
+			})
+		</script>
+
+		
+
+		<script type="text/javascript">
+			var now = new Date();
+   			now.setHours(now.getHours() + 1);
+    		var str = now.getFullYear() + "-" + fix((now.getMonth() + 1), 2) + "-" + fix(now.getDate(), 2) + "T" + fix(now.getHours(), 2) + ":" + fix(now.getMinutes(), 2);
+    		$("#begintime").val(str);
+    		$("#endtime").val(str);
+			function fix(num, length) {
+        		return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
+			}
+
+			
+			$(function() {
+
+				
+				
+				
+			//删除试卷操作
+			var currentpaperid ;
+			$('.delete-paper').click(function(){
+					if($(this).parent().prev().find('.icon').hasClass('icon-UploadCLoud')){
+					$('.alert').html('该试卷已上架到试卷无法删除').addClass('alert-danger').show().delay(1000).fadeOut();
+				}else{
+					currentpaperid=$(this).closest('.custom-col').attr('paperid');
+
+					$('#delete-paperModal').modal('show');
+				}
+			})
+			
+			
+			//删除试卷
+			$('#deletepaper').click(function(){
+//				alert("2222");
+				var paper={'paperid':currentpaperid};
+				
+				$.ajax({
+					url:'deletepaper',
+					type:'post',
+					contentType:'application/json;charset=utf-8',//请求的字符编码
+					data:JSON.stringify(paper),//转换成json格式字符串
+					dateType:"text",//返回类型
+					success:function(e){
+	//				alert(e);
+					$('.alert').html('删除成功！').addClass('alert-success').show().delay(1000).fadeOut();
+	
+					
+						window.location.href = "tounpublishteacherPaper";
+					
+					},
+					error:function(){
+						$('.alert').html('删除失败！').addClass('alert-warning').show().delay(1000).fadeOut();
+		 
+					}
+				});
+				 
+					
+					
+					
+			})
+			
+			
+		
+			//新增试卷
+			$('#addpaperbut').click(function(){
+//				alert("111");
+				var name = $('#paper-name').val();
+				
+		//		alert(description);
+				if(name==null||name==''){
+					$('.alert').html('试卷名不能为空！').addClass('alert-warning').show().delay(2000).fadeOut();
+					return;
+				}
+				
+				var alreadypaper=$('.custom-col');
+				var i=0;
+				for(i=0;i<alreadypaper.length;i++){
+					if(alreadypaper.eq(i).find('.product-text h5 a').text()==name){
+						$('.alert').html('已存在同名试卷！添加失败').addClass('alert-warning').show().delay(2000).fadeOut();
+						return;
+					}
+				}
+				
+				 
+				var paper = {'papername':name};
+				$.ajax({
+					url:'addpaper',
+					type:'post',
+					contentType:'application/json;charset=utf-8',//请求的字符编码
+					data:JSON.stringify(paper),//转换成json格式字符串
+					dateType:"text",//返回类型
+					success:function(e){
+		//				alert(e);
+						$('.alert').html('创建成功！').addClass('alert-success').show().delay(1000).fadeOut();
+		
+						window.location.href = "tounpublishteacherPaper";
+						
+						
+					},
+					error:function(){
+						$('.alert').html('创建失败！').addClass('alert-warning').show().delay(1000).fadeOut();
+		
+					}
+				});
+			
+			});
+			
+			//编辑试卷
+			$('#editor-sure-btn').click(function(){
+			
+		//		alert($('#clickpaperid').val());
+				var paperid= $('#clickpaperid').val();
+				var papername = $('#new-paper-name').val();
+				var duration = $('#new-paper-time').val();
+//				alert(duration);
+			
+				if(papername==null||papername==''){
+					$('.alert').html('试卷名不能为空！').addClass('alert-warning').show().delay(2000).fadeOut();
+					return;
+				}
+				if(duration==null||duration==''){
+					$('.alert').html('考试时长不能为空！').addClass('alert-warning').show().delay(2000).fadeOut();
+					return;
+				}
+		
+//				var alreadypaper=$('.custom-col');
+//				var i=0;
+//				for(i=0;i<alreadypaper.length;i++){
+//					if(alreadypaper.eq(i).find('.product-text h5 a').text()==papername){
+//						$('.alert').html('已存在同名试卷！添加失败').addClass('alert-warning').show().delay(2000).fadeOut();
+//						return;
+//					}
+//				} 
+				
+				var paper = {'paperid':paperid,'papername':papername,'duration':duration};
+				$.ajax({
+					url:'updatepaper',
+					type:'post',
+					contentType:'application/json;charset=utf-8',//请求的字符编码
+					data:JSON.stringify(paper),//转换成json格式字符串
+					dateType:"text",//返回类型
+					success:function(e){
+		//				alert(e);
+						$('.alert').html('修改成功！').addClass('alert-success').show().delay(1000).fadeOut();
+		
+						window.location.href = "tounpublishteacherPaper";
+						
+					},
+					error:function(){
+						$('.alert').html('修改失败！').addClass('alert-warning').show().delay(1000).fadeOut();
+		
+					}
+				});
+	
+			})
+	
+			
+			//上架试卷
+			$('#uploadpaper').click(function(){
+		//		alert("111");
+				var paperid = $('#uploadclickpaper').val();
+		//		alert(paperid);
+				var paperlabel = $('#paperlabel').val();
+		//		alert(paperlabel);
+				var price = $('#uploadprice').val();
+		//		alert(price);
+				var type = $("input[type='radio']:checked").val();
+				if(type==1){
+					if(price==null||price==''){
+					$('.alert').html('请输入下载所需积分！').addClass('alert-warning').show().delay(2000).fadeOut();
+					return;
+					}
+					if(parseInt(price)<0||parseInt(price)>1000||isNaN(price)){
+					$('.alert').html('积分输入不符合规范！').addClass('alert-warning').show().delay(2000).fadeOut();
+					return;
+					}
+					
+				}else{
+					var price = 0;
+				}
+				
+				var bank = {'paperid':paperid,'paperlabel':paperlabel,'price':price};
+				$.ajax({
+					url:'uploadpaper',
+					type:'post',
+					contentType:'application/json;charset=utf-8',//请求的字符编码
+					data:JSON.stringify(bank),//转换成json格式字符串
+					dateType:"text",//返回类型
+					success:function(e){
+		//				alert(e);
+						$('.alert').html('上传成功，想要编辑试卷请先下架！').addClass('alert-success').show().delay(1000).fadeOut();
+						window.location.href = "tounpublishteacherPaper";
+						
+					},
+					error:function(){
+						$('.alert').html('上传失败！').addClass('alert-warning').show().delay(1000).fadeOut();
+		
+					}
+				});
+				
+			})
+			
+			//发布考试
+			$('#publishpaper').click(function(){
+				var type = $("input[type='radio']:checked").val();
+				var begin = new Date();
+				var end = new Date();
+				x = $("#begintime").val();
+       			begin.setFullYear(parseInt(x.substring(0, 4)));
+        		begin.setMonth(parseInt(x.substring(5, 7)) - 1);
+        		begin.setDate(parseInt(x.substring(8, 10)));
+        		begin.setHours(parseInt(x.substring(11, 13)));
+        		begin.setMinutes(parseInt(x.substring(14, 16)));
+
+				y = $("#endtime").val();
+       			end.setFullYear(parseInt(y.substring(0, 4)));
+        		end.setMonth(parseInt(y.substring(5, 7)) - 1);
+        		end.setDate(parseInt(y.substring(8, 10)));
+        		end.setHours(parseInt(y.substring(11, 13)));
+        		end.setMinutes(parseInt(y.substring(14, 16)));
+				
+				var paperid= $('#publishclickpaper').val();
+				var begintime = begin;
+				var endtime = end;
+				var outnum = $('#outnum').val();
+				alert(outnum);
+//				var duration = $('#duration').val();
+//				var name =$('#name').val();
+//				var tel = $('#tel').val();
+				if(begintime==null||begintime==''){
+					$('.alert').html('请输入开始时间！').addClass('alert-warning').show().delay(2000).fadeOut();
+					return;
+				}
+				
+				if(endtime==null||endtime==''){
+					$('.alert').html('请输入结束时间！').addClass('alert-warning').show().delay(2000).fadeOut();
+					return;
+				}
+				
+//				
+//				if(name==null||name==''){
+//					$('.alert').html('邀请考试考生姓名不能为空！').addClass('alert-warning').show().delay(2000).fadeOut();
+//					return;
+//				}
+//				if(tel==null||tel==''){
+//					$('.alert').html('邀请考试考生电话不能为空！').addClass('alert-warning').show().delay(2000).fadeOut();
+//					return;
+//				}
+				
+//				var user = {'username':name,'tel':tel};
+//				var examinee ;
+//				$.ajax({
+//					url:'checkuser',
+//					type:'post',
+//					contentType:'application/json;charset=utf-8',//请求的字符编码
+//					data:JSON.stringify(user),//转换成json格式字符串
+//					dateType:"text",//返回类型
+//					success:function(e){
+//						if(e=="false"){
+//							$('.alert').html('未找到该考试信息！').addClass('alert-warning').show().delay(1000).fadeOut();
+//							return;
+//						}
+//						examinee= e;
+//						
+						var paper = {'begintime':begintime,'endtime':endtime,'paperid':paperid,'type1':type,'outnum':outnum};
+						
+						$.ajax({
+							url:'publishpaper',
+							type:'post',
+							contentType:'application/json;charset=utf-8',//请求的字符编码
+							data:JSON.stringify(paper),//转换成json格式字符串
+							dateType:"text",//返回类型
+							success:function(e){
+								$('#publish-paperModal').modal('hide');
+								$('#addpersonclickpaper').val(paperid);
+								$('#hhh').val(paperid);
+								$('#addperson-paperModal').modal('show');
+								
+							},
+							error:function(){
+								
+								$('.alert').html('系统维护，请稍后再试！').addClass('alert-warning').show().delay(1000).fadeOut();
+								
+								return;
+							}
+						});
+//					},
+//					error:function(){
+//						
+//						$('.alert').html('录入考生信息错误！').addClass('alert-warning').show().delay(1000).fadeOut();
+//						
+//						return;
+//					}
+//				});
+//				
+				
+				
+			})
+			
+			
+			$('#addperson').click(function(){
+				var paperid = $('#addpersonclickpaper').val();
+				var name = $('#name').val();
+				var tel = $('#tel').val();
+				if(name==null||name==''){
+					$('.alert').html('邀请考试考生姓名不能为空！').addClass('alert-warning').show().delay(2000).fadeOut();
+					return;
+				}
+				if(tel==null||tel==''){
+					$('.alert').html('邀请考试考生电话不能为空！').addClass('alert-warning').show().delay(2000).fadeOut();
+					return;
+				}
+				var user = {'username':name,'tel':tel};
+				var examinee ;
+				$.ajax({
+					url:'checkuser',
+					type:'post',
+					contentType:'application/json;charset=utf-8',//请求的字符编码
+					data:JSON.stringify(user),//转换成json格式字符串
+					dateType:"text",//返回类型
+					success:function(e){
+						if(e=="false"){
+							$('.alert').html('未找到该考试信息！').addClass('alert-warning').show().delay(1000).fadeOut();
+							return;
+						}
+						examinee= e;	
+						var paper = {'examinee':examinee,'paperid':paperid};
+						
+						$.ajax({
+							url:'addperson',
+							type:'post',
+							contentType:'application/json;charset=utf-8',//请求的字符编码
+							data:JSON.stringify(paper),//转换成json格式字符串
+							dateType:"text",//返回类型
+							success:function(e){
+								if(e=="excited"){
+									$('.alert').html('该考生已加入！').addClass('alert-warning').show().delay(1000).fadeOut();
+									return;
+								}
+								$('.alert').html('发布成功，可以继续添加考生！').addClass('alert-success').show().delay(1000).fadeOut();
+								$('#name').val("");
+								$('#tel').val("");
+								
+							},
+							error:function(){
+								
+								$('.alert').html('添加考试错误！').addClass('alert-warning').show().delay(1000).fadeOut();
+								
+								return;
+							}
+						});
+						
+						
+						
+					},
+					error:function(){
+						
+						$('.alert').html('录入考生信息错误！').addClass('alert-warning').show().delay(1000).fadeOut();
+						
+						return;
+					}
+				});
+				
+				
+			})
+
+
+			})
+			//编辑试卷
+			function edit(obj) {
+					$('#clickpaperid').val($(obj).attr("value"));
+					$('#new-paper-name').val($(obj).attr("name"));
+					$('#new-paper-time').val($(obj).attr("duration"));
+					$('#editor-paperModal').modal('show');
+			}
+			function edit2(obj) {
+				$('.alert').html('该试卷已上架到商城无法编辑').addClass('alert-danger').show().delay(1000).fadeOut();
+		
+			}
+
+			function upload(obj) {
+				var num = $(obj).attr("question");
+				if(num==0){
+					$('.alert').html('试卷为空，无法上架！').addClass('alert-warning').show().delay(1000).fadeOut();
+					return;
+				}
+				$('#uploadclickpaper').val($(obj).attr("value"));
+				//		$('#new-paper-name').val($(obj).attr("name"));
+				//		$('#new-paper-describe').val($(obj).attr("description"));
+				$('#upload-paperModal').modal('show');
+
+			}
+			
+			function publish(obj){
+				
+				
+				var num = $(obj).attr("question");
+				if(num==0){
+					$('.alert').html('试卷为空，无法发布！').addClass('alert-warning').show().delay(1000).fadeOut();
+					return;
+				}
+				$('#publishclickpaper').val($(obj).attr("value"));
+				$('#publish-paperModal').modal('show');
+			}
+			function publish2(obj){
+				$('.alert').html('该试卷已上架到商城无法发布').addClass('alert-danger').show().delay(1000).fadeOut();
+		
+			}
+			
+			function unpublishpaper(){
+				
+				window.location.href ="tounpublishteacherPaper";
+			}
+			
+			function publishpaper(){
+				
+				window.location.href ="topublishteacherPaper";
+			}
+			
+			
+			
+		
+			
+			
+		</script>
+		
+		<script>
+		  $(function () {
+		    $('#myTab a:last').tab('show');
+		  })
+		  $('#myTab a').click(function (e) {
+		  e.preventDefault();
+		  $(this).tab('show');
+		})
+		</script>
+
+
+	</body>
+
+</html> 

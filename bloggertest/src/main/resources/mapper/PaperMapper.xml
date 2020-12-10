@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.dao.PaperMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.entity.Paper" >
+    <id column="paperid" property="paperid" jdbcType="INTEGER" />
+    <result column="papername" property="papername" jdbcType="VARCHAR" />
+    <result column="paperlabel" property="paperlabel" jdbcType="VARCHAR" />
+    <result column="invitationcode" property="invitationcode" jdbcType="VARCHAR" />
+    <result column="questionnum" property="questionnum" jdbcType="INTEGER" />
+    <result column="singlenum" property="singlenum" jdbcType="INTEGER" />
+    <result column="judgenum" property="judgenum" jdbcType="INTEGER" />
+    <result column="multiplenum" property="multiplenum" jdbcType="INTEGER" />
+    <result column="fillnum" property="fillnum" jdbcType="INTEGER" />
+    <result column="shortanswernum" property="shortanswernum" jdbcType="INTEGER" />
+    <result column="questionscore" property="questionscore" jdbcType="INTEGER" />
+    <result column="signlescore" property="signlescore" jdbcType="INTEGER" />
+    <result column="judgescore" property="judgescore" jdbcType="INTEGER" />
+    <result column="multiplescore" property="multiplescore" jdbcType="INTEGER" />
+    <result column="fillscore" property="fillscore" jdbcType="INTEGER" />
+    <result column="shortanswerscore" property="shortanswerscore" jdbcType="INTEGER" />
+    <result column="winder" property="winder" jdbcType="INTEGER" />
+    <result column="examinee" property="examinee" jdbcType="INTEGER" />
+    <result column="begintime" property="begintime" jdbcType="TIMESTAMP" />
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="duration" property="duration" jdbcType="VARCHAR" />
+    <result column="type1" property="type1" jdbcType="INTEGER" />
+    <result column="timeout" property="timeout" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="finscore" property="finscore" jdbcType="INTEGER" />
+    <result column="outnum" property="outnum" jdbcType="INTEGER" />
+    <result column="judger" property="judger" jdbcType="INTEGER" />
+    <result column="resource" property="resource" jdbcType="VARCHAR" />
+    <result column="orderflag" property="orderflag" jdbcType="INTEGER" />
+    <result column="undonenum" property="undonenum" jdbcType="INTEGER" />
+    <result column="doingnum" property="doingnum" jdbcType="INTEGER" />
+    <result column="donenum" property="donenum" jdbcType="INTEGER" />
+    <result column="doflag" property="doflag" jdbcType="INTEGER" />
+    <result column="c1" property="c1" jdbcType="VARCHAR" />
+    <result column="c2" property="c2" jdbcType="INTEGER" />
+    <result column="c3" property="c3" jdbcType="INTEGER" />
+    <result column="c4" property="c4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    paperid, papername, paperlabel, invitationcode, questionnum, singlenum, judgenum, 
+    multiplenum, fillnum, shortanswernum, questionscore, signlescore, judgescore, multiplescore, 
+    fillscore, shortanswerscore, winder, examinee, begintime, endtime, duration, type1, 
+    timeout, location, finscore, outnum, judger, resource, orderflag, undonenum, doingnum, 
+    donenum, doflag, c1, c2, c3, c4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.entity.PaperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from paper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from paper
+    where paperid = #{paperid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from paper
+    where paperid = #{paperid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.entity.PaperExample" >
+    delete from paper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" useGeneratedKeys="true"  keyColumn="paperid" parameterType="com.neuedu.entity.Paper" >
+  <selectKey keyProperty="paperid" order="AFTER" resultType="int">
+  select LAST_INSERT_ID()
+  </selectKey>
+    insert into paper (paperid, papername, paperlabel, 
+      invitationcode, questionnum, singlenum, 
+      judgenum, multiplenum, fillnum, 
+      shortanswernum, questionscore, signlescore, 
+      judgescore, multiplescore, fillscore, 
+      shortanswerscore, winder, examinee, 
+      begintime, endtime, duration, 
+      type1, timeout, location, 
+      finscore, outnum, judger, 
+      resource, orderflag, undonenum, 
+      doingnum, donenum, doflag, 
+      c1, c2, c3, c4
+      )
+    values (#{paperid,jdbcType=INTEGER}, #{papername,jdbcType=VARCHAR}, #{paperlabel,jdbcType=VARCHAR}, 
+      #{invitationcode,jdbcType=VARCHAR}, #{questionnum,jdbcType=INTEGER}, #{singlenum,jdbcType=INTEGER}, 
+      #{judgenum,jdbcType=INTEGER}, #{multiplenum,jdbcType=INTEGER}, #{fillnum,jdbcType=INTEGER}, 
+      #{shortanswernum,jdbcType=INTEGER}, #{questionscore,jdbcType=INTEGER}, #{signlescore,jdbcType=INTEGER}, 
+      #{judgescore,jdbcType=INTEGER}, #{multiplescore,jdbcType=INTEGER}, #{fillscore,jdbcType=INTEGER}, 
+      #{shortanswerscore,jdbcType=INTEGER}, #{winder,jdbcType=INTEGER}, #{examinee,jdbcType=INTEGER}, 
+      #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{duration,jdbcType=VARCHAR}, 
+      #{type1,jdbcType=INTEGER}, #{timeout,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, 
+      #{finscore,jdbcType=INTEGER}, #{outnum,jdbcType=INTEGER}, #{judger,jdbcType=INTEGER}, 
+      #{resource,jdbcType=VARCHAR}, #{orderflag,jdbcType=INTEGER}, #{undonenum,jdbcType=INTEGER}, 
+      #{doingnum,jdbcType=INTEGER}, #{donenum,jdbcType=INTEGER}, #{doflag,jdbcType=INTEGER}, 
+      #{c1,jdbcType=VARCHAR}, #{c2,jdbcType=INTEGER}, #{c3,jdbcType=INTEGER}, #{c4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="paperid"  keyColumn="qId" parameterType="com.neuedu.entity.Paper" >
+    insert into paper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paperid != null" >
+        paperid,
+      </if>
+      <if test="papername != null" >
+        papername,
+      </if>
+      <if test="paperlabel != null" >
+        paperlabel,
+      </if>
+      <if test="invitationcode != null" >
+        invitationcode,
+      </if>
+      <if test="questionnum != null" >
+        questionnum,
+      </if>
+      <if test="singlenum != null" >
+        singlenum,
+      </if>
+      <if test="judgenum != null" >
+        judgenum,
+      </if>
+      <if test="multiplenum != null" >
+        multiplenum,
+      </if>
+      <if test="fillnum != null" >
+        fillnum,
+      </if>
+      <if test="shortanswernum != null" >
+        shortanswernum,
+      </if>
+      <if test="questionscore != null" >
+        questionscore,
+      </if>
+      <if test="signlescore != null" >
+        signlescore,
+      </if>
+      <if test="judgescore != null" >
+        judgescore,
+      </if>
+      <if test="multiplescore != null" >
+        multiplescore,
+      </if>
+      <if test="fillscore != null" >
+        fillscore,
+      </if>
+      <if test="shortanswerscore != null" >
+        shortanswerscore,
+      </if>
+      <if test="winder != null" >
+        winder,
+      </if>
+      <if test="examinee != null" >
+        examinee,
+      </if>
+      <if test="begintime != null" >
+        begintime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="duration != null" >
+        duration,
+      </if>
+      <if test="type1 != null" >
+        type1,
+      </if>
+      <if test="timeout != null" >
+        timeout,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="finscore != null" >
+        finscore,
+      </if>
+      <if test="outnum != null" >
+        outnum,
+      </if>
+      <if test="judger != null" >
+        judger,
+      </if>
+      <if test="resource != null" >
+        resource,
+      </if>
+      <if test="orderflag != null" >
+        orderflag,
+      </if>
+      <if test="undonenum != null" >
+        undonenum,
+      </if>
+      <if test="doingnum != null" >
+        doingnum,
+      </if>
+      <if test="donenum != null" >
+        donenum,
+      </if>
+      <if test="doflag != null" >
+        doflag,
+      </if>
+      <if test="c1 != null" >
+        c1,
+      </if>
+      <if test="c2 != null" >
+        c2,
+      </if>
+      <if test="c3 != null" >
+        c3,
+      </if>
+      <if test="c4 != null" >
+        c4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paperid != null" >
+        #{paperid,jdbcType=INTEGER},
+      </if>
+      <if test="papername != null" >
+        #{papername,jdbcType=VARCHAR},
+      </if>
+      <if test="paperlabel != null" >
+        #{paperlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="invitationcode != null" >
+        #{invitationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="questionnum != null" >
+        #{questionnum,jdbcType=INTEGER},
+      </if>
+      <if test="singlenum != null" >
+        #{singlenum,jdbcType=INTEGER},
+      </if>
+      <if test="judgenum != null" >
+        #{judgenum,jdbcType=INTEGER},
+      </if>
+      <if test="multiplenum != null" >
+        #{multiplenum,jdbcType=INTEGER},
+      </if>
+      <if test="fillnum != null" >
+        #{fillnum,jdbcType=INTEGER},
+      </if>
+      <if test="shortanswernum != null" >
+        #{shortanswernum,jdbcType=INTEGER},
+      </if>
+      <if test="questionscore != null" >
+        #{questionscore,jdbcType=INTEGER},
+      </if>
+      <if test="signlescore != null" >
+        #{signlescore,jdbcType=INTEGER},
+      </if>
+      <if test="judgescore != null" >
+        #{judgescore,jdbcType=INTEGER},
+      </if>
+      <if test="multiplescore != null" >
+        #{multiplescore,jdbcType=INTEGER},
+      </if>
+      <if test="fillscore != null" >
+        #{fillscore,jdbcType=INTEGER},
+      </if>
+      <if test="shortanswerscore != null" >
+        #{shortanswerscore,jdbcType=INTEGER},
+      </if>
+      <if test="winder != null" >
+        #{winder,jdbcType=INTEGER},
+      </if>
+      <if test="examinee != null" >
+        #{examinee,jdbcType=INTEGER},
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duration != null" >
+        #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="type1 != null" >
+        #{type1,jdbcType=INTEGER},
+      </if>
+      <if test="timeout != null" >
+        #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="finscore != null" >
+        #{finscore,jdbcType=INTEGER},
+      </if>
+      <if test="outnum != null" >
+        #{outnum,jdbcType=INTEGER},
+      </if>
+      <if test="judger != null" >
+        #{judger,jdbcType=INTEGER},
+      </if>
+      <if test="resource != null" >
+        #{resource,jdbcType=VARCHAR},
+      </if>
+      <if test="orderflag != null" >
+        #{orderflag,jdbcType=INTEGER},
+      </if>
+      <if test="undonenum != null" >
+        #{undonenum,jdbcType=INTEGER},
+      </if>
+      <if test="doingnum != null" >
+        #{doingnum,jdbcType=INTEGER},
+      </if>
+      <if test="donenum != null" >
+        #{donenum,jdbcType=INTEGER},
+      </if>
+      <if test="doflag != null" >
+        #{doflag,jdbcType=INTEGER},
+      </if>
+      <if test="c1 != null" >
+        #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        #{c2,jdbcType=INTEGER},
+      </if>
+      <if test="c3 != null" >
+        #{c3,jdbcType=INTEGER},
+      </if>
+      <if test="c4 != null" >
+        #{c4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.entity.PaperExample" resultType="java.lang.Integer" >
+    select count(*) from paper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update paper
+    <set >
+      <if test="record.paperid != null" >
+        paperid = #{record.paperid,jdbcType=INTEGER},
+      </if>
+      <if test="record.papername != null" >
+        papername = #{record.papername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paperlabel != null" >
+        paperlabel = #{record.paperlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invitationcode != null" >
+        invitationcode = #{record.invitationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.questionnum != null" >
+        questionnum = #{record.questionnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.singlenum != null" >
+        singlenum = #{record.singlenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.judgenum != null" >
+        judgenum = #{record.judgenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.multiplenum != null" >
+        multiplenum = #{record.multiplenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.fillnum != null" >
+        fillnum = #{record.fillnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.shortanswernum != null" >
+        shortanswernum = #{record.shortanswernum,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionscore != null" >
+        questionscore = #{record.questionscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.signlescore != null" >
+        signlescore = #{record.signlescore,jdbcType=INTEGER},
+      </if>
+      <if test="record.judgescore != null" >
+        judgescore = #{record.judgescore,jdbcType=INTEGER},
+      </if>
+      <if test="record.multiplescore != null" >
+        multiplescore = #{record.multiplescore,jdbcType=INTEGER},
+      </if>
+      <if test="record.fillscore != null" >
+        fillscore = #{record.fillscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.shortanswerscore != null" >
+        shortanswerscore = #{record.shortanswerscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.winder != null" >
+        winder = #{record.winder,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinee != null" >
+        examinee = #{record.examinee,jdbcType=INTEGER},
+      </if>
+      <if test="record.begintime != null" >
+        begintime = #{record.begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null" >
+        endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.duration != null" >
+        duration = #{record.duration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type1 != null" >
+        type1 = #{record.type1,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeout != null" >
+        timeout = #{record.timeout,jdbcType=INTEGER},
+      </if>
+      <if test="record.location != null" >
+        location = #{record.location,jdbcType=VARCHAR},
+      </if>
+      <if test="record.finscore != null" >
+        finscore = #{record.finscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.outnum != null" >
+        outnum = #{record.outnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.judger != null" >
+        judger = #{record.judger,jdbcType=INTEGER},
+      </if>
+      <if test="record.resource != null" >
+        resource = #{record.resource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderflag != null" >
+        orderflag = #{record.orderflag,jdbcType=INTEGER},
+      </if>
+      <if test="record.undonenum != null" >
+        undonenum = #{record.undonenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.doingnum != null" >
+        doingnum = #{record.doingnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.donenum != null" >
+        donenum = #{record.donenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.doflag != null" >
+        doflag = #{record.doflag,jdbcType=INTEGER},
+      </if>
+      <if test="record.c1 != null" >
+        c1 = #{record.c1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c2 != null" >
+        c2 = #{record.c2,jdbcType=INTEGER},
+      </if>
+      <if test="record.c3 != null" >
+        c3 = #{record.c3,jdbcType=INTEGER},
+      </if>
+      <if test="record.c4 != null" >
+        c4 = #{record.c4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update paper
+    set paperid = #{record.paperid,jdbcType=INTEGER},
+      papername = #{record.papername,jdbcType=VARCHAR},
+      paperlabel = #{record.paperlabel,jdbcType=VARCHAR},
+      invitationcode = #{record.invitationcode,jdbcType=VARCHAR},
+      questionnum = #{record.questionnum,jdbcType=INTEGER},
+      singlenum = #{record.singlenum,jdbcType=INTEGER},
+      judgenum = #{record.judgenum,jdbcType=INTEGER},
+      multiplenum = #{record.multiplenum,jdbcType=INTEGER},
+      fillnum = #{record.fillnum,jdbcType=INTEGER},
+      shortanswernum = #{record.shortanswernum,jdbcType=INTEGER},
+      questionscore = #{record.questionscore,jdbcType=INTEGER},
+      signlescore = #{record.signlescore,jdbcType=INTEGER},
+      judgescore = #{record.judgescore,jdbcType=INTEGER},
+      multiplescore = #{record.multiplescore,jdbcType=INTEGER},
+      fillscore = #{record.fillscore,jdbcType=INTEGER},
+      shortanswerscore = #{record.shortanswerscore,jdbcType=INTEGER},
+      winder = #{record.winder,jdbcType=INTEGER},
+      examinee = #{record.examinee,jdbcType=INTEGER},
+      begintime = #{record.begintime,jdbcType=TIMESTAMP},
+      endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      duration = #{record.duration,jdbcType=VARCHAR},
+      type1 = #{record.type1,jdbcType=INTEGER},
+      timeout = #{record.timeout,jdbcType=INTEGER},
+      location = #{record.location,jdbcType=VARCHAR},
+      finscore = #{record.finscore,jdbcType=INTEGER},
+      outnum = #{record.outnum,jdbcType=INTEGER},
+      judger = #{record.judger,jdbcType=INTEGER},
+      resource = #{record.resource,jdbcType=VARCHAR},
+      orderflag = #{record.orderflag,jdbcType=INTEGER},
+      undonenum = #{record.undonenum,jdbcType=INTEGER},
+      doingnum = #{record.doingnum,jdbcType=INTEGER},
+      donenum = #{record.donenum,jdbcType=INTEGER},
+      doflag = #{record.doflag,jdbcType=INTEGER},
+      c1 = #{record.c1,jdbcType=VARCHAR},
+      c2 = #{record.c2,jdbcType=INTEGER},
+      c3 = #{record.c3,jdbcType=INTEGER},
+      c4 = #{record.c4,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.entity.Paper" >
+    update paper
+    <set >
+      <if test="papername != null" >
+        papername = #{papername,jdbcType=VARCHAR},
+      </if>
+      <if test="paperlabel != null" >
+        paperlabel = #{paperlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="invitationcode != null" >
+        invitationcode = #{invitationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="questionnum != null" >
+        questionnum = #{questionnum,jdbcType=INTEGER},
+      </if>
+      <if test="singlenum != null" >
+        singlenum = #{singlenum,jdbcType=INTEGER},
+      </if>
+      <if test="judgenum != null" >
+        judgenum = #{judgenum,jdbcType=INTEGER},
+      </if>
+      <if test="multiplenum != null" >
+        multiplenum = #{multiplenum,jdbcType=INTEGER},
+      </if>
+      <if test="fillnum != null" >
+        fillnum = #{fillnum,jdbcType=INTEGER},
+      </if>
+      <if test="shortanswernum != null" >
+        shortanswernum = #{shortanswernum,jdbcType=INTEGER},
+      </if>
+      <if test="questionscore != null" >
+        questionscore = #{questionscore,jdbcType=INTEGER},
+      </if>
+      <if test="signlescore != null" >
+        signlescore = #{signlescore,jdbcType=INTEGER},
+      </if>
+      <if test="judgescore != null" >
+        judgescore = #{judgescore,jdbcType=INTEGER},
+      </if>
+      <if test="multiplescore != null" >
+        multiplescore = #{multiplescore,jdbcType=INTEGER},
+      </if>
+      <if test="fillscore != null" >
+        fillscore = #{fillscore,jdbcType=INTEGER},
+      </if>
+      <if test="shortanswerscore != null" >
+        shortanswerscore = #{shortanswerscore,jdbcType=INTEGER},
+      </if>
+      <if test="winder != null" >
+        winder = #{winder,jdbcType=INTEGER},
+      </if>
+      <if test="examinee != null" >
+        examinee = #{examinee,jdbcType=INTEGER},
+      </if>
+      <if test="begintime != null" >
+        begintime = #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duration != null" >
+        duration = #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="type1 != null" >
+        type1 = #{type1,jdbcType=INTEGER},
+      </if>
+      <if test="timeout != null" >
+        timeout = #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="finscore != null" >
+        finscore = #{finscore,jdbcType=INTEGER},
+      </if>
+      <if test="outnum != null" >
+        outnum = #{outnum,jdbcType=INTEGER},
+      </if>
+      <if test="judger != null" >
+        judger = #{judger,jdbcType=INTEGER},
+      </if>
+      <if test="resource != null" >
+        resource = #{resource,jdbcType=VARCHAR},
+      </if>
+      <if test="orderflag != null" >
+        orderflag = #{orderflag,jdbcType=INTEGER},
+      </if>
+      <if test="undonenum != null" >
+        undonenum = #{undonenum,jdbcType=INTEGER},
+      </if>
+      <if test="doingnum != null" >
+        doingnum = #{doingnum,jdbcType=INTEGER},
+      </if>
+      <if test="donenum != null" >
+        donenum = #{donenum,jdbcType=INTEGER},
+      </if>
+      <if test="doflag != null" >
+        doflag = #{doflag,jdbcType=INTEGER},
+      </if>
+      <if test="c1 != null" >
+        c1 = #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        c2 = #{c2,jdbcType=INTEGER},
+      </if>
+      <if test="c3 != null" >
+        c3 = #{c3,jdbcType=INTEGER},
+      </if>
+      <if test="c4 != null" >
+        c4 = #{c4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where paperid = #{paperid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.entity.Paper" >
+    update paper
+    set papername = #{papername,jdbcType=VARCHAR},
+      paperlabel = #{paperlabel,jdbcType=VARCHAR},
+      invitationcode = #{invitationcode,jdbcType=VARCHAR},
+      questionnum = #{questionnum,jdbcType=INTEGER},
+      singlenum = #{singlenum,jdbcType=INTEGER},
+      judgenum = #{judgenum,jdbcType=INTEGER},
+      multiplenum = #{multiplenum,jdbcType=INTEGER},
+      fillnum = #{fillnum,jdbcType=INTEGER},
+      shortanswernum = #{shortanswernum,jdbcType=INTEGER},
+      questionscore = #{questionscore,jdbcType=INTEGER},
+      signlescore = #{signlescore,jdbcType=INTEGER},
+      judgescore = #{judgescore,jdbcType=INTEGER},
+      multiplescore = #{multiplescore,jdbcType=INTEGER},
+      fillscore = #{fillscore,jdbcType=INTEGER},
+      shortanswerscore = #{shortanswerscore,jdbcType=INTEGER},
+      winder = #{winder,jdbcType=INTEGER},
+      examinee = #{examinee,jdbcType=INTEGER},
+      begintime = #{begintime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      duration = #{duration,jdbcType=VARCHAR},
+      type1 = #{type1,jdbcType=INTEGER},
+      timeout = #{timeout,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR},
+      finscore = #{finscore,jdbcType=INTEGER},
+      outnum = #{outnum,jdbcType=INTEGER},
+      judger = #{judger,jdbcType=INTEGER},
+      resource = #{resource,jdbcType=VARCHAR},
+      orderflag = #{orderflag,jdbcType=INTEGER},
+      undonenum = #{undonenum,jdbcType=INTEGER},
+      doingnum = #{doingnum,jdbcType=INTEGER},
+      donenum = #{donenum,jdbcType=INTEGER},
+      doflag = #{doflag,jdbcType=INTEGER},
+      c1 = #{c1,jdbcType=VARCHAR},
+      c2 = #{c2,jdbcType=INTEGER},
+      c3 = #{c3,jdbcType=INTEGER},
+      c4 = #{c4,jdbcType=VARCHAR}
+    where paperid = #{paperid,jdbcType=INTEGER}
+  </update>
+   <select id="selectAllPaper" parameterType="Integer" resultMap="BaseResultMap">
+  	select * from paper where examinee = #{userid}
+  </select>
+     <select id="selectAllPaperByTeacher" parameterType="Integer" resultMap="BaseResultMap">
+  	select * from paper where winder = #{userid}
+  </select>
+   <delete id="deleteFillByknowledge" parameterType="java.lang.Integer" >
+    delete from paper_fill
+    where paperid = #{paperid} and Q_knowledge =#{qKnowledge}
+  </delete>
+  
+   <delete id="deleteSingleByknowledge" parameterType="java.lang.Integer" >
+    delete from paper_single
+    where paperid = #{paperid} and Q_knowledge =#{qKnowledge}
+  </delete>
+  
+  <delete id="deleteMultipleByknowledge" parameterType="java.lang.Integer" >
+    delete from paper_multiple
+    where paperid = #{paperid} and Q_knowledge =#{qKnowledge}
+  </delete>
+  
+  
+   <delete id="deleteJudgeByknowledge" parameterType="java.lang.Integer" >
+    delete from paper_judge
+    where paperid = #{paperid} and Q_knowledge =#{qKnowledge}
+  </delete>
+  
+   <delete id="deleteShortanswerByknowledge" parameterType="java.lang.Integer" >
+    delete from paper_shortanswer
+    where paperid = #{paperid} and Q_knowledge =#{qKnowledge}
+  </delete>
+  
+  
+</mapper>

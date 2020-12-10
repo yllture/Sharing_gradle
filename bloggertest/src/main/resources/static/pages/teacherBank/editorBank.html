@@ -1,0 +1,2696 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>编辑试卷</title>
+		<link href="../../css/bootstrap.min.css" th:href="@{static/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="../../font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}">
+		<link rel="stylesheet" href="../../font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}">
+		<link href="../../css/components.css" th:href="@{static/css/components.css}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="../../css/autoPaper.css" th:href="@{static/css/autoPaper.css}">
+		<link rel="stylesheet" href="../../css/editSingle.css" th:href="@{static/css/editSingle.css}">
+		<link rel="stylesheet" href="../../css/questionshow.css" th:href="@{static/css/questionshow.css}">
+		<link rel="stylesheet" href="../../css/backgroundcolor.css" th:href="@{static/css/backgroundcolor.css}">
+		<link rel="stylesheet" type="text/css" href="../../css/wenjuan_ht.css" th:href="@{static/css/wenjuan_ht.css}" />
+		<link rel="stylesheet" type="text/css" href="../../css/alert.css" th:href="@{static/css/alert.css}">
+		<link href="../../css/app.css" type="text/css" rel="stylesheet" th:href="@{static/css/app.css}" />
+		<link href="../../css/sets.min.css" type="text/css" rel="stylesheet" th:href="@{static/css/sets.min.css}" />
+		<link href="../../css/editoritem.css" type="text/css" rel="stylesheet" th:href="@{static/css/editoritem.css}" />
+
+		<link rel="stylesheet" type="text/css" href="../../css/question.css" th:href="@{static/css/question.css}" />
+		<link href="../../css/editorbank.css" type="text/css" rel="stylesheet" th:href="@{static/css/editorbank.css}" />
+		<script src="../../js/jquery.min.js" type="text/javascript" th:src="@{static/js/jquery.min.js}"></script>
+		<script src="../../js/modernizr.min.js" th:src="@{static/js/modernizr.min.js}"></script>
+		<script src="../../js/jquery-2.0.3.min.js" type="text/javascript" th:src="@{static/js/jquery-2.0.3.min.js}"></script>
+		<script src="../../js/template.js" th:src="@{static/js/template.js}"></script>
+	</head>
+
+	<body>
+		<div style="padding-left: 10%; padding-right: 10%;">
+			<div>
+				<ol class="breadcrumb mt20 mb20 ">
+					<li>
+						<a href="">我的题目</a>
+					</li>
+					<li class="active">编辑题库</li>
+
+				</ol>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="col-xs-3">
+						<div id="paper-form-nav" class="pad paper-form-nav unselectable affix-top" style="position: fixed; margin-top: 1px;">
+							<ul class="part nav" style="width: 240px;">
+								<li class style="padding-bottom: 5px;">
+									<a class="btn" href="#a1">基本信息</a>
+								</li>
+								<li class style="padding-bottom: 5px;">
+									<a class="btn" href="#paper-part-0">单选题</a>
+								</li>
+								<li class style="padding-bottom: 5px;">
+									<a class="btn" href="#paper-part-1">多选题</a>
+								</li>
+								<li class style="padding-bottom: 5px;">
+									<a class="btn" href="#paper-part-2">判断题</a>
+								</li>
+								<li class style="padding-bottom: 5px;">
+									<a class="btn" href="#paper-part-3">填空题</a>
+								</li>
+								<li class style="padding-bottom: 5px;">
+									<a class="btn" href="#paper-part-4">简答题</a>
+								</li>
+							</ul>
+							<div class="part summary" style="padding-top: 10px;">
+								<div>
+									<table class="w">
+										<tbody>
+											<tr class="score-wrap">
+												<td>目前总题数:</td>
+												<td class="tr text-medium-gray"><span class="num text-golden-yellow inline-block mb5 mr5" th:text="${Bank.questionnum}">0</span> 道&emsp;
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<table class="w">
+										<tbody>
+											<tr>
+												<td>
+													<a class="btn btn-warning btn-block btn-save-bank" href="tobankTeacher">完成编辑</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--
+          	描述：以上是左侧导航
+          -->
+					<div class="col-xs-9">
+						<div class="paper-form-container">
+							<div class="section-basic" id="a1">
+								<div>
+									<a class="anchor-mark" id="anchor-paper-name"></a> <input type="text" th:value="${Bank.bankname}" class="form-control form-input input-lg paper-name mb10" placeholder="题库名称" disabled/>
+								</div>
+								<div>
+									<textarea class="form-control form-input paper-guide" placeholder="题库描述" th:text="${Bank.bankdescription}" disabled=/></textarea>
+								</div>
+							</div>
+							<!--
+                  	描述：以上是考试说明
+                  -->
+							<!--------------------------------------单选题---------------------------------------->
+							<div class="section-part" id="paper-part-0">
+								<div class="part-header">
+									<form class="form-inline part-name-wrap">
+										<div class="form-group" style="width: 100%;">
+											<label>单选题</label>
+										</div>
+									</form>
+								</div>
+								<fieldset class="mt20" style="padding: 20px 10px;">
+									<legend>
+										<i class="fa fa-bar-chart"></i> 题目统计
+									</legend>
+									<label class="part-summary unselectable">
+									<div class="part-summary-container" style="display: block;">
+										
+						<ul class="summary-list" style="padding-left: 10%;">
+							<li class="summary-item summary-header"><span> <span
+													class="text-ellipsis">知识点 </span>
+				</span> <span> <span class="text-ellipsis">题目数 </span>
+				</span>  <span> <span class="text-ellipsis">操作 </span>
+				</span>
+			</li>
+			<li class="summary-item" th:each="konw:${kownledgsinlefor}">
+				            	<span><span class="skill-item text-ellipsis" th:text="${konw.name}"></span></span>
+					            <span><span class="count-item text-highlight" th:text="${konw.num}">1</span></span>
+					            <span class="action-item"><a class="btn-remove"><i class="fa fa-trash"></i></a></span>
+				        	</li>
+						</ul>
+					</div>
+					</label>
+					</fieldset>
+					<fieldset class="mt20" style="padding: 20px 10px;">
+						<legend>
+							<i class="fa fa-bar-chart"></i> 题目详情 <label class="hide-input unselectable q-reorder-toggle"><span>收起</span>
+										<i class="fa fa-angle-double-up"></i> </label>
+						</legend>
+						<div class="part-questions-container">
+							<div class="pin-wrapper" style="height: 52px;">
+								<div class="part-questions-toolbar unselectable" style="width: 760px;">
+									<ul class="list-inline inline-block" style="display: inline-block;">
+										<li style="padding-top: 5px; padding-bottom: 6px;">
+
+										<div class="checkall checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" value="option1"> <label for="inlineCheckbox2">
+											全选 </label>
+										</div>
+										</li>
+										<li>
+											<a class="btn btn-default btn-sm delete-sure-btn" data-action="remove"> <i class="fa fa-trash"></i> 删除
+											</a>
+										</li>
+										<li>
+                                            <div class="btn-group">
+							                    <a class="btn btn-default btn-sm btn-up" data-action="up">
+							                        <i class="fa fa-arrow-up"></i> 上移
+							                    </a>
+							                    <a class="btn btn-default btn-sm btn-down" data-action="down">
+							                        <i class="fa fa-arrow-down"></i> 下移
+							                    </a>
+							                </div>
+							            </li>
+									</ul>
+									<ul class="list-inline f12 pull-right">
+										<li>总题数： <span class="text-golden-yellow" th:text="${Bank.singlenum}"></span> <span class="text-medium-gray ml5 mr15">道</span>
+										</li>
+										<li>
+											<a class="btn btn-success btn-sm btn-add-singlequestions" style="display: inline-block;"> <i class="fa fa-plus"></i> 添加题目
+											</a>
+										</li>
+									</ul>
+									<div class="cb"></div>
+								</div>
+							</div>
+
+							<!-- 单选题样式 -->
+							<ul class="q-list" id="singlediv">
+								<li th:each="single :${singles}" class="q-item sets-question-item" th:data-qid="${single.qId}">
+									<div class="check-wrap">
+													<div class="checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" th:data-qid="${single.qId}" value="option1"/> <label>
+											 </label>
+										</div>
+									</div>
+									<div class="q-data">
+										<div class="select-toolbar-wrap">
+        
+        <a class="btn-remove delete-single"><i class="fa fa-trash"></i></a>
+        <a class="btn-edit edit-single"><i class="fa fa-edit"></i></a>
+    </div>
+										<span class="q-sequence" th:text="${singleStat.count}">1</span>
+										<span class="text-medium-gray">[单选题]</span>
+										<span class="ml5 label-skill text-ellipsis" th:text="${single.qKnowledge}"></span>
+										<span class="ml5 label-difficulty text-ellipsis" th:if="${single.qDifficulty==0}">易</span>
+										<span class="ml5 label-difficulty text-ellipsis" th:if="${single.qDifficulty==1}">中</span>
+										<span class="ml5 label-difficulty text-ellipsis" th:if="${single.qDifficulty==2}">难</span>
+										<label class="hide-input unselectable q-expand-toggle independent" style="margin-left: 0"> 
+												<a>收起</a> 
+												<i class="fa fa-angle-double-up "></i>
+												</label>
+
+										<div class="q-title" style="margin-top: 10px;">
+											<pre th:text="${single.qTitle}"></pre>
+
+										</div>
+										<ul class="list-title-media mt10"></ul>
+
+										<div>
+
+											<ul class="q-options-wrap mt20">
+												<li class="q-option" th:each="singlechoice :${single.singlelist}">
+													<label class="q-choice-icon radio-inline sets-radio active" th:if="${singlechoice.type==1}">
+													<span class="fa-stack radio-icon"> 
+														<i class="fa fa-circle-thin fa-stack-2x"></i> 
+														<i class="fa fa-dot-circle-o fa-stack-1x select" style="opacity: 1;"></i>
+														
+													</span>
+														</label> 
+														
+														<label class="q-choice-icon radio-inline sets-radio" th:if="${singlechoice.type!=1}"> 
+															<span class="fa-stack radio-icon"> 
+														<i class="fa fa-circle-thin fa-stack-2x"></i> 
+														<i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+													</span>
+															
+														</label>
+														<span class="option-index" th:text="A、" th:if="${singlechoiceStat.count==1}"></span> 
+														<span class="option-index" th:text="B、" th:if="${singlechoiceStat.count==2}"></span> <span class="option-index" th:text="C、" th:if="${singlechoiceStat.count==3}"></span> <span class="option-index" th:text="D、" th:if="${singlechoiceStat.count==4}"></span> <span class="option-index" th:text="F、" th:if="${singlechoiceStat.count==5}"></span> <span class="option-index" th:text="G、" th:if="${singlechoiceStat.count==6}"></span> <span class="option-index" th:text="H、" th:if="${singlechoiceStat.count==7}"></span> <span class="option-index" th:text="I、" th:if="${singlechoiceStat.count==8}"></span> <span class="option-index" th:text="J、" th:if="${singlechoiceStat.count==9}"></span> <span class="option-index" th:text="K、" th:if="${singlechoiceStat.count==10}"></span> <span class="option-index" th:text="L、" th:if="${singlechoiceStat.count==11}"></span> <span class="option-index" th:text="M、" th:if="${singlechoiceStat.count==12}"></span>
+													<div class="q-option-content pl5">
+														<pre th:text="${singlechoice.content}"></pre>
+													</div>
+												</li>
+											</ul>
+											<div class="q-answer mt20"></div>
+											<div class="q-answer mt20" style="display: block;">
+												<p class="q-ans-label">题目解析：</p>
+												<span th:if="${single.qAnalysis!=null}" th:text="${single.qAnalysis}"></span>
+												<span th:if="${single.qAnalysis==null}" th:text="无"></span>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<!--    <ul class="part-question-list q-list" data-link="visible{:_toggleContent}" data-jsv-df="" style="display: block;"><p data-jsv="#144^#44_/44_#45_">该部分下还没有试题，请从这里添加 <i class="fa fa-hand-o-up"></i></p></ul>-->
+						<!--选择添加题目时展开-->
+					</fieldset>
+
+				</div>
+
+				<!-------------------------------- 多选题 ---------------------------- -->
+
+				<div class="section-part" id="paper-part-1">
+					<div class="part-header">
+						<form class="form-inline part-name-wrap">
+							<div class="form-group" style="width: 100%;">
+								<label>多选题</label>
+							</div>
+						</form>
+					</div>
+					<fieldset class="mt20">
+						<legend>
+							<i class="fa fa-bar-chart"></i> 题目统计
+						</legend>
+						<label class="part-summary unselectable">
+									<div class="part-summary-container" style="display: block;">
+										
+			<ul class="summary-list" style="padding-left: 10%;">
+				<li class="summary-item summary-header"><span> <span
+													class="text-ellipsis">知识点 </span>
+								</span> <span> <span class="text-ellipsis">题目数 </span>
+								</span>  <span> <span class="text-ellipsis">操作 </span>
+								</span>
+							</li>
+							<li class="summary-item" th:each="konw:${kownledgsinmufor}">
+				            	<span><span class="skill-item text-ellipsis" th:text="${konw.name}"></span></span>
+					            <span><span class="count-item text-highlight" th:text="${konw.num}">1</span></span>
+					            <span class="action-item"><a class="btn-remove"><i class="fa fa-trash"></i></a></span>
+				        	</li>
+			</ul>
+		</div>
+		</label>
+		</fieldset>
+		<fieldset class="mt20" style="padding: 20px 10px;">
+			<legend>
+				<i class="fa fa-bar-chart"></i> 题目详情 <label class="hide-input unselectable q-reorder-toggle"><span>收起</span>
+										<i class="fa fa-angle-double-up"></i> </label>
+			</legend>
+			<div class="part-questions-container">
+				<div class="pin-wrapper" style="height: 52px;">
+					<div class="part-questions-toolbar unselectable" style="width: 760px;">
+						<ul class="list-inline inline-block" style="display: inline-block;">
+							<li style="padding-top: 5px; padding-bottom: 6px;">
+<div class="checkall checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" value="option1"> <label for="inlineCheckbox2">
+											全选 </label>
+										</div>
+							</li>
+							
+							<li>
+								<a class="btn btn-default btn-sm delete-sure-btn" data-action="remove"> <i class="fa fa-trash"></i> 删除
+								</a>
+							</li>
+							<li>
+                                            <div class="btn-group">
+							                    <a class="btn btn-default btn-sm btn-up" data-action="up">
+							                        <i class="fa fa-arrow-up"></i> 上移
+							                    </a>
+							                    <a class="btn btn-default btn-sm btn-down" data-action="down">
+							                        <i class="fa fa-arrow-down"></i> 下移
+							                    </a>
+							                </div>
+							            </li>
+						</ul>
+						<ul class="list-inline f12 pull-right">
+							<li>总题数： <span class="text-golden-yellow" th:text="${Bank.multiplenum}"></span> <span class="text-medium-gray ml5 mr15" >道</span>
+							</li>
+							<li>
+								<a class="btn btn-success btn-sm btn-add-multiplequestions" style="display: inline-block;"> <i class="fa fa-plus"></i> 添加题目
+								</a>
+							</li>
+						</ul>
+						<div class="cb"></div>
+					</div>
+				</div>
+				<ul class="q-list" id="multiplydiv">
+					<li th:each="multiple :${multiples}" class="q-item sets-question-item"  th:data-qid="${multiple.qId}">
+						<div class="check-wrap">
+								<div class="checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" th:data-qid="${multiple.qId}" value="option1"/> <label>
+											 </label>
+										</div>
+						</div>
+						<div class="q-data">
+<div class="select-toolbar-wrap">
+        <a class="btn-remove delete-multiple"><i class="fa fa-trash"></i></a>
+        <a class="btn-edit edit-multiple"><i class="fa fa-edit"></i></a>
+    </div>
+							<span class="q-sequence" th:text="${multipleStat.count}">1</span>
+							<span class="text-medium-gray">[多选题 ]</span>
+							<span class="ml5 label-skill text-ellipsis" th:text="${multiple.qKnowledge}"></span>
+							<span class="ml5 label-difficulty text-ellipsis" th:if="${multiple.qDifficulty==0}">易</span>
+							<span class="ml5 label-difficulty text-ellipsis" th:if="${multiple.qDifficulty==1}">中</span>
+							<span class="ml5 label-difficulty text-ellipsis" th:if="${multiple.qDifficulty==2}">难</span>
+							<label class="hide-input unselectable q-expand-toggle independent" style="margin-left: 0">
+						<a>收起</a>
+						<i  class="fa fa-angle-double-up "></i>
+					</label>
+
+							<div class="q-title" style="margin-top: 10px;">
+								<pre th:text="${multiple.qTitle}"></pre>
+							</div>
+							<ul class="list-title-media mt10"></ul>
+
+							<div data-link="">
+
+								<ul class="q-options-wrap mt20" data-jsv-df="">
+									<li class="q-option" th:each="multiplechoice :${multiple.multiplelist}">
+										<label class="q-choice-icon check-box inline-block active" th:if="${multiplechoice.type==1}">
+													<span class="fa-stack check-icon"> 
+														<i class="fa fa-square-o fa-stack-2x"></i> 
+														<i class="fa fa-check-square fa-stack-1x check" style="opacity: 1;"></i>
+														
+													</span>
+														</label> 
+														
+														<label class="q-choice-icon check-box inline-block" th:if="${multiplechoice.type!=1}"> 
+															<span class="fa-stack check-icon"> 
+														<i class="fa fa-square-o fa-stack-2x"></i> 
+														<i class="fa fa-check-square fa-stack-1x check"></i>
+													</span>
+															
+														</label>
+										<span class="option-index" th:text="A、" th:if="${multiplechoiceStat.count==1}"></span> 
+										<span class="option-index" th:text="B、" th:if="${multiplechoiceStat.count==2}"></span> <span class="option-index" th:text="C、" th:if="${multiplechoiceStat.count==3}"></span> <span class="option-index" th:text="D、" th:if="${multiplechoiceStat.count==4}"></span> <span class="option-index" th:text="F、" th:if="${multiplechoiceStat.count==5}"></span> <span class="option-index" th:text="G、" th:if="${multiplechoiceStat.count==6}"></span> <span class="option-index" th:text="H、" th:if="${multiplechoiceStat.count==7}"></span> <span class="option-index" th:text="I、" th:if="${multiplechoiceStat.count==8}"></span> <span class="option-index" th:text="J、" th:if="${multiplechoiceStat.count==9}"></span> <span class="option-index" th:text="K、" th:if="${multiplechoiceStat.count==10}"></span> <span class="option-index" th:text="L、" th:if="${multiplechoiceStat.count==11}"></span> <span class="option-index" th:text="M、" th:if="${multiplechoiceStat.count==12}"></span>
+										<div class="q-option-content pl5">
+											<pre th:text="${multiplechoice.content}"></pre>
+										</div>
+									</li>
+								</ul>
+								<div class="q-answer mt20">
+
+								</div>
+								<div class="q-answer mt20" style="display: block;">
+									<p class="q-ans-label">题目解析：</p>
+									<span th:if="${multiple.qAnalysis!=null}" th:text="${multiple.qAnalysis}"></span>
+									<span th:if="${multiple.qAnalysis==null}" th:text="无"></span>
+								</div>
+
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!--    <ul class="part-question-list q-list" data-link="visible{:_toggleContent}" data-jsv-df="" style="display: block;"><p data-jsv="#144^#44_/44_#45_">该部分下还没有试题，请从这里添加 <i class="fa fa-hand-o-up"></i></p></ul>-->
+			<!--选择添加题目时展开-->
+		</fieldset>
+
+		</div>
+
+		<!-------------------------------- 判断题 ---------------------------- -->
+
+		<div class="section-part" id="paper-part-2">
+			<div class="part-header">
+				<form class="form-inline part-name-wrap">
+					<div class="form-group" style="width: 100%;">
+						<label>判断题</label>
+					</div>
+				</form>
+			</div>
+			<fieldset class="mt20">
+				<legend>
+					<i class="fa fa-bar-chart"></i> 题目统计
+				</legend>
+				<label class="part-summary unselectable">
+									<div class="part-summary-container" style="display: block;">
+										
+		<ul class="summary-list" style="padding-left: 10%;">
+			<li class="summary-item summary-header"><span> <span
+													class="text-ellipsis">知识点 </span>
+								</span> <span> <span class="text-ellipsis">题目数 </span>
+								</span> <span> <span class="text-ellipsis">操作 </span>
+								</span>
+							</li>
+			<li class="summary-item" th:each="konw:${kownledgsinjufor}">
+				            	<span><span class="skill-item text-ellipsis" th:text="${konw.name}"></span></span>
+					            <span><span class="count-item text-highlight" th:text="${konw.num}">1</span></span>
+					            <span class="action-item"><a class="btn-remove"><i class="fa fa-trash"></i></a></span>
+				        	</li>
+		</ul>
+		</div>
+		</label>
+		</fieldset>
+		<fieldset class="mt20" style="padding: 20px 10px;">
+			<legend>
+				<i class="fa fa-bar-chart"></i> 题目详情 <label class="hide-input unselectable q-reorder-toggle"><span>收起</span>
+										<i class="fa fa-angle-double-up"></i> </label>
+			</legend>
+			<div class="part-questions-container">
+				<div class="pin-wrapper" style="height: 52px;">
+					<div class="part-questions-toolbar unselectable" style="width: 760px;">
+						<ul class="list-inline inline-block" style="display: inline-block;">
+							<li style="padding-top: 5px; padding-bottom: 6px;">
+<div class="checkall checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" value="option1"> <label for="inlineCheckbox2">
+											全选 </label>
+										</div>
+						</li>
+							
+							<li>
+								<a class="btn btn-default btn-sm delete-sure-btn" data-action="remove"> <i class="fa fa-trash"></i> 删除
+								</a>
+							</li>
+							<li>
+                                            <div class="btn-group">
+							                    <a class="btn btn-default btn-sm btn-up" data-action="up">
+							                        <i class="fa fa-arrow-up"></i> 上移
+							                    </a>
+							                    <a class="btn btn-default btn-sm btn-down" data-action="down">
+							                        <i class="fa fa-arrow-down"></i> 下移
+							                    </a>
+							                </div>
+							            </li>
+						</ul>
+						<ul class="list-inline f12 pull-right">
+							<li>总题数： <span class="text-golden-yellow" th:text="${Bank.judgenum}"></span> <span class="text-medium-gray ml5 mr15">道</span>
+							</li>
+							<li>
+								<a class="btn btn-success btn-sm btn-add-judgequestions" style="display: inline-block;"> <i class="fa fa-plus"></i> 添加题目
+								</a>
+							</li>
+						</ul>
+						<div class="cb"></div>
+					</div>
+				</div>
+				<ul class="q-list" id="judgediv">
+					<!-- 判断题例子 -->
+				<li class="q-item sets-question-item" th:each="judge :${judges}" th:data-qid="${judge.qId}">
+					<div class="check-wrap">
+						<div class="checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" th:data-qid="${judge.qId}" value="option1"/> <label>
+											 </label>
+										</div>
+					</div>
+					<div class="q-data">
+<div class="select-toolbar-wrap">
+        <a class="btn-remove delete-judge"><i class="fa fa-trash"></i></a>
+        <a class="btn-edit edit-judge"><i class="fa fa-edit"></i></a>
+    </div>
+						<span class="q-sequence" th:text="${judgeStat.count}">1</span>
+						<span class="text-medium-gray">[判断题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" th:text="${judge.qKnowledge}"></span>
+						<span class="ml5 label-difficulty text-ellipsis" th:if="${judge.qDifficulty==0}">易</span>
+						<span class="ml5 label-difficulty text-ellipsis" th:if="${judge.qDifficulty==1}">中</span>
+						<span class="ml5 label-difficulty text-ellipsis" th:if="${judge.qDifficulty==2}">难</span>
+							
+						<label class="hide-input unselectable q-expand-toggle independent" style="margin-left: 0">
+						<a>收起</a>
+						<i  class="fa fa-angle-double-up "></i>
+					</label>
+
+						<div class="q-title" style="margin-top: 10px;">
+							<pre th:text="${judge.qTitle}"></pre>
+						</div>
+						<ul class="list-title-media mt10"></ul>
+
+						<div data-link="">
+
+							<ul class="q-options-wrap mt20">
+								<li class="q-option">
+									<label class="q-choice-icon radio-inline sets-radio active" th:if="${judge.isture==0}">
+							        <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select" style="opacity: 1;"></i>
+							        </span>
+						        </label>
+						         <label class="q-choice-icon radio-inline sets-radio" th:if="${judge.isture==1}">
+							        <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+							        </span>
+						         </label>
+									<span class="option-index">A、</span>
+									<div class="q-option-content pl5">
+										<pre>错误</pre>
+									</div>
+								</li>
+								<li class="q-option">
+									<label class="q-choice-icon radio-inline sets-radio active" th:if="${judge.isture==1}">
+							        <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select" style="opacity: 1;"></i>
+							        </span>
+						        </label>
+						         <label class="q-choice-icon radio-inline sets-radio" th:if="${judge.isture==0}">
+							        <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+							        </span>
+						         </label>
+									<span class="option-index">B、</span>
+									<div class="q-option-content pl5">
+										<pre>正确</pre>
+									</div>
+								</li>
+
+							</ul>
+							<div class="q-answer mt20">
+
+							</div>
+							<div class="q-answer mt20" style="display: block;">
+								<p class="q-ans-label">题目解析：</p>
+								<span th:if="${judge.qAnalysis!=null}" th:text="${judge.qAnalysis}"></span>
+									<span th:if="${judge.qAnalysis==null}" th:text="无"></span>
+							</div>
+
+						</div>
+					</div>
+				</li>
+				</ul>
+			</div>
+			<!--    <ul class="part-question-list q-list" data-link="visible{:_toggleContent}" data-jsv-df="" style="display: block;"><p data-jsv="#144^#44_/44_#45_">该部分下还没有试题，请从这里添加 <i class="fa fa-hand-o-up"></i></p></ul>-->
+			<!--选择添加题目时展开-->
+		</fieldset>
+
+		</div>
+
+		<!-------------------------------- 填空题 ---------------------------- -->
+
+		<div class="section-part" id="paper-part-3">
+			<div class="part-header">
+				<form class="form-inline part-name-wrap">
+					<div class="form-group" style="width: 100%;">
+						<label>填空题</label>
+					</div>
+				</form>
+			</div>
+			<fieldset class="mt20">
+				<legend>
+					<i class="fa fa-bar-chart"></i> 题目统计
+				</legend>
+				<label class="part-summary unselectable">
+									<div class="part-summary-container" style="display: block;">
+										
+		<ul class="summary-list" style="padding-left: 10%;">
+			<li class="summary-item summary-header"><span> <span
+													class="text-ellipsis">知识点 </span>
+				</span> <span> <span class="text-ellipsis">题目数 </span>
+				</span> <span> <span class="text-ellipsis">操作 </span>
+				</span>
+			</li>
+			<li class="summary-item" th:each="konw:${kownledgsinfifor}">
+				            	<span><span class="skill-item text-ellipsis" th:text="${konw.name}"></span></span>
+					            <span><span class="count-item text-highlight" th:text="${konw.num}">1</span></span>
+					            <span class="action-item"><a class="btn-remove"><i class="fa fa-trash"></i></a></span>
+				        	</li>
+		</ul>
+		</div>
+		</label>
+		</fieldset>
+		<fieldset class="mt20" style="padding: 20px 10px;">
+			<legend>
+				<i class="fa fa-bar-chart"></i> 题目详情 <label class="hide-input unselectable q-reorder-toggle"><span>收起</span>
+										<i class="fa fa-angle-double-up"></i> </label>
+			</legend>
+			<div class="part-questions-container">
+				<div class="pin-wrapper" style="height: 52px;">
+					<div class="part-questions-toolbar unselectable" style="width: 760px;">
+						<ul class="list-inline inline-block" style="display: inline-block;">
+							<li style="padding-top: 5px; padding-bottom: 6px;">
+								<div class="checkall checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" value="option1"> <label for="inlineCheckbox2">
+											全选 </label>
+										</div>
+
+							</li>
+							
+							<li>
+								<a class="btn btn-default btn-sm delete-sure-btn" data-action="remove"> <i class="fa fa-trash"></i> 删除
+								</a>
+							</li>
+							<li>
+                                            <div class="btn-group">
+							                    <a class="btn btn-default btn-sm btn-up" data-action="up">
+							                        <i class="fa fa-arrow-up"></i> 上移
+							                    </a>
+							                    <a class="btn btn-default btn-sm btn-down" data-action="down">
+							                        <i class="fa fa-arrow-down"></i> 下移
+							                    </a>
+							                </div>
+							            </li>
+						</ul>
+						<ul class="list-inline f12 pull-right">
+							<li>总题数： <span class="text-golden-yellow" th:text="${Bank.fillnum}"></span> <span class="text-medium-gray ml5 mr15">道</span>
+							</li>
+							<li>
+								<a class="btn btn-success btn-sm btn-add-fillquestions" style="display: inline-block;"> <i class="fa fa-plus"></i> 添加题目
+								</a>
+							</li>
+						</ul>
+						<div class="cb"></div>
+					</div>
+				</div>
+				<ul class="q-list" id="filldiv">
+					<!-- 填空题 -->
+				<li class="q-item sets-question-item" th:each="fill :${fills}" th:data-qid="${fill.qId}">
+					<div class="check-wrap">
+						<div class="checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" th:data-qid="${fill.qId}" value="option1"/> <label>
+											 </label>
+										</div>
+					</div>
+					<div class="q-data">
+<div class="select-toolbar-wrap">
+        <a class="btn-remove delete-fill"><i class="fa fa-trash"></i></a>
+        <a class="btn-edit edit-fill"><i class="fa fa-edit"></i></a>
+    </div>
+						<span class="q-sequence" th:text="${fillStat.count}">1</span>
+						<span class="text-medium-gray">[填空题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" th:text="${fill.qKnowledge}"></span>
+						<span class="ml5 label-difficulty text-ellipsis" th:if="${fill.qDifficulty==0}">易</span>
+						<span class="ml5 label-difficulty text-ellipsis" th:if="${fill.qDifficulty==1}">中</span>
+						<span class="ml5 label-difficulty text-ellipsis" th:if="${fill.qDifficulty==2}">难</span>
+						<label class="hide-input unselectable q-expand-toggle independent" style="margin-left: 0">
+						<a>收起</a>
+						<i  class="fa fa-angle-double-up"></i>
+					</label>
+
+						<div class="q-title" style="margin-top: 10px;">
+							<pre th:text="${fill.qTitle}"></pre>
+						</div>
+						<ul class="list-title-media mt10"></ul>
+
+						<div data-link="">
+
+							<div class="q-answer mt20">
+
+							</div>
+							<div class="q-answer q-fill-answer mt20">
+								<p class="q-ans-label">答案：</p> 
+								<span class="fill-answer" th:each="fillchoice :${fill.filllsit}" th:text="${fillchoice.content}">飞马测试</span>
+							</div>
+
+							<div class="q-answer mt20" style="display: block;">
+								<p class="q-ans-label">题目解析：</p>
+								<span th:if="${fill.qAnalysis!=null}" th:text="${fill.qAnalysis}"></span>
+									<span th:if="${fill.qAnalysis==null}" th:text="无"></span>
+							</div>
+
+						</div>
+					</div>
+				</li>
+				</ul>
+			</div>
+			<!--    <ul class="part-question-list q-list" data-link="visible{:_toggleContent}" data-jsv-df="" style="display: block;"><p data-jsv="#144^#44_/44_#45_">该部分下还没有试题，请从这里添加 <i class="fa fa-hand-o-up"></i></p></ul>-->
+			<!--选择添加题目时展开-->
+		</fieldset>
+
+		</div>
+
+		<!-------------------------------- 简答题 ---------------------------- -->
+
+		<div class="section-part" id="paper-part-4">
+			<div class="part-header">
+				<form class="form-inline part-name-wrap">
+					<div class="form-group" style="width: 100%;">
+						<label>简答题</label>
+					</div>
+				</form>
+			</div>
+			<fieldset class="mt20">
+				<legend>
+					<i class="fa fa-bar-chart"></i> 题目统计
+				</legend>
+				<label class="part-summary unselectable">
+									<div class="part-summary-container" style="display: block;">
+										
+		<ul class="summary-list" style="padding-left: 10%;">
+			<li class="summary-item summary-header"><span> <span
+													class="text-ellipsis">知识点 </span>
+			</span> <span> <span class="text-ellipsis">题目数 </span>
+				</span><span> <span class="text-ellipsis">操作 </span>
+				</span>
+			</li>
+			<li class="summary-item" th:each="konw:${kownledgsinshfor}">
+				            	<span><span class="skill-item text-ellipsis" th:text="${konw.name}"></span></span>
+					            <span><span class="count-item text-highlight" th:text="${konw.num}">1</span></span>
+					            <span class="action-item"><a class="btn-remove"><i class="fa fa-trash"></i></a></span>
+				        	</li>
+		</ul>
+		</div>
+		</label>
+		</fieldset>
+		<fieldset class="mt20" style="padding: 20px 10px;">
+			<legend>
+				<i class="fa fa-bar-chart"></i> 题目详情 <label class="hide-input unselectable q-reorder-toggle"><span>收起</span>
+										<i class="fa fa-angle-double-up"></i> </label>
+			</legend>
+			<div class="part-questions-container">
+				<div class="pin-wrapper" style="height: 52px;">
+					<div class="part-questions-toolbar unselectable" style="width: 760px;">
+						<ul class="list-inline inline-block" style="display: inline-block;">
+							<li style="padding-top: 5px; padding-bottom: 6px;">
+								<div class="checkall checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" value="option1"> <label for="inlineCheckbox2">
+											全选 </label>
+										</div>
+							</li>
+							
+							<li>
+								<a class="btn btn-default btn-sm delete-sure-btn" data-action="remove"> <i class="fa fa-trash"></i> 删除
+								</a>
+							</li>
+							<li>
+                                            <div class="btn-group">
+							                    <a class="btn btn-default btn-sm btn-up" data-action="up">
+							                        <i class="fa fa-arrow-up"></i> 上移
+							                    </a>
+							                    <a class="btn btn-default btn-sm btn-down" data-action="down">
+							                        <i class="fa fa-arrow-down"></i> 下移
+							                    </a>
+							                </div>
+							            </li>
+						</ul>
+						<ul class="list-inline f12 pull-right">
+							<li>总题数： <span class="text-golden-yellow"  th:text="${Bank.shortanswernum}"></span> <span class="text-medium-gray ml5 mr15">道</span>
+							</li>
+							<li>
+								<a class="btn btn-success btn-sm btn-add-shortquestions" style="display: inline-block;"> <i class="fa fa-plus"></i> 添加题目
+								</a>
+							</li>
+						</ul>
+						<div class="cb"></div>
+					</div>
+				</div>
+				<ul class="q-list" id="shortanswerdiv">
+					<!-- 问答题 -->
+				<li class="q-item sets-question-item" th:each="shortanswer :${shortanswers}" th:data-qid="${shortanswer.qId}">
+					<div class="check-wrap">
+						<div class="checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" th:data-qid="${shortanswer.qId}" value="option1"/> <label>
+											 </label>
+										</div>
+					</div>
+					<div class="q-data">
+<div class="select-toolbar-wrap">
+        <a class="btn-remove delete-short"><i class="fa fa-trash"></i></a>
+        <a class="btn-edit edit-short"><i class="fa fa-edit"></i></a>
+    </div>
+						<span class="q-sequence" th:text="${shortanswerStat.count}">1</span>
+						<span class="text-medium-gray">[问答题]</span>
+						<span class="ml5 label-skill text-ellipsis" th:text="${shortanswer.qKnowledge}"></span>
+						<span class="ml5 label-difficulty text-ellipsis" th:if="${shortanswer.qFifficulty==0}">易</span>
+						<span class="ml5 label-difficulty text-ellipsis" th:if="${shortanswer.qFifficulty==1}">中</span>
+						<span class="ml5 label-difficulty text-ellipsis" th:if="${shortanswer.qFifficulty==2}">难</span>
+						<label class="hide-input unselectable q-expand-toggle independent" style="margin-left: 0">
+						<a>收起</a>
+						<i  class="fa fa-angle-double-up"></i>
+					</label>
+
+						<div class="q-title" style="margin-top: 10px;">
+							<pre th:text="${shortanswer.qTitle}"></pre>
+							<!--<img src="../../img/logo_black.png" th:src="shortpic ${shortanswer.shortpiclist}" />-->
+						</div>
+						<ul class="list-title-media mt10"></ul>
+
+						<div>
+
+							<div class="q-answer mt20">
+
+							</div>
+
+							<div class="q-answer mt20" style="display: block;">
+								<p class="q-ans-label">题目解析：</p>
+								<span th:if="${shortanswer.qAnalysis!=null}" th:text="${shortanswer.qAnalysis}"></span>
+									<span th:if="${shortanswer.qAnalysis==null}" th:text="无"></span>
+							</div>
+						</div>
+					</div>
+				</li>
+				</ul>
+			</div>
+			<!--    <ul class="part-question-list q-list" data-link="visible{:_toggleContent}" data-jsv-df="" style="display: block;"><p data-jsv="#144^#44_/44_#45_">该部分下还没有试题，请从这里添加 <i class="fa fa-hand-o-up"></i></p></ul>-->
+			<!--选择添加题目时展开-->
+		</fieldset>
+
+		</div>
+
+		</div>
+		</div>
+
+		</div>
+		</div>
+		</div>
+
+		
+		
+		<!--警告提示框-->
+		<div class="alert"></div>
+
+		<script src="../../js/bootstrap.min.js" th:src="@{static/js/bootstrap.min.js}"></script>
+  		<script src="../../js/detect.js" th:src="@{static/js/detect.js}"></script>
+       
+		<script src="../../js/fastclick.js" th:src="@{static/js/fastclick.js}"></script>
+		<script src="../../js/jquery.slimscroll.js" th:src="@{static/js/jquery.slimscroll.js}"></script>
+        <script src="../../js/jquery.blockUI.js" th:src="@{static/js/jquery.blockUI.js}"></script>
+		<script src="../../js/waves.js" th:src="@{static/js/waves.js}"></script>
+		<script src="../../js/wow.min.js" th:src="@{static/js/wow.min.js}"></script>
+		<script src="../../js/jquery.app.js " th:src="@{static/js/jquery.app.js} "></script>
+		<script src="../../js/addbanksingle.js" th:src="@{static/js/addbanksingle.js} "></script>
+		<script>
+			var resizefunc = [];
+			
+		</script>
+	</body>
+
+</html>
+<!----------------------------------------------------------------单选题------------------------------------------------------------------->
+<!--增加单选模态框-->
+<script id="add-singelModaldiv" type="text/html">
+		<div class="modal fade" id="add-singelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title" id="myModalLabel">添加单选题</h4>
+					</div>
+					<div class="modal-body pad q-no-sub">
+						<div class="pad-body question-form">
+							<form class="form-inline form-meta" role="form">
+								<span style="display: inline;"> <label
+								class="inline-block tr">知识点</label>
+								<div class="form-group mr20">
+									<div class="skill-selector-wrapper skill-selector">
+										<!-- 遮罩,用于点击时隐藏搜索面板 -->
+										<a type="button" class="btn btn-default trigger"> <span
+											class="pull-left skill-name text-ellipsis" title="">无</span>
+								<span class="pull-right"> <i class="fa fa-caret-down"></i>
+										</span>
+								</a>
+								<div class="dropdown" style="top: 74px; display: none;">
+									<div>
+										<ul class="skill-list edit">
+											<div class="fuDiv">
+												<li class="text-ellipsis" title="无">无</li>
+											{{each knowledges as value index}}
+											    {{if value!= "无"}}
+												<li class="text-ellipsis" title={{value}}>{{value}}</li>
+												{{/if}}
+											{{/each}}	
+											</div>
+											<div class="add-skill input-group input-group-sm">
+												<input class="form-control" placeholder="添加一个知识点">
+												<span class="input-group-btn"> <a
+															class="btn btn-add"> <i class="fa fa-plus"></i>
+														</a>
+														</span>
+											</div>
+										</ul>
+
+									</div>
+									<div class="actions pull-right">
+										<a class="btn btn-default btn-xs">取消</a>
+										<a class="btn btn-add btn-xs">确定</a>
+									</div>
+								</div>
+						</div>
+					</div>
+					</span>
+
+					</form>
+					<ul>
+						<li class="question-item">
+							<div class="q-wrapper">
+								<div class="question-custom">
+									<label class="required mb10">题干</label>
+									<a class="anchor-mark" id="anchor_title"></a>
+									<div class="form-group form-title">
+										<div contenteditable="true" title="Rich Text Editor, editor1" class="custom-section editable-section question-gutter" placeholder="请输入题干" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor1" aria-describedby="cke_44" style="position: relative;">
+											<p><br></p>
+										</div>
+								<div class="cl"></div>
+							</div>
+							<div>
+								<label class="required mb10">选项</label> <span class="q-hint">单选题的选项个数范围
+												2到 26，正确选项个数为 1</span>
+								<a class="anchor-mark" id="anchor_option">
+								</a>
+							</div>
+							<ul class="options">
+								<li class="option" style="display: table;">
+									<label class="option-addon radio-inline sets-radio" style="visibility: visible;">
+										<span class="fa-stack radio-icon">
+											<div class="radio radio-success radio-single"><input type="radio" value="0" name="radioSingle1" checked/> <label></label></div>
+										</span>
+									</label>
+									<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;"><br></pre>
+									<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+								</li>
+								<li class="option" style="display: table;">
+									<label class="option-addon radio-inline sets-radio" style="visibility: visible;">
+										<span class="fa-stack radio-icon">
+											<div class="radio radio-success radio-single"><input type="radio" value="1" name="radioSingle1"/> <label></label></div>
+										</span>
+									</label>
+									<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;"><br></pre>
+									<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+								</li>
+								<center>
+									<a class="btn btn-add btn-add-option"><i class="fa fa-plus"></i> 添加一个选项</a>
+								</center>
+							</ul>
+			<label class="mt20 mb10">题目解析</label><span class="q-hint">考生/学员查答案时可显示该信息，达到学习的目的</span>
+			<form class="analysis">
+				<div contenteditable="true" title="题目解析" class="custom-section editable-section question-gutter cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" placeholder="请输入题目解析" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor6" aria-describedby="cke_124" style="position: relative;">
+					<p><br></p>
+				</div>
+			</form>
+		</div>
+		<span style="display: inline;"> <label
+										class="required mt20 mb10">难度</label>
+										<div class="form-group" style="margin-left: 16px;">
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="0" name="radiodifficult" checked/> <label>易</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="1" name="radiodifficult"/>
+												<label>中</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="2" name="radiodifficult"/>
+												<label>难</label>
+											</div>
+										</div>
+									</span>
+		</div>
+		</li>
+		</ul>
+		</div>
+
+		</div>
+
+		<div class="insertItem" style="display: none;">
+			<li class="option" style="display: table;">
+				<label class="option-addon radio-inline sets-radio" style="visibility: visible;"> 
+											    <span class="fa-stack radio-icon">
+														<div class="radio radio-success radio-single">
+															<input type="radio" value="option2" name="radioSingle1"/> <label></label>
+		</div>
+		</span>
+		</label>
+		<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;"><br></pre>
+		<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+		</li>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-success editorsingel-sure-btn">确认</button>
+		</div>
+		</div>
+		</div>
+		</div>
+</script>
+
+<!------单选题样式------->
+
+<script id="singleitem" type="text/html">
+
+	<li class="q-item sets-question-item" data-qid={{bank_single.qId}}>
+		<div class="check-wrap">
+			<div class="checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" data-qid={{bank_single.qId}} value="option1"/> <label>
+											 </label>
+										</div>
+
+		</div>
+		<div class="q-data">
+<div class="select-toolbar-wrap">
+        
+        <a class="btn-remove delete-single"><i class="fa fa-trash"></i></a>
+        <a class="btn-edit edit-single"><i class="fa fa-edit"></i></a>
+    </div>
+			<span class="q-sequence">1</span>
+			<span class="text-medium-gray">[单选题]</span>
+			<span class="ml5 label-skill text-ellipsis">{{bank_single.qKnowledge}}</span>
+
+			<span class="ml5 label-difficulty text-ellipsis">{{if bank_single.qDifficulty==0}}易{{else if bank_single.qDifficulty==1}}中{{else if bank_single.qDifficulty==2}}难{{/if}}</span>
+			<label class="hide-input unselectable q-expand-toggle independent" style="margin-left: 0">
+						<a>收起</a>
+						<i  class="fa fa-angle-double-up "></i>
+					</label>
+
+			<div class="q-title" style="margin-top: 10px;">
+				<pre>{{bank_single.qTitle}}</pre>
+
+			</div>
+			<ul class="list-title-media mt10"></ul>
+
+			<div data-link="">
+
+				<ul class="q-options-wrap mt20">
+					{{each bank_single.singlelist as value index}}
+					<li class="q-option">
+						{{if value.type ==1}}
+						        <label class="q-choice-icon radio-inline sets-radio active">
+							        <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select" style="opacity: 1;"></i>
+								        {{else if value.type !=1}}
+								        <label class="q-choice-icon radio-inline sets-radio">
+							            <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+								        {{/if}}
+							        </span>
+						         </label>
+						<span class="option-index">{{'&#'+(index+65)+';'}}、</span>
+
+						<div class="q-option-content pl5">
+							<pre>{{value.content}}</pre>
+						</div>
+					</li>
+					{{/each}}
+
+				</ul>
+				<div class="q-answer mt20">
+
+				</div>
+				<div class="q-answer mt20" style="display: block;">
+					<p class="q-ans-label">题目解析：</p><span>{{bank_single.qAnalysis}}</span>
+				</div>
+
+			</div>
+		</div>
+	</li>
+</script>
+
+<script id="edit-singelModaldiv" type="text/html">
+	<div class="modal fade" id="editor-singelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  data-qid={{bank_single.qId}} data-sequence={{sequence}}>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title" id="myModalLabel">修改单选题</h4>
+					</div>
+					<div class="modal-body pad q-no-sub">
+						<div class="pad-body question-form">
+							<form class="form-inline form-meta" role="form">
+								<span style="display: inline;"> <label
+								class="inline-block tr">知识点</label>
+								<div class="form-group mr20">
+									<div class="skill-selector-wrapper skill-selector">
+										<!-- 遮罩,用于点击时隐藏搜索面板 -->
+										<a type="button" class="btn btn-default trigger"> <span
+											class="pull-left skill-name text-ellipsis" title="">{{bank_single.qKnowledge}}</span>
+								<span class="pull-right"> <i class="fa fa-caret-down"></i>
+										</span>
+								</a>
+								<div class="dropdown" style="top: 74px; display: none;">
+									<div>
+										<ul class="skill-list edit">
+											<div class="fuDiv">
+												<li class="text-ellipsis" title="无">无</li>
+											{{each knowledges as value index}}
+												{{if value!= "无"}}
+												<li class="text-ellipsis" title={{value}}>{{value}}</li>
+												{{/if}}
+											{{/each}}	
+											</div>
+											<div class="add-skill input-group input-group-sm">
+												<input class="form-control" placeholder="添加一个知识点">
+												<span class="input-group-btn"> <a
+															class="btn btn-add"> <i class="fa fa-plus"></i>
+														</a>
+														</span>
+											</div>
+										</ul>
+
+									</div>
+									<div class="actions pull-right">
+										<a class="btn btn-default btn-xs">取消</a>
+										<a class="btn btn-add btn-xs">确定</a>
+									</div>
+								</div>
+						</div>
+					</div>
+					</span>
+
+					</form>
+					<ul>
+						<li class="question-item">
+							<div class="q-wrapper">
+								<div class="question-custom">
+									<label class="required mb10">题干</label>
+									<a class="anchor-mark" id="anchor_title"></a>
+									<div class="form-group form-title">
+										<div contenteditable="true" title="Rich Text Editor, editor1" class="custom-section editable-section question-gutter" placeholder="请输入题干" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor1" aria-describedby="cke_44" style="position: relative;">
+											<p>{{bank_single.qTitle}}</p>
+										</div>
+								<div class="cl"></div>
+							</div>
+							<div>
+								<label class="required mb10">选项</label> <span class="q-hint">单选题的选项个数范围
+												2到 26，正确选项个数为 1</span>
+								<a class="anchor-mark" id="anchor_option">
+								</a>
+							</div>
+							<ul class="options">
+								{{each bank_single.singlelist as value index}}
+								<li class="option" style="display: table;">
+									<label class="option-addon radio-inline sets-radio" style="visibility: visible;">
+										<span class="fa-stack radio-icon">
+											<div class="radio radio-success radio-single">
+											{{if value.type==0}}
+												<input type="radio" value="0" name="radioSingle1"/>
+											{{else if value.type==1}}
+											<input type="radio" value="0" name="radioSingle1" checked/> 
+											{{/if}}
+											<label></label></div>
+										</span>
+									</label>
+									<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;">{{value.content}}</pre>
+									<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+								</li>
+								{{/each}}
+								<center>
+									<a class="btn btn-add btn-add-option"><i class="fa fa-plus"></i> 添加一个选项</a>
+								</center>
+							</ul>
+			<label class="mt20 mb10">题目解析</label><span class="q-hint">考生/学员查答案时可显示该信息，达到学习的目的</span>
+			<form class="analysis">
+				<div contenteditable="true" title="题目解析" class="custom-section editable-section question-gutter cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" placeholder="请输入题目解析" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor6" aria-describedby="cke_124" style="position: relative;">
+					<p>{{bank_single.qAnalysis}}</p>
+				</div>
+			</form>
+		</div>
+		<span style="display: inline;"> <label
+										class="required mt20 mb10">难度</label>
+										<div class="form-group" style="margin-left: 16px;">
+											<div class="radio radio-success radio-inline">
+												{{if bank_single.qDifficulty==0}}
+												<input type="radio" value="0" name="radiodifficult" checked/> 
+												{{else if bank_single.qDifficulty!=0}}
+												<input type="radio" value="0" name="radiodifficult">
+												{{/if}}
+												<label>易</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												{{if bank_single.qDifficulty==1}}
+												<input type="radio" value="1" name="radiodifficult" checked/>
+												{{else if bank_single.qDifficulty!=1}}
+												<input type="radio" value="1" name="radiodifficult">
+												{{/if}}
+												<label>中</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												{{if bank_single.qDifficulty==2}}
+												<input type="radio" value="2" name="radiodifficult" checked/>
+												{{else if bank_single.qDifficulty!=2}}
+												<input type="radio" value="2" name="radiodifficult"/>
+												{{/if}}
+												<label>难</label>
+											</div>
+										</div>
+									</span>
+		</div>
+		</li>
+		</ul>
+		</div>
+
+		</div>
+
+		<div class="insertItem" style="display: none;">
+			<li class="option" style="display: table;">
+				<label class="option-addon radio-inline sets-radio" style="visibility: visible;"> 
+											    <span class="fa-stack radio-icon">
+														<div class="radio radio-success radio-single">
+															<input type="radio" value="option2" name="radioSingle1"/> <label></label>
+		</div>
+		</span>
+		</label>
+		<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;"><br></pre>
+		<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+		</li>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-success editorsingel-sure-btn">确认</button>
+		</div>
+		</div>
+		</div>
+		</div>
+</script>
+<!---------------------------------------------------------多选题-------------------------------------------------------------------->
+<!--增加多选模态框-->
+<script id="add-multipleModaldiv" type="text/html">
+		<div class="modal fade" id="add-multipleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title" id="myModalLabel">添加多选题</h4>
+					</div>
+					<div class="modal-body pad q-no-sub">
+						<div class="pad-body question-form">
+							<form class="form-inline form-meta" role="form">
+								<span style="display: inline;"> <label
+								class="inline-block tr">知识点</label>
+								<div class="form-group mr20">
+									<div class="skill-selector-wrapper skill-selector">
+										<a type="button" class="btn btn-default trigger"> <span
+											class="pull-left skill-name text-ellipsis" title="">无</span>
+								<span class="pull-right"> <i class="fa fa-caret-down"></i>
+										</span>
+								</a>
+								<div class="dropdown" style="top: 74px; display: none;">
+									<div>
+										<ul class="skill-list edit">
+											<div class="fuDiv">
+                                            <li class="text-ellipsis" title="无">无</li>
+										    {{each knowledges as value index}}
+												{{if value!= "无"}}
+												<li class="text-ellipsis" title={{value}}>{{value}}</li>
+												{{/if}}
+											{{/each}}
+											</div>
+											<div class="add-skill input-group input-group-sm">
+												<input class="form-control" placeholder="添加一个知识点">
+												<span class="input-group-btn"> <a
+															class="btn btn-add"> <i class="fa fa-plus"></i>
+														</a>
+														</span>
+											</div>
+										</ul>
+
+									</div>
+									<div class="actions pull-right">
+										<a class="btn btn-default btn-xs">取消</a>
+										<a class="btn btn-add btn-xs">确定</a>
+									</div>
+								</div>
+						</div>
+					</div>
+					</span>
+
+					</form>
+					<ul>
+						<li class="question-item">
+							<div class="q-wrapper">
+								<div class="question-custom">
+									<label class="required mb10">题干</label>
+									<a class="anchor-mark" id="anchor_title"></a>
+									<div class="form-group form-title">
+										<div contenteditable="true" title="Rich Text Editor, editor1" class="custom-section editable-section question-gutter" placeholder="请输入题干" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor1" aria-describedby="cke_44" style="position: relative;">
+											<p><br></p>
+										</div>
+										
+								<div class="cl"></div>
+							</div>
+							<div>
+								<label class="required mb10">选项</label> <span class="q-hint">多选题的选项个数范围
+												2到 26，正确选项个数至少为2</span>
+								<a class="anchor-mark" id="anchor_option">
+								</a>
+							</div>
+							<ul class="options">
+								<li class="option" style="display: table;">
+									<label class="option-addon radio-inline sets-radio" style="visibility: visible;">
+										<span class="fa-stack radio-icon">
+											<div class="checkbox checkbox-success checkbox-inline">
+                                                <input type="checkbox" name="checkboxmultiple1" checked/>
+                                                <label></label>
+                                            </div>
+										</span>
+									</label>
+									<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;"><br></pre>
+									<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+								</li>
+								<li class="option" style="display: table;">
+									<label class="option-addon radio-inline sets-radio" style="visibility: visible;">
+										<span class="fa-stack radio-icon">
+											<div class="checkbox checkbox-success checkbox-inline">
+                                                <input type="checkbox" name="checkboxmultiple1" checked/>
+                                                <label></label>
+                                            </div>
+										</span>
+									</label>
+									<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;"><br></pre>
+									<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+								</li>
+								<center>
+									<a class="btn btn-add btn-add-option"><i class="fa fa-plus"></i> 添加一个选项</a>
+								</center>
+							</ul>
+			<label class="mt20 mb10">题目解析</label><span class="q-hint">考生/学员查答案时可显示该信息，达到学习的目的</span>
+			<form class="analysis">
+				<div contenteditable="true" title="题目解析" class="custom-section editable-section question-gutter cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" placeholder="请输入题目解析" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor6" aria-describedby="cke_124" style="position: relative;">
+					<p><br></p>
+				</div>
+			</form>
+		</div>
+		<span style="display: inline;"> <label
+										class="required mt20 mb10">难度</label>
+										<div class="form-group" style="margin-left: 16px;">
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="0" name="radiodifficult" checked/> <label>易</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="1" name="radiodifficult"/>
+												<label>中</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="2" name="radiodifficult"/>
+												<label>难</label>
+											</div>
+										</div>
+									</span>
+		</div>
+		</li>
+		</ul>
+		</div>
+
+		</div>
+
+		<div class="insertItem" style="display: none;">
+								<li class="option" style="display: table;">
+									<label class="option-addon radio-inline sets-radio" style="visibility: visible;">
+										<span class="fa-stack radio-icon">
+											<div class="checkbox checkbox-success checkbox-inline">
+                                                <input type="checkbox" name="checkboxmultiple1" checked/>
+                                                <label></label>
+                                            </div>
+										</span>
+									</label>
+									<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;"><br></pre>
+									<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+								</li>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-success editormultiple-sure-btn">确认</button>
+		</div>
+		</div>
+		</div>
+		</div>
+</script>
+
+
+<script id="multiplyitem" type="text/html">
+	<li class="q-item sets-question-item" data-qid={{bank_multiple.qId}}>
+		<div class="check-wrap">
+		<div class="checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" data-qid={{bank_multiple.qId}} value="option1"/> <label>
+											 </label>
+										</div>
+		</div>
+		<div class="q-data">
+<div class="select-toolbar-wrap">
+        <a class="btn-remove delete-multiple"><i class="fa fa-trash"></i></a>
+        <a class="btn-edit edit-multiple"><i class="fa fa-edit"></i></a>
+    </div>
+			<span class="q-sequence">1</span>
+			<span class="text-medium-gray">[多选题 ]</span>
+			<span class="ml5 label-skill text-ellipsis">{{bank_multiple.qKnowledge}}</span>
+
+			<span class="ml5 label-difficulty text-ellipsis">{{if bank_multiple.qDifficulty==0}}易{{else if bank_multiple.qDifficulty==1}}中{{else if bank_multiple.qDifficulty==2}}难{{/if}}</span>
+			<label class="hide-input unselectable q-expand-toggle independent" style="margin-left: 0">
+						<a>收起</a>
+						<i  class="fa fa-angle-double-up "></i>
+					</label>
+
+			<div class="q-title" style="margin-top: 10px;">
+				<pre>{{bank_multiple.qTitle}}</pre>
+
+			</div>
+			<ul class="list-title-media mt10"></ul>
+
+			<div data-link="">
+
+				<ul class="q-options-wrap mt20">
+					{{each bank_multiple.multiplelist as value index}}
+					<li class="q-option">
+						{{if value.type ==1}}
+						<label class="q-choice-icon check-box inline-block active">
+							        <span class="fa-stack check-icon">
+										<i class="fa fa-square-o fa-stack-2x"></i>
+										<i class="fa fa-check-square fa-stack-1x check" style="opacity: 1;"></i>
+										{{else if value.type !=1}}
+										<label class="q-choice-icon check-box inline-block">
+							        <span class="fa-stack check-icon">
+										<i class="fa fa-square-o fa-stack-2x"></i>
+										<i class="fa fa-check-square fa-stack-1x check"></i>
+										{{/if}}
+									</span>
+								    </label>
+						<span class="option-index">{{'&#'+(index+65)+';'}}、</span>
+
+						<div class="q-option-content pl5">
+							<pre>{{value.content}}</pre>
+						</div>
+					</li>
+					{{/each}}
+				</ul>
+				<div class="q-answer mt20">
+
+				</div>
+				<div class="q-answer mt20" style="display: block;">
+					<p class="q-ans-label">题目解析：</p><span>{{bank_multiple.qAnalysis}}</span>
+				</div>
+
+			</div>
+		</div>
+	</li>
+</script>
+
+<script id="edit-multipleModaldiv" type="text/html">
+		<div class="modal fade" id="editor-multipleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-qid={{bank_multiple.qId}} data-sequence={{sequence}}>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title" id="myModalLabel">修改多选题</h4>
+					</div>
+					<div class="modal-body pad q-no-sub">
+						<div class="pad-body question-form">
+							<form class="form-inline form-meta" role="form">
+								<span style="display: inline;"> <label
+								class="inline-block tr">知识点</label>
+								<div class="form-group mr20">
+									<div class="skill-selector-wrapper skill-selector">
+										<a type="button" class="btn btn-default trigger"> <span
+											class="pull-left skill-name text-ellipsis" title="">{{bank_multiple.qKnowledge}}</span>
+								<span class="pull-right"> <i class="fa fa-caret-down"></i>
+										</span>
+								</a>
+								<div class="dropdown" style="top: 74px; display: none;">
+									<div>
+										<ul class="skill-list edit">
+											<div class="fuDiv">
+                                            <li class="text-ellipsis" title="无">无</li>
+										    {{each knowledges as value index}}
+												{{if value!= "无"}}
+												<li class="text-ellipsis" title={{value}}>{{value}}</li>
+												{{/if}}
+											{{/each}}
+											</div>
+											<div class="add-skill input-group input-group-sm">
+												<input class="form-control" placeholder="添加一个知识点">
+												<span class="input-group-btn"> <a
+															class="btn btn-add"> <i class="fa fa-plus"></i>
+														</a>
+														</span>
+											</div>
+										</ul>
+
+									</div>
+									<div class="actions pull-right">
+										<a class="btn btn-default btn-xs">取消</a>
+										<a class="btn btn-add btn-xs">确定</a>
+									</div>
+								</div>
+						</div>
+					</div> 
+					</span>
+
+					</form>
+					<ul>
+						<li class="question-item">
+							<div class="q-wrapper">
+								<div class="question-custom">
+									<label class="required mb10">题干</label>
+									<a class="anchor-mark" id="anchor_title"></a>
+									<div class="form-group form-title">
+										<div contenteditable="true" title="Rich Text Editor, editor1" class="custom-section editable-section question-gutter" placeholder="请输入题干" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor1" aria-describedby="cke_44" style="position: relative;">
+											<p>{{bank_multiple.qTitle}}</p>
+										</div>
+										
+								<div class="cl"></div>
+							</div>
+							<div>
+								<label class="required mb10">选项</label> <span class="q-hint">多选题的选项个数范围
+												2到 26，正确选项个数至少为2</span>
+								<a class="anchor-mark" id="anchor_option">
+								</a>
+							</div>
+							<ul class="options">
+								{{each bank_multiple.multiplelist as value index}}
+								<li class="option" style="display: table;">
+									<label class="option-addon radio-inline sets-radio" style="visibility: visible;">
+										<span class="fa-stack radio-icon">
+											<div class="checkbox checkbox-success checkbox-inline">
+												{{if value.type==1}}
+                                                <input type="checkbox" name="checkboxmultiple" checked/>
+                                                {{else if value.type==0}}
+                                                <input type="checkbox" name="checkboxmultiple"/>
+                                                {{/if}}
+                                                <label></label>
+                                            </div>
+										</span>
+									</label>
+									<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;">{{value.content}}</pre>
+									<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+								</li>
+								{{/each}}
+								<center>
+									<a class="btn btn-add btn-add-option"><i class="fa fa-plus"></i> 添加一个选项</a>
+								</center>
+							</ul>
+			<label class="mt20 mb10">题目解析</label><span class="q-hint">考生/学员查答案时可显示该信息，达到学习的目的</span>
+			<form class="analysis">
+				<div contenteditable="true" title="题目解析" class="custom-section editable-section question-gutter cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" placeholder="请输入题目解析" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor6" aria-describedby="cke_124" style="position: relative;">
+					<p>{{bank_multiple.qAnalysis}}</p>
+				</div>
+			</form>
+		</div>
+		<span style="display: inline;"> <label
+										class="required mt20 mb10">难度</label>
+										<div class="form-group" style="margin-left: 16px;">
+											<div class="radio radio-success radio-inline">
+												{{if bank_multiple.qDifficulty==0}}
+												<input type="radio" value="0" name="radiodifficult" checked/> 
+												{{else if bank_multiple.qDifficulty!=0}}
+												<input type="radio" value="0" name="radiodifficult"/> 
+												{{/if}}
+												<label>易</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												{{if bank_multiple.qDifficulty==1}}
+												<input type="radio" value="1" name="radiodifficult" checked/> 
+												{{else if bank_multiple.qDifficulty!=1}}
+												<input type="radio" value="1" name="radiodifficult"/> 
+												{{/if}}
+												<label>中</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												{{if bank_multiple.qDifficulty==2}}
+												<input type="radio" value="2" name="radiodifficult" checked/> 
+												{{else if bank_multiple.qDifficulty!=2}}
+												<input type="radio" value="2" name="radiodifficult"/> 
+												{{/if}}
+												<label>难</label>
+											</div>
+										</div>
+									</span>
+		</div>
+		</li>
+		</ul>
+		</div>
+
+		</div>
+
+		<div class="insertItem" style="display: none;">
+								<li class="option" style="display: table;">
+									<label class="option-addon radio-inline sets-radio" style="visibility: visible;">
+										<span class="fa-stack radio-icon">
+											<div class="checkbox checkbox-success checkbox-inline">
+                                                <input type="checkbox" name="checkboxmultiple1" checked/>
+                                                <label></label>
+                                            </div>
+										</span>
+									</label>
+									<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;"><br></pre>
+									<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+								</li>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-success editormultiple-sure-btn">确认</button>
+		</div>
+		</div>
+		</div>
+		</div>
+</script>
+<!---------------------------------------------------------判断题-------------------------------------------------------------------->
+	
+<script id="add-judgeModaldiv" type="text/html">
+	<div class="modal fade" id="add-judgeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title" id="myModalLabel">添加判断题</h4>
+					</div>
+					<div class="modal-body pad q-no-sub">
+						<div class="pad-body question-form">
+							<form class="form-inline form-meta" role="form">
+								<span style="display: inline;"> <label
+								class="inline-block tr">知识点</label>
+								<div class="form-group mr20">
+									<div class="skill-selector-wrapper skill-selector">
+										<!-- 遮罩,用于点击时隐藏搜索面板 -->
+										<a type="button" class="btn btn-default trigger"> <span
+											class="pull-left skill-name text-ellipsis" title="">无</span>
+								<span class="pull-right"> <i class="fa fa-caret-down"></i>
+										</span>
+								</a>
+								<div class="dropdown" style="top: 74px; display: none;">
+									<div>
+										<ul class="skill-list edit">
+											<div class="fuDiv">
+												<li class="text-ellipsis" title="无">无</li>
+											{{each knowledges as value index}}
+												{{if value!= "无"}}
+												<li class="text-ellipsis" title={{value}}>{{value}}</li>
+												{{/if}}
+											{{/each}}	
+											</div>
+											<div class="add-skill input-group input-group-sm">
+												<input class="form-control" placeholder="添加一个知识点">
+												<span class="input-group-btn"> <a
+															class="btn btn-add"> <i class="fa fa-plus"></i>
+														</a>
+														</span>
+											</div>
+										</ul>
+
+									</div>
+									<div class="actions pull-right">
+										<a class="btn btn-default btn-xs">取消</a>
+										<a class="btn btn-add btn-xs">确定</a>
+									</div>
+								</div>
+						</div>
+					</div>
+					</span>
+
+					</form>
+					<ul>
+						<li class="question-item">
+							<div class="q-wrapper">
+								<div class="question-custom">
+									<label class="required mb10">题干</label>
+									<a class="anchor-mark" id="anchor_title"></a>
+									<div class="form-group form-title">
+										<div contenteditable="true" title="Rich Text Editor, editor1" class="custom-section editable-section question-gutter" placeholder="请输入题干" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor1" aria-describedby="cke_44" style="position: relative;">
+											<p><br></p>
+										</div>
+								<div class="cl"></div>
+							</div>
+							<div>
+								<label class="required mb10">题目对错</label> <span class="q-hint">选择题目是否正确</span>
+								<a class="anchor-mark" id="anchor_option">
+								</a>
+							</div>
+							<ul class="options">
+								<div class="form-group" style="margin-left: 16px;">
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="0" name="radiojudge" checked/> <label>错误</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="1" name="radiojudge"/>
+												<label>正确</label>
+											</div>
+								</div>
+							</ul>
+			<label class="mt20 mb10">题目解析</label><span class="q-hint">考生/学员查答案时可显示该信息，达到学习的目的</span>
+			<form class="analysis">
+				<div contenteditable="true" title="题目解析" class="custom-section editable-section question-gutter cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" placeholder="请输入题目解析" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor6" aria-describedby="cke_124" style="position: relative;">
+					<p><br></p>
+				</div>
+			</form>
+		</div>
+		<span style="display: inline;"> <label
+										class="required mt20 mb10">难度</label>
+										<div class="form-group" style="margin-left: 16px;">
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="0" name="radiodifficult" checked/> <label>易</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="1" name="radiodifficult"/>
+												<label>中</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="2" name="radiodifficult"/>
+												<label>难</label>
+											</div>
+										</div>
+									</span>
+		</div>
+		</li>
+		</ul>
+		</div>
+
+		</div>
+
+		<div class="modal-footer">
+			<button class="btn btn-success editorjudge-sure-btn">确认</button>
+		</div>
+		</div>
+		</div>
+		</div>
+</script>
+
+
+<script id="judgeitem" type="text/html">
+		<!-- 判断题例子 -->
+	<li class="q-item sets-question-item" data-qid={{bank_judge.qId}}>
+		<div class="check-wrap">
+				<div class="checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" data-qid={{bank_judge.qId}} value="option1"/> <label>
+											 </label>
+										</div>
+					</div>
+					<div class="q-data">
+<div class="select-toolbar-wrap">
+        <a class="btn-remove delete-judge"><i class="fa fa-trash"></i></a>
+        <a class="btn-edit edit-judge"><i class="fa fa-edit"></i></a>
+    </div>
+						<span class="q-sequence">1</span>
+						<span class="text-medium-gray">[判断题 ]</span>
+			<span class="ml5 label-skill text-ellipsis">{{bank_judge.qKnowledge}}</span>
+
+			<span class="ml5 label-difficulty text-ellipsis">{{if bank_judge.qDifficulty==0}}易{{else if bank_judge.qDifficulty==1}}中{{else if bank_judge.qDifficulty==2}}难{{/if}}</span>
+			<label class="hide-input unselectable q-expand-toggle independent" style="margin-left: 0">
+						<a>收起</a>
+						<i  class="fa fa-angle-double-up "></i>
+					</label>
+
+						<div class="q-title" style="margin-top: 10px;">
+							<pre>{{bank_judge.qTitle}}</pre>
+						</div>
+						<ul class="list-title-media mt10"></ul>
+
+						<div data-link="">
+
+							<ul class="q-options-wrap mt20">
+								<li class="q-option">
+									{{if bank_judge.isture==0}}
+									<label class="q-choice-icon radio-inline sets-radio active">
+										<span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select" style="opacity: 1;"></i>
+							        </span>
+						        </label>
+									{{else if bank_judge.isture==1}}
+									<label class="q-choice-icon radio-inline sets-radio">
+							        <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+							        </span>
+						         </label>
+						         {{/if}}
+									<span class="option-index">A、</span>
+									<div class="q-option-content pl5">
+										<pre>错误</pre>
+									</div>
+								</li>
+								<li class="q-option">
+									{{if bank_judge.isture==1}}
+									<label class="q-choice-icon radio-inline sets-radio active">
+										<span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select" style="opacity: 1;"></i>
+							        </span>
+						        </label>
+									{{else if bank_judge.isture==0}}
+									<label class="q-choice-icon radio-inline sets-radio">
+							        <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+							        </span>
+						         </label>
+						         {{/if}}
+									<span class="option-index">B、</span>
+									<div class="q-option-content pl5">
+										<pre>正确</pre>
+									</div>
+								</li>
+
+							</ul>
+							<div class="q-answer mt20">
+
+							</div>
+							<div class="q-answer mt20" style="display: block;">
+								<p class="q-ans-label">题目解析：</p>
+								{{if bank_judge.qAnalysis == undefined}}
+								<span>无</span>
+								{{else}}
+									<span>{{bank_judge.qAnalysis}}</span>
+									{{/if}}
+							</div>
+
+						</div>
+					</div>
+				</li>
+</script>
+
+<script id="edit-judgeModaldiv" type="text/html">
+	<div class="modal fade" id="editor-judgeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-qid={{bank_judge.qId}} data-sequence={{sequence}}>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title" id="myModalLabel">修改判断题</h4>
+					</div>
+					<div class="modal-body pad q-no-sub">
+						<div class="pad-body question-form">
+							<form class="form-inline form-meta" role="form">
+								<span style="display: inline;"> <label
+								class="inline-block tr">知识点</label>
+								<div class="form-group mr20">
+									<div class="skill-selector-wrapper skill-selector">
+										<!-- 遮罩,用于点击时隐藏搜索面板 -->
+										<a type="button" class="btn btn-default trigger"> <span
+											class="pull-left skill-name text-ellipsis" title="">{{bank_judge.qKnowledge}}</span>
+								<span class="pull-right"> <i class="fa fa-caret-down"></i>
+										</span>
+								</a>
+								<div class="dropdown" style="top: 74px; display: none;">
+									<div>
+										<ul class="skill-list edit">
+											<div class="fuDiv">
+												<li class="text-ellipsis" title="无">无</li>
+											{{each knowledges as value index}}
+												{{if value!= "无"}}
+												<li class="text-ellipsis" title={{value}}>{{value}}</li>
+												{{/if}}
+											{{/each}}	
+											</div>
+											<div class="add-skill input-group input-group-sm">
+												<input class="form-control" placeholder="添加一个知识点">
+												<span class="input-group-btn"> <a
+															class="btn btn-add"> <i class="fa fa-plus"></i>
+														</a>
+														</span>
+											</div>
+										</ul>
+
+									</div>
+									<div class="actions pull-right">
+										<a class="btn btn-default btn-xs">取消</a>
+										<a class="btn btn-add btn-xs">确定</a>
+									</div>
+								</div>
+						</div>
+					</div>
+					</span>
+
+					</form>
+					<ul>
+						<li class="question-item">
+							<div class="q-wrapper">
+								<div class="question-custom">
+									<label class="required mb10">题干</label>
+									<a class="anchor-mark" id="anchor_title"></a>
+									<div class="form-group form-title">
+										<div contenteditable="true" title="Rich Text Editor, editor1" class="custom-section editable-section question-gutter" placeholder="请输入题干" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor1" aria-describedby="cke_44" style="position: relative;">
+											<p>{{bank_judge.qTitle}}</p>
+										</div>
+								<div class="cl"></div>
+							</div>
+							<div>
+								<label class="required mb10">题目对错</label> <span class="q-hint">选择题目是否正确</span>
+								<a class="anchor-mark" id="anchor_option">
+								</a>
+							</div>
+							<ul class="options">
+								<div class="form-group" style="margin-left: 16px;">
+											<div class="radio radio-success radio-inline">
+												{{if bank_judge.isture==0}}
+												<input type="radio" value="0" name="radiojudge" checked/>
+												{{else if bank_judge.isture==1}}
+												<input type="radio" value="0" name="radiojudge">
+												{{/if}}
+												<label>错误</label>
+											</div>
+											
+											<div class="radio radio-success radio-inline">
+												{{if bank_judge.isture==0}}
+												<input type="radio" value="1" name="radiojudge"/>
+												{{else if bank_judge.isture==1}}
+												<input type="radio" value="1" name="radiojudge" checked/>
+												{{/if}}
+												<label>正确</label>
+											</div>
+								</div>
+							</ul>
+			<label class="mt20 mb10">题目解析</label><span class="q-hint">考生/学员查答案时可显示该信息，达到学习的目的</span>
+			<form class="analysis">
+				<div contenteditable="true" title="题目解析" class="custom-section editable-section question-gutter cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" placeholder="请输入题目解析" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor6" aria-describedby="cke_124" style="position: relative;">
+					<p>{{bank_judge.qAnalysis}}</p>
+				</div>
+			</form>
+		</div>
+		<span style="display: inline;"> <label
+										class="required mt20 mb10">难度</label>
+										<div class="form-group" style="margin-left: 16px;">
+											<div class="radio radio-success radio-inline">
+												{{if bank_judge.qDifficulty==0}}
+												<input type="radio" value="0" name="radiodifficult" checked/>
+												{{else if bank_judge.qDifficulty!=0}}
+												<input type="radio" value="0" name="radiodifficult">
+												{{/if}}
+												<label>易</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												{{if bank_judge.qDifficulty==1}}
+												<input type="radio" value="1" name="radiodifficult"/>
+												{{else if bank_judge.qDifficulty!=1}}
+												<input type="radio" value="1" name="radiodifficult">
+												{{/if}}
+												<label>中</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												{{if bank_judge.qDifficulty==2}}
+												<input type="radio" value="2" name="radiodifficult"/>
+												{{else if bank_judge.qDifficulty!=2}}
+												<input type="radio" value="2" name="radiodifficult">
+												{{/if}}
+												<label>难</label>
+											</div>
+										</div>
+									</span>
+		</div>
+		</li>
+		</ul>
+		</div>
+
+		</div>
+
+		<div class="modal-footer">
+			<button class="btn btn-success editorjudge-sure-btn">确认</button>
+		</div>
+		</div>
+		</div>
+		</div>
+</script>
+<!---------------------------------------------------------填空题-------------------------------------------------------------------->
+
+<script id="add-fillModaldiv" type="text/html">
+	<div class="modal fade" id="add-fillModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title" id="myModalLabel">添加填空题</h4>
+					</div>
+					<div class="modal-body pad q-no-sub">
+						<div class="pad-body question-form">
+							<form class="form-inline form-meta" role="form">
+								<span style="display: inline;"> <label
+								class="inline-block tr">知识点</label>
+								<div class="form-group mr20">
+									<div class="skill-selector-wrapper skill-selector">
+										<!-- 遮罩,用于点击时隐藏搜索面板 -->
+										<a type="button" class="btn btn-default trigger"> <span
+											class="pull-left skill-name text-ellipsis" title="">无</span>
+								<span class="pull-right"> <i class="fa fa-caret-down"></i>
+										</span>
+								</a>
+								<div class="dropdown" style="top: 74px; display: none;">
+									<div>
+										<ul class="skill-list edit">
+											<div class="fuDiv">
+												<li class="text-ellipsis" title="无">无</li>
+											{{each knowledges as value index}}
+												{{if value!= "无"}}
+												<li class="text-ellipsis" title={{value}}>{{value}}</li>
+												{{/if}}
+											{{/each}}	
+											</div>
+											<div class="add-skill input-group input-group-sm">
+												<input class="form-control" placeholder="添加一个知识点">
+												<span class="input-group-btn"> <a
+															class="btn btn-add"> <i class="fa fa-plus"></i>
+														</a>
+														</span>
+											</div>
+										</ul>
+
+									</div>
+									<div class="actions pull-right">
+										<a class="btn btn-default btn-xs">取消</a>
+										<a class="btn btn-add btn-xs">确定</a>
+									</div>
+								</div>
+						</div>
+					</div>
+					</span>
+
+					</form>
+					<ul>
+						<li class="question-item">
+							<div class="q-wrapper">
+								<div class="question-custom">
+									<label class="required mb10">题干</label>
+									<a class="anchor-mark" id="anchor_title"></a>
+									<div class="form-group form-title">
+										<div contenteditable="true" title="Rich Text Editor, editor1" class="custom-section editable-section question-gutter" placeholder="请输入题干" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor1" aria-describedby="cke_44" style="position: relative;">
+											<p><br></p>
+										</div>
+								<div class="cl"></div>
+							</div>
+							<div>
+								<label class="required mb10">填空答案</label> <span class="q-hint">请按照您自身需求进行顺序填写，至少有一个填空答案，无上限</span>
+								<a class="anchor-mark" id="anchor_option">
+								</a>
+							</div>
+							<ul class="options">
+								<li class="option" style="display: table;">
+									<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;"><br></pre>
+									<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+								</li>
+								<li class="option" style="display: table;">
+									<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;"><br></pre>
+									<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+								</li>
+								<center>
+									<a class="btn btn-add btn-add-option"><i class="fa fa-plus"></i> 添加一个答案</a>
+								</center>
+							</ul>
+			<label class="mt20 mb10">题目解析</label><span class="q-hint">考生/学员查答案时可显示该信息，达到学习的目的</span>
+			<form class="analysis">
+				<div contenteditable="true" title="题目解析" class="custom-section editable-section question-gutter cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" placeholder="请输入题目解析" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor6" aria-describedby="cke_124" style="position: relative;">
+					<p><br></p>
+				</div>
+			</form>
+		</div>
+		<span style="display: inline;"> <label
+										class="required mt20 mb10">难度</label>
+										<div class="form-group" style="margin-left: 16px;">
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="0" name="radiodifficult" checked/> <label>易</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="1" name="radiodifficult"/>
+												<label>中</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="2" name="radiodifficult"/>
+												<label>难</label>
+											</div>
+										</div>
+									</span>
+		</div>
+		</li>
+		</ul>
+		</div>
+
+		</div>
+
+		<div class="insertItem" style="display: none;">
+			<li class="option" style="display: table;">
+		<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;"><br></pre>
+		<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+		</li>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-success editorfill-sure-btn">确认</button>
+		</div>
+		</div>
+		</div>
+		</div>
+</script>
+
+<script id="fillitem" type="text/html">
+	<li class="q-item sets-question-item" data-qid={{bank_fill.qId}}>
+					<div class="check-wrap">
+							<div class="checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" data-qid={{bank_fill.qId}} value="option1"/> <label>
+											 </label>
+										</div>
+					</div>
+					<div class="q-data">
+<div class="select-toolbar-wrap">
+        <a class="btn-remove delete-fill"><i class="fa fa-trash"></i></a>
+        <a class="btn-edit edit-fill"><i class="fa fa-edit"></i></a>
+    </div>
+						<span class="q-sequence">1</span>
+						<span class="text-medium-gray">[填空题 ]</span>
+			<span class="ml5 label-skill text-ellipsis">{{bank_fill.qKnowledge}}</span>
+
+			<span class="ml5 label-difficulty text-ellipsis">{{if bank_fill.qDifficulty==0}}易{{else if bank_fill.qDifficulty==1}}中{{else if bank_fill.qDifficulty==2}}难{{/if}}</span>
+			<label class="hide-input unselectable q-expand-toggle independent" style="margin-left: 0">
+						<a>收起</a>
+						<i  class="fa fa-angle-double-up"></i>
+					</label>
+
+						<div class="q-title" style="margin-top: 10px;">
+							<pre>{{bank_fill.qTitle}}</pre>
+						</div>
+						<ul class="list-title-media mt10"></ul>
+
+						<div data-link="">
+
+							<div class="q-answer mt20">
+
+							</div>
+							<div class="q-answer q-fill-answer mt20">
+								<p class="q-ans-label">答案：</p>
+								{{each bank_fill.filllsit as value index}}<span class="fill-answer">{{value.content}}</span>{{/each}}
+							</div>
+
+							<div class="q-answer mt20" style="display: block;">
+								<p class="q-ans-label">题目解析：</p>
+								{{if bank_fill.qAnalysis == undefined}}
+								<span>无</span>
+								{{else}}
+									<span>{{bank_fill.qAnalysis}}</span>
+									{{/if}}
+							</div>
+
+						</div>
+					</div>
+				</li>
+</script>
+
+<script id="edit-fillModaldiv" type="text/html">
+	<div class="modal fade" id="editor-fillModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-qid={{bank_fill.qId}} data-sequence={{sequence}}>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title" id="myModalLabel">修改填空题</h4>
+					</div>
+					<div class="modal-body pad q-no-sub">
+						<div class="pad-body question-form">
+							<form class="form-inline form-meta" role="form">
+								<span style="display: inline;"> <label
+								class="inline-block tr">知识点</label>
+								<div class="form-group mr20">
+									<div class="skill-selector-wrapper skill-selector">
+										<!-- 遮罩,用于点击时隐藏搜索面板 -->
+										<a type="button" class="btn btn-default trigger"> <span
+											class="pull-left skill-name text-ellipsis" title="">{{bank_fill.qKnowledge}}</span>
+								<span class="pull-right"> <i class="fa fa-caret-down"></i>
+										</span>
+								</a>
+								<div class="dropdown" style="top: 74px; display: none;">
+									<div>
+										<ul class="skill-list edit">
+											<div class="fuDiv">
+												<li class="text-ellipsis" title="无">无</li>
+											{{each knowledges as value index}}
+												{{if value!= "无"}}
+												<li class="text-ellipsis" title={{value}}>{{value}}</li>
+												{{/if}}
+											{{/each}}	
+											</div>
+											<div class="add-skill input-group input-group-sm">
+												<input class="form-control" placeholder="添加一个知识点">
+												<span class="input-group-btn"> <a
+															class="btn btn-add"> <i class="fa fa-plus"></i>
+														</a>
+														</span>
+											</div>
+										</ul>
+
+									</div>
+									<div class="actions pull-right">
+										<a class="btn btn-default btn-xs">取消</a>
+										<a class="btn btn-add btn-xs">确定</a>
+									</div>
+								</div>
+						</div>
+					</div>
+					</span>
+
+					</form>
+					<ul>
+						<li class="question-item">
+							<div class="q-wrapper">
+								<div class="question-custom">
+									<label class="required mb10">题干</label>
+									<a class="anchor-mark" id="anchor_title"></a>
+									<div class="form-group form-title">
+										<div contenteditable="true" title="Rich Text Editor, editor1" class="custom-section editable-section question-gutter" placeholder="请输入题干" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor1" aria-describedby="cke_44" style="position: relative;">
+											<p>{{bank_fill.qTitle}}</p>
+										</div>
+								<div class="cl"></div>
+							</div>
+							<div>
+								<label class="required mb10">填空答案</label> <span class="q-hint">请按照您自身需求进行顺序填写，至少有一个填空答案，无上限</span>
+								<a class="anchor-mark" id="anchor_option">
+								</a>
+							</div>
+							<ul class="options">
+								{{each bank_fill.filllsit as value index}}
+								<li class="option" style="display: table;">
+									<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;">{{value.content}}</pre>
+									<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+								</li>
+								{{/each}}
+								<center>
+									<a class="btn btn-add btn-add-option"><i class="fa fa-plus"></i> 添加一个答案</a>
+								</center>
+							</ul>
+			<label class="mt20 mb10">题目解析</label><span class="q-hint">考生/学员查答案时可显示该信息，达到学习的目的</span>
+			<form class="analysis">
+				<div contenteditable="true" title="题目解析" class="custom-section editable-section question-gutter cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" placeholder="请输入题目解析" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor6" aria-describedby="cke_124" style="position: relative;">
+					<p>{{bank_fill.qAnalysis}}</p>
+				</div>
+			</form>
+		</div>
+		<span style="display: inline;"> <label
+										class="required mt20 mb10">难度</label>
+										<div class="form-group" style="margin-left: 16px;">
+											<div class="radio radio-success radio-inline">
+												{{if bank_fill.qDifficulty==0}}
+												<input type="radio" value="0" name="radiodifficult" checked/>
+												{{else if bank_fill.qDifficulty!=0}}
+												<input type="radio" value="0" name="radiodifficult"/>
+												{{/if}}
+												<label>易</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												{{if bank_fill.qDifficulty==1}}
+												<input type="radio" value="1" name="radiodifficult" checked/>
+												{{else if bank_fill.qDifficulty!=1}}
+												<input type="radio" value="1" name="radiodifficult"/>
+												<label>中</label>
+												{{/if}}
+											</div>
+											<div class="radio radio-success radio-inline">
+												{{if bank_fill.qDifficulty==2}}
+												<input type="radio" value="2" name="radiodifficult" checked/>
+												{{else if bank_fill.qDifficulty!=2}}
+												<input type="radio" value="2" name="radiodifficult"/>
+												<label>难</label>
+												{{/if}}
+											</div>
+										</div>
+									</span>
+		</div>
+		</li>
+		</ul>
+		</div>
+
+		</div>
+
+		<div class="insertItem" style="display: none;">
+			<li class="option" style="display: table;">
+		<pre type='text' contenteditable="true" class="custom-section editable-section option-section cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor4" title="Rich Text Editor, editor4" aria-describedby="cke_92" style="position: relative;"><br></pre>
+		<a class="option-addon btn btn-link btn-remove-option" disabled="disabled"><i class="fa fa-times"></i></a>
+		</li>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-success editorfill-sure-btn">确认</button>
+		</div>
+		</div>
+		</div>
+		</div>
+</script>
+<!---------------------------------------------------------简答题-------------------------------------------------------------------->
+
+
+<script id="add-shortModaldiv" type="text/html">
+	<div class="modal fade" id="add-shortModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title" id="myModalLabel">添加简答题</h4>
+					</div>
+					<div class="modal-body pad q-no-sub">
+						<div class="pad-body question-form">
+							<form class="form-inline form-meta" role="form">
+								<span style="display: inline;"> <label
+								class="inline-block tr">知识点</label>
+								<div class="form-group mr20">
+									<div class="skill-selector-wrapper skill-selector">
+										<!-- 遮罩,用于点击时隐藏搜索面板 -->
+										<a type="button" class="btn btn-default trigger"> <span
+											class="pull-left skill-name text-ellipsis" title="">无</span>
+								<span class="pull-right"> <i class="fa fa-caret-down"></i>
+										</span>
+								</a>
+								<div class="dropdown" style="top: 74px; display: none;">
+									<div>
+										<ul class="skill-list edit">
+											<div class="fuDiv">
+												<li class="text-ellipsis" title="无">无</li>
+											{{each knowledges as value index}}
+												{{if value!= "无"}}
+												<li class="text-ellipsis" title={{value}}>{{value}}</li>
+												{{/if}}
+											{{/each}}	
+											</div>
+											<div class="add-skill input-group input-group-sm">
+												<input class="form-control" placeholder="添加一个知识点">
+												<span class="input-group-btn"> <a
+															class="btn btn-add"> <i class="fa fa-plus"></i>
+														</a>
+														</span>
+											</div>
+										</ul>
+
+									</div>
+									<div class="actions pull-right">
+										<a class="btn btn-default btn-xs">取消</a>
+										<a class="btn btn-add btn-xs">确定</a>
+									</div>
+								</div>
+						</div>
+					</div>
+					</span>
+
+					</form>
+					<ul>
+						<li class="question-item">
+							<div class="q-wrapper">
+								<div class="question-custom">
+									<label class="required mb10">题干</label>
+									<a class="anchor-mark" id="anchor_title"></a>
+									<div class="form-group form-title">
+										<div contenteditable="true" title="Rich Text Editor, editor1" class="custom-section editable-section question-gutter" placeholder="请输入题干" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor1" aria-describedby="cke_44" style="position: relative;">
+											<p><br></p>
+										</div>
+										<div class="question-gutter title-media-form">
+											<table class="mt5">
+												<tbody>
+													<tr>
+														<td>为题干添加</td>
+														<td><span class="p0 btn btn-link btn-add-media btn-add-vedio">
+																	<i class="fa fa-video-camera"></i> 视频
+																	<div>
+																		<span style="display: none;">只能上传一个视频或图片</span>
+															<p style="display: block;">
+																<div class="btn btn-upload btn-sm btn-success" style="position: relative; overflow: hidden; cursor: default;">
+																	<span class="uploadText"> <i
+																				class="fa fa-cloud-upload"></i> 上传
+																			</span>
+																	<form method="POST" action="https://101test-private.oss-cn-beijing.aliyuncs.com" enctype="multipart/form-data" style="margin: 0px; padding: 0px;">
+																		<input type="file" id="ajax-upload-id-1561525071183" name="file" accept=".flv,.f4v,.mp4" multiple="" style="position: absolute; cursor: pointer; top: 0px; width: 100%; height: 100%; left: 0px; z-index: 100; opacity: 0;">
+																	</form>
+																</div>
+																<a class="btn btn-upload btn-sm btn-success" style="display: none;"> <i class="fa fa-cloud-upload"></i> 上传
+																</a>
+																<div class="upload-error-log"></div>
+															</p>
+										</div>
+										</span>
+										</td>
+										<td>或</td>
+										<td><span class="p0 btn btn-link btn-add-media btn-add-file">
+																	<i class="fa fa-image"></i> 图片
+																	<div>
+																		<span style="display: none;">只能上传一个视频或图片</span>
+											<p style="display: block;">
+												<div class="btn btn-upload btn-sm btn-success" style="position: relative; overflow: hidden; cursor: default;">
+													<span class="uploadText"> <i
+																				class="fa fa-cloud-upload"></i> 上传
+																			</span>
+													<form method="POST" action="https://101test-private.oss-cn-beijing.aliyuncs.com" enctype="multipart/form-data" style="margin: 0px; padding: 0px;">
+														<input type="file" id="ajax-upload-id-1561525071186" name="file" accept="*" multiple="" style="position: absolute; cursor: pointer; top: 0px; width: 100%; height: 100%; left: 0px; z-index: 100; opacity: 0;">
+													</form>
+												</div>
+												<a class="btn btn-upload btn-sm btn-success" style="display: none;"> <i class="fa fa-cloud-upload"></i> 上传
+												</a>
+												<div class="upload-error-log"></div>
+											</p>
+									</div>
+									</span>
+									</td>
+									<td><span class="text-highlight">只能上传一个视频或图片</span>
+									</td>
+									</tr>
+									</tbody>
+									</table>
+									<div class="upload-progress"></div>
+									<ul class="list-title-media mt10">
+									</ul>
+								</div>
+								<div class="cl"></div>
+							</div>
+							
+			<label class="required mt20 mb10">题目参考答案</label><span class="q-hint">批卷时进行显示，且考生/学员查答案时可显示，达到学习的目的</span>
+			<form class="analysis">
+				<div contenteditable="true" title="参考答案" class="custom-section editable-section question-gutter cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" placeholder="请输入题目参考答案" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor6" aria-describedby="cke_124" style="position: relative;">
+					<p><br></p>
+				</div>
+			</form>
+		</div>
+		<span style="display: inline;"> <label
+										class="required mt20 mb10">难度</label>
+										<div class="form-group" style="margin-left: 16px;">
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="0" name="radiodifficult" checked/> <label>易</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="1" name="radiodifficult"/>
+												<label>中</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												<input type="radio" value="2" name="radiodifficult"/>
+												<label>难</label>
+											</div>
+										</div>
+									</span>
+		</div>
+		</li>
+		</ul>
+		</div>
+
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-success editorshort-sure-btn">确认</button>
+		</div>
+		</div>
+		</div>
+		</div>
+</script>
+
+<script id="shortitem" type="text/html">
+	<li class="q-item sets-question-item" data-qid={{bank_shortanswer.qId}}>
+					<div class="check-wrap">
+						<div class="checkbox checkbox-success checkbox-inline">
+											<input type="checkbox" data-qid={{bank_shortanswer.qId}} value="option1"/> <label>
+											 </label>
+										</div>
+					</div>
+					<div class="q-data">
+<div class="select-toolbar-wrap">
+        <a class="btn-remove delete-short"><i class="fa fa-trash"></i></a>
+        <a class="btn-edit edit-short"><i class="fa fa-edit"></i></a>
+    </div>
+						<span class="q-sequence">1</span>
+						<span class="text-medium-gray">[问答题]</span>
+			<span class="ml5 label-skill text-ellipsis">{{bank_shortanswer.qKnowledge}}</span>
+
+			<span class="ml5 label-difficulty text-ellipsis">{{if bank_shortanswer.qFifficulty==0}}易{{else if bank_shortanswer.qFifficulty==1}}中{{else if bank_shortanswer.qFifficulty==2}}难{{/if}}</span>
+			<label class="hide-input unselectable q-expand-toggle independent" style="margin-left: 0">
+						<a>收起</a>
+						<i  class="fa fa-angle-double-up"></i>
+					</label>
+
+						<div class="q-title" style="margin-top: 10px;">
+							<pre>{{bank_shortanswer.qTitle}}</pre>
+							<!--<img src="../../img/logo_black.png" th:src="shortpic ${shortanswer.shortpiclist}" />-->
+						</div>
+						<ul class="list-title-media mt10"></ul>
+
+						<div>
+							<div class="q-answer mt20">
+							</div>
+							<div class="q-answer mt20" style="display: block;">
+								<p class="q-ans-label">题目解析：</p>
+								{{if bank_shortanswer.qAnalysis == undefined}}
+								<span>无</span>
+								{{else}}
+									<span>{{bank_shortanswer.qAnalysis}}</span>
+									{{/if}}
+							</div>
+						</div>
+					</div>
+				</li>
+</script>
+
+<script id="edit-shortModaldiv" type="text/html">
+	<div class="modal fade" id="editor-shortModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  data-qid={{bank_shortanswer.qId}} data-sequence={{sequence}}>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title" id="myModalLabel">修改简答题</h4>
+					</div>
+					<div class="modal-body pad q-no-sub">
+						<div class="pad-body question-form">
+							<form class="form-inline form-meta" role="form">
+								<span style="display: inline;"> <label
+								class="inline-block tr">知识点</label>
+								<div class="form-group mr20">
+									<div class="skill-selector-wrapper skill-selector">
+										<!-- 遮罩,用于点击时隐藏搜索面板 -->
+										<a type="button" class="btn btn-default trigger"> <span
+											class="pull-left skill-name text-ellipsis" title="">{{bank_shortanswer.qKnowledge}}</span>
+								<span class="pull-right"> <i class="fa fa-caret-down"></i>
+										</span>
+								</a>
+								<div class="dropdown" style="top: 74px; display: none;">
+									<div>
+										<ul class="skill-list edit">
+											<div class="fuDiv">
+												<li class="text-ellipsis" title="无">无</li>
+											{{each knowledges as value index}}
+												{{if value!= "无"}}
+												<li class="text-ellipsis" title={{value}}>{{value}}</li>
+												{{/if}}
+											{{/each}}	
+											</div>
+											<div class="add-skill input-group input-group-sm">
+												<input class="form-control" placeholder="添加一个知识点">
+												<span class="input-group-btn"> <a
+															class="btn btn-add"> <i class="fa fa-plus"></i>
+														</a>
+														</span>
+											</div>
+										</ul>
+
+									</div>
+									<div class="actions pull-right">
+										<a class="btn btn-default btn-xs">取消</a>
+										<a class="btn btn-add btn-xs">确定</a>
+									</div>
+								</div>
+						</div>
+					</div>
+					</span>
+
+					</form>
+					<ul>
+						<li class="question-item">
+							<div class="q-wrapper">
+								<div class="question-custom">
+									<label class="required mb10">题干</label>
+									<a class="anchor-mark" id="anchor_title"></a>
+									<div class="form-group form-title">
+										<div contenteditable="true" title="Rich Text Editor, editor1" class="custom-section editable-section question-gutter" placeholder="请输入题干" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor1" aria-describedby="cke_44" style="position: relative;">
+											<p>{{bank_shortanswer.qTitle}}</p>
+										</div>
+										<div class="question-gutter title-media-form">
+											<table class="mt5">
+												<tbody>
+													<tr>
+														<td>为题干添加</td>
+														<td><span class="p0 btn btn-link btn-add-media btn-add-vedio">
+																	<i class="fa fa-video-camera"></i> 视频
+																	<div>
+																		<span style="display: none;">只能上传一个视频或图片</span>
+															<p style="display: block;">
+																<div class="btn btn-upload btn-sm btn-success" style="position: relative; overflow: hidden; cursor: default;">
+																	<span class="uploadText"> <i
+																				class="fa fa-cloud-upload"></i> 上传
+																			</span>
+																	<form method="POST" action="https://101test-private.oss-cn-beijing.aliyuncs.com" enctype="multipart/form-data" style="margin: 0px; padding: 0px;">
+																		<input type="file" id="ajax-upload-id-1561525071183" name="file" accept=".flv,.f4v,.mp4" multiple="" style="position: absolute; cursor: pointer; top: 0px; width: 100%; height: 100%; left: 0px; z-index: 100; opacity: 0;">
+																	</form>
+																</div>
+																<a class="btn btn-upload btn-sm btn-success" style="display: none;"> <i class="fa fa-cloud-upload"></i> 上传
+																</a>
+																<div class="upload-error-log"></div>
+															</p>
+										</div>
+										</span>
+										</td>
+										<td>或</td>
+										<td><span class="p0 btn btn-link btn-add-media btn-add-file">
+																	<i class="fa fa-image"></i> 图片
+																	<div>
+																		<span style="display: none;">只能上传一个视频或图片</span>
+											<p style="display: block;">
+												<div class="btn btn-upload btn-sm btn-success" style="position: relative; overflow: hidden; cursor: default;">
+													<span class="uploadText"> <i
+																				class="fa fa-cloud-upload"></i> 上传
+																			</span>
+													<form method="POST" action="https://101test-private.oss-cn-beijing.aliyuncs.com" enctype="multipart/form-data" style="margin: 0px; padding: 0px;">
+														<input type="file" id="ajax-upload-id-1561525071186" name="file" accept="*" multiple="" style="position: absolute; cursor: pointer; top: 0px; width: 100%; height: 100%; left: 0px; z-index: 100; opacity: 0;">
+													</form>
+												</div>
+												<a class="btn btn-upload btn-sm btn-success" style="display: none;"> <i class="fa fa-cloud-upload"></i> 上传
+												</a>
+												<div class="upload-error-log"></div>
+											</p>
+									</div>
+									</span>
+									</td>
+									<td><span class="text-highlight">只能上传一个视频或图片</span>
+									</td>
+									</tr>
+									</tbody>
+									</table>
+									<div class="upload-progress"></div>
+									<ul class="list-title-media mt10">
+									</ul>
+								</div>
+								<div class="cl"></div>
+							</div>
+							
+			<label class="required mt20 mb10">题目参考答案</label><span class="q-hint">在老师批卷时进行显示，却考生/学员查答案时可显示该信息，达到学习的目的</span>
+			<form class="analysis">
+				<div contenteditable="true" title="参考答案" class="custom-section editable-section question-gutter cke_editable cke_editable_inline cke_contents_ltr cke_show_borders" placeholder="请输入题目参考答案" tabindex="0" spellcheck="false" role="textbox" aria-label="Rich Text Editor, editor6" aria-describedby="cke_124" style="position: relative;">
+					<p>{{bank_shortanswer.qAnalysis}}</p>
+				</div>
+			</form>
+		</div>
+		<span style="display: inline;"> <label
+										class="required mt20 mb10">难度</label>
+										<div class="form-group" style="margin-left: 16px;">
+											<div class="radio radio-success radio-inline">
+												{{if bank_shortanswer.qFifficulty==0}}
+												<input type="radio" value="0" name="radiodifficult" checked/>
+												{{else if bank_shortanswer.qFifficulty!=0}}
+												<input type="radio" value="0" name="radiodifficult">
+												{{/if}}
+												<label>易</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												{{if bank_shortanswer.qFifficulty==1}}
+												<input type="radio" value="1" name="radiodifficult" checked/>
+												{{else if bank_shortanswer.qFifficulty!=1}}
+												<input type="radio" value="1" name="radiodifficult"/>
+												{{/if}}
+												<label>中</label>
+											</div>
+											<div class="radio radio-success radio-inline">
+												{{if bank_shortanswer.qFifficulty==2}}
+												<input type="radio" value="2" name="radiodifficult" checked/>
+												{{else if bank_shortanswer.qFifficulty!=2}}
+												<input type="radio" value="2" name="radiodifficult"/>
+												{{/if}}
+												<label>难</label>
+											</div>
+										</div>
+									</span>
+		</div>
+		</li>
+		</ul>
+		</div>
+
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-success editorshort-sure-btn">确认</button>
+		</div>
+		</div>
+		</div>
+		</div>
+</script>
+
+<!---------------------------------------------------------知识点情况-------------------------------------------------------------------->
+
+<script id="summary-listdiv" type="text/html">
+	<li class="summary-item summary-header">
+		<span> <span class="text-ellipsis">知识点 </span>
+		</span> <span> <span class="text-ellipsis">题目数 </span>
+		</span> <span> <span class="text-ellipsis">操作 </span>
+		</span>
+	</li>
+	{{each kownledgs as value index}}
+    <li class="summary-item">
+        <span><span class="skill-item text-ellipsis">{{value.name}}</span></span>
+        <span><span class="count-item text-highlight">{{value.num}}</span></span>
+        <span class="action-item"><a class="btn-remove"><i class="fa fa-trash"></i></a></span>
+    </li>
+    {{/each}}
+</script>
+
+

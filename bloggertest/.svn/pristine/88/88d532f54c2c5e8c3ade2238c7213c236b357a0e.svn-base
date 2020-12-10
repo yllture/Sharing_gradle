@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.dao.NoteMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.entity.Note" >
+    <id column="noteid" property="noteid" jdbcType="INTEGER" />
+    <result column="activeuserid" property="activeuserid" jdbcType="INTEGER" />
+    <result column="passiveuserid" property="passiveuserid" jdbcType="INTEGER" />
+    <result column="notetime" property="notetime" jdbcType="TIMESTAMP" />
+    <result column="paperid" property="paperid" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="c1" property="c1" jdbcType="INTEGER" />
+    <result column="c2" property="c2" jdbcType="INTEGER" />
+    <result column="c3" property="c3" jdbcType="VARCHAR" />
+    <result column="c4" property="c4" jdbcType="VARCHAR" />
+    
+    
+    <association property="activeuser" javaType="com.neuedu.entity.User">
+    <id column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="useraccount" property="useraccount" jdbcType="VARCHAR" />
+    <result column="usermail" property="usermail" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="userposition" property="userposition" jdbcType="VARCHAR" />
+    <result column="usercompany" property="usercompany" jdbcType="VARCHAR" />
+    <result column="usercompanylogo" property="usercompanylogo" jdbcType="VARCHAR" />
+    <result column="usertype" property="usertype" jdbcType="INTEGER" />
+    <result column="userpassword" property="userpassword" jdbcType="VARCHAR" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="outundonenum" property="outundonenum" jdbcType="INTEGER" />
+    <result column="donenum" property="donenum" jdbcType="INTEGER" />
+    <result column="inundomenum" property="inundomenum" jdbcType="INTEGER" />
+    <result column="futurenum" property="futurenum" jdbcType="INTEGER" />
+    <result column="c1" property="c1" jdbcType="VARCHAR" />
+    <result column="c2" property="c2" jdbcType="VARCHAR" />
+    <result column="c3" property="c3" jdbcType="INTEGER" />
+    <result column="c4" property="c4" jdbcType="INTEGER" />
+    </association>
+  
+    
+    
+  </resultMap>
+  
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    noteid, activeuserid, passiveuserid, notetime, paperid, type, c1, c2, c3, c4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.entity.NoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from note
+    where noteid = #{noteid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from note
+    where noteid = #{noteid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.entity.NoteExample" >
+    delete from note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.entity.Note" >
+    insert into note (noteid, activeuserid, passiveuserid, 
+      notetime, paperid, type, 
+      c1, c2, c3, c4
+      )
+    values (#{noteid,jdbcType=INTEGER}, #{activeuserid,jdbcType=INTEGER}, #{passiveuserid,jdbcType=INTEGER}, 
+      #{notetime,jdbcType=TIMESTAMP}, #{paperid,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{c1,jdbcType=INTEGER}, #{c2,jdbcType=INTEGER}, #{c3,jdbcType=VARCHAR}, #{c4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.entity.Note" >
+    insert into note
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noteid != null" >
+        noteid,
+      </if>
+      <if test="activeuserid != null" >
+        activeuserid,
+      </if>
+      <if test="passiveuserid != null" >
+        passiveuserid,
+      </if>
+      <if test="notetime != null" >
+        notetime,
+      </if>
+      <if test="paperid != null" >
+        paperid,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="c1 != null" >
+        c1,
+      </if>
+      <if test="c2 != null" >
+        c2,
+      </if>
+      <if test="c3 != null" >
+        c3,
+      </if>
+      <if test="c4 != null" >
+        c4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noteid != null" >
+        #{noteid,jdbcType=INTEGER},
+      </if>
+      <if test="activeuserid != null" >
+        #{activeuserid,jdbcType=INTEGER},
+      </if>
+      <if test="passiveuserid != null" >
+        #{passiveuserid,jdbcType=INTEGER},
+      </if>
+      <if test="notetime != null" >
+        #{notetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paperid != null" >
+        #{paperid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="c1 != null" >
+        #{c1,jdbcType=INTEGER},
+      </if>
+      <if test="c2 != null" >
+        #{c2,jdbcType=INTEGER},
+      </if>
+      <if test="c3 != null" >
+        #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null" >
+        #{c4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.entity.NoteExample" resultType="java.lang.Integer" >
+    select count(*) from note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update note
+    <set >
+      <if test="record.noteid != null" >
+        noteid = #{record.noteid,jdbcType=INTEGER},
+      </if>
+      <if test="record.activeuserid != null" >
+        activeuserid = #{record.activeuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.passiveuserid != null" >
+        passiveuserid = #{record.passiveuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.notetime != null" >
+        notetime = #{record.notetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.paperid != null" >
+        paperid = #{record.paperid,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.c1 != null" >
+        c1 = #{record.c1,jdbcType=INTEGER},
+      </if>
+      <if test="record.c2 != null" >
+        c2 = #{record.c2,jdbcType=INTEGER},
+      </if>
+      <if test="record.c3 != null" >
+        c3 = #{record.c3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c4 != null" >
+        c4 = #{record.c4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update note
+    set noteid = #{record.noteid,jdbcType=INTEGER},
+      activeuserid = #{record.activeuserid,jdbcType=INTEGER},
+      passiveuserid = #{record.passiveuserid,jdbcType=INTEGER},
+      notetime = #{record.notetime,jdbcType=TIMESTAMP},
+      paperid = #{record.paperid,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      c1 = #{record.c1,jdbcType=INTEGER},
+      c2 = #{record.c2,jdbcType=INTEGER},
+      c3 = #{record.c3,jdbcType=VARCHAR},
+      c4 = #{record.c4,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.entity.Note" >
+    update note
+    <set >
+      <if test="activeuserid != null" >
+        activeuserid = #{activeuserid,jdbcType=INTEGER},
+      </if>
+      <if test="passiveuserid != null" >
+        passiveuserid = #{passiveuserid,jdbcType=INTEGER},
+      </if>
+      <if test="notetime != null" >
+        notetime = #{notetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paperid != null" >
+        paperid = #{paperid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="c1 != null" >
+        c1 = #{c1,jdbcType=INTEGER},
+      </if>
+      <if test="c2 != null" >
+        c2 = #{c2,jdbcType=INTEGER},
+      </if>
+      <if test="c3 != null" >
+        c3 = #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null" >
+        c4 = #{c4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where noteid = #{noteid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.entity.Note" >
+    update note
+    set activeuserid = #{activeuserid,jdbcType=INTEGER},
+      passiveuserid = #{passiveuserid,jdbcType=INTEGER},
+      notetime = #{notetime,jdbcType=TIMESTAMP},
+      paperid = #{paperid,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      c1 = #{c1,jdbcType=INTEGER},
+      c2 = #{c2,jdbcType=INTEGER},
+      c3 = #{c3,jdbcType=VARCHAR},
+      c4 = #{c4,jdbcType=VARCHAR}
+    where noteid = #{noteid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByUser" parameterType="com.neuedu.entity.User" resultMap="BaseResultMap">
+  select *
+  from note n,user u
+  where n.passiveuserid = #{userid,jdbcType=INTEGER}
+  and n.activeuserid=u.userid 
+  </select>
+  
+</mapper>

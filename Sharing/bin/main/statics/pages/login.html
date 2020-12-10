@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="icon" href="../assets/images/favicon.png">
+
+     <!-- CSS 
+    ================================================== -->
+    <link rel="stylesheet" href="../assets/css/style.css" th:href="@{statics/assets/css/style.css}">
+    <link rel="stylesheet" href="../assets/css/night-mode.css" th:href="@{statics/assets/css/night-mode.css}">
+    <link rel="stylesheet" href="../assets/css/framework.css" th:href="@{statics/assets/css/framework.css}">
+
+    <!-- icons
+    ================================================== -->
+    <link rel="stylesheet" href="../assets/css/icons.css" th:href="@{statics/assets/css/icons.css}">
+
+    <!-- Google font
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+
+    <!-- Content
+    ================================================== -->
+    <div uk-height-viewport class="uk-flex uk-flex-middle">
+        <div class="uk-width-2-3@m uk-width-1-2@s m-auto rounded">
+            <div class="uk-child-width-1-2@m uk-grid-collapse bg-gradient-warning" uk-grid>
+
+
+                <!-- column one -->
+                <div class="uk-margin-auto-vertical uk-text-center uk-animation-scale-up p-3 uk-light">
+                    <img src="../assets/images/logo-light-icon.png" th:src="@{statics/assets/images/logo-light-icon.png}" width="45" alt="">
+                    <h1 class="mb-4 mt-2"> GoSharing</h1>
+                    <!--<p>在这里你可以分享的IOT数据 </p>-->
+                </div>
+
+                <!-- column two -->
+                <div class="uk-card-default p-6">
+                    <div class="my-4 uk-text-center">
+                        <h2 class="mb-0"> Welcome back</h2>
+                        <p class="my-2">Login to manage your account.</p>
+                    </div>
+                    <!--<form method="post" action="login">-->
+
+                        <div class="uk-form-group">
+                            <label class="uk-form-label"> 账户：</label>
+
+                            <div class="uk-position-relative w-100">
+                                <span class="uk-form-icon">
+                                    <i class="icon-feather-menu"></i>
+                                </span>
+                                <input id="username" name = "username" class="uk-input"  placeholder="账户名称">
+                            </div>
+
+                        </div>
+
+                        <div class="uk-form-group">
+                            <label class="uk-form-label"> 密码：</label>
+
+                            <div class="uk-position-relative w-100">
+                                <span class="uk-form-icon">
+                                    <i class="icon-feather-lock"></i>
+                                </span>
+                                <input id = "password" name="password" class="uk-input" type="password" placeholder="********">
+                            </div>
+
+                        </div>
+
+                        <!--<div class="uk-form-group">
+                            <label class="uk-form-label"> Confirm password</label>
+
+                            <div class="uk-position-relative w-100">
+                                <span class="uk-form-icon">
+                                    <i class="icon-feather-lock"></i>
+                                </span>
+                                <input class="uk-input" type="password" placeholder="********">
+                            </div>
+
+                        </div>-->
+
+                        <div class="mt-4 uk-flex-middle uk-grid-small" uk-grid>
+                            <div class="uk-width-expand@s">
+                                <p> 没有账户 <a href="toregister">去注册</a></p>
+                            </div>
+                            <div class="uk-width-auto@s">
+                            	<input id ="login" type="submit" class="button warning" value="登录">  </input>
+                                <!--<button type="submit" class="button warning">Get Started</button>-->
+                            </div>
+                        </div>
+
+                    <!--</form>-->
+                </div><!--  End column two -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -End
+    ================================================== -->
+
+	
+    <!-- For Night mode -->
+    <script>
+        (function (window, document, undefined) {
+            'use strict';
+            if (!('localStorage' in window)) return;
+            var nightMode = localStorage.getItem('gmtNightMode');
+            if (nightMode) {
+                document.documentElement.className += ' night-mode';
+            }
+        })(window, document);
+
+
+        (function (window, document, undefined) {
+
+            'use strict';
+
+            // Feature test
+            if (!('localStorage' in window)) return;
+
+            // Get our newly insert toggle
+            var nightMode = document.querySelector('#night-mode');
+            if (!nightMode) return;
+
+            // When clicked, toggle night mode on or off
+            nightMode.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.documentElement.classList.toggle('night-mode');
+                if (document.documentElement.classList.contains('night-mode')) {
+                    localStorage.setItem('gmtNightMode', true);
+                    return;
+                }
+                localStorage.removeItem('gmtNightMode');
+            }, false);
+
+        })(window, document);
+    </script>
+
+
+    <!-- javaScripts
+    ================================================== -->
+    <script src="../assets/js/framework.js" th:src="@{statics/assets/js/framework.js}"></script>
+    <script src="../assets/js/jquery-2.0.3.min.js" th:src="@{statics/assets/js/jquery-2.0.3.min.js}" ></script>
+    <script src="../assets/js/simplebar.js" th:src="@{statics/assets/js/simplebar.js}"></script>
+    <script src="../assets/js/main.js" th:src="@{statics/assets/js/main.js}"></script>
+	<script type="text/javascript">
+		
+		$(function() {
+			
+			$("#login").click(function() {
+				check_login();
+			})
+		})
+		
+		function check_login() {
+//			alert(111);
+			
+			var username = $("#username").val();
+			var password = $("#password").val();
+//			alert(username);
+//			alert(password);
+				$.ajax({
+					url: "login",
+				//	async: true,
+					type: "post",
+					data:{
+						"username":username,
+						"password":password
+					},
+					//  dataType: "json",
+					success: function(data) {
+//						alert(data.code);
+						if(data.code =="0") {
+							//alert("账号或密码错误");
+							
+							UIkit.notification({message: '账号或密码错误', status: 'danger'})
+						}
+						//登录成功
+						else if(data.code == "1") {
+							
+								window.location.href="toapplydata";
+							
+								
+							
+						}
+					}
+				})
+			
+		}
+		
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+.layui-header{
+	height: 80px;
+	font-size: 18px;
+}
+.custom-header .layui-nav{
+    color: rgba(0,0,0,.8);
+}
+.layui-layout.fold-side-bar .custom-header .layui-nav.layui-layout-left{
+    left: 60px;
+}
+
+.custom-header .layui-nav .layui-nav-item{
+    line-height: 60px;
+}
+
+.myself{
+	float: right;
+}
+.prenavil{
+	height: 20px;;
+}
+.layui-nav{
+	background-color: #ff6158;
+}
+.nav-logo{
+	width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+.prenavil a{
+	float: right;
+	margin-top: 5px;
+	margin-right: 20px;
+	font-size: 12px;
+	
+}
+
+
+/*.prenavil div{
+	float: right;
+	background-color: #E8E8E8;
+	border-radius: 5px;
+}*/

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>考试答题须知</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" th:href="@{../../static/css/bootstrap.css}">
+		<link rel="stylesheet" type="text/css" href="css/paper.css" th:href="@{../../static/css/paper.css}">
+		
+		
+	</head>
+	<body style="background-color: #e4ebf4;">
+		<!--head begin-->
+		<div class="headbg position_fixed">
+			<div class="container header">
+				<div class="navheader">
+					<p class="nav-title">飞马测试</p>
+					
+				</div>
+			</div>
+		</div>
+		<div class="container exam_content">
+			<div>
+				<center><h3 th:text="${'您好，欢迎参加《'+session.currentPaper.papername+'》考试'}"></h3></center>
+			</div>
+			
+			<div class="exam_tip">
+				<p class="notice">说明</p>
+				哈哈哈哈哈哈
+			</div>
+			<div class="exam_tip">
+				<p class="notice">注意事项：</p>
+				<ul class="notice_main">
+					
+				    <li>答题过程中系统自动计时、自动保存答案，到时自动交卷；开始考试后请在计时时间内完成作答。</li>
+                    <li>答题前请关闭其他浏览器窗口，关闭可能弹窗的应用如QQ、屏保等，答题中不要切换到考试窗口之外的区域；</li>
+                    <li>如果答题过程中因电源、网络故障等造成中断，请退出并在几分钟之内再次按照相同的步骤进入考试，从中断处继续答题；</li>
+                    <li>Sogou、360浏览器请用极速模式，如果出现异常无法答题请换一种浏览器；</li>
+				</ul>
+			</div>
+			<center><button  class="btn btn-default" style="margin-top: 20px; "><a style="color:black" href="../../toPaper_contruct">我知道了</a></button></center>
+			
+		</div>
+		
+		
+		
+	</body>
+</html>

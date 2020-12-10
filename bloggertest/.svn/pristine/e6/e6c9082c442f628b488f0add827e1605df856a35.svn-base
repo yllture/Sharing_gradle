@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+		<meta name="author" content="Coderthemes">
+
+		<link rel="shortcut icon" href="../../img/favicon_1.ico" th:src="@{static/img/favicon_1.ico}">
+
+		<title>学生中心</title>
+
+		<link href="../../css/bootstrap.min.css" th:href="@{static/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/setcore.css" th:href="@{static/css/setcore.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/icons.css" th:href="@{static/css/icons.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/components.css" th:href="@{static/css/components.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/pages.css" th:href="@{static/css/pages.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/menu.css" th:href="@{static/css/menu.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/responsive.css" th:href="@{static/css/responsive.css}" rel="stylesheet" type="text/css">
+		<link href="../../font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+		<link href="../../css/changeUserInfor.css" th:href="@{static/css/changeUserInfor.css}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="../../css/cropper.min.css" th:href="@{static/css/cropper.min.css}">
+		<link rel="stylesheet" href="../../css/ImgCropping.css" th:href="@{static/css/ImgCropping.css}">
+		<link rel="stylesheet" type="text/css" href="../../css/build.css" th:href="@{static/css/build.css}">
+		<link rel="stylesheet" type="text/css" href="../../css/alert.css" th:href="@{static/css/alert.css}">
+		<link href="../../css/gloab.css" th:href="@{static/css/gloab.css}" rel="stylesheet">
+		<script src="../../js/jquery.min.js" th:src="@{static/js/jquery.min.js}"></script>
+		<script src="../../js/modernizr.min.js" th:src="@{static/js/modernizr.min.js}"></script>
+		<script type="text/javascript" src="../../js/register.js" th:src="@{static/js/register.js}"></script>
+	</head>
+
+	<body class="fixed-left" style="background-color:white;">
+
+		<!-- 大的页面 -->
+		<div id="wrapper">
+
+			<!-- 引入导航栏 -->
+			<div class="topbar">
+				<!-- LOGO -->
+				<div class="topbar-left">
+					<div class="text-center">
+						<a href="toindex" class="logo"><img src="../../img/logo.png" th:src="@{static/img/logo.png}" width="60px" /><span>飞马测试 </span></a>
+					</div>
+				</div>
+
+				<div class="navbar navbar-default" role="navigation">
+					<div class="container">
+						<div class="">
+							<div class="pull-left">
+								<button class="button-menu-mobile open-left">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+								<span class="clearfix"></span>
+							</div>
+							<ul class="nav navbar-nav navbar-left pull-left">
+								<li class="hidden-xs">
+									<a th:href="toStudentPaperIndex" id="" class="waves-effect"><i class="glyphicon glyphicon-education nvaIcon"></i>试卷</a>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="toGroup" id="" class="waves-effect"><i class="fa fa-users nvaIcon"></i>群组</a>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="topapershop" id="" class="waves-effect"><i class="fa fa-shopping-basket nvaIcon"></i>试卷商城</a>
+								</li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right pull-right">
+								<li class="dropdown hidden-xs">
+									<a href="#" data-target="#" class="dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="true">
+										<i class="md md-notifications"></i> <span class="badge badge-xs badge-danger">3</span>
+									</a>
+									<ul class="dropdown-menu dropdown-menu-lg">
+										<li class="text-center notifi-title">通知</li>
+
+										<li class="list-group">
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-user-plus fa-2x text-info"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">New user registered</div>
+														<p class="m-0">
+															<small>You have 10 unread messages</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-diamond fa-2x text-primary"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">New settings</div>
+														<p class="m-0">
+															<small>There are new settings available</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-bell-o fa-2x text-danger"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">Updates</div>
+														<p class="m-0">
+															<small>There are
+                                                          <span class="text-primary">2</span> new updates available</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- last list item -->
+											<a th:href="inform" class="list-group-item">
+												<small>See all notifications</small>
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="hidden-xs">
+									<a href="#" id="btn-fullscreen" class="waves-effect"><i class="md md-crop-free"></i></a>
+								</li>
+								<li class="hidden-xs">
+									<a href="#" class="right-bar-toggle waves-effect"><i class="md md-chat"></i></a>
+								</li>
+								<li class="dropdown">
+									<a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="../../img/defalutIcon.png" th:src="@{static/img/defalutIcon.png}" alt="user-img" class="img-circle"> </a>
+									<ul class="dropdown-menu">
+										<li>
+											<a th:href="toExamEntrance"><i class="fa fa-pencil nvaIcon2"></i> 考试入口</a>
+										</li>
+										<li>
+											<a th:href="tochangeUserInfor"><i class="md md-settings nvaIcon2"></i> 我的设置</a>
+										</li>
+										<li>
+											<a th:href="switchIdentity"><i class="fa fa-exchange nvaIcon2"></i> 切换身份</a>
+										</li>
+										<li>
+											<a href="toLogout"><i class="md md-settings-power nvaIcon2"></i> 退出登录</a>
+										</li>
+									</ul>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="switchIdentity" class="waves-effect"><i class="fa fa-exchange"></i></a>
+								</li>
+							</ul>
+						</div>
+						<!--用户选项 -->
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="left side-menu">
+				<div class="sidebar-inner slimscrollleft">
+					<div id="sidebar-menu">
+						<ul>
+						    <li class="has_sub">
+								<a href="#" class="waves-effect waves-light"><i class="fa fa-pie-chart" aria-hidden="true"></i><span>我的考试</span><span class="pull-right"><i class="md md-add"></i></span></a>
+								<ul class="list-unstyled">
+									<li>
+										<a href="#a0">考试信息统计</a>
+									</li>
+									
+								</ul>
+							</li>
+							<li class="has_sub">
+								<a href="#" class="waves-effect waves-light"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><span>考试详情</span><span class="pull-right"><i class="md md-remove"></i></span></a>
+								<ul>
+									<li >
+										<a href="#a1"><span>已过期考试</span></a>
+									</li>
+									<li>
+										<a href="#a2"><span>待开始考试</span></a>
+									</li>
+									<li >
+										<a href="#a3"><span>已完成考试</span></a>
+									</li>
+									<li >
+										<a href="#a4"><span>待完成考试</span></a>
+									</li>
+								</ul>
+							</li>
+							<li>
+							   <a href="#" class="waves-effect waves-light"><i class="fa fa-pencil" aria-hidden="true"></i><span>我的测试</span><span class="pull-right"><i class="md md-add"></i></span></a>
+								<ul class="list-unstyled">
+									<li>
+										<a href="#a5"><span>待测试卷</span></a>
+									</li>
+									<li>
+										<a href="#a6"><span>已测试卷</span></a>
+									</li>
+									
+								</ul>
+							
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<!-- 左边bar结束 -->
+
+			<!-- ============================================================== -->
+			<!-- 中间信息显示开始 ->
+			<!-- ============================================================== -->
+			<div class="content-page" id="a0">
+				<!-- 内容开始 -->
+				<div class="content">
+					<div class="container">
+					<!-- 页面名称 -->
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="pull-left page-title"><span style="color: green;background-color: green;width: 10px;margin-right: 15px;"><b>|</b></span>考试信息统计</h4>
+							</div>
+						</div>
+					<iframe name="" frameborder="0" scrolling="no" marginwidth="0" marginheight="0"  width="100%" height=1000px  th:src="toMyExam"></iframe>
+					<!-- 内容结束 -->
+
+				</div>
+				<!-- 内容容器结束 -->
+
+			</div>
+		   </div>
+		   
+		   <div class="content-page" id="a1">
+				<!-- 内容开始 -->
+				<div class="content">
+					<div class="container">
+					<!-- 页面名称 -->
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="pull-left page-title"><span style="color: green;background-color: green;width: 10px;margin-right: 15px;"><b>|</b></span>已过期考试</h4>
+							</div>
+						</div>
+					<div id="loadtoOutOfdate" style="background-color:white">
+					
+					<!-- 内容结束 -->
+					</div>
+
+				</div>
+				<!-- 内容容器结束 -->
+
+			</div>
+		   </div>
+		   <div class="content-page" id="a2">
+				<!-- 内容开始 -->
+				<div class="content">
+					<div class="container">
+					<!-- 页面名称 -->
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="pull-left page-title"><span style="color: green;background-color: green;width: 10px;margin-right: 15px;"><b>|</b></span>待开始考试</h4>
+							</div>
+						</div>
+						<div id="loadtoWaitingStart" style="background-color:white">
+						
+						</div>
+						
+					
+					<!-- 内容结束 -->
+
+				</div>
+				<!-- 内容容器结束 -->
+
+			</div>
+		   </div>
+		   
+		   <div class="content-page" id="a3">
+				<!-- 内容开始 -->
+				<div class="content">
+					<div class="container">
+					<!-- 页面名称 -->
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="pull-left page-title"><span style="color: green;background-color: green;width: 10px;margin-right: 15px;"><b>|</b></span>已完成考试</h4>
+							</div>
+						</div>
+						<div id="loadtoFinishPaper" style="background-color:white">
+						</div>
+					
+					<!-- 内容结束 -->
+
+				</div>
+				<!-- 内容容器结束 -->
+
+			</div>
+		   </div>
+		   <div class="content-page" id="a4">
+				<!-- 内容开始 -->
+				<div class="content">
+					<div class="container">
+					<!-- 页面名称 -->
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="pull-left page-title"><span style="color: green;background-color: green;width: 10px;margin-right: 15px;"><b>|</b></span>待完成考试</h4>
+							</div>
+						</div>
+						<div id="loadWaitingToFinish" style="background-color:white">
+						
+						</div>
+					
+					<!-- 内容结束 -->
+
+				</div>
+				<!-- 内容容器结束 -->
+
+			</div>
+		   </div>
+		    <div class="content-page" id="a5">
+				<!-- 内容开始 -->
+				<div class="content">
+					<div class="container">
+					<!-- 页面名称 -->
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="pull-left page-title"><span style="color: green;background-color: green;width: 10px;margin-right: 15px;"><b>|</b></span>待测试卷</h4>
+							</div>
+						</div>
+						<div id="loadWaitingToTest" style="background-color:white">
+						
+						</div>
+					
+					<!-- 内容结束 -->
+
+				</div>
+				<!-- 内容容器结束 -->
+
+			</div>
+		   </div>
+		    <div class="content-page" id="a6">
+				<!-- 内容开始 -->
+				<div class="content">
+					<div class="container">
+					<!-- 页面名称 -->
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="pull-left page-title"><span style="color: green;background-color: green;width: 10px;margin-right: 15px;"><b>|</b></span>已測试卷</h4>
+							</div>
+						</div>
+						<div id="loadFinishedTest" style="background-color:white">
+						
+						</div>
+					
+					<!-- 内容结束 -->
+
+				</div>
+				<!-- 内容容器结束 -->
+
+			</div>
+		   </div>
+		   
+
+	
+		<script src="../../js/bootstrap.min.js" th:src="@{static/js/bootstrap.min.js}"></script>
+		<script src="../../js/fastclick.js" th:src="@{static/js/fastclick.js}"></script>
+		<script src="../../js/waves.js" th:src="@{static/js/waves.js}"></script>
+		<script src="../../js/wow.min.js" th:src="@{static/js/wow.min.js}"></script>
+		<script src="../../js/jquery.nicescroll.js" th:src="@{static/js/jquery.nicescroll.js}"></script>
+		<script src="../../js/jquery.scrollTo.min.js" th:src="@{static/js/jquery.scrollTo.min.js}"></script>
+		<script src="../../js/jquery.app.js" th:src="@{static/js/jquery.app.js}"></script>
+
+		<script type="text/javascript" src="../../js/cropper.min.js" th:src="@{static/js/cropper.min.js}"></script>
+		<script>
+            $("#loadWaitingToFinish").load("toWaitingFinish");
+            $("#loadtoOutOfdate").load("toOutOfdate");
+            $("#loadtoFinishPaper").load("toFinishPaper"); 
+            $("#loadtoWaitingStart").load("toWaitingStart"); 
+            
+            
+            $("#loadWaitingToTest").load("toWaitingTest");
+            $("#loadFinishedTest").load("toFinishTest");
+           
+              
+      
+           
+           
+    </script>
+		
+	</body>
+
+</html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="../../font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{../static/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" th:href="@{../static/css/bootstrap.css}">
+		<link rel="stylesheet" type="text/css" href="../../css/corpage.css" th:href="@{../static/css/corpage.css}" />
+		<link rel="stylesheet" href="css/report.css" th:href="@{../static/css/report.css}"/>
+
+	</head>
+
+	<body>
+		<div class="detail-infor-div web-clip pad paper-detail-container sets-question-item">
+			<center>
+				<h3 class="name" th:text="${paper.papername}"></h3></center>
+			<div class="pad-heading">
+				
+					
+					<div class="head-info">
+	            	<img class="avator" th:src="${examinee.icon}"></img>
+	            	<div class="info-wrapper">
+	            		<div class="name-wrapper" th:text="${examinee.username}"></div>
+	            		<div>
+	            			"邮箱"
+	            			<span th:if="${examinee.usermail!=null}" th:text="${examinee.usermail}"></span>
+	            		</div>
+	            	</div>
+	            	
+	       </div>
+			</div>
+			
+			
+		
+			
+		</div>
+		<div style="padding-left:200px;padding-right:200px">
+		<div class="q-div">
+			<ul class="q-list">
+				<div class="part-title q-part"><i class="fa fa-bookmark fa-2x"></i> <label th:text="${'第一部分：单选题(共'+paper.singlenum+'道题)'}">第一部分：单选题 （共15道题）</label></div>
+				
+				<!-- 单选题例子 -->
+				<li th:each="singleitem:${singles}" class="q-item sets-question-item">
+					<div class="check-wrap">
+						<label q-action="" class="pure-checkbox checkbox-list unselectable" data-link="class{merge:_selected toggle='selected'}">
+                        <div>
+        	                <i class="fa fa-check"></i>
+        	                <input type="checkbox" />
+                        </div>
+                    </label>
+
+					</div>
+					
+					<div class="q-data">
+                      <div th:if="${singleitem.examineescore!=null} and ${ singleitem.qScore!=null} and ${singleitem.examineescore  ne singleitem.qScore}" style="background-color: #fff4f4; height: 34px;line-height: 30px;">
+						<span class="q-sequence" th:text="${singleitemStat.count}"></span>
+						<span class="text-medium-gray">[ 单选题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识" th:text="${singleitem.qKnowledge}">知识点</span>
+                        <span th:if="${singleitem.qDifficulty==0}" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中" >简单</span>
+						<span th:if="${singleitem.qDifficulty==1}" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中" >中等</span>
+						<span th:if="${singleitem.qDifficulty==2}" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中" >难</span>
+						<div  class="pull-right"  >
+							<i  class="fa right-icon fa-close"></i>
+							<span class="divider"></span>
+							<div class="score-wrapper">
+								<span class="score" th:text="${'得分'+singleitem.examineescore}"></span>
+								<span class="point" th:text="${'满分'+singleitem.qScore}"></span>
+								
+							</div>
+						</div>
+						
+						</div>
+						<div th:if="${singleitem.examineescore!=null} and ${ singleitem.qScore!=null} and ${singleitem.examineescore  eq singleitem.qScore}" style="background-color: #ecfdeb; height: 34px;line-height: 30px;">
+						<span class="q-sequence" th:text="${singleitemStat.count}"></span>
+						<span class="text-medium-gray">[ 单选题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识" th:text="${singleitem.qKnowledge}">知识点</span>
+                        <span th:if="${singleitem.qDifficulty==0}" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中" >简单</span>
+						<span th:if="${singleitem.qDifficulty==1}" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中" >中等</span>
+						<span th:if="${singleitem.qDifficulty==2}" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中" >难</span>
+						<div  class="pull-right"  >
+							<i  class="fa right-icon fa-check"></i>
+							<span class="divider"></span>
+							<div class="score-wrapper">
+								<span class="score" th:text="${'得分'+singleitem.examineescore}"></span>
+								<span class="point" th:text="${'满分'+singleitem.qScore}"></span>
+								
+							</div>
+						</div>
+						
+						</div>
+						<div th:if="${singleitem.examineescore==null}" >
+						<span class="q-sequence" th:text="${singleitemStat.count}"></span>
+						<span class="text-medium-gray">[ 单选题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识" th:text="${singleitem.qKnowledge}">知识点</span>
+                        <span th:if="${singleitem.qDifficulty==0}" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中" >简单</span>
+						<span th:if="${singleitem.qDifficulty==1}" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中" >中等</span>
+						<span th:if="${singleitem.qDifficulty==2}" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中" >难</span>
+						
+						</div>
+
+						
+
+						<div class="q-title" data-link="css-margin-top{:~q.programLanguages?'45px':'10px'}" style="margin-top: 10px;">
+							<pre th:text="${singleitem.qTitle}"></pre>
+						</div>
+						<ul class="list-title-media mt10"></ul>
+
+						
+
+						<div data-link="">
+
+							<ul class="q-options-wrap mt20" data-jsv-df="">
+								<li  th:each="singlechoice: ${singleitem.singlelist}"data-jsv="#26_#27_" class="q-option">
+								
+								 
+						     <label class="q-choice-icon radio-inline sets-radio active" th:if="${singlechoice.ischoose==1}">
+									<span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+							        </span>
+						     </label>
+                       
+						     <label class="q-choice-icon radio-inline sets-radio" th:if="${singlechoice.ischoose==0}">
+						         <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+							        </span>
+						     </label>
+                  
+						         
+									<span class="option-index"  th:if="${singlechoiceStat.count==1}">A、</span>
+									<span class="option-index"  th:if="${singlechoiceStat.count==2}">B、</span>
+									<span class="option-index"  th:if="${singlechoiceStat.count==3}">C、</span>
+									<span class="option-index"  th:if="${singlechoiceStat.count==4}">D、</span>
+									<span class="option-index"  th:if="${singlechoiceStat.count==5}">E、</span>
+									<span class="option-index"  th:if="${singlechoiceStat.count==6}">F、</span>
+									
+									<div class="q-option-content pl5">
+										<pre th:text="${singlechoice.content}"></pre>
+									</div>
+									
+								</li>
+						
+							</ul>
+							
+							<div class="q-answer mt20" style="display: block;"><p class="q-ans-label" >题目解析：</p></div>
+								<label th:text="${singleitem.qAnalysis}"></label>
+							</div>
+
+						</div>
+					
+				</li>
+			</ul>
+			
+			<ul class="q-list">
+				<div class="part-title q-part"><i class="fa fa-bookmark fa-2x"></i><label th:text="${'第二部分:多选题 （共'+paper.multiplenum+'道题）'}"></label>
+				</div>
+
+				<!-- 多选题例子 -->
+				<li class="q-item sets-question-item">
+					<div class="check-wrap">
+						<label q-action="" class="pure-checkbox checkbox-list unselectable" data-link="class{merge:_selected toggle='selected'}">
+                        <div>
+        	                <i class="fa fa-check"></i>
+        	                <input type="checkbox" />
+                        </div>
+                    </label>
+
+					</div>
+					<div class="q-data" th:each="multipleitem:${multiples}">
+                        <div th:if="${multipleitem.examineescore!=null} and ${multipleitem.qScore!=null} and ${multipleitem.examineescore eq multipleitem.qScore}"  style="background-color: #ecfdeb;height: 34px;line-height: 30px;">
+						<span class="q-sequence" th:text=${multipleitemStat.count}>1</span>
+						<span class="text-medium-gray">[ 多选题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识" th:text="${multipleitem.qKnowledge}">知识点</span>
+
+						<span th:if="${multipleitem.qDifficulty==0}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">容易</span>
+						<span th:if="${multipleitem.qDifficulty==1}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">中等</span>
+						<span th:if="${multipleitem.qDifficulty==2}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">难</span>
+                         <div  class="pull-right" >
+							<i class="fa right-icon fa-check"></i>
+							<span class="divider"></span>
+							<div class="score-wrapper">
+								<span class="score" th:text="${'得分'+multipleitem.examineescore}"></span>
+								<span class="point" th:text="${'满分'+multipleitem.qScore}"></span>
+								
+							</div>
+						</div>
+						
+						</div>
+						
+						 <div th:if="${multipleitem.examineescore!=null} and ${multipleitem.qScore!=null} and ${multipleitem.examineescore ne multipleitem.qScore}" style="background-color: #fff4f4;  height: 34px;line-height: 30px;">
+						<span class="q-sequence" th:text=${multipleitemStat.count}>1</span>
+						<span class="text-medium-gray">[ 多选题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识" th:text="${multipleitem.qKnowledge}">知识点</span>
+
+						<span th:if="${multipleitem.qDifficulty==0}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">容易</span>
+						<span th:if="${multipleitem.qDifficulty==1}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">中等</span>
+						<span th:if="${multipleitem.qDifficulty==2}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">难</span>
+                         <div  class="pull-right">
+							<i class="fa right-icon fa-close"></i>
+							<span class="divider"></span>
+							<div class="score-wrapper">
+								<span class="score" th:text="${'得分'+multipleitem.examineescore}"></span>
+								<span class="point" th:text="${'满分'+multipleitem.qScore}"></span>
+								
+							</div>
+						</div>
+						
+						</div>
+						<div th:if="${multipleitem.examineescore==null} ">
+						<span class="q-sequence" th:text=${multipleitemStat.count}>1</span>
+						<span class="text-medium-gray">[ 多选题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识" th:text="${multipleitem.qKnowledge}">知识点</span>
+
+						<span th:if="${multipleitem.qDifficulty==0}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">容易</span>
+						<span th:if="${multipleitem.qDifficulty==1}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">中等</span>
+						<span th:if="${multipleitem.qDifficulty==2}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">难</span>
+                         
+						
+						</div>
+						
+
+						<div class="q-title" data-link="css-margin-top{:~q.programLanguages?'45px':'10px'}" style="margin-top: 10px;">
+							<pre th:text="${multipleitem.qTitle}"></pre>
+						</div>
+						<ul class="list-title-media mt10"></ul>
+
+						<div data-link="">
+                                <ul class="q-options-wrap mt20" data-jsv-df="">
+								<li  th:each="multiplechoice:${multipleitem.multiplelist}" data-jsv="#26_#27_" class="q-option">
+									 <label class="q-choice-icon radio-inline sets-radio active" th:if="${multiplechoice.ischoose==1}">
+									<span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+							        </span>
+						     </label>
+                       
+						     <label class="q-choice-icon radio-inline sets-radio" th:if="${multiplechoice.ischoose==0}">
+						         <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+							        </span>
+						     </label>
+									<span th:if="${multiplechoiceStat.count==1}" class="option-index">A、</span>
+									<span th:if="${multiplechoiceStat.count==2}" class="option-index">B、</span>
+									<span th:if="${multiplechoiceStat.count==3}" class="option-index">C、</span>
+									<span th:if="${multiplechoiceStat.count==4}" class="option-index">D、</span>
+									<span th:if="${multiplechoiceStat.count==5}" class="option-index">E、</span>
+									<span th:if="${multiplechoiceStat.count==6}" class="option-index">F、</span>
+                                    
+
+									<div class="q-option-content pl5">
+										<pre th:text="${multiplechoice.content}"></pre>
+									</div>
+								</li>
+								
+							</ul>
+							
+							<div class="q-answer mt20">
+
+							</div>
+							<div class="q-answer mt20" style="display: block;">
+								<p class="q-ans-label" >题目解析：</p></div><label th:text="${multipleitem.qAnalysis}"></label>
+							</div>
+
+						</div>
+					
+				</li>
+			</ul>
+			<ul class="q-list">
+				<div class="part-title q-part"><i class="fa fa-bookmark fa-2x"></i> 第三部分:判断题</div>
+				<!-- 判断题例子 -->
+				<li class="q-item sets-question-item">
+					<div class="check-wrap">
+						<label q-action="" class="pure-checkbox checkbox-list unselectable" data-link="class{merge:_selected toggle='selected'}">
+                        <div>
+        	                <i class="fa fa-check"></i>
+        	                <input type="checkbox" />
+                        </div>
+                    </label>
+
+					</div>
+					<div  class="q-data" th:each="judgeitem:${judges}">
+                        <div th:if="${judgeitem.examineescore!=null} and ${judgeitem.qScore!=null} and  ${judgeitem.examineescore ne judgeitem.qScore}" style="background-color: #fff4f4; height: 34px;line-height: 30px;">
+						<span class="q-sequence" th:text="${judgeitemStat.count}">1</span>
+						<span class="text-medium-gray">[ 判断题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识" th:text="${judgeitem.qKnowledge}">知识点</span>
+                        <span th:if="${judgeitem.qDifficulty==0}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">容易</span>
+                        <span th:if="${judgeitem.qDifficulty==1}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">中等</span>
+                        <span th:if="${judgeitem.qDifficulty==2}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">难</span>
+                        <div  class="pull-right" style="background:#ecfdeb;">
+							<i  class="fa right-icon fa-close"></i>
+							
+							<span class="divider"></span>
+							<div class="score-wrapper">
+								<span class="score" th:text="${'得分'+judgeitem.examineescore}"></span>
+								<span class="point" th:text="${'满分'+judgeitem.qScore}"></span>
+								
+							</div>
+						</div>
+						 
+						</div>
+						
+						<div th:if="${judgeitem.examineescore!=null} and ${judgeitem.qScore!=null} and  ${judgeitem.examineescore eq judgeitem.qScore}" style="background-color: #ecfdeb; height: 34px;line-height: 30px;">
+						<span class="q-sequence" th:text="${judgeitemStat.count}">1</span>
+						<span class="text-medium-gray">[ 判断题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识" th:text="${judgeitem.qKnowledge}">知识点</span>
+                        <span th:if="${judgeitem.qDifficulty==0}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">容易</span>
+                        <span th:if="${judgeitem.qDifficulty==1}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">中等</span>
+                        <span th:if="${judgeitem.qDifficulty==2}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">难</span>
+                        <div  class="pull-right" style="background:#ecfdeb;">
+							<i  class="fa right-icon fa-check"></i>
+							
+							<span class="divider"></span>
+							<div class="score-wrapper">
+								<span class="score" th:text="${'得分'+judgeitem.examineescore}"></span>
+								<span class="point" th:text="${'满分'+judgeitem.qScore}"></span>
+								
+							</div>
+						</div>
+						</div>
+						<div th:if="${judgeitem.examineescore==null} ">
+						<span class="q-sequence" th:text="${judgeitemStat.count}">1</span>
+						<span class="text-medium-gray">[ 判断题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识" th:text="${judgeitem.qKnowledge}">知识点</span>
+                        <span th:if="${judgeitem.qDifficulty==0}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">容易</span>
+                        <span th:if="${judgeitem.qDifficulty==1}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">中等</span>
+                        <span th:if="${judgeitem.qDifficulty==2}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">难</span>
+                        
+						</div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <div class="q-title" data-link="css-margin-top{:~q.programLanguages?'45px':'10px'}" style="margin-top: 10px;">
+							<pre th:text="${judgeitem.qTitle}"></pre>
+                        </div>
+						<ul class="list-title-media mt10"></ul>
+
+						<div data-link="">
+
+							<ul class="q-options-wrap mt20" data-jsv-df="">
+								<li data-jsv="#26_#27_" class="q-option">
+								
+						         <label class="q-choice-icon radio-inline sets-radio active" th:if="${judgeitem.answer==0}">
+							        <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+							        </span>
+						         </label>
+                    
+						          <label class="q-choice-icon radio-inline sets-radio" th:if="${judgeitem.answer==1}">
+							        <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+							        </span>
+						         </label>
+                     
+									<span  class="option-index">A、</span>
+                                     <div class="q-option-content pl5">
+										<pre>错误</pre>
+									</div>
+								</li>
+								<li class="q-option">
+									<label class="q-choice-icon radio-inline sets-radio active" th:if="${judgeitem.answer!=null} and ${judgeitem.answer==1}">
+							        <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+							        </span>
+						         </label>
+                        
+						         <label class="q-choice-icon radio-inline sets-radio" th:if="${judgeitem.answer!=null} and ${judgeitem.answer==0}">
+							        <span class="fa-stack radio-icon">
+								        <i class="fa fa-circle-thin fa-stack-2x"></i>
+								        <i class="fa fa-dot-circle-o fa-stack-1x select"></i>
+							        </span>
+						         </label>
+									<span class="option-index">B、</span>
+
+									
+
+									<div class="q-option-content pl5">
+										<pre>正确</pre>
+									</div>
+								</li>
+
+							</ul>
+							
+							
+							<div class="q-answer mt20" style="display: block;">
+								<p class="q-ans-label" >题目解析：</p>
+							</div>
+							<label th:text="${judgeitem.qAnalysis}"></label>
+							</div>
+
+						
+					</div>
+				</li>
+			</ul>
+			<ul class="q-list">
+				<div class="part-title q-part"><i class="fa fa-bookmark fa-2x"></i> 第四部分:填空题
+				</div>
+				<!-- 填空题 -->
+				<li class="q-item sets-question-item">
+					<div class="check-wrap">
+						<label q-action="" class="pure-checkbox checkbox-list unselectable" data-link="class{merge:_selected toggle='selected'}">
+                        <div>
+        	                <i class="fa fa-check"></i>
+        	                <input type="checkbox" />
+                        </div>
+                    </label>
+
+					</div>
+					<div class="q-data" th:each="fillitem:${fills}">
+                       <div th:if="${fillitem.examineescore!=null} and ${fillitem.qScore!=null} and ${fillitem.examineescore ne fillitem.qScore}" style="background-color: #fff4f4; height: 34px;line-height: 30px;">
+						<span class="q-sequence" th:text="${fillitemStat.count}">1</span>
+						<span class="text-medium-gray">[ 填空题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识" th:text="${fillitem.qKnowledge}">知识点</span>
+
+						<span th:text="fillitem.qDifficulty==0" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">容易</span>
+						<span th:text="fillitem.qDifficulty==1" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">中等</span>
+						<span th:text="fillitem.qDifficulty==2" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">难</span>
+					 
+						<div  class="pull-right" >
+							
+							<i  class="fa right-icon fa-close"></i>
+							<span class="divider"></span>
+							<div class="score-wrapper">
+								<span class="score" th:text="${'得分'+fillitem.examineescore}"></span>
+								<span class="point" th:text="${'满分'+fillitem.qScore}"></span>
+								
+							</div>
+						</div>
+						</div>
+                        <div th:if="${fillitem.examineescore!=null} and ${fillitem.qScore!=null} and ${fillitem.examineescore eq fillitem.qScore}"  style="background-color: #ecfdeb; height: 34px;line-height: 30px;">
+						<span class="q-sequence" th:text="${fillitemStat.count}">1</span>
+						<span class="text-medium-gray">[ 填空题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识" th:text="${fillitem.qKnowledge}">知识点</span>
+
+						<span th:text="fillitem.qDifficulty==0" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">容易</span>
+						<span th:text="fillitem.qDifficulty==1" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">中等</span>
+						<span th:text="fillitem.qDifficulty==2" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">难</span>
+					     <div  class="pull-right" >
+							
+							<i  class="fa right-icon fa-check"></i>
+							<span class="divider"></span>
+							<div class="score-wrapper">
+								<span class="score" th:text="${'得分'+fillitem.examineescore}"></span>
+								<span class="point" th:text="${'满分'+fillitem.qScore}"></span>
+								
+							</div>
+						</div>
+						</div>
+						
+						 <div th:if="${fillitem.examineescore==null} ">
+						<span class="q-sequence" th:text="${fillitemStat.count}">1</span>
+						<span class="text-medium-gray">[ 填空题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识" th:text="${fillitem.qKnowledge}">知识点</span>
+
+						<span th:text="fillitem.qDifficulty==0" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">容易</span>
+						<span th:text="fillitem.qDifficulty==1" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">中等</span>
+						<span th:text="fillitem.qDifficulty==2" class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">难</span>
+					  
+						
+						</div>
+                        
+						<div class="q-title" data-link="css-margin-top{:~q.programLanguages?'45px':'10px'}" style="margin-top: 10px;">
+							<pre th:text="${fillitem.qTitle}">以下图片是____产品的logo？</pre>
+							
+
+						</div>
+						<ul class="list-title-media mt10"></ul>
+
+						<div data-link="">
+
+							<div class="q-answer mt20">
+
+							</div>
+							<div class="q-answer q-fill-answer mt20">
+								<p class="q-ans-label">答案：</p> 
+								<div th:each="fillchoice:${fillitem.filllist}">
+								<span class="fill-answer" th:text="${fillchoice.content}">飞马测试</span>
+								</div>
+							</div>
+
+							<div class="q-answer mt20" style="display: block;">
+								<p class="q-ans-label" >题目解析：</p></div><label th:text="${fillitem.qAnalysis}"></label>
+							</div>
+
+						</div>
+					
+				</li>
+			</ul>
+			<ul class="q-list">
+				<div class="part-title q-part"><i class="fa fa-bookmark fa-2x"></i> 第五部分:开放题
+				</div>
+				<!-- 问答题 -->
+				<li class="q-item sets-question-item">
+					<div class="check-wrap">
+						<label q-action="" class="pure-checkbox checkbox-list unselectable" data-link="class{merge:_selected toggle='selected'}">
+                        <div>
+        	                <i class="fa fa-check"></i>
+        	                <input type="checkbox" />
+                        </div>
+                    </label>
+
+					</div>
+					<div class="q-data" th:each="shortansweritem:${shortanswers}">
+                      <div  th:if="${shortansweritem.examineescore!=null} and ${shortansweritem.qScore!=null} and ${shortansweritem.examineescore eq shortansweritem.qScore}" style="background-color: #ecfdeb;; height: 34px;line-height: 30px;">
+						<span class="q-sequence" th:text="${shortansweritemStat.count}">1</span>
+						<span class="text-medium-gray">[ 简答题 ]</span>
+						<span th:text="${shortansweritem.qKnowledge}"class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识">知识点</span>
+                        <span th:if="${shortansweritem.qFifficulty==0}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">容易</span>
+						<span th:if="${shortansweritem.qFifficulty==1}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">中等</span>
+						<span th:if="${shortansweritem.qFifficulty==2}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">难</span>
+						<div  class="pull-right" >
+							<i  class="fa right-icon fa-check"></i>
+							
+							<span class="divider"></span>
+							<div class="score-wrapper">
+								<span class="score" th:text="${'得分'+shortansweritem.examineescore}"></span>
+								<span class="point" th:text="${'满分'+shortansweritem.qScore}"></span>
+								
+							</div>
+						</div>
+						
+					</div>
+					<div  th:if="${shortansweritem.examineescore!=null} and ${shortansweritem.qScore!=null} and ${shortansweritem.examineescore ne shortansweritem.qScore}" style="background-color: #fff4f4; height: 34px;line-height: 30px;">
+						<span class="q-sequence" th:text="${shortansweritemStat.count}">1</span>
+						<span class="text-medium-gray">[ 简答题 ]</span>
+						<span th:text="${shortansweritem.qKnowledge}"class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识">知识点</span>
+                        <span th:if="${shortansweritem.qFifficulty==0}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">容易</span>
+						<span th:if="${shortansweritem.qFifficulty==1}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">中等</span>
+						<span th:if="${shortansweritem.qFifficulty==2}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">难</span>
+						<div  class="pull-right" >
+							<i  class="fa right-icon fa-close"></i>
+							
+							<span class="divider"></span>
+							<div class="score-wrapper">
+								<span class="score" th:text="${'得分'+shortansweritem.examineescore}"></span>
+								<span class="point" th:text="${'满分'+shortansweritem.qScore}"></span>
+								
+							</div>
+						</div>
+						
+					</div>
+					<div  th:if="${shortansweritem.examineescore==null} ">
+						<span class="q-sequence" th:text="${shortansweritemStat.count}">1</span>
+						<span class="text-medium-gray">[ 简答题 ]</span>
+						<span th:text="${shortansweritem.qKnowledge}"class="ml5 label-skill text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:skillName?'技能：'+skillName:''}" data-placement="top auto" data-original-title="技能：常识">知识点</span>
+                        <span th:if="${shortansweritem.qFifficulty==0}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">容易</span>
+						<span th:if="${shortansweritem.qFifficulty==1}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">中等</span>
+						<span th:if="${shortansweritem.qFifficulty==2}"class="ml5 label-difficulty text-ellipsis" data-link="class{merge:!skillName toggle='no-skill'} data-original-title{:'难度：'+~getDifficulty(difficulty)}" data-placement="top auto" data-original-title="难度：中">难</span>
+						
+						
+						
+					</div>
+						
+						
+						
+						<div class="q-title" data-link="css-margin-top{:~q.programLanguages?'45px':'10px'}" style="margin-top: 10px;">
+							<pre th:text="${shortansweritem.qTitle}">以下图片是____产品的logo？</pre>
+							<!-- <img src="../../img/logo_black.png" th:src="@{static/img/logo_black.png}" /> -->
+
+						</div>
+						<ul class="list-title-media mt10"></ul>
+
+						<div data-link="">
+
+							<div class="q-answer mt20">
+
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		</div>
+		<div class="detail-infor-div web-clip pad paper-detail-container sets-question-item">
+		 <div class="report-logs" id="report-logs">
+	       	  <div class="section-title"><label>考试日志</label></div>
+	       	  <ul class="log-list">
+	       	    <li class="md5">IP 地址 &emsp; <label th:text="${ip}"></label></li>
+	       	  	<li class="md5">浏览器 &emsp; <label th:text="${browser}"></label></li>
+	       	  	<li class="md5">操作系统 &emsp; <label th:text="${os}"></label></li>
+	       	  	<div th:each="record:${records}">
+	       	  	<li class="md5">
+	       	  		<span class="log-time" th:text="${record.begintime}">2019-06-16 13:34</span>
+	       	  		&emsp;
+	       	  		<span class="ml30"  th:text="${record.dothing}"></span>
+	       	  	</li>
+	       	  	</div>
+	       	  	
+	       	  </ul>
+	       </div>
+	       </div>
+		
+	</body>
+	<script   src="../../js/jquery.min.js" th:src="@{../static/js/jquery.min.js}"></script>
+	<script type="text/javascript" src="../../js/bootstrap.min.js" th:src="@{../static/js/bootstrap.min.js}"></script>
+	
+</html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+		<meta name="author" content="Coderthemes">
+
+		<link rel="shortcut icon" href="../../img/favicon_1.ico" th:src="@{static/img/favicon_1.ico}">
+
+		<title>我的设置</title>
+
+		<link href="../../css/bootstrap.min.css" th:href="@{static/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/setcore.css" th:href="@{static/css/setcore.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/icons.css" th:href="@{static/css/icons.css}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="../../css/ie7.css" th:href="@{static/css/ie7.css}">
+		<link href="../../css/components.css" th:href="@{static/css/components.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/pages.css" th:href="@{static/css/pages.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/menu.css" th:href="@{static/css/menu.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/responsive.css" th:href="@{static/css/responsive.css}" rel="stylesheet" type="text/css">
+		<link href="../../font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+		<link rel="stylesheet" href="../../css/cropper.min.css" th:href="@{static/css/cropper.min.css}">
+		<link rel="stylesheet" href="../../css/ImgCropping.css" th:href="@{static/css/ImgCropping.css}">
+
+		<link rel="stylesheet" type="text/css" href="../../css/alert.css" th:href="@{static/css/alert.css}">
+		<link rel="stylesheet" type="text/css" href="../../css/bankTeacher.css" th:href="@{static/css/bankTeacher.css}">
+		<link rel="stylesheet" href="../../css/folder.css" th:href="@{static/css/folder.css}">
+		<link rel="stylesheet" type="text/css" href="../../css/bankteachefolder.css" th:href="@{static/css/bankteachefolder.css}" />
+		<script src="../../js/jquery.min.js" th:src="@{static/js/jquery.min.js}"></script>
+		<script src="../../js/modernizr.min.js" th:src="@{static/js/modernizr.min.js}"></script>
+
+	</head>
+ 
+	<body class="fixed-left">
+
+		<!-- 大的页面 -->
+		<div id="wrapper">
+
+			<!-- 导航栏开始 -->
+			 <div class="topbar">
+				<!-- LOGO -->
+				<div class="topbar-left">
+					<div class="text-center">
+						<a href="toindex" class="logo"><img src="../../img/logo.png" th:src="@{static/img/logo.png}" width="60px" /><span>飞马测试 </span></a>
+					</div>
+				</div>
+
+				<div class="navbar navbar-default" role="navigation">
+					<div class="container">
+						<div class="">
+							<div class="pull-left">
+								<button class="button-menu-mobile open-left">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+								<span class="clearfix"></span>
+							</div>
+							<ul class="nav navbar-nav navbar-left pull-left">
+								<li class="hidden-xs">
+									<a th:href="tounpublishteacherPaper" id="" class="waves-effect"><i class="glyphicon glyphicon-education nvaIcon"></i>试卷</a>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="tobankTeacher" id="" class="waves-effect"><i class="glyphicon glyphicon-folder-open nvaIcon"></i>题库</a>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="toGroup" id="" class="waves-effect"><i class="fa fa-users nvaIcon"></i>群组</a>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="tobankshop" id="" class="waves-effect"><i class="fa fa-shopping-basket nvaIcon"></i>题库商城</a>
+								</li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right pull-right">
+								<li class="dropdown hidden-xs">
+									<a href="#" data-target="#" class="dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="true">
+										<i class="md md-notifications"></i> <span class="badge badge-xs badge-danger">3</span>
+									</a>
+									<ul class="dropdown-menu dropdown-menu-lg">
+										<li class="text-center notifi-title">通知</li>
+
+										<li class="list-group">
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-user-plus fa-2x text-info"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">New user registered</div>
+														<p class="m-0">
+															<small>You have 10 unread messages</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-diamond fa-2x text-primary"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">New settings</div>
+														<p class="m-0">
+															<small>There are new settings available</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-bell-o fa-2x text-danger"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">Updates</div>
+														<p class="m-0">
+															<small>There are
+                                                          <span class="text-primary">2</span> new updates available</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- last list item -->
+											<a th:href="inform" class="list-group-item">
+												<small>See all notifications</small>
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="hidden-xs">
+									<a href="#" id="btn-fullscreen" class="waves-effect"><i class="md md-crop-free"></i></a>
+								</li>
+								<li class="hidden-xs">
+									
+								</li>
+								<li class="dropdown">
+									<a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="../../img/defalutIcon.png" th:src="@{static/img/defalutIcon.png}" alt="user-img" class="img-circle"> </a>
+									<ul class="dropdown-menu">
+										<li>
+											<a th:href="toExamEntrance"><i class="fa fa-pencil nvaIcon2"></i> 考试入口</a>
+										</li>
+										<li>
+											<a th:href="tochangeUserInfor"><i class="md md-settings nvaIcon2"></i> 我的设置</a>
+										</li>
+										<li>
+											<a th:href="tomymoneyaccount"><i class="fa fa-diamond nvaIcon2"></i> 我的账户</a>
+										</li>
+										<li>
+											<a href="toLogout"><i class="md md-settings-power nvaIcon2"></i> 退出登录</a>
+										</li>
+									</ul>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="switchIdentity" class="waves-effect"><i class="fa fa-exchange"></i></a>
+								</li>
+							</ul>
+						</div>
+						<!--用户选项 -->
+					</div>
+				</div>
+			</div>
+			<!-- 导航栏结束 -->
+
+			<div class="left side-menu">
+				<div class="sidebar-inner slimscrollleft">
+					<div class="user-details">
+					 	<center><button type="button" class="btn btn-success"  data-toggle="modal" data-target="#add-bankModal"><i class="fa fa-plus"></i><span>新增题库</span></button></center>
+					</div>
+					<!--- Divider -->
+					<div id="sidebar-menu">
+						<ul>
+
+							<li class="has_sub" >
+								<a class="waves-effect waves-light" onclick="bank()"><i class="fa fa-folder-open"></i><span>我的题库</span><span class="pull-right"></span></a>
+							
+							</li>
+							
+							<li class="has_sub" >
+								<a class="waves-effect waves-light" onclick="garbage()" style="color:#ffffff;"><i class="fa fa-trash"></i><span>回收站</span><span class="pull-right"></span></a>
+								
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<!-- 左边bar结束 -->
+
+			<!-- ============================================================== -->
+			<!-- 中间信息显示开始 ->
+			<!-- ============================================================== -->
+			<div class="content-page">
+				<!-- 内容开始 -->
+				<div class="content">
+					<div class="container">
+
+						<!-- 页面名称 -->
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="pull-left page-title">
+								<span
+									style="color: green; background-color: green; width: 10px; margin-right: 15px;"><b>|</b></span>
+							</h4>
+								<div class="file-operater"><button type="button" id="back-folder" class="btn btn-dark"><i class="fa fa-undo"></i><span>还原</span></button></div>
+								<!--<div class="file-operater"><button type="button" id="back-order-folder" class="btn btn-dark"><i class="fa fa-arrow-circle-left"></i><span>还原到</span></button></div>-->
+								<div class="file-operater"><button type="button" id="delete-over-folder" class="btn btn-dark"><i class="fa fa-remove"></i><span>永久删除</span></button></div>
+								<div class="file-operater"><button type="button" id="clear-trash" class="btn btn-dark"><i class="fa fa-trash-o"></i><span>清空回收站</span></button></div>
+							
+							</div>
+						</div>
+
+						<!-- 页面详情-->
+						<div style="height: auto; background: #FFFFFF;">
+							<div class="inforContainer">
+								<div class="folder-container ">
+									<!-- 这里是文件显示面包屑路径 -->
+									<div class="modal-name breadcrumbs"><i class="fa fa-bookmark fa-2x"></i></i>
+										<tr>
+											<a th:href="tobankTrashTeacher">回收站</a>
+											<a th:each="path :${pathlist}" th:text="'>'+${path.foldername}" th:href="@{tobankTrashTeacher2?folderid={folderid}(folderid=${path.folderid})}"></a>
+										
+											
+										</tr>
+										
+										
+									
+									</div>
+									<div class="folder-report" th:each="bankfolder:${allbankfolder}" th:folderid="${bankfolder.folderid}">
+										<div class="folder-item">
+											<div class="folder  folder--durga">
+												<!-- 展示文件夹中前三个题库名称，若有多的用逗号代替 -->
+												<div class="folder__icon">
+
+													<div class="folder__preview folder__preview--text" style="left: 160%;    top: -30%;">
+														<p class="folder__detail" th:each="bank :${bankfolder.banklist}" th:text="${bank.bankname}" th:if="${bankStat.count <=3}">
+
+														</p>
+														<!--<p class="folder__detail">  hahh </p>-->
+													</div>
+
+												</div>
+												<div class="front" id="icon-foldercover" th:text="${bankfolder.banknum}" th:folderid="${bankfolder.folderid}"></div>
+
+												<div class="back"></div>
+
+											</div>
+											<div class="folder-name">
+												<center><span th:text="${bankfolder.foldername}">中学</span></center>
+											</div>
+											
+										</div>
+									</div>
+
+									
+								</div>
+								<div class="bank-container">
+									<div class="modal-name"><i class="fa fa-bookmark fa-2x"></i></i>
+										<a>题库</a>
+									</div>
+									<p1 th:each="bank:${allbank}">
+									<div class="custom-col" th:bankid="${bank.bankid}">
+										<div class="single-product-item">
+											<div class="bank-label flag-left">题库</div>
+											<div class="product-image">
+												<div class="product-hover">
+													<div class="product-mask"></div>
+													<ul class="hover-icon-list">
+														<li>
+															<a data-toggle="tooltip" title="还原" class="back-bank" style="margin-left: 30px;" ><i class="icon icon-Share"></i></a>
+														</li>
+														<li>
+															<a data-toggle="tooltip" title="删除" class="delete-bank" style="margin-left: 43px;"><i class="icon icon-Delete"></i></a>
+														</li>
+													</ul>
+
+												</div>
+											</div>
+											<div class="product-text">
+												<!-- 题库看题目 -->
+												<h5><a href="product-details.html" th:text="${bank.bankname}">小升初高级数学模拟题</a></h5>
+												<!-- 最近更新于 -->
+												<h6><i class="fa fa-pencil-square-o"></i><a th:text="${#dates.format(bank.updatetime,'yyyy-MM-dd HH:mm:ss')}">2019-10-12 12:12:12</a></h6>
+												<!-- 题库描述 -->
+												<h6 class="c-blue"><a th:text="${bank.bankdescription}">题库描述：这是用来给小学生做的这是用来给小学生做的这是用来给小学生做的这是用来给小学生做的</a></h6>
+
+												<div class="product-number">
+													<!-- 题量(题目总数量) -->
+													<span class="new-info" title="题量"><h4 th:text="${bank.questionnum}">330</h4>道题</span>
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									</p1>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<!-- 内容结束 -->
+
+				</div>
+				<!-- 内容容器结束 -->
+
+			</div>
+
+			<!-- 右边通讯录滑页 -->
+			<!-- <div class="side-bar right-bar nicescroll">
+				<h4 class="text-center">通讯录</h4>
+				<div class="contact-list nicescroll">
+					<ul class="list-group contacts-list">
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="../../img/users/avatar-1.jpg" th:src="@{static/img/users/avatar-1.jpg}" alt="">
+								</div> <span class="name">郭力源</span> <i class="fa fa-circle online"></i>
+							</a> <span class="clearfix"></span></li>
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="../../img/users/avatar-2.jpg" th:src="@{static/img/users/avatar-2.jpg}" alt="">
+								</div> <span class="name">郑娇</span> <i class="fa fa-circle online"></i>
+							</a> <span class="clearfix"></span></li>
+
+					</ul>
+				</div>
+			</div> -->
+			<!-- 滑页结束 -->
+
+		</div>
+		<!-- 页面结束 -->
+		<!--图片裁剪框 start-->
+		<div style="display: none" class="tailoring-container">
+			<div class="black-cloth" onClick="closeTailor(this)"></div>
+			<div class="tailoring-content">
+				<div class="tailoring-content-one">
+					<label id="imageKTitle">上传头像</label>
+					<div class="close-tailoring" onclick="closeTailor(this)">×</div>
+				</div>
+				<div class="tailoring-content-two">
+					<div class="tailoring-box-parcel">
+						<img id="tailoringImg">
+					</div>
+					<div class="preview-box-parcel">
+
+						<!-- <div class="square previewImg"></div> -->
+						<center>
+							<div class="circular previewImg"></div>
+							<p>
+								图片预览<br />108px × 108px
+							</p>
+							<br /> <label title="上传图片" for="chooseImg" class="l-btn choose-btn"> <input type="file"
+							accept="image/jpg,image/jpeg,image/png" name="file"
+							id="chooseImg" class="hidden" onChange="selectImg(this)" /> 选择图片
+						</label>
+						</center>
+					</div>
+				</div>
+				<div class="tailoring-content-three">
+					<button class="l-btn cropper-reset-btn">复位</button>
+					<button class="l-btn cropper-rotate-btn">旋转</button>
+					<button class="l-btn cropper-scaleX-btn">换向</button>
+					<button class="l-btn sureCut" id="sureCut">确认上传</button>
+				</div>
+			</div>
+		</div>
+		<!--图片裁剪框 end-->
+		<!-- Main  -->
+
+		<!--警告提示框-->
+		<div class="alert"></div>
+
+
+	
+		<!--删除文件夹 -->
+		<div class="modal fade" id="delete-folderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">永久删除</h4>
+					</div>
+					<div class="modal-body">
+						确认永久删除文件夹？
+					</div>
+					
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-danger" id="deletebankfolder">确认删除</button>
+					
+				</div>
+			</div>
+		</div>
+		
+		<!--清空回收站 -->
+		<div class="modal fade" id="clear-trashModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">清空回收站</h4>
+					</div>
+					<div class="modal-body">
+						确认清空回收站？
+					</div>
+					
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-danger" id="deleteall">确认清空</button>
+					
+				</div>
+			</div>
+		</div>
+		
+		<!--删除题库 -->
+		<div class="modal fade" id="delete-bankModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">永久删除</h4>
+					</div>
+					<div class="modal-body">
+						确认永久删除题库？
+					</div>
+					
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-danger" id="deletebank">确认删除</button>
+					
+				</div>
+			</div>
+		</div>
+		
+		
+		<!--还原文件夹 -->
+		<div class="modal fade" id="back-folderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">还原文件夹</h4>
+					</div>
+					<div class="modal-body">
+						确认还原文件夹？<br />
+					还原到：
+					<input type="text" class="form-control" id="backpath" disabled/>
+					</div>
+					
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-danger" id="rebackfolder">确认还原</button>
+					
+				</div>
+			</div>
+		</div>
+		
+		<!--还原题库 -->
+		<div class="modal fade" id="back-bankModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">还原题库</h4>
+					</div>
+					<div class="modal-body">
+						确认还原题库？<br />
+					还原到：
+					<input type="text" class="form-control" id="backbankpath" disabled/>
+					</div>
+					
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-danger" id="rebackbank">确认还原</button>
+					
+				</div>
+			</div>
+		</div>
+		
+		<!-- 增加题库 -->
+		<div class="modal fade" id="add-bankModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">新增题库</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="recipient-name" class="control-label"><b class="ftx04"></b>题库名称：</label>
+								<input type="text" class="form-control" id="bank-name"/>
+							</div>
+							<div class="form-group">
+								<label for="recipient-name" class="control-label"><b class="ftx04"></b>题库描述：</label>
+								<input type="text" class="form-control" id="bank-describe">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">确认</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../js/jquery-2.0.3.min.js" th:src="@{static/js/jquery-2.0.3.min.js}"></script>
+		<script src="../../js/bootstrap.min.js" th:src="@{static/js/bootstrap.min.js}"></script>
+		<script src="../../js/fastclick.js" th:src="@{static/js/fastclick.js}"></script>
+		<script src="../../js/waves.js" th:src="@{static/js/waves.js}"></script>
+		<script src="../../js/wow.min.js" th:src="@{static/js/wow.min.js}"></script>
+		<script src="../../js/jquery.nicescroll.js" th:src="@{static/js/jquery.nicescroll.js}"></script>
+		<script src="../../js/jquery.scrollTo.min.js" th:src="@{static/js/jquery.scrollTo.min.js}"></script>
+		<script src="../../js/jquery.app.js" th:src="@{static/js/jquery.app.js}"></script>
+		<script type="text/javascript" src="../../js/cropper.min.js" th:src="@{static/js/cropper.min.js}"></script>
+		<script src="../../js/jquery-ui.js" th:src="@{static/js/jquery-ui.js}"></script>
+		<script src="../../js/script2.js" th:src="@{static/js/script2.js}"></script>
+		<script src="../../js/anime.min.js" th:src="@{static/js/anime.min.js}"></script>
+		<script src="../../js/bankTeacherFolder.js" th:src="@{static/js/bankTeacherFolder.js}"></script>
+		<script src="../../js/charming.min.js" th:src="@{static/js/charming.min.js}"></script>
+		<script type="text/javascript">
+			//弹出框水平垂直居中
+			(window.onresize = function() {
+				var win_height = $(window).height();
+				var win_width = $(window).width();
+				if(win_width <= 768) {
+					$(".tailoring-content").css({
+						"top": (win_height - $(".tailoring-content").outerHeight()) / 2,
+						"left": 0
+					});
+				} else {
+					$(".tailoring-content").css({
+						"top": (win_height - $(".tailoring-content").outerHeight()) / 2,
+						"left": (win_width - $(".tailoring-content").outerWidth()) / 2
+					});
+				}
+			})();
+
+			//弹出图片裁剪框
+			/*    $("#replaceImg").on("click",function () {
+			       $(".tailoring-container").toggle();
+			   }); */
+			//图像上传
+			function selectImgupload(file) {
+				$(".tailoring-container").toggle();
+				if(!file.files || !file.files[0]) {
+					return;
+				}
+				var reader = new FileReader();
+				reader.onload = function(evt) {
+					var replaceSrc = evt.target.result;
+					//更换cropper的图片
+					$('#tailoringImg').cropper('replace', replaceSrc, false); //默认false，适应高度，不失真
+				}
+				reader.readAsDataURL(file.files[0]);
+			}
+			//图像上传
+			function selectImg(file) {
+				if(!file.files || !file.files[0]) {
+					return;
+				}
+				var reader = new FileReader();
+				reader.onload = function(evt) {
+					var replaceSrc = evt.target.result;
+					//更换cropper的图片
+					$('#tailoringImg').cropper('replace', replaceSrc, false); //默认false，适应高度，不失真
+				}
+				reader.readAsDataURL(file.files[0]);
+			};
+			//cropper图片裁剪
+			
+			$('#tailoringImg').cropper({
+				aspectRatio: 1 / 1, //默认比例
+				preview: '.previewImg', //预览视图
+				guides: false, //裁剪框的虚线(九宫格)
+				autoCropArea: 0.5, //0-1之间的数值，定义自动剪裁区域的大小，默认0.8
+				movable: false, //是否允许移动图片
+				dragCrop: true, //是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域
+				movable: true, //是否允许移动剪裁框
+				resizable: true, //是否允许改变裁剪框的大小
+				zoomable: false, //是否允许缩放图片大小
+				mouseWheelZoom: false, //是否允许通过鼠标滚轮来缩放图片
+				touchDragZoom: true, //是否允许通过触摸移动来缩放图片
+				rotatable: true, //是否允许旋转图片
+				crop: function(e) {
+					// 输出结果数据裁剪图像。
+				}
+			});
+			//旋转
+			$(".cropper-rotate-btn").on("click", function() {
+				$('#tailoringImg').cropper("rotate", 45);
+			});
+			//复位
+			$(".cropper-reset-btn").on("click", function() {
+				$('#tailoringImg').cropper("reset");
+			});
+			//换向
+			var flagX = true;
+			$(".cropper-scaleX-btn").on("click", function() {
+				if(flagX) {
+					$('#tailoringImg').cropper("scaleX", -1);
+					flagX = false;
+				} else {
+					$('#tailoringImg').cropper("scaleX", 1);
+					flagX = true;
+				}
+				flagX != flagX;
+			});
+
+			//裁剪后的处理
+			$("#sureCut").on("click", function() {
+				if($("#tailoringImg").attr("src") == null) {
+					return false;
+				} else {
+					var cas = $('#tailoringImg').cropper('getCroppedCanvas'); //获取被裁剪后的canvas
+					var base64url = cas.toDataURL('image/png'); //转换为base64地址形式
+					$("#finalImg").prop("src", base64url); //显示为图片的形式
+					var start = base64url.indexOf('base64,') + 7;
+					base64url = base64url.substring(start, base64url.length);
+					base64url = base64url.replace(/\+/g, "%2B");
+
+					$.ajax({
+						contentType: "application/x-www-form-urlencoded; charset=utf-8",
+						type: "post",
+						url: "uploadUserAuatarImg",
+						data: {
+							image: base64url
+						},
+						dataType: 'text',
+						success: function(res) {
+							//console.log(res);
+							var data = JSON.parse(res);
+							if(data.flag == '0000') {
+								$('.alert').html('头像上传成功').addClass('alert-success').show().delay(1000).fadeOut();
+							}
+						}
+					})
+					//关闭裁剪框
+					closeTailor();
+				}
+			});
+			//关闭裁剪框
+			function closeTailor() {
+				$(".tailoring-container").toggle();
+			}
+		</script>
+
+		<script>
+			var resizefunc = [];
+
+			$(function() {
+				//为所有的文件夹绑定事件,注意新建的时候要重新绑定
+				var folders = $('.folder-report');
+				var i = 0;
+				for(i = 0; i < folders.length; i++) {
+					new DurgaFx(folders[i]);
+				}
+
+				$("[data-toggle='tooltip']").tooltip();
+
+				$('.single-product-item').hover(function() {
+					$(this).find('.product-image').show();
+				}, function() {
+					$(this).find('.product-image').hide();
+				})
+
+				$('.hover-icon-list a').hover(function() {
+					//					alert('11');
+				})
+				$('.folder__thumb').click(function() {
+					alert(11);
+				})
+			})
+		</script>
+		
+		<script type="text/javascript">
+			function bank(){
+				
+				window.location.href ="tobankTeacher";
+			}
+			
+			function garbage(){
+				
+				window.location.href ="tobankTrashTeacher";
+			}
+			
+			
+		</script>
+		
+
+	</body>
+
+</html>

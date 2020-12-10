@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>三级高级电工考证题库（10）100题—百一测评在线考试系统</title>
+
+		<base href="https://www.101test.com/">
+
+		<meta name="keywords" content="资格证书,电气/工程类,电工证/电气工程师,在线题库,在线组卷,自助上题,网校,在线题库中心,万题库,猿题库,会计从业资格考试题库">
+
+		<meta name="description" content="三级高级电工考证题库（10）100题">
+
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+
+		<link rel="bookmark" href="assets/img/favicon.ico" />
+		<link rel="shortcut icon" href="assets/img/favicon.ico" />
+
+		<link rel="stylesheet" href="lib/bootsets/css/sets.min.css" />
+		<link rel="stylesheet" href="assets/css/base.min.css" />
+		<link rel="stylesheet" href="assets/css/app.css" />
+		<link rel="stylesheet" href="assets/css/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="assets/fonts/moon/moon.css" />
+
+	</head>
+
+	<body style="background: #f5f7fa !important">
+
+		<link rel="stylesheet" href="/app/scaffold/dist/index.css">
+
+		<div id="sets-header" style="z-index: 3;">
+			<sets-header class=""></sets-header>
+		</div>
+
+		<div class="fade modal in login-wrapper" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" style="width:650px;">
+				<div class="modal-content pb30">
+					<div class="modal-header">
+						<p class="title" style="padding: 10px 45px;font-size: 16px;color: #E9573F;"></p>
+						<button id="btnHide" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+					</div>
+					<div class="modal-body login-main">
+					</div>
+					<div class="modal-body register-main">
+					</div>
+					<div class="modal-body sso-login-main">
+						<a id="btn-sso-login" data-open="new" href="/login" class="btn-connect btn btn-success btn-block btn-lg">点此去重新登录</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- user statement Modal -->
+		<div class="fade modal" id="userStatementModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" style="width: 650px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-info" data-dismiss="modal">我知道了</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- secret statement Modal -->
+		<div class="fade modal" id="secretStatementModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" style="width: 650px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-info" data-dismiss="modal">我知道了</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- register statement Modal -->
+		<div class="fade modal" id="companyRegisterStatementModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" style="width: 650px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-info" data-dismiss="modal">我知道了</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="storeDetail-wrapper" class="container sets-container">
+
+			<div class="crumb_pathway">
+				<a href="#">全部分类 >
+					<a href="store/open/resource?resType=1&amp;catalogId1=60000&amp;catalogName1=%E8%B5%84%E6%A0%BC%E8%AF%81%E4%B9%A6">资格证书</a> >
+					<a href="store/open/resource?resType=1&amp;catalogId1=60000&amp;catalogName1=%E8%B5%84%E6%A0%BC%E8%AF%81%E4%B9%A6&amp;catalogId2=600007&amp;catalogName2=%E7%94%B5%E6%B0%94%2F%E5%B7%A5%E7%A8%8B%E7%B1%BB">电气/工程类</a> >
+					<a href="store/open/resource?resType=1&amp;catalogId1=60000&amp;catalogName1=%E8%B5%84%E6%A0%BC%E8%AF%81%E4%B9%A6&amp;catalogId2=600007&amp;catalogName2=%E7%94%B5%E6%B0%94%2F%E5%B7%A5%E7%A8%8B%E7%B1%BB">电工证/电气工程师</a>
+			</div>
+			<h3 class="pt20" v-pre>三级高级电工考证题库（10）100题</h3>
+			<div class="s-table">
+				<div class="t-row">
+					<div class="owner text-muted t-cell wp50 tl">
+						<span class="text-info mr5" v-pre>蓝欣</span>发布于 2019-05-05 12:59
+					</div>
+					<div class="text-muted t-cell wp50 tr">
+						<span class="grade">
+<i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>                （6.0）分
+            </span>
+						<div class="btn-group btn-contextmenu">
+							<button type="button" class="btn btn-default" data-action="share" @click="share">
+                    <i class="fa fa-share-alt"></i>
+                </button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="s-table mt15">
+				<div class="t-row">
+					<ul class="storeDetail-summary list-inline t-cell wp50 tl">
+						<li>题目数<br/> <span class="text-success">100</span> 道题
+						</li>
+						<li>技能数<br/> <span class="text-success">2</span> 个
+						</li>
+						<li>已售<br/> <span class="text-success">0</span> 份
+						</li>
+					</ul>
+					<div class="t-cell wp50 tr vm storeDetail-price">
+						<span class="text-highlight price"> 积分 100.0</span>
+						<span class="text-muted priceUnit">/ 份</span>
+
+						<a class="btn btn-primary w80 ml10" id="after-buy" @click="buy" :class="{'disabled': purchasing}">买题库</a>
+					</div>
+				</div>
+			</div>
+			<div class="pad mt20">
+				<div class="storeDetail-matrix pad-body">
+					<div class="storeDetail-panel pull-left wp80 pr30">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist" v-pre>
+							<li class="active">
+								<a href="#bank-questions" aria-controls="profile" role="tab" data-toggle="tab">试题信息</a>
+							</li>
+							<li>
+								<a href="#storeDetail-summary" aria-controls="home" role="tab" data-toggle="tab">题库概述</a>
+							</li>
+							<li>
+								<a href="#bank-buyer-comments" aria-controls="messages" role="tab" data-toggle="tab">购买人评论</a>
+							</li>
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane fade" id="storeDetail-summary" v-pre>
+								<div class="summary sets-question-item">
+									<h4 class="mb10">题库描述</h4>
+									<pre id="resDesc" class="text-muted">三级高级电工考证题库（10）100题</pre>
+								</div>
+
+								<div class="storeDetail-structure mt20 pb30">
+									<h4 class="mb10">题库结构</h4>
+									<div class="bank-skills pr10">
+										<!--  <h6 class="tc pb10">技能分布</h6>-->
+										<div class="barChart tc" style="display: none">
+											<ul class="list-inline">
+												<li>
+													<div class="barChart-bar">
+														<div class="barChart-label">常识</div>
+														<div class="barChart-bar-percent" style="height:16%"></div>
+													</div>
+													<div class="barChart-num mb15">16%</div>
+												</li>
+												<li>
+													<div class="barChart-bar">
+														<div class="barChart-label"><span style="color:#F9690E">未指定技能</span></div>
+														<div class="barChart-bar-percent" style="height:84%"></div>
+													</div>
+													<div class="barChart-num mb15">84%</div>
+												</li>
+											</ul>
+										</div>
+										<div class="s-table pt10">
+											<div class="t-row th tc">
+												<div class="t-cell tl skill-name pl20" style="width: 40%;">技能</div>
+												<div class="t-cell" style="width: 20%">题目数</div>
+												<div class="t-cell" style="width: 20%">占比(%)</div>
+											</div>
+											<div class="t-row tc q-type-root">
+												<div class="t-cell tl skill-name pl20" style="width: 40%">
+													<div class="table-skill" data-original-title="常识">常识</div>
+												</div>
+												<div class="t-cell" style="width: 20%">16</div>
+												<div class="t-cell" style="width: 20%">16</div>
+											</div>
+											<div class="t-row tc q-type-root">
+												<div class="t-cell tl skill-name pl20" style="width: 40%">
+													<div class="table-skill" data-original-title="未指定技能">未指定技能</div>
+												</div>
+												<div class="t-cell" style="width: 20%">84</div>
+												<div class="t-cell" style="width: 20%">84</div>
+											</div>
+										</div>
+									</div>
+									<div class="bank-questionTypes pl10">
+										<!-- <h6 class="tc pb10">题型分布</h6>-->
+										<div class="barChart tc" style="display: none">
+											<ul class="list-inline">
+												<li>
+													<div class="barChart-bar">
+														<div class="barChart-label">单选题</div>
+														<div class="barChart-bar-percent" style="height:74%"></div>
+													</div>
+													<div class="barChart-num mb15">74%</div>
+												</li>
+												<li>
+													<div class="barChart-bar">
+														<div class="barChart-label">判断题</div>
+														<div class="barChart-bar-percent" style="height:26%"></div>
+													</div>
+													<div class="barChart-num mb15">26%</div>
+												</li>
+											</ul>
+										</div>
+										<div class="s-table pt10">
+											<div class="t-row th tc">
+												<div class="t-cell tl question-type pl20" style="width: 40%">题型</div>
+												<div class="t-cell" style="width: 20%">题目数</div>
+												<div class="t-cell" style="width: 20%">占比(%)</div>
+											</div>
+											<div class="t-row tc q-type-root">
+												<div class="t-cell tl question-type pl20" style="width: 40%">
+													单选题
+												</div>
+												<div class="t-cell" style="width: 20%">74</div>
+												<div class="t-cell" style="width: 20%">74</div>
+											</div>
+											<div class="t-row tc q-type-root">
+												<div class="t-cell tl question-type pl20" style="width: 40%">
+													判断题
+												</div>
+												<div class="t-cell" style="width: 20%">26</div>
+												<div class="t-cell" style="width: 20%">26</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade in active" v-pre id="bank-questions">
+								<div class="report-question">
+									<div class="part-question">
+
+										<div class="q-item sets-question-item">
+											<div class="q-head-wrapper row">
+												<div class="q-skill col-xs-12">
+													<span class="q-sequence">
+
+                        <a href="/store/open/question/1/1257632/21042878" target="_blank">
+                            1
+                        </a>
+                                </span>
+													<span class="q-type">[</span>
+													<span class="q-type p0">单选题</span>
+													<span class="q-type">]</span> (分)
+													<span class="label label-info skill-label text-ellipsis question-label" title="未指定技能">
+                未指定技能
+            </span>
+
+													<span class="label label-info difficult-label">
+                    中
+                </span>
+												</div>
+											</div>
+
+											<div class="q-subject">
+
+												<pre>三相异步电动机的启停控制线路中需要有（  ）过载保护和失压保护功能。</pre>
+											</div>
+
+											<ul class="q-options-wrapper mt20 ml10 " data-part-index="" id="q-options-0">
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">A</span>
+														<!-- @formatter:off -->
+														<pre><pre>短路保护</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">B</span>
+														<!-- @formatter:off -->
+														<pre><pre>超速保护</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">C</span>
+														<!-- @formatter:off -->
+														<pre><pre>失磁保护</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">D</span>
+														<!-- @formatter:off -->
+														<pre><pre>零速保护</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+											</ul>
+
+										</div>
+
+										<div class="q-item sets-question-item">
+											<div class="q-head-wrapper row">
+												<div class="q-skill col-xs-12">
+													<span class="q-sequence">
+
+                        <a href="/store/open/question/1/1257632/21042879" target="_blank">
+                            2
+                        </a>
+                                </span>
+													<span class="q-type">[</span>
+													<span class="q-type p0">单选题</span>
+													<span class="q-type">]</span> (分)
+													<span class="label label-info skill-label text-ellipsis question-label" title="未指定技能">
+                未指定技能
+            </span>
+
+													<span class="label label-info difficult-label">
+                    中
+                </span>
+												</div>
+											</div>
+
+											<div class="q-subject">
+
+												<pre>直流电动机运行中转速突然急速升高并失控。故障原因可能是（  ）。</pre>
+											</div>
+
+											<ul class="q-options-wrapper mt20 ml10 " data-part-index="" id="q-options-1">
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">A</span>
+														<!-- @formatter:off -->
+														<pre><pre>突然失去励磁电流</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">B</span>
+														<!-- @formatter:off -->
+														<pre><pre>电枢电压过大</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">C</span>
+														<!-- @formatter:off -->
+														<pre><pre>电枢电流过大</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">D</span>
+														<!-- @formatter:off -->
+														<pre><pre>励磁电流过大</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+											</ul>
+
+										</div>
+
+										<div class="q-item sets-question-item">
+											<div class="q-head-wrapper row">
+												<div class="q-skill col-xs-12">
+													<span class="q-sequence">
+
+                        <a href="/store/open/question/1/1257632/21042880" target="_blank">
+                            3
+                        </a>
+                                </span>
+													<span class="q-type">[</span>
+													<span class="q-type p0">单选题</span>
+													<span class="q-type">]</span> (分)
+													<span class="label label-info skill-label text-ellipsis question-label" title="未指定技能">
+                未指定技能
+            </span>
+
+													<span class="label label-info difficult-label">
+                    中
+                </span>
+												</div>
+											</div>
+
+											<div class="q-subject">
+
+												<pre>三相异步电动机反接制动时，采用对称制电阻接法，可以在限制制动转矩的同时也限制（  ）。</pre>
+											</div>
+
+											<ul class="q-options-wrapper mt20 ml10 " data-part-index="" id="q-options-2">
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">A</span>
+														<!-- @formatter:off -->
+														<pre><pre>制动电流</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">B</span>
+														<!-- @formatter:off -->
+														<pre><pre>起动电流</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">C</span>
+														<!-- @formatter:off -->
+														<pre><pre>制动电压</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+											</ul>
+
+										</div>
+
+										<div class="q-item sets-question-item">
+											<div class="q-head-wrapper row">
+												<div class="q-skill col-xs-12">
+													<span class="q-sequence">
+
+                        <a href="/store/open/question/1/1257632/21042881" target="_blank">
+                            4
+                        </a>
+                                </span>
+													<span class="q-type">[</span>
+													<span class="q-type p0">单选题</span>
+													<span class="q-type">]</span> (分)
+													<span class="label label-info skill-label text-ellipsis question-label" title="未指定技能">
+                未指定技能
+            </span>
+
+													<span class="label label-info difficult-label">
+                    中
+                </span>
+												</div>
+											</div>
+
+											<div class="q-subject">
+
+												<pre>电动机的启动转矩必须大于负载转矩。若软启动器不能启动某负载，则可改用的启动设备是（  ）。</pre>
+											</div>
+
+											<ul class="q-options-wrapper mt20 ml10 " data-part-index="" id="q-options-3">
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">A</span>
+														<!-- @formatter:off -->
+														<pre><pre>采用内三角接法的软启动器</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">B</span>
+														<!-- @formatter:off -->
+														<pre><pre>采用外三角接法的软启动器</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">C</span>
+														<!-- @formatter:off -->
+														<pre><pre>变频器</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">D</span>
+														<!-- @formatter:off -->
+														<pre><pre>星—三角启动器</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+											</ul>
+
+										</div>
+
+										<div class="q-item sets-question-item">
+											<div class="q-head-wrapper row">
+												<div class="q-skill col-xs-12">
+													<span class="q-sequence">
+
+                        <a href="/store/open/question/1/1257632/21042882" target="_blank">
+                            5
+                        </a>
+                                </span>
+													<span class="q-type">[</span>
+													<span class="q-type p0">单选题</span>
+													<span class="q-type">]</span> (分)
+													<span class="label label-info skill-label text-ellipsis question-label" title="未指定技能">
+                未指定技能
+            </span>
+
+													<span class="label label-info difficult-label">
+                    中
+                </span>
+												</div>
+											</div>
+
+											<div class="q-subject">
+
+												<pre>软启动器启动完成后，旁路接触器刚动作就跳闸。故障原因可能是（  ）。</pre>
+											</div>
+
+											<ul class="q-options-wrapper mt20 ml10 " data-part-index="" id="q-options-4">
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">A</span>
+														<!-- @formatter:off -->
+														<pre><pre>启动电流过大</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">B</span>
+														<!-- @formatter:off -->
+														<pre><pre>旁路接触器接线相序不对</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">C</span>
+														<!-- @formatter:off -->
+														<pre><pre>启动转矩过大</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">D</span>
+														<!-- @formatter:off -->
+														<pre><pre>电动机过载</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+											</ul>
+
+										</div>
+
+										<div class="q-item sets-question-item">
+											<div class="q-head-wrapper row">
+												<div class="q-skill col-xs-12">
+													<span class="q-sequence">
+
+                        <a href="/store/open/question/1/1257632/21042883" target="_blank">
+                            6
+                        </a>
+                                </span>
+													<span class="q-type">[</span>
+													<span class="q-type p0">单选题</span>
+													<span class="q-type">]</span> (分)
+													<span class="label label-info skill-label text-ellipsis question-label" title="未指定技能">
+                未指定技能
+            </span>
+
+													<span class="label label-info difficult-label">
+                    中
+                </span>
+												</div>
+											</div>
+
+											<div class="q-subject">
+
+												<pre>软启动器启动完成后，旁路接触器刚动作就跳闸。故障原因可能是（  ）。</pre>
+											</div>
+
+											<ul class="q-options-wrapper mt20 ml10 " data-part-index="" id="q-options-5">
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">A</span>
+														<!-- @formatter:off -->
+														<pre><pre>启动参数不合适</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">B</span>
+														<!-- @formatter:off -->
+														<pre><pre>晶闸管模块故障</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">C</span>
+														<!-- @formatter:off -->
+														<pre><pre>启动动控制方式不当</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">D</span>
+														<!-- @formatter:off -->
+														<pre><pre>旁路接触器与软启动器的接线相序不一致。</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+											</ul>
+
+										</div>
+
+										<div class="q-item sets-question-item">
+											<div class="q-head-wrapper row">
+												<div class="q-skill col-xs-12">
+													<span class="q-sequence">
+
+                        <a href="/store/open/question/1/1257632/21042884" target="_blank">
+                            7
+                        </a>
+                                </span>
+													<span class="q-type">[</span>
+													<span class="q-type p0">单选题</span>
+													<span class="q-type">]</span> (分)
+													<span class="label label-info skill-label text-ellipsis question-label" title="未指定技能">
+                未指定技能
+            </span>
+
+													<span class="label label-info difficult-label">
+                    中
+                </span>
+												</div>
+											</div>
+
+											<div class="q-subject">
+
+												<pre>软启动器采用内三角接法时，电动机额定电流应按相电流设置，这时（  ）。</pre>
+											</div>
+
+											<ul class="q-options-wrapper mt20 ml10 " data-part-index="" id="q-options-6">
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">A</span>
+														<!-- @formatter:off -->
+														<pre><pre>容量提高﹑有三次谐波</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">B</span>
+														<!-- @formatter:off -->
+														<pre><pre>容量提高﹑无三次谐波</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">C</span>
+														<!-- @formatter:off -->
+														<pre><pre>容量不变﹑有三次谐波</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">D</span>
+														<!-- @formatter:off -->
+														<pre><pre>容量减小﹑无三次谐波</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+											</ul>
+
+										</div>
+
+										<div class="q-item sets-question-item">
+											<div class="q-head-wrapper row">
+												<div class="q-skill col-xs-12">
+													<span class="q-sequence">
+
+                        <a href="/store/open/question/1/1257632/21042885" target="_blank">
+                            8
+                        </a>
+                                </span>
+													<span class="q-type">[</span>
+													<span class="q-type p0">单选题</span>
+													<span class="q-type">]</span> (分)
+													<span class="label label-info skill-label text-ellipsis question-label" title="未指定技能">
+                未指定技能
+            </span>
+
+													<span class="label label-info difficult-label">
+                    中
+                </span>
+												</div>
+											</div>
+
+											<div class="q-subject">
+
+												<pre>软启动器接通主电源后，虽处于待机状态，但电机有嗡嗡响。此故障不可能的原因是（  ）。</pre>
+											</div>
+
+											<ul class="q-options-wrapper mt20 ml10 " data-part-index="" id="q-options-7">
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">A</span>
+														<!-- @formatter:off -->
+														<pre><pre>晶闸管短路故障</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">B</span>
+														<!-- @formatter:off -->
+														<pre><pre>旁路接触器有触点粘连</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">C</span>
+														<!-- @formatter:off -->
+														<pre><pre>触发电路故障</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">D</span>
+														<!-- @formatter:off -->
+														<pre><pre>启动线路接线错误</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+											</ul>
+
+										</div>
+
+										<div class="q-item sets-question-item">
+											<div class="q-head-wrapper row">
+												<div class="q-skill col-xs-12">
+													<span class="q-sequence">
+
+                        <a href="/store/open/question/1/1257632/21042886" target="_blank">
+                            9
+                        </a>
+                                </span>
+													<span class="q-type">[</span>
+													<span class="q-type p0">单选题</span>
+													<span class="q-type">]</span> (分)
+													<span class="label label-info skill-label text-ellipsis question-label" title="未指定技能">
+                未指定技能
+            </span>
+
+													<span class="label label-info difficult-label">
+                    中
+                </span>
+												</div>
+											</div>
+
+											<div class="q-subject">
+
+												<pre>（  ）是直流调速系统的主要控制方案。</pre>
+											</div>
+
+											<ul class="q-options-wrapper mt20 ml10 " data-part-index="" id="q-options-8">
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">A</span>
+														<!-- @formatter:off -->
+														<pre><pre>改变电源频率</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">B</span>
+														<!-- @formatter:off -->
+														<pre><pre>调节电枢电压</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">C</span>
+														<!-- @formatter:off -->
+														<pre><pre>改变电枢回路电阻R</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">D</span>
+														<!-- @formatter:off -->
+														<pre><pre>改变转差率</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+											</ul>
+
+										</div>
+
+										<div class="q-item sets-question-item">
+											<div class="q-head-wrapper row">
+												<div class="q-skill col-xs-12">
+													<span class="q-sequence">
+
+                        <a href="/store/open/question/1/1257632/21042887" target="_blank">
+                            10
+                        </a>
+                                </span>
+													<span class="q-type">[</span>
+													<span class="q-type p0">单选题</span>
+													<span class="q-type">]</span> (分)
+													<span class="label label-info skill-label text-ellipsis question-label" title="未指定技能">
+                未指定技能
+            </span>
+
+													<span class="label label-info difficult-label">
+                    中
+                </span>
+												</div>
+											</div>
+
+											<div class="q-subject">
+
+												<pre>工程设计中的调速恒度指标要求在所有调速特性上都能满足，故应是调速系统（  ）特性的静差率。</pre>
+											</div>
+
+											<ul class="q-options-wrapper mt20 ml10 " data-part-index="" id="q-options-9">
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">A</span>
+														<!-- @formatter:off -->
+														<pre><pre>最高调速</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">B</span>
+														<!-- @formatter:off -->
+														<pre><pre>额定转速</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">C</span>
+														<!-- @formatter:off -->
+														<pre><pre>平均转速</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">D</span>
+														<!-- @formatter:off -->
+														<pre><pre>最低转速</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+											</ul>
+
+										</div>
+
+										<div class="q-item sets-question-item">
+											<div class="q-head-wrapper row">
+												<div class="q-skill col-xs-12">
+													<span class="q-sequence">
+
+                        <a href="/store/open/question/1/1257632/21042888" target="_blank">
+                            11
+                        </a>
+                                </span>
+													<span class="q-type">[</span>
+													<span class="q-type p0">单选题</span>
+													<span class="q-type">]</span> (分)
+													<span class="label label-info skill-label text-ellipsis question-label" title="未指定技能">
+                未指定技能
+            </span>
+
+													<span class="label label-info difficult-label">
+                    中
+                </span>
+												</div>
+											</div>
+
+											<div class="q-subject">
+
+												<pre>在转速电流双闭环速系统中，电机转速可调，转速不高且波动较大。此故障的可能原因是（  ）。</pre>
+											</div>
+
+											<ul class="q-options-wrapper mt20 ml10 " data-part-index="" id="q-options-10">
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">A</span>
+														<!-- @formatter:off -->
+														<pre><pre>PI调节器限幅值电路故障</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">B</span>
+														<!-- @formatter:off -->
+														<pre><pre>电动机励磁电路故障</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">C</span>
+														<!-- @formatter:off -->
+														<pre><pre>晶闸管或触发电路故障</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">D</span>
+														<!-- @formatter:off -->
+														<pre><pre>反馈电路故障</pre></pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+											</ul>
+
+										</div>
+
+										<div class="q-item sets-question-item">
+											<div class="q-head-wrapper row">
+												<div class="q-skill col-xs-12">
+													<span class="q-sequence">
+
+                        <a href="/store/open/question/1/1257632/21042889" target="_blank">
+                            12
+                        </a>
+                                </span>
+													<span class="q-type">[</span>
+													<span class="q-type p0">单选题</span>
+													<span class="q-type">]</span> (分)
+													<span class="label label-info skill-label text-ellipsis question-label" title="未指定技能">
+                未指定技能
+            </span>
+
+													<span class="label label-info difficult-label">
+                    中
+                </span>
+												</div>
+											</div>
+
+											<div class="q-subject">
+												<p>转速负反馈直流调速系统具有良好的抗干扰性能，它能有效地抑制（ ）。</p>
+											</div>
+
+											<ul class="q-options-wrapper mt20 ml10 " data-part-index="" id="q-options-11">
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">A</span>
+														<!-- @formatter:off -->
+														<pre>给定电压变化的扰动</pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">B</span>
+														<!-- @formatter:off -->
+														<pre>一切前向通道上的扰动</pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">C</span>
+														<!-- @formatter:off -->
+														<pre>反馈检测电压变化的扰动</pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+												<li class="q-option">
+													<div>
+														<label class="q-choice-icon radio-inline sets-radio "><span class="fa-stack radio-icon"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x select"></i></span></label>
+														<span class="option-index">D</span>
+														<!-- @formatter:off -->
+														<pre>电网电压及负载变化的扰动</pre>
+														<!-- @formatter:on -->
+													</div>
+												</li>
+											</ul>
+											<div class="q-text-answer mt20">
+												<p style="margin-bottom:5px;">题目解析：</p>
+												<pre><p><br /></p></pre>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div id="purchaseAlert" class="tc pt10 pb20" style="color: #F9690E;">
+									<a class="after-buy">购买后查看全部试题</a>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="bank-buyer-comments">
+
+							</div>
+						</div>
+					</div>
+					<div class="storeDetail-label-panel pull-right wp20" v-pre>
+						<div class="text-muted"></div>
+						<div class="paper-label mt10">
+
+						</div>
+						<div class="ownerInfo mt30">
+							<div class="s-table">
+								<div class="user-picture t-cell tl w60">
+									<img class="img-circle" src="http://101test-public.oss-cn-beijing.aliyuncs.com/common/employer/defaultPortrait/9.png">
+
+								</div>
+
+								<div class="t-cell vm">
+									<label>蓝欣</label>
+
+									<p class="text-muted"></p>
+								</div>
+							</div>
+							<div class="desc text-muted pt10 pb10">
+								这个人很懒，没留下任何内容</div>
+							<div class="publish-num text-muted pt10">
+								共发布了 <span class="text-primary">13</span> 份题库
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h4 class="pt20 pb10">相关题库</h4>
+			<div class="relatedBanks store-wrap" v-pre>
+				<div class="paper-item" style="border-top:3px solid #b5dac9">
+
+					<div class="paper-header">
+						<div class="text-ellipsis" title="三级高级电工考证题库（3）100题">
+							<a href="store/open/bankInfo/1257625" target="_blank">三级高级电工考证题库（3）100题</a>
+						</div>
+						<div class="papertime">2019-05-05 12:58</div>
+						<div class="sets-question-item">
+							<pre><div class="paperdesc" title="三级高级电工考证题库（3）100题">三级高级电工考证题库（3）100题</div></pre>
+						</div>
+						<div class="paperbtn">
+							<div class="paper-count"><span class="vm"><i class=' moon moon-d1-1' style='font-size:20px'></i><i class=' moon moon-d1-0' style='font-size:20px'></i><i class=' moon moon-d1-0' style='font-size:20px'></i>道题</span></div>
+							<div class="paper-price"><span class="price"> 积分 100.0</span> <span class="t">/ 份</span></div>
+							<div class="paper-btn">
+								<a href="store/open/bankInfo/1257625" target="_blank" class="btn btn-buy btn-primary">买题库</a>
+							</div>
+						</div>
+					</div>
+					<div class="paper-footer">
+						<ul class="list-inline">
+							<li class="score">
+								<span class="grade">
+<i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>                      6.0
+            </span>
+							</li>
+							<li class="buy" data-original-title="已售"><i class="fa fa-shopping-cart"></i> 0</li>
+							<li class="user pull-right tc" data-original-title="蓝欣"><i class="fa fa-user"></i></li>
+						</ul>
+
+					</div>
+				</div>
+
+				<div class="paper-item" style="border-top:3px solid #b5dac9">
+
+					<div class="paper-header">
+						<div class="text-ellipsis" title="三级高级电工考证题库（4）100题">
+							<a href="store/open/bankInfo/1257626" target="_blank">三级高级电工考证题库（4）100题</a>
+						</div>
+						<div class="papertime">2019-05-05 12:58</div>
+						<div class="sets-question-item">
+							<pre><div class="paperdesc" title="三级高级电工考证题库（4）100题">三级高级电工考证题库（4）100题</div></pre>
+						</div>
+						<div class="paperbtn">
+							<div class="paper-count"><span class="vm"><i class=' moon moon-d1-1' style='font-size:20px'></i><i class=' moon moon-d1-0' style='font-size:20px'></i><i class=' moon moon-d1-0' style='font-size:20px'></i>道题</span></div>
+							<div class="paper-price"><span class="price"> 积分 100.0</span> <span class="t">/ 份</span></div>
+							<div class="paper-btn">
+								<a href="store/open/bankInfo/1257626" target="_blank" class="btn btn-buy btn-primary">买题库</a>
+							</div>
+						</div>
+					</div>
+					<div class="paper-footer">
+						<ul class="list-inline">
+							<li class="score">
+								<span class="grade">
+<i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>                      6.0
+            </span>
+							</li>
+							<li class="buy" data-original-title="已售"><i class="fa fa-shopping-cart"></i> 0</li>
+							<li class="user pull-right tc" data-original-title="蓝欣"><i class="fa fa-user"></i></li>
+						</ul>
+
+					</div>
+				</div>
+
+				<div class="paper-item" style="border-top:3px solid #b5dac9">
+
+					<div class="paper-header">
+						<div class="text-ellipsis" title="三级高级电工考证题库（8）100题">
+							<a href="store/open/bankInfo/1257630" target="_blank">三级高级电工考证题库（8）100题</a>
+						</div>
+						<div class="papertime">2019-05-05 12:58</div>
+						<div class="sets-question-item">
+							<pre><div class="paperdesc" title="三级高级电工考证题库（8）100题">三级高级电工考证题库（8）100题</div></pre>
+						</div>
+						<div class="paperbtn">
+							<div class="paper-count"><span class="vm"><i class=' moon moon-d1-1' style='font-size:20px'></i><i class=' moon moon-d1-0' style='font-size:20px'></i><i class=' moon moon-d1-0' style='font-size:20px'></i>道题</span></div>
+							<div class="paper-price"><span class="price"> 积分 100.0</span> <span class="t">/ 份</span></div>
+							<div class="paper-btn">
+								<a href="store/open/bankInfo/1257630" target="_blank" class="btn btn-buy btn-primary">买题库</a>
+							</div>
+						</div>
+					</div>
+					<div class="paper-footer">
+						<ul class="list-inline">
+							<li class="score">
+								<span class="grade">
+<i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>                      6.0
+            </span>
+							</li>
+							<li class="buy" data-original-title="已售"><i class="fa fa-shopping-cart"></i> 0</li>
+							<li class="user pull-right tc" data-original-title="蓝欣"><i class="fa fa-user"></i></li>
+						</ul>
+
+					</div>
+				</div>
+
+			</div>
+
+			<!--pay modal-->
+			<pay :title="payTitle" :pac="payModel" points="true" v-cloak>
+				<h4 v-text="resName"></h4>
+
+			</pay>
+		</div>
+		<!--视频播放-->
+
+		<style>
+			.media-player-wrapper {
+				width: 400px;
+				height: 300px;
+				margin: 0 auto;
+				position: relative;
+			}
+			
+			.media-player-wrapper.short {
+				height: 150px;
+			}
+			
+			.media-player-wrapper .audio-icon,
+			.media-player-wrapper .media-player-mask {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 2;
+				text-align: center;
+			}
+			
+			.media-player-wrapper .audio-icon {
+				background-image: url("assets/img/report/audio1.gif");
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+			
+			.media-player-wrapper .player-toolbar .btn-link {
+				min-width: 25px;
+				text-align: center;
+				padding: 0;
+				display: none;
+			}
+			
+			.media-player-wrapper .player-toolbar .btn-link.iblock {
+				display: inline-block;
+			}
+			
+			.media-player-wrapper .player-toolbar {
+				height: 25px;
+				line-height: 25px;
+				background-color: #E6E9ED;
+				color: #37BC9B;
+				border-bottom-left-radius: 4px;
+				border-bottom-right-radius: 4px;
+				padding: 0 10px;
+			}
+		</style>
+		<div class="fade modal" id="flash-player-modal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" style="width: 400px;">
+				<div class="modal-content">
+					<div class="modal-header p0">
+						<button type="button" class="close mr5" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+					</div>
+					<div class="modal-body p0 pr"></div>
+				</div>
+			</div>
+		</div>
+
+		<script src="/lib/vuejs/vue.js"></script>
+		<script src="/app/scaffold/dist/index.js"></script>
+		<link rel="stylesheet" href="/app/scaffold/dist/index.css">
+		
+
+		<!--支付modal-->
+
+		<script src="../../../app-static/static/font/iconfont.js"></script>
+		<link rel="stylesheet" href="../../../app-static/static/font/iconfont.css">
+
+	</body>
+
+</html>

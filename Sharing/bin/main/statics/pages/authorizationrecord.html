@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="icon" href="../assets/images/favicon.png">
+
+    <!-- CSS 
+    ================================================== -->
+    <link rel="stylesheet" href="../assets/css/style.css" th:href="@{statics/assets/css/style.css}">
+    <link rel="stylesheet" href="../assets/css/night-mode.css" th:href="@{statics/assets/css/night-mode.css}">
+    <link rel="stylesheet" href="../assets/css/framework.css" th:href="@{statics/assets/css/framework.css}">
+	
+	
+    <!-- icons
+    ================================================== -->
+    <link rel="stylesheet" href="../assets/css/icons.css" th:href="@{statics/assets/css/icons.css}">
+
+
+	 <link rel="stylesheet" href="../assets/layui/css/layui.css" th:href="@{statics/assets/layui/css/layui.css}" media="all">
+
+
+
+    <!-- Google font
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- sidebar -->
+        <div class="main_sidebar">
+            <div class="side-overlay" uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible"></div>
+
+            <!-- sidebar header -->
+            <div class="sidebar-header">
+                <h4> Navigation</h4>
+                <span class="btn-close" uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible"></span>
+            </div>	
+
+            <!-- sidebar Menu -->
+            <div class="sidebar">
+                <div class="sidebar_innr" data-simplebar>
+
+                    <div class="sections">
+                        <h3> 数据共享 </h3>
+                        <ul>
+                            <li > <a th:href="@{toapplydata}"> <i class="uil-home-alt"></i> 数据申请 </a></li>
+                            <li> <a th:href="@{toauthorizationdata}"> <i class="uil-users-alt"></i> 数据授权 </a></li>
+                            <li > <a th:href="@{togetdata}"> <i class="uil-layers"></i> 数据获取 </a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="sections">
+                        <h3> 记录查看 </h3>
+                        <ul>
+                            <li class="active"> <a th:href="@{toauthorizationrecord}"> <i class="uil-home-alt"></i> 授权记录 </a></li>
+                            <li > <a th:href="@{touserecord}"> <i class="uil-users-alt"></i> 使用记录 </a></li>
+                            <li> <a th:href="@{torevokerecord}"> <i class="uil-layers"></i> 撤销记录 </a></li>
+                      
+                        </ul>
+                    </div>
+				</div>
+
+
+            </div>
+
+        </div>
+
+        <!-- header -->
+        <div id="main_header">
+            <header>
+
+                <!-- Logo-->
+                <i class="header-traiger uil-bars"
+                    uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible"></i>
+
+                <!-- Logo-->
+                <div id="logo">
+                    <a href="#"> <img src="../assets/images/logo.png" th:src="@{statics/assets/images/logo.png}"  alt style="max-width:20%; ">GoSharing</a>
+                    <a href="#"> <img src="../assets/images/logo-light.png" th:src="@{statics/assets/images/logo-light-icon.png}" class="logo-inverse" alt=""></a>
+                
+                </div>
+
+               
+                <!-- user icons -->
+                <div class="head_user">
+					  <!-- profile -image -->
+                    <a class="opts_account"> <img src="../assets/images/avatars/avatar-1.jpg" th:src="@{statics/assets/images/avatars/avatar-1.jpg}" alt=""><text th:text="${session.currentUser.username}"></text></a>
+
+					<div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small"
+                        class="dropdown-notifications small">
+                        <a href="#">
+
+                            <div class="dropdown-user-details">
+                                <div class="dropdown-user-avatar">
+                                    <img src="../assets/images/avatars/avatar-1.jpg"  th:src="@{statics/assets/images/avatars/avatar-1.jpg}" alt="">
+                                </div>
+                                <div class="dropdown-user-name">
+                                    <text th:text="${session.currentUser.username}"></text> <span> 已登录 <i class="uil-check"></i> </span>
+                                </div>
+                            </div>
+                        </a>
+                        <ul class="dropdown-user-menu">
+                            <li><a href="tologout"> <i class="icon-feather-log-out"></i> 退出登录</a>
+                            </li>
+                        </ul>
+                    </div>
+                 
+
+                    </div>
+
+                </div>
+
+            </header>
+
+        </div>
+
+        <!-- contents -->
+        <div class="main_content">
+            <div class="main_content_inner">
+
+ 		
+ 		
+ 		<div>
+ 			<h3> 记录列表 </h3> 
+ 		</div>
+		
+		<table class="layui-table">
+		  <colgroup>
+		    <col width="150">
+		   
+		    <col>
+		   
+		  </colgroup>
+		  <thead>
+		    <tr>
+		      <th>编号</th>
+		      <th>授权记录</th>
+		      
+		      <th>时间</th>
+		    </tr> 
+		  </thead>
+		  
+		   <tbody >
+		    <tr th:if="${authorizationrecordlist.size()} eq '0'">
+		      <td colspan="3" align="center">暂无授权记录！</td>
+		      
+		    </tr>
+		   
+		  </tbody>
+		  <tbody>
+		    <tr th:each="authorization:${authorizationrecordlist}">
+		      <td th:text="${authorizationStat.count}"></td>
+		      <td th:text="${authorization.record}">李四使用张三耳科诊疗记录</td>
+		      <td th:text="${authorization.time}">2016-11-29</td>
+		     
+		    </tr>
+		    
+		  </tbody>
+		</table>
+          
+          
+          
+          
+            </div>
+        </div>
+
+
+    <!--</div>-->
+    
+    
+
+
+    <!-- For Night mode -->
+    <script>
+        (function (window, document, undefined) {
+            'use strict';
+            if (!('localStorage' in window)) return;
+            var nightMode = localStorage.getItem('gmtNightMode');
+            if (nightMode) {
+                document.documentElement.className += ' night-mode';
+            }
+        })(window, document);
+
+
+        (function (window, document, undefined) {
+
+            'use strict';
+
+            // Feature test
+            if (!('localStorage' in window)) return;
+
+            // Get our newly insert toggle
+            var nightMode = document.querySelector('#night-mode');
+            if (!nightMode) return;
+
+            // When clicked, toggle night mode on or off
+            nightMode.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.documentElement.classList.toggle('night-mode');
+                if (document.documentElement.classList.contains('night-mode')) {
+                    localStorage.setItem('gmtNightMode', true);
+                    return;
+                }
+                localStorage.removeItem('gmtNightMode');
+            }, false);
+
+        })(window, document);
+    </script>
+
+
+    <!-- javaScripts
+                ================================================== -->
+    
+	<script src="../assets/js/framework.js" th:src="@{statics/assets/js/framework.js}"></script>
+    <script src="../assets/js/jquery-3.3.1.min.js" th:src="@{statics/assets/js/jquery-3.3.1.min.js}" ></script>
+    <script src="../assets/js/simplebar.js" th:src="@{statics/assets/js/simplebar.js}"></script>
+    <script src="../assets/js/main.js" th:src="@{statics/assets/js/main.js}"></script>
+	
+	
+	
+</body>
+
+</html>

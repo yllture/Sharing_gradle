@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="icon" href="../assets/images/favicon.png">
+
+    <!-- CSS 
+    ================================================== -->
+    <link rel="stylesheet" href="../assets/css/style.css" th:href="@{statics/assets/css/style.css}">
+    <link rel="stylesheet" href="../assets/css/night-mode.css" th:href="@{statics/assets/css/night-mode.css}">
+    <link rel="stylesheet" href="../assets/css/framework.css" th:href="@{statics/assets/css/framework.css}">
+	
+	
+    <!-- icons
+    ================================================== -->
+    <link rel="stylesheet" href="../assets/css/icons.css" th:href="@{statics/assets/css/icons.css}">
+
+
+	 <link rel="stylesheet" href="../assets/layui/css/layui.css" th:href="@{statics/assets/layui/css/layui.css}" media="all">
+
+
+
+    <!-- Google font
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- sidebar -->
+        <div class="main_sidebar">
+            <div class="side-overlay" uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible"></div>
+
+            <!-- sidebar header -->
+            <div class="sidebar-header">
+                <h4> Navigation</h4>
+                <span class="btn-close" uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible"></span>
+            </div>
+
+            <!-- sidebar Menu -->
+            <div class="sidebar">
+                <div class="sidebar_innr" data-simplebar>
+
+                    <div class="sections">
+                        <h3> 数据共享 </h3>
+                        <ul>
+                            <li > <a th:href="@{toapplydata}"> <i class="uil-home-alt"></i> 数据申请 </a></li>
+                            <li class="active"> <a th:href="@{toauthorizationdata}"> <i class="uil-users-alt"></i> 数据授权 </a></li>
+                            <li> <a th:href="@{togetdata}"> <i class="uil-layers"></i> 数据获取 </a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="sections">
+                        <h3> 记录查看 </h3>
+                        <ul>
+                            <li > <a th:href="@{toauthorizationrecord}"> <i class="uil-home-alt"></i> 授权记录 </a></li>
+                            <li> <a th:href="@{touserecord}"> <i class="uil-users-alt"></i> 使用记录 </a></li>
+                            <li> <a th:href="@{torevokerecord}"> <i class="uil-layers"></i> 撤销记录 </a></li>
+                      
+                        </ul>
+                    </div>
+				</div>
+
+
+            </div>
+
+        </div>
+
+        <!-- header -->
+        <div id="main_header">
+            <header>
+
+                <!-- Logo-->
+                <i class="header-traiger uil-bars"
+                    uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible"></i>
+
+                <!-- Logo-->
+                <div id="logo">
+                    <a href="#"> <img src="../assets/images/logo.png" th:src="@{statics/assets/images/logo.png}"  alt style="max-width:20%; ">GoSharing</a>
+                    <a href="#"> <img src="../assets/images/logo-light.png" th:src="@{statics/assets/images/logo-light-icon.png}" class="logo-inverse" alt=""></a>
+                
+                </div>
+
+               
+                <!-- user icons -->
+                <div class="head_user">
+					  <!-- profile -image -->
+                    <a class="opts_account"> <img src="../assets/images/avatars/avatar-1.jpg" th:src="@{statics/assets/images/avatars/avatar-1.jpg}" alt=""><text th:text="${session.currentUser.username}"></text></a>
+					
+					<div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small"
+                        class="dropdown-notifications small">
+                        <a href="#">
+
+                            <div class="dropdown-user-details">
+                                <div class="dropdown-user-avatar">
+                                    <img src="../assets/images/avatars/avatar-1.jpg"  th:src="@{statics/assets/images/avatars/avatar-1.jpg}" alt="">
+                                </div>
+                                <div class="dropdown-user-name">
+                                    <text th:text="${session.currentUser.username}"></text> <span> 已登录 <i class="uil-check"></i> </span>
+                                </div>
+                            </div>
+                        </a>
+                        <ul class="dropdown-user-menu">
+                            <li><a href="tologout"> <i class="icon-feather-log-out"></i> 退出登录</a>
+                            </li>
+                        </ul>
+                    </div>
+                 
+
+                    </div>
+
+                </div>
+
+            </header>
+
+        </div>
+
+        <!-- contents -->
+        <div class="main_content">
+            <div class="main_content_inner">
+
+ 		
+ 		
+          
+        <div>
+ 			<h3> 授权列表 </h3> 
+ 		</div>
+		
+		<table class="layui-table">
+		  <colgroup>
+		    <col >
+		    <col >
+		    <col>
+		    <col >
+		    <col >
+		    <col >
+		    
+		  </colgroup>
+		  <thead>
+		    <tr>
+		      <th>申请人</th>
+		      <th>授权人</th>
+		      <th>申请时间</th>
+		      <th>申请说明</th>
+		      <th>状态</th>
+		      <th>授权文件</th>
+		      <th>操作</th>
+		    </tr> 
+		  </thead>
+		    <tr th:if="${authorizationlist.size()} eq '0'">
+		      <td colspan="7" align="center">暂无授权数据</td>
+		      
+		    </tr>
+		   
+		  </tbody>
+		  <tbody>
+		    <tr th:each="authorization:${authorizationlist}">
+		      <td th:text ="${authorization.applicant}">李四</td>
+		      <td th:text ="${authorization.owner}">张三</td>
+		      <td th:text="${#dates.format(authorization.time,'yyyy-MM-dd HH:mm:ss')}">2016-11-29</td>
+		      <td th:text="${authorization.introduction}">人生就像是一场修行</td>
+		      <td th:if="${authorization.state} eq '2'">已授权</td>
+		      <td th:text="${authorization.filename}"></td>
+		      <td><a href="#revoke" onclick="revoke(this)" th:value="${authorization.applicant}" th:file ="${authorization.filename}" th:applyid="${authorization.applyid}"  uk-toggle>
+		      	
+		      	<i class="layui-icon layui-icon-logout" style="font-size: 20px ;" title="撤销"></i> 
+		      	
+		      </a></td>
+		      
+		    </tr>
+		     
+		  </tbody>
+		</table>
+          
+          
+          
+          
+            </div>
+        </div>
+
+
+    <!--</div>-->
+    
+    <!--撤销授权model-->
+		<div id="revoke" uk-modal>
+		    <div class="uk-modal-dialog">
+		        <button class="uk-modal-close-default" type="button" uk-close></button>
+		        <div class="uk-modal-header">
+		            <h2 class="uk-modal-title">确定撤销以下授权？</h2>
+		        </div>
+		        <input id="revokeid" type="hidden" value="" />
+		        <div class="uk-modal-body">
+		            <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+		        	<div class="layui-form-item">
+					    <label class="layui-form-label">申请人</label>
+					    <div class="layui-input-block">
+					      <input id="clickrevoke"   class="layui-input"  value="" readonly="true"  />
+					    </div>
+					     
+					   
+					  </div>
+					  <div class="layui-form-item">
+					    <label class="layui-form-label">授权人</label>
+					    <div class="layui-input-block">
+					      
+					      <text th:text="${session.currentUser.username}" style="padding-top: 10px;"  class="layui-input">
+					      <!--<text id="clickau" >-->
+					    </div>
+					     
+					   
+					  </div>
+					  <!--<div class="layui-form-item layui-form-text">
+					    <label class="layui-form-label">申请说明</label>
+					    <div class="layui-input-block">
+					      <textarea id="explain" name="desc" class="layui-textarea" readonly="true"> </textarea>
+					    	
+					    </div>
+					  </div>-->
+					<div class="layui-form-item">
+					    <label class="layui-form-label">授权文件</label>
+					    <div class="layui-input-block">
+					      <input id="file"   class="layui-input"  value="" readonly="true"  />
+					    </div>
+					     
+					   
+					  </div>      
+		        </div>
+		        <div class="uk-modal-footer uk-text-right">
+		            <button class="button uk-button-default uk-modal-close" type="button">取消</button>
+		            <button id="revokedata" class="button uk-button-primary" type="button">确认</button>
+		        </div>
+		    </div>
+		</div>
+
+
+
+    <!-- For Night mode -->
+    <script>
+        (function (window, document, undefined) {
+            'use strict';
+            if (!('localStorage' in window)) return;
+            var nightMode = localStorage.getItem('gmtNightMode');
+            if (nightMode) {
+                document.documentElement.className += ' night-mode';
+            }
+        })(window, document);
+
+
+        (function (window, document, undefined) {
+
+            'use strict';
+
+            // Feature test
+            if (!('localStorage' in window)) return;
+
+            // Get our newly insert toggle
+            var nightMode = document.querySelector('#night-mode');
+            if (!nightMode) return;
+
+            // When clicked, toggle night mode on or off
+            nightMode.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.documentElement.classList.toggle('night-mode');
+                if (document.documentElement.classList.contains('night-mode')) {
+                    localStorage.setItem('gmtNightMode', true);
+                    return;
+                }
+                localStorage.removeItem('gmtNightMode');
+            }, false);
+
+        })(window, document);
+    </script>
+
+
+    <!-- javaScripts
+                ================================================== -->
+    
+	<script src="../assets/js/framework.js" th:src="@{statics/assets/js/framework.js}"></script>
+    <script src="../assets/js/jquery-3.3.1.min.js" th:src="@{statics/assets/js/jquery-3.3.1.min.js}" ></script>
+    <script src="../assets/js/simplebar.js" th:src="@{statics/assets/js/simplebar.js}"></script>
+    <script src="../assets/js/main.js" th:src="@{statics/assets/js/main.js}"></script>
+	<script type="text/javascript">
+		
+		$(function() {
+			
+			$("#revokedata").click(function() {
+				revokedata();
+			})
+			
+		})
+		
+		function revokedata() {
+//			alert(111);
+			
+			var applyid = $("#revokeid").val();
+			var filename = $("#file").val();
+//			alert(applyid);
+
+				$.ajax({
+					url: "revokedata",
+				//	async: true,
+					type: "post",
+					data:{
+						"applyid":applyid,
+						"filename":filename
+					},
+					//  dataType: "json",
+					success: function(data) {
+//						alert(data);
+						if(data =="0") {
+						
+							UIkit.notification({message: '撤销失败！', status: 'danger'})
+						}
+						//登录成功
+						else if(data == "1") {
+							window.location.href="toauthorizationdata";
+//							UIkit.notification({message: '申请成功', status: 'danger'})
+							
+//							
+							
+						}
+					}
+				})
+			
+		}
+		
+		
+		
+		function revoke(obj){
+
+			
+			$('#clickrevoke').val($(obj).attr("value"));
+			$('#revokeid').val($(obj).attr("applyid"));
+//			$('#explain').val($(obj).attr("introduction"));
+			$('#file').val($(obj).attr("file"));
+		}
+		$(function () {
+		        var x = -30;
+		        var y = 20;
+		        var newtitle = '';
+		        $('i.layui-icon').mouseover(function (e) {
+		            newtitle = this.title;
+		            this.title = '';
+		            $('body').append('<div id="mytitle" style=" z-index:999;">' + newtitle + '</div>');
+		            $('#mytitle').css({
+		                'left': (e.pageX + x + 'px'),
+		                'top': (e.pageY + y - 80 + 'px')
+		            }).show();
+		        }).mouseout(function () {
+		            this.title = newtitle;
+		            $('#mytitle').remove();
+		        }).mousemove(function (e) {
+		            $('#mytitle').css({
+		                'left': (e.pageX + x +10 + 'px'),
+		                'top': (e.pageY + y - 60 + 'px')
+		            }).show();
+		        })
+		    });
+		
+		
+		
+	</script>
+	
+	<style type="text/css">
+		 #mytitle {
+        position: absolute;
+        color: #ffffff;
+        max-width: 160px;
+        font-size: 14px;
+        padding: 4px;
+        background: rgba(40, 40, 40, 0.8);
+        border: solid 1px #e9f7f6;
+        border-radius:5px;
+    }
+
+	</style>
+</body>
+
+</html>

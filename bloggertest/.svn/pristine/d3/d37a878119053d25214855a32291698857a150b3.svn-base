@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css" th:href="@{static/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" href="css/header.css" th:href="@{static/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"/>
+	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/admin.css" th:href="@{static/css/admin.css}">
+
+    <title>管理后台</title>
+</head>
+<body class="layui-view-body">
+	   
+	    <div th:if="${session.currentUser.usertype != null} and ${session.currentUser.usertype==0}"th:replace="studentHead :: html"></div>
+	   	<div th:if="${session.currentUser.usertype != null} and ${session.currentUser.usertype==1}"th:replace="teacherHead :: html"></div>
+	   	<div th:if="${session.currentUser.usertype == null}"th:replace="studentHead :: html"></div>
+	   	
+        
+    <div class="layui-layout layui-layout-admin center">
+        
+
+        <div class="layui-side custom-admin">
+            <div class="layui-side-scroll" style="background-color: rgb(252,248,222);">
+
+                <div class="custom-search">
+                	<i class="fa fa-search"></i>
+                    <input type="text" placeholder="搜索群" class="form-control"/>
+                </div>
+                <ul id="Nav" class="layui-nav layui-nav-tree group-list" >
+                    <li class="layui-nav-item group-list-li">
+                        <a href="javascript:;" class="group-list-group">
+                            <i class="layui-icon">&#xe609;</i>
+                            <em>管理的群</em>
+                        </a>
+                        
+                        <dl class="layui-nav-child">
+                            <dd>
+                            	<a href="teacher/adminwork.html" class="group-list-dla">
+                            	<img src="img/pandaddd.jpg" class="customer-img"/>kk
+                            	</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item group-list-li">
+                        <a href="javascript:;" class="group-list-group">
+                            <i class="layui-icon">&#xe857;</i>
+                            <em>加入的群</em>
+                        </a>
+                        <dl class="layui-nav-child ">
+                            <dd>
+                            	<a href="teacher/memberwork.html" class="group-list-dla">
+                            		<img src="img/pandaddd.jpg" class="customer-img"/>qq
+                            	</a>
+                            </dd>
+                            <!--dd>
+                                <a href="javascript:;">页面</a>
+                                <dl class="layui-nav-child">
+                                    <dd>
+                                        <a href="login.html">登录页</a>
+                                    </dd>
+                                </dl>
+                            </dd-->
+                        </dl>
+                    </li>
+                </ul>
+				<!--<div class="list-footer" id="Nav">
+					<div class="gButton">
+						<a class="group-create" href="teacher/createGroup.html"><i class="layui-icon layui-icon-add-1"></i><h3>创建群</h3></a>
+					</div>
+                	
+                	<div class="gButton">
+                		<a class="group-in" href="teacher/joinGroup.html"><i class="layui-icon layui-icon-add-1"></i><h3>添加群</h3></a>
+                	</div>
+                </div>-->
+            </div>
+        </div>
+
+        <div class="layui-body">
+             <div class="layui-tab app-container" lay-allowClose="true" lay-filter="tabs">
+                <ul id="appTabs" class="layui-tab-title custom-tab"></ul>
+                <div id="appTabPage" class="layui-tab-content"></div>
+            </div>
+        </div>
+
+        <div class="layui-footer">
+            <p>© 2018 DEMO</p>
+        </div>
+
+        <div class="mobile-mask"></div>
+    </div>
+   
+    <script src="layui/layui.js" th:src="@{static/layui/layui.js}"></script>
+	<script src="index.js" data-main="home" th:src="@{static/index.js}"></script>
+    <script>
+		//注意：导航 依赖 element 模块，否则无法进行功能性操作
+		layui.use('element', function(){
+		  var element = layui.element;
+		  
+		  //…
+		});
+	</script>
+</body>
+
+</html>

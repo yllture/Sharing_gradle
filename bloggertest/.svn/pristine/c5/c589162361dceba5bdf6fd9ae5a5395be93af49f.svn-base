@@ -1,0 +1,12 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.Paper_singlechoice;
+
+public interface Paper_singlechoiceService {
+	int addPaper_singlechoice(Paper_singlechoice choice);
+	int deletePaper_singlechoice(Paper_singlechoice choice);
+	int updatePaper_singlechoice(Paper_singlechoice choice);
+	List<Paper_singlechoice> selectByqid(Paper_singlechoice choice);
+}

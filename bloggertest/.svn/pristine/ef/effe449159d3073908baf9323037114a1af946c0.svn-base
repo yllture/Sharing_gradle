@@ -1,0 +1,837 @@
+package com.neuedu.service.impl;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.neuedu.controller.StudentPaperControl;
+import com.neuedu.dao.PaperMapper;
+import com.neuedu.dao.Paper_fillMapper;
+import com.neuedu.dao.Paper_fillchoiceMapper;
+import com.neuedu.dao.Paper_judgeMapper;
+import com.neuedu.dao.Paper_multipleMapper;
+import com.neuedu.dao.Paper_multiplechoiceMapper;
+import com.neuedu.dao.Paper_shortanswerMapper;
+import com.neuedu.dao.Paper_shortanswer_movMapper;
+import com.neuedu.dao.Paper_shortanswer_picMapper;
+import com.neuedu.dao.Paper_singleMapper;
+import com.neuedu.dao.Paper_singlechoiceMapper;
+import com.neuedu.dao.PapermappingMapper;
+import com.neuedu.entity.*;
+import com.neuedu.entity.PaperExample.Criteria;
+import com.neuedu.service.ExamService;
+import com.neuedu.service.PaperService;
+import com.neuedu.service.Paper_fillService;
+import com.neuedu.service.Paper_judgeService;
+import com.neuedu.service.Paper_multipleService;
+import com.neuedu.service.Paper_shortanswerService;
+import com.neuedu.service.Paper_singleService;
+import com.neuedu.service.UserService;
+@Service
+public class ExamServiceImpl implements ExamService{
+	@Autowired
+	PaperExample paperExample;
+	@Autowired
+	PaperMapper paperMapper;
+	@Autowired 
+	PapermappingMapper papermappingMapper;
+	@Autowired
+	PapermappingExample papermappingExample;
+	@Autowired
+	Paper_singleMapper paper_singleMapper;
+	@Autowired
+	Paper_multipleMapper paper_multipleMapper;
+	@Autowired
+	Paper_judgeMapper paper_judgeMapper;
+	@Autowired
+	Paper_fillMapper paper_fillMapper;
+	@Autowired
+	Paper_shortanswerMapper paper_shortanswerMapper;
+	@Autowired
+	PaperService paperService;
+	@Autowired
+	Paper_singlechoiceMapper paper_singlechoiceMapper;
+	@Autowired
+	Paper_multiplechoiceMapper paper_mutiplechoiceMapper;
+	@Autowired
+	Paper_fillchoiceMapper paper_fillchoiceMapper;
+	@Autowired
+	UserService userService;
+	@Autowired
+	Paper_fillExample paper_fillExample;
+	@Autowired
+	Paper_shortanswer_movMapper paper_shortanswer_movMapper;
+	@Autowired
+	Paper_shortanswer_picMapper paper_shortanswer_picMapper;
+	@Autowired
+	Paper_singleService paper_singleService;
+	@Autowired
+	Paper_fillService paper_fillService;
+	@Autowired
+	Paper_multipleService paper_multipleService;
+	@Autowired
+	Paper_judgeService paper_judgeService;
+	@Autowired
+	Paper_shortanswerService paper_shortanswerService;
+	
+	@Override
+	public List<Paper> getExamingPaper(User user) {
+		// TODO Auto-generated method stub
+		Criteria c1=paperExample.createCriteria();
+		c1.andWinderEqualTo(user.getUserid());
+		List<Paper> papers = paperMapper.selectByExample(paperExample);
+		List<Paper> papers2=new ArrayList<>();
+		if(papers!=null) {
+			for(Paper p:papers) {
+				papers2.add(p);
+			}
+			for(Paper paper:papers) {
+				if(paper.getBegintime()==null&&paper.getEndtime()==null) {
+					papers2.remove(paper);
+				}else {
+					if(paper.getBegintime().before(new Date())&&paper.getEndtime().after(new Date())) {
+					}else {
+					papers2.remove(paper);
+					}
+				}
+				//System.out.println(papers2.size());
+			}
+		}
+		
+		return papers2;
+	}
+
+	@Override
+	public List<Paper> getExamdonePaper(User user) {
+		
+		Criteria c1=paperExample.createCriteria();
+		c1.andWinderEqualTo(user.getUserid());
+		List<Paper> papers = paperMapper.selectByExample(paperExample);
+		List<Paper> papers2=new ArrayList<>();
+		if(papers!=null) {
+			for(Paper p:papers) {
+				papers2.add(p);
+			}
+			for(Paper paper:papers) {
+				if(paper.getEndtime()==null) {
+//					System.out.println("111");
+					papers2.remove(paper);
+				}else {
+					if(paper.getEndtime().before(new Date())) {
+					}else {
+					papers2.remove(paper);
+					}
+				}
+		}
+		
+		
+			//System.out.println(papers2.size());
+		}
+		return papers2;
+	}
+
+	@Override
+	public List<Paper> getunExamPaper(User user) {
+		Criteria c1=paperExample.createCriteria();
+		c1.andWinderEqualTo(user.getUserid());
+		List<Paper> papers = paperMapper.selectByExample(paperExample);
+		List<Paper> papers2=new ArrayList<>();
+		if(papers!=null) {
+			for(Paper p:papers) {
+				papers2.add(p);
+			}
+			for(Paper paper:papers) {
+				if(paper.getEndtime()==null) {
+//					System.out.println("111");
+					papers2.remove(paper);
+				}else {
+					if(paper.getBegintime().after(new Date())) {
+					}else {
+					papers2.remove(paper);
+					}
+				}
+				//System.out.println(papers2.size());
+			}
+		}
+		
+		return papers2;
+	}
+
+	@Override
+	public List<Paper> getExamineePapers(Paper paper) {
+		com.neuedu.entity.PapermappingExample.Criteria c1=papermappingExample.createCriteria();
+		c1.andPaperidEqualTo(paper.getPaperid());
+		List<Papermapping> mappings = papermappingMapper.selectByExample(papermappingExample);
+		List<Paper> papers=new ArrayList<>();
+		List<Paper> result=new ArrayList<>();
+		if(mappings!=null) {
+			for(Papermapping pm:mappings) {
+				papers.add(paperMapper.selectByPrimaryKey(pm.getUserpaperid()));
+			}
+			
+			for(Paper p:papers) {
+				if(!(p.getDoflag()==null)) {
+					result.add(p);
+				}
+			}
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int autoCheckSingle(Paper paper) {
+		List<Paper_single> singles=paper_singleMapper.getAllbyPaperid(paper.getPaperid());
+		if(singles!=null) {
+			for(Paper_single ps:singles) {
+				List<Paper_singlechoice> choices=ps.getSinglelist();
+				boolean flag=true;
+				for(Paper_singlechoice psc:choices) {
+					if(psc.getIschoose()==null) {
+						flag=false;
+						break;
+					}
+					if(psc.getIschoose()!=psc.getType()) {
+						flag=false;
+						break;
+					}
+				}
+				if(flag) {
+				ps.setExamineescore(ps.getqScore());
+				}else {
+					ps.setExamineescore(0);
+				}
+				paper_singleMapper.updateByPrimaryKeySelective(ps);
+			}
+		}
+		
+		return 0;
+	}
+
+	@Override
+	public int autoCheckMutiple(Paper paper) {
+		List<Paper_multiple> mutiples=paper_multipleMapper.getAllbyPaperid(paper.getPaperid());
+		if(mutiples!=null) {
+			for(Paper_multiple ps:mutiples) {
+				List<Paper_multiplechoice> choices=ps.getMultiplelist();
+				boolean flag=true;
+				for(Paper_multiplechoice psc:choices) {
+					if(psc.getIschoose()==null) {
+						flag=false;
+						break;
+					}
+					if(psc.getIschoose()!=psc.getType()) {
+						flag=false;
+						break;
+					}
+				}
+				if(flag) {
+				ps.setExamineescore(ps.getqScore());
+				}else {
+					ps.setExamineescore(0);
+				}
+				paper_multipleMapper.updateByPrimaryKeySelective(ps);
+			}
+		}
+		
+		return 0;
+	}
+
+	@Override
+	public int autoCheckJudge(Paper paper) {
+		List<Paper_judge> judges=paper_judgeMapper.getAllbyPaperid(paper.getPaperid());
+		if(judges!=null) {
+			for(Paper_judge judge:judges) {
+				boolean flag=true;
+				if(!(judge.getAnswer()==null)) {
+					if(judge.getAnswer()!=judge.getIsture()) {
+						flag=false;
+					}
+				}else {
+					flag=false;
+				}
+				if(flag) {
+					judge.setExamineescore(judge.getqScore());
+					}else {
+						judge.setExamineescore(0);
+					}
+				paper_judgeMapper.updateByPrimaryKeySelective(judge);
+			}
+		}
+		
+		return 0;
+	}
+
+	@Override
+	public int getExamScore(Paper paper) {
+		List<Paper_fill> fills=paper_fillMapper.getAllbyPaperid(paper.getPaperid());
+			int fillscore=0;
+			if(fills!=null) {
+				for(Paper_fill fill:fills) {
+					fillscore+=fill.getExamineescore();
+				}
+			}
+			
+			//System.out.println(fillscore);
+			List<Paper_judge> judges=paper_judgeMapper.getAllbyPaperid(paper.getPaperid());
+			int judgescore=0;
+			if(judges!=null) {
+				for(Paper_judge judge:judges) {
+					judgescore+=judge.getExamineescore();
+				}
+			}
+			
+			//System.out.println(judgescore);
+			List<Paper_shortanswer> shortanswers=paper_shortanswerMapper.getAllbyid(paper.getPaperid());
+			int shortanswerscore=0;
+			if(shortanswers!=null) {
+				for(Paper_shortanswer shortanswer:shortanswers) {
+					//System.out.println("简答"+shortanswer.getqId());
+					shortanswerscore+=shortanswer.getExamineescore();
+				}
+			}
+			
+			//System.out.println(shortanswerscore);
+			List<Paper_multiple> multiples=paper_multipleMapper.getAllbyPaperid(paper.getPaperid());
+			int jmultiplescore=0;
+			if(multiples!=null) {
+				for(Paper_multiple multiple:multiples) {
+					jmultiplescore+=multiple.getExamineescore();
+				}
+			}
+			
+			//System.out.println(jmultiplescore);
+			List<Paper_single> singles=paper_singleMapper.getAllbyPaperid(paper.getPaperid());
+			int singlescore=0;
+			if(singles!=null) {
+				for(Paper_single single:singles) {
+					singlescore+=single.getExamineescore();
+				}
+			}
+			
+			//System.out.println(singlescore);
+			int result=fillscore+judgescore+shortanswerscore+jmultiplescore+singlescore;
+			paper.setFinscore(result);
+			paperMapper.updateByPrimaryKeySelective(paper);
+		return result;
+	}
+
+	@Override
+	public int creatExampaper(Paper paper,User user) {
+		int paperid=paper.getPaperid();
+		paper.setPaperid(0);
+		paper.setQuestionnum(0);
+		paper.setDoflag(0);
+		paper.setShortanswernum(0);
+		paper.setSinglenum(0);
+		paper.setMultiplenum(0);
+		paper.setJudgenum(0);
+		paper.setFillnum(0);
+		paper.setExaminee(user.getUserid());
+		//System.out.println("before add");
+		//paperService.addPaper(paper);
+		paperMapper.insert(paper);
+		//System.out.println("after add");
+		int userpaperid=paper.getPaperid();
+		//System.out.println(userpaperid);
+		Papermapping pm=new Papermapping();
+		pm.setPaperid(paperid);
+		pm.setUserpaperid(userpaperid);
+		pm.setType(0);
+		pm.setExaminee(user.getUserid());
+		papermappingMapper.insert(pm);
+		Paper newp=new Paper();
+		newp.setPaperid(paperid);
+		List<Paper_single> singles=paper_singleMapper.getAllbyPaperid(paperid);
+		if(!singles.isEmpty()) {
+			for(Paper_single single:singles) {
+				single.setExaminee(user.getUserid());
+				single.setPaperid(userpaperid);
+				//System.out.println("beforeinsert");
+				single.setqId(null);
+				paper_singleMapper.insert(single);
+				//System.out.println("afterinsert");
+				if(paper.getOrderflag()==0) {
+				List<Paper_singlechoice> choices=single.getSinglelist();
+				int n=choices.size();
+				//随机生成1-size的随机数列
+	        	   int [] a = new int[n];
+	   	           for(int i = 0;i<a.length;i++){
+	   	               a[i]=(int)(1+Math.random()*n); 
+	   	                 for(int j = 0;j<i;j++){
+	   	                    if(a[j]==a[i]){
+	   	                        i--;
+	   	                    }
+	   	                 }
+	   	           }
+	   	           int t=0;
+	   	          for(Paper_singlechoice choice:choices) {
+	   	        	   choice.setSequence(a[t]);
+	   	        	   t++;
+	   	          }
+	   	          for(Paper_singlechoice c:choices) {
+	   	        	  System.out.println(c.getSequence());
+	   	          }
+	   	       List<Paper_singlechoice> choices2=new ArrayList<>();
+				for(int i=1;i<=choices2.size();i++) {
+					for(Paper_singlechoice psc:choices) {
+						if(psc.getSequence()==i) {
+							choices2.add(psc);
+						}
+					}
+					
+				}
+				single.setSinglelist(choices2);
+				}
+				
+				for(Paper_singlechoice choice:single.getSinglelist()) {
+					choice.setqId(single.getqId());
+					choice.setChoiceid(null);
+					paper_singlechoiceMapper.insert(choice);
+				}
+			}
+		}
+		List<Paper_multiple> multiples=paper_multipleMapper.getAllbyPaperid(paperid);
+		if(!multiples.isEmpty()) {
+			for(Paper_multiple multiple:multiples) {
+				multiple.setExaminee(user.getUserid());
+				multiple.setPaperid(userpaperid);
+				multiple.setqId(null);
+				paper_multipleMapper.insert(multiple);
+				if(paper.getOrderflag()==0) {
+				List<Paper_multiplechoice> choices=multiple.getMultiplelist();
+				int n=choices.size();
+				//随机生成1-size的随机数列
+	        	   int [] a = new int[n];
+	   	           for(int i = 0;i<a.length;i++){
+	   	               a[i]=(int)(1+Math.random()*n); 
+	   	                 for(int j = 0;j<i;j++){
+	   	                    if(a[j]==a[i]){
+	   	                        i--;
+	   	                    }
+	   	                 }
+	   	           }
+	   	           int t=0;
+	   	          for(Paper_multiplechoice choice:choices) {
+	   	        	   choice.setSequence(a[t]);
+	   	        	   t++;
+	   	          }
+	   	          for(Paper_multiplechoice c:choices) {
+	   	        	  System.out.println(c.getSequence());
+	   	          }
+		   	       List<Paper_multiplechoice> choices2=new ArrayList<>();
+					for(int i=1;i<=choices2.size();i++) {
+						for(Paper_multiplechoice psc:choices) {
+							if(psc.getSequence()==i) {
+								choices2.add(psc);
+							}
+						}
+						
+					}
+					multiple.setMultiplelist(choices2);
+	   	          
+				}
+				for(Paper_multiplechoice choice:multiple.getMultiplelist()) {
+					choice.setChoiceid(null);
+					choice.setqId(multiple.getqId());
+					paper_mutiplechoiceMapper.insert(choice);
+				}
+			}
+		}
+		List<Paper_judge> judges=paper_judgeMapper.getAllbyPaperid(paperid);
+		if(!judges.isEmpty()) {
+			for(Paper_judge judge:judges) {
+				judge.setExaminee(user.getUserid());
+				judge.setqId(null);
+				judge.setPaperid(userpaperid);
+				paper_judgeMapper.insert(judge);
+				
+			}
+		}
+		List<Paper_fill> fills=paper_fillMapper.getAllbyPaperid(paperid);
+		if(!fills.isEmpty()) {
+			for(Paper_fill fill:fills) {
+				fill.setExaminee(user.getUserid());
+				fill.setqId(null);
+				fill.setPaperid(userpaperid);
+				paper_fillMapper.insert(fill);
+				for(Paper_fillchoice choice:fill.getFilllist()) {
+					choice.setChoiceid(null);
+					choice.setqId(fill.getqId());
+					paper_fillchoiceMapper.insert(choice);
+				}
+			}
+		}
+		List<Paper_shortanswer> shortanswers=paper_shortanswerMapper.getAllbyid(paperid);
+		if(!shortanswers.isEmpty()) {
+			for(Paper_shortanswer shortanswer:shortanswers) {
+				shortanswer.setqId(null);
+				shortanswer.setPaperid(userpaperid);
+				shortanswer.setExaminee(user.getUserid());
+				paper_shortanswerMapper.insert(shortanswer);
+				Integer sid=shortanswer.getqId();
+				List<Paper_shortanswer_mov> movs=shortanswer.getShortmovlist();
+				if(movs!=null) {
+					System.out.println(movs.size());
+					for(Paper_shortanswer_mov mov:movs) {
+						Paper_shortanswer_mov m=new Paper_shortanswer_mov();
+						System.out.println(mov.getqId());
+						System.out.println(mov.getMovie());
+						mov.setqId(shortanswer.getqId());
+						paper_shortanswer_movMapper.insert(mov);
+					}
+				}
+				List<Paper_shortanswer_pic> pics=shortanswer.getShortpiclist();
+				if(pics!=null) {
+					for(Paper_shortanswer_pic pic:pics) {
+						Paper_shortanswer_pic m=new Paper_shortanswer_pic();
+
+						pic.setqId(shortanswer.getqId());
+						paper_shortanswer_picMapper.insert(pic);
+					}
+				}
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public HashMap<String, Integer> getExamResult(Paper paper) {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> hashmap=new HashMap<>();
+		List<Paper> papers=getExamineePapers(paper);
+		if(papers!=null) {
+			for(Paper p:papers) {
+				Integer score=p.getFinscore();
+				User u=new User();
+				u.setUserid(p.getExaminee());
+				User user=userService.selectUserByPrimaryKey(u);
+				hashmap.put(user.getUsername(), score);
+			}
+		}
+		
+		return hashmap;
+	}
+
+	@Override
+	public HashMap<Paper_fill, Integer> getfillResult(Paper paper) {
+		HashMap<String, Integer> result=new HashMap<>();
+		
+		//母本的填空题
+		List<Paper_fill> motherfills=paper_fillMapper.getAllbyPaperid(paper.getPaperid());
+		if(motherfills.size()==0) {
+			return null;
+		}
+		for(Paper_fill fill:motherfills) {
+			//System.out.println("222");
+			result.put(fill.getqTitle(), 0);
+		}
+//		for(String key:result.keySet()) {
+//			System.out.println("key"+key+"value"+result.get(key));
+//		}
+		List<Paper> examineepapers=getExamineePapers(paper);
+		for(Paper p:examineepapers) {
+			
+			List<Paper_fill> fills=paper_fillMapper.getAllbyPaperid(p.getPaperid());
+			for(Paper_fill fill:fills) {
+				if(fill.getqScore().equals(fill.getExamineescore())) {
+					Integer i=result.get(fill.getqTitle());
+					i++;
+					result.put(fill.getqTitle(), i);
+				}
+			}	
+		}
+		HashMap<Paper_fill, Integer> hashmap=new HashMap<>();
+		for(String key:result.keySet()) {
+			Paper_fillExample paperfillExample=new Paper_fillExample();
+			com.neuedu.entity.Paper_fillExample.Criteria c1=paperfillExample.createCriteria();
+			c1.andPaperidEqualTo(paper.getPaperid());
+			c1.andQTitleEqualTo(key);
+			List<Paper_fill> fill= paper_fillMapper.selectByExample(paperfillExample);
+			for(Paper_fill f:fill) {
+				hashmap.put(f, result.get(key));
+			}
+			
+		}
+		
+		return hashmap;
+	}
+
+	@Override
+	public HashMap<Paper_single, List<Integer>> getsingleResult(Paper paper) {
+		HashMap<String, List<Integer>> result=new HashMap<>();
+		//母本的单选题
+		List<Paper_single> mothersingles=paper_singleMapper.getAllbyPaperid(paper.getPaperid());
+		if(mothersingles.size()==0) {
+			return null;
+		}
+		for(Paper_single single:mothersingles) {
+			List<Paper_singlechoice> list=single.getSinglelist();
+			List<Integer> studentchoice=new ArrayList<>();
+			for(int i=0;i<list.size()+1;i++) {
+				studentchoice.add(0);
+			}
+			result.put(single.getqTitle(), studentchoice);
+		}
+		List<Paper> examineepapers=getExamineePapers(paper);
+		for(Paper p:examineepapers) {
+			List<Paper_single> singles=paper_singleMapper.getAllbyPaperid(p.getPaperid());
+			for(Paper_single single:singles) {
+				List<Integer> l=result.get(single.getqTitle());
+				if(single.getqScore().equals(single.getExamineescore())) {
+					int t=l.get(0);
+					l.set(0, t+1);
+				}
+				List<Paper_singlechoice> choices=single.getSinglelist();
+				Integer size=choices.size();
+				for(Paper_singlechoice choice:choices) {
+					if(choice.getIschoose()==1) {
+						int t=l.get(choice.getSequence());
+						l.set(choice.getSequence(), ++t);
+					}
+				}
+				result.put(single.getqTitle(), l);
+			}	
+		}
+		//把结果转变
+		HashMap<Paper_single, List<Integer>> hashmap=new HashMap<>();
+		for(String key:result.keySet()) {
+			Paper_singleExample papersingleExample=new Paper_singleExample();
+			com.neuedu.entity.Paper_singleExample.Criteria c1=papersingleExample.createCriteria();
+			c1.andPaperidEqualTo(paper.getPaperid());
+			c1.andQTitleEqualTo(key);
+			List<Paper_single> single= paper_singleMapper.selectByExample(papersingleExample);
+			for(Paper_single f:single) {
+				hashmap.put(f, result.get(key));
+			}
+			
+		}
+		
+		return hashmap;
+	}
+
+	@Override
+	public HashMap<Paper_judge, Integer> getjudgeResult(Paper paper) {
+		HashMap<String, Integer> result=new HashMap<>();
+		//母本的判断题
+		List<Paper_judge> motherjudges=paper_judgeMapper.getAllbyPaperid(paper.getPaperid());
+		if(motherjudges.size()==0) {
+			return null;
+		}
+		for(Paper_judge fill:motherjudges) {
+			//System.out.println("222");
+			result.put(fill.getqTitle(), 0);
+		}
+		List<Paper> examineepapers=getExamineePapers(paper);
+		for(Paper p:examineepapers) {
+			
+			List<Paper_judge> judges=paper_judgeMapper.getAllbyPaperid(p.getPaperid());
+			for(Paper_judge judge:judges) {
+				if(judge.getqScore().equals(judge.getExamineescore())) {
+					Integer i=result.get(judge.getqTitle());
+					i++;
+					result.put(judge.getqTitle(), i);
+				}
+			}	
+		}
+		HashMap<Paper_judge, Integer> hashmap=new HashMap<>();
+		for(String key:result.keySet()) {
+			Paper_judgeExample paperjudgeExample=new Paper_judgeExample();
+			com.neuedu.entity.Paper_judgeExample.Criteria c1=paperjudgeExample.createCriteria();
+			c1.andPaperidEqualTo(paper.getPaperid());
+			c1.andQTitleEqualTo(key);
+			List<Paper_judge> judge= paper_judgeMapper.selectByExample(paperjudgeExample);
+			for(Paper_judge f:judge) {
+				hashmap.put(f, result.get(key));
+			}
+			
+		}
+		
+		return hashmap;
+	}
+
+	@Override
+	public HashMap<Paper_shortanswer, Integer> getshortanswerResult(Paper paper) {
+		HashMap<String, Integer> result=new HashMap<>();
+		
+		//母本的简答题
+		List<Paper_shortanswer> mothershortanswers=paper_shortanswerMapper.getAllbyid(paper.getPaperid());
+		if(mothershortanswers.size()==0) {
+			return null;
+		}
+		for(Paper_shortanswer shortanswer:mothershortanswers) {
+			//System.out.println("222");
+			result.put(shortanswer.getqTitle(), 0);
+		}
+//		for(String key:result.keySet()) {
+//			System.out.println("key"+key+"value"+result.get(key));
+//		}
+		List<Paper> examineepapers=getExamineePapers(paper);
+		for(Paper p:examineepapers) {
+			
+			List<Paper_shortanswer> shortanswers=paper_shortanswerMapper.getAllbyid(paper.getPaperid());
+			for(Paper_shortanswer shortanswer:shortanswers) {
+				if(shortanswer.getqScore().equals(shortanswer.getExamineescore())) {
+					Integer i=result.get(shortanswer.getqTitle());
+					i++;
+					result.put(shortanswer.getqTitle(), i);
+				}
+			}	
+		}
+		HashMap<Paper_shortanswer, Integer> hashmap=new HashMap<>();
+		for(String key:result.keySet()) {
+			Paper_shortanswerExample papershortanswerExample=new Paper_shortanswerExample();
+			com.neuedu.entity.Paper_shortanswerExample.Criteria c1=papershortanswerExample.createCriteria();
+			c1.andPaperidEqualTo(paper.getPaperid());
+			c1.andQTitleEqualTo(key);
+			List<Paper_shortanswer> shortanswer= paper_shortanswerMapper.selectByExample(papershortanswerExample);
+			for(Paper_shortanswer f:shortanswer) {
+				hashmap.put(f, result.get(key));
+			}
+			
+		}
+		
+		return hashmap;
+	}
+
+	@Override
+	public HashMap<Paper_multiple, List<Integer>> getmultipleResult(Paper paper) {
+		HashMap<String, List<Integer>> result=new HashMap<>();
+		//母本的单选题
+		List<Paper_multiple> mothermultiples=paper_multipleMapper.getAllbyPaperid(paper.getPaperid());
+		if(mothermultiples.size()==0) {
+			return null;
+		}
+		for(Paper_multiple multiple:mothermultiples) {
+			List<Paper_multiplechoice> list=multiple.getMultiplelist();
+			List<Integer> studentchoice=new ArrayList<>();
+			for(int i=0;i<list.size()+1;i++) {
+				studentchoice.add(0);
+			}
+			result.put(multiple.getqTitle(), studentchoice);
+		}
+		List<Paper> examineepapers=getExamineePapers(paper);
+		for(Paper p:examineepapers) {
+			List<Paper_multiple> multiples=paper_multipleMapper.getAllbyPaperid(p.getPaperid());
+			for(Paper_multiple multiple:multiples) {
+				List<Integer> l=result.get(multiple.getqTitle());
+				if(multiple.getqScore().equals(multiple.getExamineescore())) {
+					int t=l.get(0);
+					l.set(0, t+1);
+				}
+				List<Paper_multiplechoice> choices=multiple.getMultiplelist();
+				Integer size=choices.size();
+				for(Paper_multiplechoice choice:choices) {
+					if(choice.getIschoose()==1) {
+						int t=l.get(choice.getSequence());
+						l.set(choice.getSequence(), ++t);
+					}
+				}
+				result.put(multiple.getqTitle(), l);
+			}	
+		}
+		//把结果转变
+		HashMap<Paper_multiple, List<Integer>> hashmap=new HashMap<>();
+		for(String key:result.keySet()) {
+			Paper_multipleExample papermultipleExample=new Paper_multipleExample();
+			com.neuedu.entity.Paper_multipleExample.Criteria c1=papermultipleExample.createCriteria();
+			c1.andPaperidEqualTo(paper.getPaperid());
+			c1.andQTitleEqualTo(key);
+			List<Paper_multiple> multiple= paper_multipleMapper.selectByExample(papermultipleExample);
+			for(Paper_multiple f:multiple) {
+				hashmap.put(f, result.get(key));
+			}
+			
+		}
+		
+		return hashmap;
+	}
+
+	@Override
+	public List<Integer> getStudentScores(Paper paper) {
+		// TODO Auto-generated method stub
+		 List<Paper> examineePapers = getExamineePapers(paper);
+		 List<Integer> scores=new ArrayList<Integer>();
+		 
+		 for(Paper p:examineePapers) {
+			 if(p.getFillscore()!=null) {
+			 scores.add(p.getFillscore());
+			 }
+		 }
+		 
+		return scores;
+	}
+
+	@Override
+	public HashMap<Paper_single, Integer> getsingleRightNum(Paper paper) {
+		// TODO Auto-generated method stub
+		 HashMap<Paper_single, List<Integer>> getsingleResult = getsingleResult(paper);
+		 if(getsingleResult==null) {
+			 return null;
+		 }
+		 LinkedHashMap<Paper_single,Integer> res=new LinkedHashMap<Paper_single,Integer>();
+		 for(Entry<Paper_single,List<Integer>> entry:getsingleResult.entrySet()) {
+			 Paper_single key=entry.getKey();
+			 List<Integer> list =entry.getValue();
+			 int rightNum=list.get(0);
+			 res.put(key, rightNum);
+		 }
+			 
+		 return res;
+	}
+
+	@Override
+	public HashMap<Paper_multiple, Integer> getmultipleRightNum(Paper paper) {
+		
+		// TODO Auto-generated method stub
+		HashMap<Paper_multiple, List<Integer>> getmultipleResult = getmultipleResult(paper);
+		HashMap<Paper_multiple,Integer> re=new LinkedHashMap<Paper_multiple,Integer>();
+		if(getmultipleResult==null) {
+			 return null;
+		 }
+		 for(Entry<Paper_multiple, List<Integer>> entry:getmultipleResult.entrySet()) {
+			 Paper_multiple key=entry.getKey();
+			 List<Integer> list =entry.getValue();
+			 int rightNum=list.get(0);
+			 re.put(key, rightNum);
+		 }
+		
+		
+		return re;
+	}
+
+	@Override
+	public int updateTeacherPaperDonenum(Paper paper) {
+		com.neuedu.entity.PapermappingExample.Criteria c1=papermappingExample.createCriteria();
+		c1.andUserpaperidEqualTo(paper.getPaperid());
+		List<Papermapping> result=papermappingMapper.selectByExample(papermappingExample);
+		Paper p = null;
+		for(Papermapping pm :result) {
+			//System.out.println("1");
+			p=paperMapper.selectByPrimaryKey(pm.getPaperid());
+		}
+		if(p!=null) {
+			//System.out.println(p.getPaperid());
+			Paper x=paperMapper.selectByPrimaryKey(p.getPaperid());
+			int t1=x.getDonenum();
+			int t2=x.getDoingnum();
+			x.setDonenum(t1+1);
+			x.setDoingnum(t2-1);
+			paperMapper.updateByPrimaryKeySelective(x);
+		}
+		
+		return 0;
+	}
+
+
+
+
+}

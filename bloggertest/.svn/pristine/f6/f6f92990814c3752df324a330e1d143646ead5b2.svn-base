@@ -1,0 +1,163 @@
+/*-------------------------
+	Simple reset
+--------------------------*/
+
+
+*{
+	margin:0;
+	padding:0;
+}
+
+
+/*-------------------------
+	General Styles
+--------------------------*/
+
+
+body{
+	font:14px/1.3 'Segoe UI',Arial, sans-serif;
+	background-color:transparent;
+}
+
+a, a:visited {
+	outline:none;
+	color:#1c4f64;
+}
+
+a:hover{
+	text-decoration:none;
+}
+
+
+/*----------------------------
+	CSS3 Folder
+-----------------------------*/
+
+
+.folder-item{
+	/*display: inline-table;
+	padding: 30px 20px 0px 20px;*/
+	   padding: 0px 0px 0px 0px;
+}
+.folder {
+	/* This will enable the 3D effect. Decrease this value 
+	 * to make the perspective more pronounced: */
+	
+	-webkit-perspective: 800px;
+	-moz-perspective: 800px;
+	perspective: 800px;
+	
+	/*display: inline;*/
+
+	top: 50%;
+	left: 50%;
+	z-index: 0;
+	margin-left: 30px;
+	margin-top: 20px;
+	width: 120px;
+	height: 80px;
+}
+
+.folder div{
+    width:100px;
+    height:80px;
+   /* background-color:#93bad8;*/
+    
+    /* Enabling 3d space for the transforms */
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    
+    /* Enabling a smooth animated transition */
+    -webkit-transition:0.5s;
+    -moz-transition:0.5s;
+    transition:0.5s;
+    
+    /* Disable text seleltion on the folder */
+    -webkit-user-select: none;
+  	-moz-user-select: none;
+  	user-select: none;
+    
+    position:absolute;
+    top:0;
+    left:50%;
+    margin-left:-75px;
+}
+
+.folder .front{
+    border-radius:5px 5px 0 0;
+    
+    -moz-transform:rotateX(-30deg);
+    -webkit-transform:rotateX(-30deg);
+    transform:rotateX(-30deg);
+    
+    -moz-transform-origin:50% 100%;
+    -webkit-transform-origin:50% 100%;
+    transform-origin:50% 100%;
+    
+    background-image: -moz-linear-gradient(top, #93bad8 0%, #6c9dc0 85%, #628faf 100%);
+        background-image: -webkit-linear-gradient(top, #56c6a7 0%, #d5c1c1 85%, #c4c4c8 100%);
+    background-image: linear-gradient(top, #93bad8 0%, #6c9dc0 85%, #628faf 100%);
+    
+    box-shadow:0 -2px 2px rgba(0,0,0,0.1), 0 1px rgba(255,255,255,0.35) inset;
+    
+    z-index:10;
+    
+    font: bold 26px sans-serif;
+	color: #698f7f;
+	text-align: center;
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1);
+	line-height: 80px;
+}
+
+.folder .back{
+    background-image: -webkit-linear-gradient(top, #b2d3c6 0%, #89c6aa 10%,  #416c54 60%);
+    background-image: -moz-linear-gradient(top, #93bad8 0%, #89afcc 10%, #5985a5 60%);
+    background-image: linear-gradient(top, #93bad8 0%, #89afcc 10%, #5985a5 60%);
+    
+    border-radius:0 5px 0 0;
+    box-shadow:0 -1px 1px rgba(0,0,0,0.15);
+}
+
+.folder .back:before{
+    content:'';
+    width: 40px;
+    height: 7px;
+    border-radius: 4px 4px 0 0;
+    background-color: #b2d3c6;
+    position: absolute;
+    top: -7px;
+    left:0px;
+    box-shadow:0 -1px 1px rgba(0,0,0,0.15);
+}
+
+.folder .back:after{
+    content:'';
+    width:100%;
+    height:4px;
+    border-radius:5px;
+    position:absolute;
+    bottom:5px;
+    left:0px;
+    box-shadow:0 4px 8px #333;
+}
+
+.folder.open .front{
+    -moz-transform:rotateX(-50deg);
+    -webkit-transform:rotateX(-50deg);
+    transform:rotateX(-50deg);
+}
+
+
+/*----------------------------
+	Draggable Icons
+-----------------------------*/
+
+.folder-container img{
+	position:absolute;
+	cursor:move;
+}
+.folder-report{
+	    display: inline-table;
+	     padding: 0px 50px 0px 0px;
+}

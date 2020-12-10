@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>报告</title>
+		<link rel="stylesheet" href="css/report.css" th:href="@{static/css/report.css}"/>
+	</head>
+	<body>
+		<div class="container report-detail-wrapper pure-pre print" style="padding: 100px;150px;150px;150px">
+	       <div class="row">
+	       	<div class="panel panel-default mb0">
+	       		<div class="panel-body">
+	       <div class="col-md-12 p0">
+	       	 <div class="report-basic" id="report-basic">
+	       	 	<h3 class="tc fn report-title"> 
+	       	 		某某某报告
+	            </h3>
+	            <div class="head-info">
+	            	<img class="avator" src="img/pandaddd.jpg"></img>
+	            	<div class="info-wrapper">
+	            		<div class="name-wrapper">答题者名字</div>
+	            		<div>
+	            			"邮箱"
+	            			<span>_邮箱号</span>
+	            		</div>
+	            	</div>
+	            	<div class="text-bittersweet score-wrapper">
+	            		<span class="report-marked no">
+	            			判断状态
+	            		</span>
+	            		<span class="score">分数20</span>"分"
+	            		
+	            	</div>
+	       </div>
+	       <div class="alert alert-success mt20"> 是否开放查看答案</div>
+	       <div class="report-logs" id="report-logs">
+	       	  <div class="section-title">测试日志</div>
+	       	  <ul class="log-list">
+	       	  	<li class="md5">浏览器 &emsp; chrome</li>
+	       	  	<li class="md5">IP 地址 &emsp; 75.167.154.91</li>
+	       	  	<li class="md5">
+	       	  		<span class="log-time">2019-06-16 13:34</span>
+	       	  		<span class="ml30">开始部分---->单选题</span>
+	       	  	</li>
+	       	  	
+	       	  </ul>
+	       </div>
+	       
+	    </div>
+	   </div>
+	  </div>
+	  </div>
+	</body>
+</html>

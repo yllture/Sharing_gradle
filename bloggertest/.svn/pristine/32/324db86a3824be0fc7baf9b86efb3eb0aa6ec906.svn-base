@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.entity.User" >
+    <id column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="useraccount" property="useraccount" jdbcType="VARCHAR" />
+    <result column="usermail" property="usermail" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="userposition" property="userposition" jdbcType="VARCHAR" />
+    <result column="usercompany" property="usercompany" jdbcType="VARCHAR" />
+    <result column="usercompanylogo" property="usercompanylogo" jdbcType="VARCHAR" />
+    <result column="usertype" property="usertype" jdbcType="INTEGER" />
+    <result column="userpassword" property="userpassword" jdbcType="VARCHAR" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="outundonenum" property="outundonenum" jdbcType="INTEGER" />
+    <result column="donenum" property="donenum" jdbcType="INTEGER" />
+    <result column="inundomenum" property="inundomenum" jdbcType="INTEGER" />
+    <result column="futurenum" property="futurenum" jdbcType="INTEGER" />
+    <result column="c1" property="c1" jdbcType="VARCHAR" />
+    <result column="c2" property="c2" jdbcType="VARCHAR" />
+    <result column="c3" property="c3" jdbcType="INTEGER" />
+    <result column="c4" property="c4" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    userid, username, useraccount, usermail, tel, userposition, usercompany, usercompanylogo, 
+    usertype, userpassword, integral, icon, outundonenum, donenum, inundomenum, futurenum, 
+    c1, c2, c3, c4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.entity.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where userid = #{userid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.entity.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.entity.User" >
+    insert into user (userid, username, useraccount, 
+      usermail, tel, userposition, 
+      usercompany, usercompanylogo, usertype, 
+      userpassword, integral, icon, 
+      outundonenum, donenum, inundomenum, 
+      futurenum, c1, c2, 
+      c3, c4)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{useraccount,jdbcType=VARCHAR}, 
+      #{usermail,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{userposition,jdbcType=VARCHAR}, 
+      #{usercompany,jdbcType=VARCHAR}, #{usercompanylogo,jdbcType=VARCHAR}, #{usertype,jdbcType=INTEGER}, 
+      #{userpassword,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, 
+      #{outundonenum,jdbcType=INTEGER}, #{donenum,jdbcType=INTEGER}, #{inundomenum,jdbcType=INTEGER}, 
+      #{futurenum,jdbcType=INTEGER}, #{c1,jdbcType=VARCHAR}, #{c2,jdbcType=VARCHAR}, 
+      #{c3,jdbcType=INTEGER}, #{c4,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="useraccount != null" >
+        useraccount,
+      </if>
+      <if test="usermail != null" >
+        usermail,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="userposition != null" >
+        userposition,
+      </if>
+      <if test="usercompany != null" >
+        usercompany,
+      </if>
+      <if test="usercompanylogo != null" >
+        usercompanylogo,
+      </if>
+      <if test="usertype != null" >
+        usertype,
+      </if>
+      <if test="userpassword != null" >
+        userpassword,
+      </if>
+      <if test="integral != null" >
+        integral,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="outundonenum != null" >
+        outundonenum,
+      </if>
+      <if test="donenum != null" >
+        donenum,
+      </if>
+      <if test="inundomenum != null" >
+        inundomenum,
+      </if>
+      <if test="futurenum != null" >
+        futurenum,
+      </if>
+      <if test="c1 != null" >
+        c1,
+      </if>
+      <if test="c2 != null" >
+        c2,
+      </if>
+      <if test="c3 != null" >
+        c3,
+      </if>
+      <if test="c4 != null" >
+        c4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="useraccount != null" >
+        #{useraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="usermail != null" >
+        #{usermail,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="userposition != null" >
+        #{userposition,jdbcType=VARCHAR},
+      </if>
+      <if test="usercompany != null" >
+        #{usercompany,jdbcType=VARCHAR},
+      </if>
+      <if test="usercompanylogo != null" >
+        #{usercompanylogo,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="userpassword != null" >
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null" >
+        #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="outundonenum != null" >
+        #{outundonenum,jdbcType=INTEGER},
+      </if>
+      <if test="donenum != null" >
+        #{donenum,jdbcType=INTEGER},
+      </if>
+      <if test="inundomenum != null" >
+        #{inundomenum,jdbcType=INTEGER},
+      </if>
+      <if test="futurenum != null" >
+        #{futurenum,jdbcType=INTEGER},
+      </if>
+      <if test="c1 != null" >
+        #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null" >
+        #{c3,jdbcType=INTEGER},
+      </if>
+      <if test="c4 != null" >
+        #{c4,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.entity.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useraccount != null" >
+        useraccount = #{record.useraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usermail != null" >
+        usermail = #{record.usermail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userposition != null" >
+        userposition = #{record.userposition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usercompany != null" >
+        usercompany = #{record.usercompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usercompanylogo != null" >
+        usercompanylogo = #{record.usercompanylogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usertype != null" >
+        usertype = #{record.usertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.userpassword != null" >
+        userpassword = #{record.userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integral != null" >
+        integral = #{record.integral,jdbcType=INTEGER},
+      </if>
+      <if test="record.icon != null" >
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outundonenum != null" >
+        outundonenum = #{record.outundonenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.donenum != null" >
+        donenum = #{record.donenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.inundomenum != null" >
+        inundomenum = #{record.inundomenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.futurenum != null" >
+        futurenum = #{record.futurenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.c1 != null" >
+        c1 = #{record.c1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c2 != null" >
+        c2 = #{record.c2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c3 != null" >
+        c3 = #{record.c3,jdbcType=INTEGER},
+      </if>
+      <if test="record.c4 != null" >
+        c4 = #{record.c4,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set userid = #{record.userid,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      useraccount = #{record.useraccount,jdbcType=VARCHAR},
+      usermail = #{record.usermail,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      userposition = #{record.userposition,jdbcType=VARCHAR},
+      usercompany = #{record.usercompany,jdbcType=VARCHAR},
+      usercompanylogo = #{record.usercompanylogo,jdbcType=VARCHAR},
+      usertype = #{record.usertype,jdbcType=INTEGER},
+      userpassword = #{record.userpassword,jdbcType=VARCHAR},
+      integral = #{record.integral,jdbcType=INTEGER},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      outundonenum = #{record.outundonenum,jdbcType=INTEGER},
+      donenum = #{record.donenum,jdbcType=INTEGER},
+      inundomenum = #{record.inundomenum,jdbcType=INTEGER},
+      futurenum = #{record.futurenum,jdbcType=INTEGER},
+      c1 = #{record.c1,jdbcType=VARCHAR},
+      c2 = #{record.c2,jdbcType=VARCHAR},
+      c3 = #{record.c3,jdbcType=INTEGER},
+      c4 = #{record.c4,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.entity.User" >
+    update user
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="useraccount != null" >
+        useraccount = #{useraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="usermail != null" >
+        usermail = #{usermail,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="userposition != null" >
+        userposition = #{userposition,jdbcType=VARCHAR},
+      </if>
+      <if test="usercompany != null" >
+        usercompany = #{usercompany,jdbcType=VARCHAR},
+      </if>
+      <if test="usercompanylogo != null" >
+        usercompanylogo = #{usercompanylogo,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        usertype = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="userpassword != null" >
+        userpassword = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null" >
+        integral = #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="outundonenum != null" >
+        outundonenum = #{outundonenum,jdbcType=INTEGER},
+      </if>
+      <if test="donenum != null" >
+        donenum = #{donenum,jdbcType=INTEGER},
+      </if>
+      <if test="inundomenum != null" >
+        inundomenum = #{inundomenum,jdbcType=INTEGER},
+      </if>
+      <if test="futurenum != null" >
+        futurenum = #{futurenum,jdbcType=INTEGER},
+      </if>
+      <if test="c1 != null" >
+        c1 = #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        c2 = #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null" >
+        c3 = #{c3,jdbcType=INTEGER},
+      </if>
+      <if test="c4 != null" >
+        c4 = #{c4,jdbcType=INTEGER},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.entity.User" >
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      useraccount = #{useraccount,jdbcType=VARCHAR},
+      usermail = #{usermail,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      userposition = #{userposition,jdbcType=VARCHAR},
+      usercompany = #{usercompany,jdbcType=VARCHAR},
+      usercompanylogo = #{usercompanylogo,jdbcType=VARCHAR},
+      usertype = #{usertype,jdbcType=INTEGER},
+      userpassword = #{userpassword,jdbcType=VARCHAR},
+      integral = #{integral,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      outundonenum = #{outundonenum,jdbcType=INTEGER},
+      donenum = #{donenum,jdbcType=INTEGER},
+      inundomenum = #{inundomenum,jdbcType=INTEGER},
+      futurenum = #{futurenum,jdbcType=INTEGER},
+      c1 = #{c1,jdbcType=VARCHAR},
+      c2 = #{c2,jdbcType=VARCHAR},
+      c3 = #{c3,jdbcType=INTEGER},
+      c4 = #{c4,jdbcType=INTEGER}
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="layui/css/layui.css" th:href="@{static/layui/css/layui.css}">
+		<link rel="stylesheet" type="text/css" href="css/header.css" th:href="@{static/css/header.css}"/>
+		<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"/>
+		<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" th:href="@{static/css/bootstrap.css}"/>
+		<link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{static/css/common.css}"/>
+			<script src="layui/layui.js" th:src="@{static/layui/layui.js}"></script>
+	<script src="index.js" data-main="home" th:src="@{static/index.js}"></script>
+
+<script type="text/javascript">
+function show(){
+	$.ajax({
+		type :'post',
+		url:'topaperinfo',
+		//contentType: "application/json; charset=utf-8",
+		success:function(){
+			alert("111");
+			var x=a;
+			window.location.href="topaperinfo?a="+x;
+		}
+	});
+}
+</script>
+	<title>管理后台</title>
+	</head>
+
+	<body class="layui-view-body">
+		<button onclick="get()" style="width:200px;height:50px;"></button>
+		<button onclick="show()" style="width:200px;height:50px;"></button>
+	</body>
+
+ <a href="exportScoresExcel?a=1">导出到excel,(模拟了一些数据,导出到excel)</a>
+</html>

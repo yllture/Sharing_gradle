@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!--连接mysql数据库的驱动 ，改location="自己工程下数据库的jar包"-->
+	<classPathEntry location="G:\程序java jee\bloggertest\src\main\resources\mysql-connector-java-5.1.6-bin.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!--数据库的用户名，密码   改jdbcConnection="自己工程的数据库连接"-->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/shixun2" userId="root" password="yll324226">
+		</jdbcConnection>
+		
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		
+		<!--自动生成实体类的文件    ，改targetPackage="放置自动生成文件的目录"  -->
+		<javaModelGenerator targetPackage="com.neuedu.entity" targetProject="../../../src">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!--自动生成表的操作语句(映射文件)    ，改targetPackage="放置自动生成文件的目录"  -->
+		<sqlMapGenerator targetPackage="com.neuedu.dao" targetProject="../../../src">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!--自动生成dao类()          ，改targetPackage="放置自动生成的DAO文件的目录"  -->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.neuedu.dao" targetProject="../../../src">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		
+		<!-- 要新生成的数据库表，注意：已经生成成功的,一定要注释掉,否则会覆盖.我们只生成新表！ -->		
+         
+<!--         <table tableName="user" domainObjectName="User"/> -->
+<!-- 		 <table tableName="note" domainObjectName="Note"/>  -->
+<!-- 		<table tableName="bank" domainObjectName="Bank"/> -->
+<!-- 		<table tableName="admin" domainObjectName="Adimin"/> -->
+<!-- 		<table tableName="bank_fill" domainObjectName="Bank_fill"/> -->
+<!-- 		<table tableName="bank_fillchoice" domainObjectName="Bank_fillchoice"/> -->
+<!-- 		<table tableName="bank_judge" domainObjectName="Bank_judge"/> -->
+<!-- 		<table tableName="bank_knowledge" domainObjectName="Bank_knowledge"/> -->
+<!-- 		<table tableName="bank_multiple" domainObjectName="Bank_multiple"/> -->
+<!-- 		<table tableName="bank_multiplechoice" domainObjectName="Bank_multiplechoice"/> -->
+<!-- 		<table tableName="bank_shortanswer" domainObjectName="Bank_shortanswer"/> -->
+<!-- 		<table tableName="bank_shortanswer_mov" domainObjectName="Bank_shortanswer_mov"/> -->
+<!-- 		<table tableName="bank_shortanswer_pic" domainObjectName="Bank_shortanswer_pic"/> -->
+<!-- 		<table tableName="bank_single" domainObjectName="Bank_single"/>		 -->
+<!-- 		<table tableName="bank_singlechoice" domainObjectName="Bank_singlechoice"/> -->
+<!-- 		<table tableName="bankfolder" domainObjectName="Bankfolder"/> -->
+<!-- 		<table tableName="examrecord" domainObjectName="Examrecord"/> -->
+<!-- 		<table tableName="groupapply" domainObjectName="Groupapply"/> -->
+<!-- 		<table tableName="groupmember" domainObjectName="Groupmember"/> -->
+<!-- 		<table tableName="groups" domainObjectName="Groups"/> -->
+<!-- 		<table tableName="homework" domainObjectName="Homework"/> -->
+<!-- 		<table tableName="label" domainObjectName="Label"/> -->
+<!-- 		<table tableName="paper" domainObjectName="Paper"/> -->
+<!-- 		<table tableName="paper_fill" domainObjectName="Paper_fill"/> -->
+<!-- 		<table tableName="paper_fillchoice" domainObjectName="Paper_fillchoice"/> -->
+<!-- 		<table tableName="paper_judge" domainObjectName="Paper_judge"/> -->
+<!-- 		<table tableName="paper_multiple" domainObjectName="Paper_multiple"/> -->
+<!-- 		<table tableName="paper_multiplechoice" domainObjectName="Paper_multiplechoice"/> -->
+<!-- 		<table tableName="paper_shortanswer" domainObjectName="Paper_shortanswer"/> -->
+<!-- 		<table tableName="paper_shortanswer_mov" domainObjectName="Paper_shortanswer_mov"/> -->
+<!-- 		<table tableName="paper_shortanswer_pic" domainObjectName="Paper_shortanswer_pic"/> -->
+<!-- 		<table tableName="paper_single" domainObjectName="Paper_single"/> -->
+<!-- 		<table tableName="paper_singlechoice" domainObjectName="Paper_singlechoice"/> -->
+<!-- 		<table tableName="papermapping" domainObjectName="Papermapping"/> -->
+		<table tableName="payrecord" domainObjectName="Payrecord"/>
+<!-- 		<table tableName="shop_bank" domainObjectName="Shop_bank"/> -->
+<!-- 		<table tableName="shop_paper" domainObjectName="Shop_paper"/> -->
+<!-- 		<table tableName="usersession" domainObjectName="Usersession"/> -->
+<!-- 		<table tableName="usersignin" domainObjectName="Usersign"/> -->
+<!-- 			<table tableName="garbage_bank" domainObjectName="Garbage_bank"/> -->
+<!-- 			<table tableName="garbage_bankfolder" domainObjectName="Garbage_bankfolder"/> -->
+		
+		
+		
+		
+		
+		
+		
+		
+	</context>
+
+</generatorConfiguration>

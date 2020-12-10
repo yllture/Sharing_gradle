@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <link rel="stylesheet" th:href="@{static/layui/css/layui.css}">
+	    <link rel="stylesheet" th:href="@{static/css/groupview.css}">
+	    <link rel="stylesheet" th:href="@{static/css/joinGroup.css}">
+ 	    <title></title>
+	</head>
+	<body class="layui-view-body">
+	    <div class="layui-content">
+	        <div class="layui-page-header">
+	            <div class="pagewrap">
+	                <span class="layui-breadcrumb">
+	                  <a href="#">首页</a>
+	                  <a><cite>转让群</cite></a>
+	                </span>
+	                <h2 class="title">转让群</h2>
+	            </div>
+	        </div>
+	        <div class="layui-row">
+	            <div class="layui-card">
+	                <div class="layui-card-body">
+	                	<div class="group-search-box">
+		                    <i class="layui-icon layui-icon-search"></i>
+	                    	<input type="text" placeholder="输入转让用户账号" class="form-control"/>
+	                    	<button type="button" class="group-search-button trans-button">确定转让</button>
+                    	</div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <script src="layui/layui.js" th:src="@{static/layui/layui.js}"></script>
+	    <script src="layui/layui.js" th:src="@{static/js/jquery.min.js}"></script>
+	    <script>
+		//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+		layui.use('element', function(){
+		  var element = layui.element;
+		  
+		  //…
+		});
+		$(function(){
+			$(".trans-button").click(function(){
+				var cownaccount=$(".form-control").val();
+				alert(cownaccount);
+				if(cownaccount!=""){
+					$.ajax({			
+						url:'/transferGroup',
+						type:'post',
+						data:{"cownaccount":cownaccount},
+						dataType:'text',
+						success:function(e){
+							//alert(e);
+							var obj=JSON.parse(e);
+							var code=obj.code;
+							alert(code);
+							if(code==6000){
+						    	alert("权限不够，请先切换到教师角色！");
+								top.location.href="toGroup";
+						    }else if(code==0000){
+						    	alert("转交成功！")
+								$(".form-control").val("");
+								top.location.href="toGroup";
+						    }else{
+						    	alert("转交失败！")
+								top.location.href="toGroup";
+						    }
+						}
+					});
+				}else{
+					alert("请输入用户账户");
+				}
+				
+			});
+		});
+		</script>
+	</body>
+</html>

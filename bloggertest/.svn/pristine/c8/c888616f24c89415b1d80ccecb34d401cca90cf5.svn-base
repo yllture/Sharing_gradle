@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" th:href="@{../static/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../static/font-awesome-4.7.0/css/font-awesome.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{../static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/memberwork.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/groupview.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/adminwork.css}">
+    <title></title>
+</head>
+<body class="layui-view-body">
+    <div class="layui-content">
+     <div class="layui-page-header adg">
+        <div class="pagewrap adg-right" style="display:inline-block;width:50%;left:48%;padding-top:0px;padding-bottom:0px;">
+	            <ul class="layui-nav" style="background-color:#fff;left:300px"> 
+            	<li class="layui-nav-item" style="display:inline-block;">
+            	<div   th:id="${session.group.c1}" class="share" style="padding:0px 20px;text-align:center;"><i class="fa fa-share" style="font-size: 16px;color: #009688;"></i>
+            		<span style="font-size: 18px;color: #009688;">分享</span>
+            		<dl class="layui-nav-child">
+            		<span class="" lay-separator="|" style="visibility: visible;" >
+            		
+					  <dd> <a href="javascript:void(0);" onclick="qqFriend();"><i class="fa fa-qq"></i></a></dd>
+					  <dd><a href="javascript:void(0);" onclick="qqZone();"><i class="fa fa-wechat"></i></a></dd>
+					  <dd><a href="javascript:void(0);" onclick="sinaWeiBo();"><i class="fa fa-weibo"></i></a></dd>
+					  <dd><a href="javascript:void(0);" onclick="copy();"><i class="fa fa-copy"></i></a></dd>
+					</span>
+					</dl>
+            	</div>
+            	</li>
+            	<li class="layui-nav-item" style="display:inline-block;">
+            	<a href="#"><i class="fa fa-gear" style="font-size: 16px;color: #009688;"></i>
+            		<span style="font-size: 18px;color: #009688;">设置</span></a>
+            		<dl class="layui-nav-child layui-anim layui-anim-upbit">
+            			<dd><a href="javascript;" onclick="deleteBut();">解散群</a></dd>
+      					<dd><a href="javascript;" onclick="transBut();">转让群</a></dd>
+            		</dl>
+            	
+            	</li>
+				</ul>
+            </div>
+            </div>
+        </div>
+        
+        <div class="layui-row">
+            <div class="layui-card" id="memberlist" style="background-color: initial; float: left;width: 78%;box-shadow:none;">
+                <!-- <div class="layui-card-body work-bar">
+                    wo 
+                </div>
+                <div class="layui-card-body work-bar">
+                    wo 
+                </div> -->
+            </div>
+            
+            <div class="layui-card" style="background-color: #FFFFFF; float: right;width: 21%;height: 800px;">
+            	<div class="custom-search">
+                	<i class="fa fa-search"></i>
+                    <input type="text" placeholder="搜索群" class="form-control"/>
+                </div>
+            	<ul class="clazz-members-wrap" id="memuserlist">
+            		
+            	</ul>
+            </div>
+        </div>
+    </div>
+    <script src="layui/layui.js" th:src="@{../static/layui/layui.js}"></script>
+    <script src="js/jquery.min.js" th:src="@{../static/js/jquery.min.js}"></script>
+    <script>
+	    layui.use('element', function(){
+		  var element = layui.element;
+		  
+		  //…
+		});
+	    $(function(){
+			//alert(11);
+			$.ajax({
+				url:'/MemberList',
+				type:'post',
+				/* data:{}, */
+				dataType:'text',
+				success:function(res){
+					//alert(1);
+					var obj=JSON.parse(res);
+				    var homeworklist=obj.homeworklist;
+				    var groupowner=obj.groupowner;
+				    var owner=groupowner[0];
+				    var userlist=obj.userlist;
+				    var paperlist=obj.paperlist;
+				    var ifdolist=obj.ifdolist;
+				   
+				    var owni=owner.icon.replace(/\\/g,"/");
+				    var ownicon="../static/"+owni; 
+                	
+				    for(var i=0;i<homeworklist.length;i++){
+				    	var addown=' ';	
+				    	addown+="<div class='layui-card-body work-bar'>";
+                    	addown+="<a href='#' class='creator-img'><img src='"+ownicon+"' /></a>";
+                    	addown+="<div class='paper-matrix'><div class='paper-desc'>";
+            			addown+="<div class='paper-basic'><a href='#' id='"+paperlist[i].paperid+"' class='paper-name-info'"+paperlist[i].papername+"</a>";
+            			addown+="<p class='creator'>"+owner.username+"&nbsp </p>";
+            			addown+="<p class='date-info'><i class='fa fa-hourglass-start fa-fw' style='font-size:13px'></i><span>"+homeworklist[i].c1+"</span></p></div>";
+            			addown+="<div class='mem-paper-action'>";
+            			if(paperlist[i].timeout==1){
+            				//alert("kk");
+            				addown+="<a href='#' class='done'>作业已过期</a></div></div></div></div>";
+            			}else{
+            				//alert(ifdolist[i]);
+	            			if(ifdolist[i]==2){
+	            				addown+="<a class='toReviewHome' href='javascript:void(0);' id='"+paperlist[i].paperid+"' class='done'>查看报告</a></div></div></div></div>";
+	            			}
+	            			if(ifdolist[i]==0){
+	            				
+	            				addown+="<a class='toDoHome' href='javascript:void(0);' id='"+paperlist[i].paperid+"'>进入作业</a></div></div></div></div>";
+	            				//alert(addown);
+	            			}
+            			}
+            			$("#memberlist").append(addown);
+				    }
+				    	//alert(addown);
+				    //$(".admin-nav").append(addown);   
+				    for(var i=0;i<userlist.length;i++){
+				    	var addown=' ';
+				    	var useri=userlist[i].icon.replace(/\\/g,"/");
+				    	var usericon="../static/"+useri;
+				    	addown+="<li><a href='#'><img src='"+usericon+"' /><span>"+userlist[i].username+"</span></a>";
+				    	//addown+="<i class='fa fa-user'></i>";
+				    	if(userlist[i].username==owner.username){
+				    		addown+="<i class='fa fa-user'></i>";
+				    	}
+				    	//addown+="<button class='gmemdelete'>删除</button></li>";
+				    	$("#memuserlist").append(addown);
+				    }
+				}
+			});
+		});
+	    
+	    function deleteBut(){
+	    	//alert(1);
+	    	$.ajax({
+				url:'toDeleteGroup',
+				type:'post',
+				/* data:{'groupid':,}, */
+				dataType:'text',
+				success:function(msg){
+					alert(msg);
+				}
+			}); 
+	    }
+	    
+	    function transBut(){
+	    	//alert(1);
+	    	$.ajax({
+				url:'totransferGroup',
+				type:'post',
+				/* data:{'groupid':,}, */
+				dataType:'text',
+				success:function(msg){
+					//alert(msg);
+				}
+			}); 
+	    }
+	    
+	    
+	    /* var paperlength=$(".done").length;
+	    for(var i=0;i<length;i++){
+	    	$('div[class="paperaction"]').on('click','a[class="done"]',function(){
+	    		
+	    		
+	    	})
+	    } */
+	    $('div[id="memberlist"]').on('click','a[class="done"]',function(){
+	    	var paperid=$(this).parent().attr('id');
+	    	$.ajax({
+				url:'toAdminDone',
+				type:'post',
+				data:{'paperid':paperid},
+				dataType:'text',
+				success:function(msg){
+					//alert(msg);
+				}
+			}); 
+    	})
+    	
+    	 $('div[id="memberlist"]').on('click','a[class="toDoHome"]',function(){
+	    	var paperid=$(this).attr('id');
+	    	var userid=[[${session.currentUser.userid}]];
+	    	
+	    	$.ajax({
+				url:'/toDoHomework',
+				type:'post',
+				data:{
+					'userid':userid,
+					'paperid':paperid
+					},
+				dataType:'text',
+				success:function(msg){
+					//alert(msg);
+					var obj=JSON.parse(msg);
+					var muserid=obj.userid;
+					var muserpaperid=obj.userpaperid;
+					//alert("/toExam_index/"+muserid+"/"+muserpaperid);
+			    	top.location.href="/toExam_index/"+muserid+"/"+muserpaperid;
+				}
+			}); 
+	    
+	    	
+    	})
+    	
+    	$('div[id="memberlist"]').on('click','a[class="toReviewHome"]',function(){
+	    	var paperid=$(this).attr('id');
+	    	var userid=[[${session.currentUser.userid}]];
+	    	
+	    	$.ajax({
+				url:'/toReviewHomework',
+				type:'post',
+				data:{
+					'userid':userid,
+					'paperid':paperid
+					},
+				dataType:'text',
+				success:function(msg){
+					//alert(msg);
+					var obj=JSON.parse(msg);
+					//var muserid=obj.userid;
+					var muserpaperid=obj.userpaperid;
+					//alert("/toPaperReport/"+"/"+muserpaperid);
+			    	top.location.href="/toPaperReport/"+muserpaperid;
+				}
+			}); 
+	    
+	    	
+    	})
+    	
+	   </script>
+</body>
+
+</html>

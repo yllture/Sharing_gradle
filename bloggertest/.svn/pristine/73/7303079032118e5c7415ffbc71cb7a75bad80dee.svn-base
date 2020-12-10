@@ -1,0 +1,14 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.Bank_fillchoice;
+import com.neuedu.entity.Bank_multiplechoice;
+
+public interface Bank_multiplechoiceService {
+	int updateBank_multiplechoice(Bank_multiplechoice bmc);
+	int deleteBank_multiplechoice(Bank_multiplechoice bmc);
+	int addBank_multiplechoice(Bank_multiplechoice choice);
+	List<Bank_multiplechoice> selectByqid(Bank_multiplechoice choice);
+
+}

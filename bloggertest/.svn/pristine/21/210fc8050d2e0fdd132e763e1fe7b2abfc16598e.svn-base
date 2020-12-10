@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 设置mybatis信息都显示在控制台上 -->
+	<settings>
+  		<setting name="logImpl" value="STDOUT_LOGGING" />
+  	</settings>
+  	
+  	<!-- 短语 -->
+	<typeAliases>
+		<!-- 批量别名定义，扫描整个包下的类，别名为类名（首字母大写或小写都可以） -->
+        <package name="com.neuedu.entity"/>
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+		<transactionManager type="JDBC"/>
+		<dataSource type="POOLED">
+			<property name="driver" value="com.mysql.jdbc.Driver"/>
+			<property name="url" value="jdbc:mysql://localhost:3306/shixun2"/>
+			<property name="username" value="root"/>
+			<property name="password" value="yll324226"/>
+		</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 注册映射文件 *****.xml 文件  ,将dao包中的所有接口都注册到mybatis框架中 -->
+	<mappers>
+		<package name="com.neuedu.dao"></package>
+	</mappers>
+	
+
+</configuration>

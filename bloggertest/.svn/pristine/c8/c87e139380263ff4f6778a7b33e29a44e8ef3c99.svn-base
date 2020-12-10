@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="../../font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" th:href="@{static/css/bootstrap.css}">
+		<link rel="stylesheet" type="text/css" href="../../css/corpage.css" th:href="@{static/css/corpage.css}" />
+
+	</head>
+
+	<body>
+		<div class="detail-infor-div web-clip pad paper-detail-container sets-question-item">
+			<center>
+				<h3 class="name" th:text=${paper.papername}>试卷名</h3></center>
+			<div class="pad-heading">
+<!-- 				<h4 class="pad-title pr paper-detail-title"> -->
+<!--                     时间范围 -->
+<!--                 </h4> -->
+<!-- 				<p class="text-muted mt10"> -->
+<!-- 					2019-05-01 00:00:00~2019-07-02 16:00:00 -->
+<!-- 					</p> -->
+					  
+					<div class="head-info">
+	            	<img class="avator" src="img/pandaddd.jpg"></img>
+	            	<div class="info-wrapper">
+	            		<div class="name-wrapper" th:text=${paper.examineer.username}>答题者名字</div>
+	            		<div>
+	            			"邮箱:"
+	            			<span th:text=${paper.examineer.usermail}>_邮箱号</span>
+	            		</div>
+	            	</div>
+<!-- 	            	<div class="text-bittersweet score-wrapper pull-right"> -->
+<!-- 	            		<span class="report-marked no"> -->
+<!-- 	            			判断状态 -->
+<!-- 	            		</span> -->
+<!-- 	            		<span class="finalscore" th:text=${paper.judgescore}></span>分 -->
+	            		
+<!-- 	            	</div> -->
+	       </div>
+			</div>
+			
+			<div class="q-div">
+			<ul class="q-list">
+				<div class="part-title q-part">
+					<i class="fa fa-bookmark fa-2x"></i>填空题
+				</div>
+				<!-- 填空题 -->
+				<li class="q-item sets-question-item"  th:each="fill,status:${fills }">
+					<div class="check-wrap" ></div>
+					<div class="q-data">
+						<div style="background-color: #fff4f4; height: 34px;line-height: 30px;">
+						<span class="q-sequence" th:text=${status.count}>1</span>
+						<span class="text-medium-gray">[ 填空题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" th:text=${fill.qKnowledge}>知识点</span>
+						<div class="pull-right">
+							<i class="fa right-icon fa-close"></i>
+							<span class="divider"></span>
+							<div class="score-wrapper">
+								得分<span th:class=${fill.qId}  th:text=${fill.examineescore}>得分0</span>分
+								满分<span class="point"  th:text=${fill.qScore}>满分10</span>分
+								<a class="btn remark-btn" ><i class="fa fa-pencil"></i></a>
+								<div class="q-remark" id="ll">
+									<form>
+										<div class="form-group form-group-sm">
+											<input type="text" class="form-control" th:value=${fill.qScore} th:id=${fill.qId} placeholder="修改得分" />
+										</div>
+										<div class="tr">
+											<button type="button" class="btn btn-default cancelremark" >取消</button>
+											<button type="button" class="btn btn-primary" th:value=${fill.qId} onclick="setfillscore(this.value)">保存</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						</div>
+
+						<div class="q-title" data-link="css-margin-top{:~q.programLanguages?'45px':'10px'}" style="margin-top: 10px;">
+							<pre th:text=${fill.qTitle}>以下图片是____产品的logo？</pre>
+<!-- 							<img src="../../img/logo_black.png" th:src="@{static/img/logo_black.png}" /> -->
+
+						</div>
+						<ul class="list-title-media mt10"></ul>
+
+						<div data-link=""   >
+
+							<div class="q-answer mt20" >
+
+<!--                         <div class="s-answer mt20" style="display: block;"  th:each="fillchoice:${fill.filllist}"> -->
+<!-- 								考生答案：<p class="s-ans-label" th:text=${fillchoice.answer}></p> -->
+								
+<!-- 							</div> -->
+
+ 							<div class="q-answer q-fill-answer mt20"  style="display: block;" th:each="fillchoice:${fill.filllist}"> 
+								
+								考生答案：<span class="fill-answer"  th:text="${fillchoice.content}">飞马测试</span>
+							</div>  
+
+							<div class="q-answer mt20" style="display: block;">
+								参考答案：<p class="q-ans-label" th:text=${fill.qAnalysis}></p>
+								
+								
+							</div>
+
+						</div>
+					</div>
+					</div>
+				</li>
+			</ul>
+			<ul class="q-list">
+				<div class="part-title q-part">
+					<i class="fa fa-bookmark fa-2x"></i>问答题
+				</div>
+				<!-- 填空题 -->
+				<li class="q-item sets-question-item">
+					<div class="check-wrap"></div>
+					<div class="q-data"  th:each="shortanswer,status:${shortanswers}">
+						<div style="background-color: #fff4f4; height: 34px;line-height: 30px;">
+						<span class="q-sequence" th:text=${status.count}>1</span>
+						<span class="text-medium-gray">[ 问答题 ]</span>
+						<span class="ml5 label-skill text-ellipsis" th:text=${shortanswer.qKnowledge}>知识点</span>
+						<div class="pull-right">
+							<i class="fa right-icon fa-close"></i>
+							<span class="divider"></span>
+							<div class="score-wrapper">
+								得分<span class="score" th:text=${shortanswer.examineescore}>得分0</span>分
+								满分<span class="point"  th:text=${shortanswer.qScore}>满分10</span>分
+								<a class="btn remark-btn" id="o"><i class="fa fa-pencil"></i></a>
+								<div class="q-remark">
+									<form>
+										<div class="form-group form-group-sm">
+											<input type="text"  th:id="'s'+${shortanswer.qId}"  th:value=${shortanswer.qScore} class="form-control" placeholder="修改得分" />
+										</div>
+										<div class="tr">
+											<button type="button" class="btn btn-default cancelremark">取消</button>
+											<button type="button" class="btn btn-primary" th:value=${shortanswer.qId} onclick="setshortanswerscore(this.value)">保存</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						</div>
+
+						<div class="q-title" data-link="css-margin-top{:~q.programLanguages?'45px':'10px'}" style="margin-top: 10px;">
+							<pre th:text=${shortanswer.qTitle}>以下图片是____产品的logo？</pre>
+<!-- 							<img src="../../img/logo_black.png" th:src="@{static/img/logo_black.png}" /> -->
+
+						</div>
+						<ul class="list-title-media mt10"></ul>
+
+						<div data-link="">
+
+							<div class="q-answer mt20">
+
+							</div>
+							<div class="s-answer mt20" style="display: block;">
+								考生答案：<p class="s-ans-label" th:text=${shortanswer.answer}></p>
+								
+							</div>
+
+							<div class="q-answer mt20" style="display: block;">
+								参考答案：<p class="q-ans-label" th:text=${shortanswer.qAnalysis}></p>
+								
+							</div>
+
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+			<button type="button" style="padding: 6px 700px;" class="btn btn-primary" th:value=${paper.paperid} onclick="givetotalscore(this.value)">提交成绩</button>
+		</div>
+		
+	</body>
+	<script   src="../../js/jquery.min.js" th:src="@{static/js/jquery.min.js}"></script>
+	<script type="text/javascript" src="../../js/bootstrap.min.js" th:src="@{static/js/bootstrap.min.js}"></script>
+	
+	<script>
+		
+		
+			var length=$(".remark-btn").length;
+			for(var i=0;i<length;i++){
+				$(".remark-btn").eq(i).click(function(){
+					$(this).next(".q-remark").show();
+				})
+				
+			}
+			
+			var length=$(".cancelremark").length;
+			for(var i=0;i<length;i++){
+				$(".cancelremark").eq(i).click(function(){
+					$(this).parents(".q-remark").hide();
+				})
+				
+			}
+	</script> 
+	<script>
+	function setfillscore(obj){
+		var type=0;
+		var questionid=obj;
+		var score=$("#"+questionid).val();
+		var maxscore=$("#"+questionid).attr("value");
+		if(parseInt(score)<=parseInt(maxscore)&&parseInt(score)>=0&&parseInt(score)==score){
+			
+		 $.ajax({
+				 
+			    type : 'post',
+				url : 'setQscore',
+				async:false,
+				data:{"type":type,"questionid":questionid,"score":score},
+				dataType : 'text',
+				success : function(res) {
+// 					$("."+questionid).value(res);
+					location.reload();
+			    }
+			 
+			 
+		 })
+				
+		}
+		else
+			{
+			alert("请输入正确的数据类型");
+			}
+		
+	}
+	
+	function setshortanswerscore(obj){
+		var type=1;
+		var questionid=obj;
+		var score=$("#s"+questionid).val();
+		var maxscore=$("#s"+questionid).attr("value");
+		if((score<=maxscore)&&(score>=0)){
+		 $.ajax({
+				  
+			    type : 'post',
+				url : 'setQscore',
+				async:false,
+				data:{"type":type,"questionid":questionid,"score":score},
+				dataType : 'text',
+				success : function(res) {
+// 					$("."+questionid).value(res);
+					location.reload();
+			    }
+			 
+			 
+		 })
+		}
+		else
+		{
+		alert("请输入正确的数据类型");
+		}
+		
+	}
+	
+	
+	function givetotalscore(obj){
+		
+	
+		
+		 $.ajax({
+			  
+			    type : 'post',
+				url : 'getsumscore',
+				async:false,
+				data:{"paperid":obj},
+				dataType : 'text',
+				success : function(res) {
+					window.location.href="touncorrectPaper?paperid="+res;
+			    }
+			 
+			 
+		 })
+	}
+	
+	</script>
+</html>

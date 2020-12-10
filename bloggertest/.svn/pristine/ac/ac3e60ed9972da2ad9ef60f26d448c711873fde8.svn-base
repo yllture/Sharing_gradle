@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" th:href="@{../static/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{../static/font-awesome-4.7.0/css/font-awesome.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{../static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/adminwork.css}">
+    
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/groupview.css}">
+    <title></title>
+</head>
+<body class="layui-view-body">
+    <div class="layui-content">
+        <div class="layui-page-header adg">
+            <div class="pagewrap adg-right" style="display:inline-block;width:50%;left:48%;padding-top:0px;padding-bottom:0px;">
+	            <ul class="layui-nav" style="background-color:#fff">
+				  <li class="layui-nav-item" style="display:inline-block;">
+					  <a href="/toSetWork"><i class="fa fa-plus" style="font-size: 16px;color: #b0dfb3;"></i>
+	            		<span style="font-size: 18px;color: #b0dfb3;">布置作业</span>
+	            	  </a>
+            	  </li>
+            	  <li class="layui-nav-item" style="display:inline-block;">
+		          <a href="/toAddMember"><i class="fa fa-user-plus" style="font-size: 16px;color: #b0dfb3;"></i>
+		           <span style="font-size: 18px;color: #b0dfb3;">添加</span>
+		           </a>
+		           </li>
+		           <li class="layui-nav-item" style="display:inline-block;">
+            	<a href="/toEditGroup"><i class="fa fa-pencil" style="font-size: 16px;color: #b0dfb3;"></i>
+            		<span style="font-size: 18px;color: #b0dfb3;">编辑</span>
+            	</a>
+            	</li> 
+            	<li class="layui-nav-item" style="display:inline-block;">
+            	<div   th:id="${session.group.c1}" class="share" style="padding:0px 20px;text-align:center;"><i class="fa fa-share" style="font-size: 16px;color: #b0dfb3;"></i>
+            		<span style="font-size: 18px;color: #b0dfb3;">分享</span>
+            		<dl class="layui-nav-child">
+            		<span class="" lay-separator="|" style="visibility: visible;" >
+            		
+					  <dd> <a href="javascript:void(0);" onclick="qqFriend();"><i class="fa fa-qq"></i></a></dd>
+					  <dd><a href="javascript:void(0);" onclick="qqZone();"><i class="fa fa-wechat"></i></a></dd>
+					  <dd><a href="javascript:void(0);" onclick="sinaWeiBo();"><i class="fa fa-weibo"></i></a></dd>
+					  <dd><a href="javascript:void(0);" onclick="copyShare();"><i class="fa fa-copy"></i></a></dd>
+					</span>
+					</dl>
+            	</div>
+            	</li>
+            	<li class="layui-nav-item" style="display:inline-block;">
+            	<a href="#"><i class="fa fa-gear" style="font-size: 16px;color: #b0dfb3;"></i>
+            		<span style="font-size: 18px;color: #b0dfb3;">设置</span></a>
+            		<dl class="layui-nav-child layui-anim layui-anim-upbit">
+            			<dd><a href="javascript;" onclick="deleteBut();">解散群</a></dd>
+      					<dd><a href="javascript;" onclick="transBut();">转让群</a></dd>
+            		</dl>
+            	
+            	</li>
+				</ul>
+            </div>
+        </div>
+        
+        <div class="layui-row">
+            <div class="layui-card" id="adminworklist" style="background-color: initial; float: left;width: 78%;box-shadow:none;">
+                <!-- <div class="layui-card-body work-bar">
+                	<a href="#" class="creator-img">
+                    	<img th:src="@{static/img/pandaddd.jpg}" />
+                   </a>
+                    <div class="paper-matrix">
+                    	<div class="papaer-desc">
+                    		<div class="paper-basic">
+                    			<a href="#" class="paper-name-info">kk</a>
+                    			<p class="creator">Garella 1小时前</p>
+                    			<p class="date-info">
+                    				<i class="fa fa-hourglass-start fa-fw" style="font-size: 13px"></i>
+                    				<span>1小时</span>
+                    			</p>
+                    		</div>
+                    		<div class="paper-action">
+                    			<a href="#" class="done">已完成<p>1</p></a>
+                    			<a href="#" class="undo">未完成<p>2</p></a>
+                    		</div>
+                    	</div>
+                    </div>
+                </div> -->
+                
+            </div>
+            
+            <div class="layui-card" id="userlist" style="background-color: #FFFFFF; float: right;width: 21%;height: 100%;">
+            	<div class="custom-search">
+                	<i class="fa fa-search"></i>
+                    <input type="text" placeholder="搜索群" class="form-control"/>
+                </div>
+            	<ul class="clazz-members-wrap" id="adminuserlist">
+            		
+            	<!-- 	<li>
+            			<a href="#">
+	            				<img th:src="@{static/img/pandaddd.jpg}" />
+	            				<span>kaiduo</span>
+	            				<i class="fa fa-user"></i>
+            			</a>
+            			<button class="gmemdelete">删除</button>
+            		</li> -->
+            	</ul>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{../static/layui/layui.all.js}"></script>
+    <script src="js/jquery.min.js" th:src="@{../static/js/jquery.min.js}"></script>
+    <script>
+	     layui.use('element', function(){
+		  var element = layui.element;
+		  
+		  //…
+		});
+	     window.onload=function(){
+			//alert(11);
+			//open(location, '_self').close();
+			$.ajax({
+				url:'/AdminList',
+				type:'post',
+				/* data:{}, */
+				async:true,
+				dataType:'text',
+				success:function(res){
+					//alert(1);
+					var obj=JSON.parse(res);
+				    var homeworklist=obj.homeworklist;//作业列表
+				    var groupowner=obj.groupowner;//一个群主
+				    var owner=groupowner[0];
+				    var userlist=obj.userlist;
+				    var paperlist=obj.paperlist;
+				    //alert(own.length);
+				    var owni=owner.icon.replace(/\\/g,"/");
+				    var ownicon="static/"+owni; 
+				    for(var i=0;i<homeworklist.length;i++){
+				    	var addown=' ';	
+				    	addown+="<div class='layui-card-body work-bar'>";
+                    	addown+="<a href='#' class='creator-img'><img src='"+ownicon+"' /></a>";
+                    	addown+="<div class='paper-matrix'><div class='paper-desc'>";
+            			addown+="<div class='paper-basic'><a href='#' class='paper-name-info'"+paperlist[i].papername+"</a>";
+            			addown+="<p class='creator'>"+owner.username+"&nbsp"+homeworklist[i].c1+"</p>";
+            			addown+="<p class='date-info'><i class='fa fa-hourglass-start fa-fw' style='font-size:13px'></i><span>"+paperlist[i].duration+"</span></p></div>";
+            			addown+="<div class='paper-action' id='"+paperlist[i].paperid+"'><a href='adminDone' class='done'>已完成<p>"+paperlist[i].donenum+"</p></a><a href='#' class='undo'>未完成<p>"+paperlist[i].undonenum+"</p></a></div></div></div></div>";
+            			$("#adminworklist").append(addown);
+            			//alert(addown);
+				    }
+				    	//alert(addown);
+				    //$(".admin-nav").append(addown);   
+				    for(var i=0;i<userlist.length;i++){
+				    	var addown=' ';
+				    	var useri=userlist[i].icon.replace(/\\/g,"/");
+				    	var usericon="static/"+useri;
+				    	addown+="<li><a href='#'><img src='"+usericon+"' /><span>"+userlist[i].username+"</span></a>";
+				    	if(userlist[i].username==owner.username){
+				    		addown+="<i class='fa fa-user'></i>";
+				    	}
+				    	addown+="<a class='gmemdelete' href='javascript:void(0);' id='"+userlist[i].userid+"'>删除</a></li>";
+				    	$("#adminuserlist").append(addown);
+				    }
+				}
+			});
+		}
+	    function deleteBut(){
+	    	//alert(1);
+	    	$.ajax({
+				url:'toDeleteGroup',
+				type:'post',
+				/* data:{'groupid':,}, */
+				dataType:'text',
+				success:function(msg){
+					alert(msg);
+				}
+			}); 
+	    }
+	    
+	    function transBut(){
+	    	//alert(1);
+	    	$.ajax({
+				url:'totransferGroup',
+				type:'post',
+				/* data:{'groupid':,}, */
+				dataType:'text',
+				success:function(msg){
+					//alert(msg);
+				}
+			}); 
+	    }
+	    
+	    $('ul[id="adminworklist"]').on('click','a[class="done"]',function(){
+	    	var paperid=$(this).parent().attr('id');
+	    	$.ajax({
+				url:'toAdminDone',
+				type:'post',
+				data:{'paperid':paperid},
+				dataType:'text',
+				success:function(msg){
+					//alert(msg);
+				}
+			}); 
+    	})
+    	
+    	//var length=$('.gmemdelete').length;
+	    //for(var i=0;i<length;i++){
+	    	$('div[id="userlist"]').on('click','a[class="gmemdelete"]',function(){
+	    		var userid=$(this).attr('id');
+	    		$.ajax({
+					url:'deleteGroupUser',
+					type:'post',
+					async:true,
+					data:{'userid':userid},
+					dataType:'text',
+					success:function(msg){
+						alert(msg);
+						location.reload();
+					}
+				}); 
+	    	})
+	    //}
+    	
+
+	    	//qq好友分享
+	    	    function qqFriend() {
+	    		var sharecode="群码为："+$(".share").attr("id");
+	    		var p = {
+	    		    /*获取URL，可加上来自分享到QQ标识，方便统计*/  
+	    		    url: 'https://10.25.40.18:8080/toGroup',   
+	    		    desc: '',
+	    		    /*分享标题(可选)*/
+	    		    title: '邀请您加入群组',
+	    		    /*分享摘要(可选)*/
+	    		    summary: sharecode,
+	    		    /*分享图片(可选)*/
+	    		    pics: '',
+	    		    /*视频地址(可选)*/
+	    		    flash: '',
+	    		   /*分享来源(可选) 如：QQ分享*/
+	    		   site: '',
+	    		   style: '201',
+	    		   width: 32,
+	    		   height: 32
+	    	};
+	    	        var s = [];
+	    		for(var i in p) {
+	    		   s.push(i + '=' + encodeURIComponent(p[i] || ''));
+	    		}
+	    		var url = "http://connect.qq.com/widget/shareqq/index.html?" + s.join('&');
+	    		window.open(url);
+	    	}
+	    	
+
+	    	    function qqZone() {
+	    	    	var sharecode="群码为："+$(".share").attr("id");
+	    	    	var p = {
+	    	    	url: 'https://10.25.40.18:8080/toGroup',
+	    	    	showcount: '1',    /*是否显示分享总数,显示：'1'，不显示：'0' */
+	    	            desc: '',        /*默认分享理由(可选)*/
+	    	            summary:sharecode,   /*分享摘要(可选)*/
+	    	    	title: '邀请您加入群组',    /*分享标题(可选)*/
+	    	    	site: '',   /*分享来源 如：腾讯网(可选)*/
+	    	            pics: '',
+	    	    	style: '203',
+	    	    	width: 98,
+	    	    	height: 22
+	    	    };
+	    	            var s = [];
+	    	    	for(var i in p) {
+	    	    	      s.push(i + '=' + encodeURIComponent(p[i] || ''));
+	    	    	}
+	    	    	url = "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?" + s.join('&');
+	    	    	window.open(url);
+	    	    }
+	    	    
+
+	    	    function sinaWeiBo() {
+	    	    	var sharecode="群码为："+$(".share").attr("id");
+	    	            var p = {
+	    	    	// 表示是否显示当前页面被分享数量(1 显示)(可选， 允许为空) 
+	    	    	count: '1',
+	    	    	//将页面地址转成短域名， 并显示在内容文字后面。(可选， 允许为空) 
+	    	    	url: 'https://10.25.40.18:8080/toGroup',
+	    	            //用于发布微博的来源显示， 为空则分享的内容来源会显示来自互联网。(可选， 允许为空) 
+	    	    	appkey: sharecode,
+	    	    	//分享时所示的文字内容， 为空则自动抓取分享页面的title值(可选， 允许为空) 
+	    	    	title: '邀请您加入群组',
+	    	    	//自定义图片地址， 作为微博配图(可选， 允许为空) 
+	    	    	pic: '',
+	    	    	//转发时会 @相关的微博账号(可选， 允许为空)
+	    	    	ralateUid: '',
+	    	    	//语言设置(zh_cn | zh_tw)(可选)
+	    	    	language: 'zh_cn'
+	    	    };
+	    	    				
+	    	    	var s = [];
+	    	    	for(var i in p) {
+	    	    	    s.push(i + '=' + encodeURIComponent(p[i] || ''));
+	    	    	}
+	    	    	var url = "http://service.weibo.com/share/share.php?" + s.join('&');
+	    	    	window.open(url);
+	    	    }
+	    	    
+	    	    function copyShare(){
+	    	    	layer.open({
+	    	    		title:'复制群码',
+	    	    		content:'<input type="text" id="copycode" readonly="readonly" value="'+$(".share").attr("id")+'">',
+	    	    		area:['500px','300px'],
+	    	    		btn:["关闭","复制群码"],
+	    	    		btn2:function(index,layero){
+	    	    			//alert(document.getElementById("copycode"));
+	    	    			var obj=document.getElementById("copycode");
+	    	    			//alert(code);
+	    	    			//window.clipboarData.setData("Text",code);
+	    	    			obj.select();
+	    	    			document.execCommand("Copy"); 
+	    	    			alert("复制成功！");	
+	    	    		}
+	    	    	})
+	    	    }
+	    	    
+	    	   /*  $("div[class='share']").on("click","button[class='copu-button']",function(){
+	    	    	console.log(1);
+	    	    }) */
+	    	   /*  $(".copy-button").click(function(){
+	    	    	alert(1);
+	    	    }) */
+    </script>
+</body>
+</html>

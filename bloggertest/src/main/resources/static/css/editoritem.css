@@ -1,0 +1,279 @@
+body {
+    font-family: "微软雅黑", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+}
+.question-form .form-meta {
+    border-bottom: 1px dotted #CCD1D9;
+    padding: 10px 0 20px;
+}
+.question-form label {
+    font-weight: normal;
+    margin-right: 10px;
+}
+.question-form .anchor-mark, .sub-question-wrapper .archor-mark {
+    display: table-caption;
+}
+.form-search .bootstrap-select.btn-group, .form-inline .bootstrap-select.btn-group, .form-horizontal .bootstrap-select.btn-group, .form-group .bootstrap-select.btn-group {
+    margin-bottom: 0;
+}
+.bootstrap-select>.btn {
+    width: 100%;
+    padding-right: 25px;
+}
+.bootstrap-select.btn-group .dropdown-menu {
+    min-width: 100%;
+    z-index: 1035;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.bootstrap-select.btn-group .dropdown-menu.inner {
+    position: static;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.bootstrap-select.btn-group .dropdown-menu li {
+    position: relative;
+}
+.bootstrap-select>.btn {
+    width: 100%;
+    padding-right: 25px;
+}
+.bootstrap-select.btn-group .dropdown-menu li a {
+    cursor: pointer;
+}
+.bootstrap-select .selectpicker .selected>a {
+    color: #37BC9B;
+    background-color: #434A54;
+}
+.bootstrap-select.btn-group.show-tick .dropdown-menu li a span.text {
+    margin-right: 34px;
+}
+.bootstrap-select.btn-group .dropdown-menu li a span.text {
+    display: inline-block;
+}
+.bootstrap-select.btn-group .dropdown-menu li a span.check-mark {
+    display: none;
+}
+.question-form .question-item {
+    position: relative;
+    padding: 20px 0;
+    color: #656D78;
+}
+.question-form .question-item {
+    position: relative;
+    padding: 20px 0;
+    color: #656D78;
+}
+.question-form label {
+    font-weight: normal;
+    margin-right: 10px;
+}
+.question-form .anchor-mark, .sub-question-wrapper .archor-mark {
+    display: table-caption;
+}
+.form-title {
+    display: table;
+    width: 100%;
+}
+.question-gutter {
+    margin-left: 44px;
+    margin-right: 55px;
+    -webkit-transition: all 0.15s ease-in-out 0s;
+    -moz-transition: all 0.15s ease-in-out 0s;
+    -ms-transition: all 0.15s ease-in-out 0s;
+    -o-transition: all 0.15s ease-in-out 0s;
+    transition: all 0.15s ease-in-out 0s;
+}
+.form-title .question-gutter>p {
+    white-space: pre-wrap;
+}
+.question-form .question-item .title-media-form {
+}
+.question-gutter {
+    margin-left: 44px;
+    margin-right: 55px;
+    -webkit-transition: all 0.15s ease-in-out 0s;
+    -moz-transition: all 0.15s ease-in-out 0s;
+    -ms-transition: all 0.15s ease-in-out 0s;
+    -o-transition: all 0.15s ease-in-out 0s;
+    transition: all 0.15s ease-in-out 0s;
+}
+.question-form .question-item .title-media-form .btn-add-media {
+    position: relative;
+}
+.question-form .question-item .title-media-form .btn-add-media>div {
+    display: none;
+    position: absolute;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    border-radius: 2px;
+    z-index: 1;
+}
+.question-form .question-item .title-media-form .btn-add-media div>span {
+    color: gray;
+}
+.btn-link, .btn-link.active, .btn-link.disabled, .btn-link:active, .btn-link:focus, .btn-link:hover, .btn-link[disabled] {
+    text-decoration: none;
+    color: #009ee7;
+    border-color: transparent;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.question-form .question-item .list-title-media .media-item .item-sequence {
+    font-size: 1em;
+    padding: 0 10px;
+    font-weight: bold;
+    color: #CCD1D9;
+}
+.question-form .question-item .list-title-media .media-item>div {
+    display: table-cell;
+    padding: 5px;
+    border-bottom: 1px solid #E6E9ED;
+    background-color: #F5F7FA;
+}
+.question-form .question-item .media-label>span {
+    border-radius: 3px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    border: 1px dashed transparent;
+}
+.question-form label {
+    font-weight: normal;
+    margin-right: 10px;
+}
+.question-form .question-item .title-media-form .btn-remove {
+    color: #CCD1D9;
+}
+.question-form .question-item .q-hint {
+    color: #FFA400;
+}
+.question-form .anchor-mark, .sub-question-wrapper .archor-mark {
+    display: table-caption;
+}
+.question-form .question-item .option {
+    margin-bottom: 10px;
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    padding: 2px 5px;
+}
+.question-form label {
+    font-weight: normal;
+    margin-right: 10px;
+}
+.custom-section {
+    min-height: 60px;
+    border-radius: 4px;
+    border: 1px solid #AFC6DA;
+    outline: none;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #656D78;
+    background-color: #fff;
+    overflow: hidden;
+    -webkit-transition: all 0.15s ease-in-out 0s;
+    -moz-transition: all 0.15s ease-in-out 0s;
+    -ms-transition: all 0.15s ease-in-out 0s;
+    -o-transition: all 0.15s ease-in-out 0s;
+    transition: all 0.15s ease-in-out 0s;
+}
+.question-form .question-item .option .option-score-rate {
+    width: 120px;
+    cursor: default;
+    padding-right: 0;
+}
+.question-form .question-item .option .option-addon {
+    text-align: center;
+    width: 1%;
+    cursor: pointer;
+    white-space: nowrap;
+    vertical-align: middle;
+    display: table-cell;
+    padding: 0 10px;
+}
+.question-form .question-item .option .btn-remove-option {
+    width: 50px;
+}
+.question-form .question-item .option .option-addon {
+    text-align: center;
+    width: 1%;
+    cursor: pointer;
+    white-space: nowrap;
+    vertical-align: middle;
+    display: table-cell;
+    padding: 0 10px;
+}
+.question-form .question-item .option-section {
+    min-height: 30px;
+}
+
+.option-addon>.radio-icon {
+    margin-top: -26px;
+    text-align: center;
+}
+.skill-selector-wrapper .dropdown > .actions {
+    padding: 10px;
+}
+ul.skill-list > .add-skill {
+    padding: 10px 5px 10px 10px;
+}
+ul.skill-list > .add-skill input {
+    border: 1px solid transparent;
+    background: #f7f7f7;
+}
+.fuDiv li:hover{
+	background-color: #E6E9ED;
+}
+.q-item .select-toolbar-wrap .point-form {
+    width: 84px;
+    display: inline-block;
+}
+.q-item .select-toolbar-wrap .point-form .input-point {
+    color: #ffa400;
+    width: 60px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 2px;
+    padding: 0 4px;
+    height: 28px;
+    margin-top: -1px;
+}
+.text-medium-gray {
+    color: #AAB2BD;
+}
+.q-item .select-toolbar-wrap .btn-remove, .q-item .select-toolbar-wrap .btn-edit {
+    padding: 0 10px;
+    z-index: 23;
+    position: relative;
+    display: inline-block;
+    color: #AAB2BD;
+    font-size: 14px;
+    border-left: 1px solid #E6E9ED;
+}
+.option-addon .checkbox-inline{
+	margin-top: 7px;
+}
+.section-part .part-summary-container .summary-item {
+    width: 100%;
+    display: table-row;
+}
+.section-part .part-summary-container .summary-item > span {
+    display: table-cell;
+    font-size: 13px;
+    text-align: left;
+    padding: 5px 5px 5px 0;
+    border-bottom: 1px dotted #ccd1d9;
+}
+.section-part .part-summary-container .skill-item {
+    color: #8CADCA;
+    display: inline-block;
+}
+.btn-warning,.btn-block,.btn-save-bank{
+	color: #FFFFFF;
+}

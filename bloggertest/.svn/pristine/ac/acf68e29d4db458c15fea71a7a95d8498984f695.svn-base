@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+		<meta name="author" content="Coderthemes">
+
+		<link rel="shortcut icon" href="../../img/favicon_1.ico" th:src="@{static/img/favicon_1.ico}">
+
+		<title>通知</title>
+
+		<link href="../../css/bootstrap.min.css" th:href="@{static/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/setcore.css" th:href="@{static/css/setcore.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/icons.css" th:href="@{static/css/icons.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/components.css" th:href="@{static/css/components.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/pages.css" th:href="@{static/css/pages.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/menu.css" th:href="@{static/css/menu.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/responsive.css" th:href="@{static/css/responsive.css}" rel="stylesheet" type="text/css">
+		<link href="../../font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+		<link href="../../css/changeUserInfor.css" th:href="@{static/css/changeUserInfor.css}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="../../css/cropper.min.css" th:href="@{static/css/cropper.min.css}">
+		<link rel="stylesheet" href="../../css/ImgCropping.css" th:href="@{static/css/ImgCropping.css}">
+		<link rel="stylesheet" type="text/css" href="../../css/build.css" th:href="@{static/css/build.css}">
+		<link href="../../css/gloab.css" th:href="@{static/css/gloab.css}" rel="stylesheet">
+		<script src="../../js/jquery.min.js" th:src="@{static/js/jquery.min.js}"></script>
+		<script src="../../js/modernizr.min.js" th:src="@{static/js/modernizr.min.js}"></script>
+		<script type="text/javascript" src="../../js/register.js" th:src="@{static/js/register.js}"></script>
+	</head>
+	<body class=class="fixed-left">
+	
+	
+	
+	
+	<!-- 导航栏开始 -->
+		<div class="topbar">
+				<!-- LOGO -->
+				<div class="topbar-left">
+					<div class="text-center">
+						<a href="toindex" class="logo"><img src="../../img/logo.png" th:src="@{static/img/logo.png}" width="60px" /><span>飞马测试 </span></a>
+					</div>
+				</div>
+
+				<div class="navbar navbar-default" role="navigation">
+					<div class="container">
+						<div class="">
+							<div class="pull-left">
+								<button class="button-menu-mobile open-left">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+								<span class="clearfix"></span>
+							</div>
+							<ul class="nav navbar-nav navbar-left pull-left">
+							
+								<li th:if="${session.currentUser.usertype != null} and ${session.currentUser.usertype==0}" class="hidden-xs">
+									<a th:href="toStudentPaperIndex" id="" class="waves-effect"><i class="glyphicon glyphicon-education nvaIcon"></i>试卷</a>
+								</li>
+								<li th:if="${session.currentUser.usertype != null} and ${session.currentUser.usertype==1}" class="hidden-xs">
+									<a th:href="tounpublishteacherPaper" id="" class="waves-effect"><i class="glyphicon glyphicon-education nvaIcon"></i>试卷</a>
+								</li>
+								<li th:if="${session.currentUser.usertype != null} and ${session.currentUser.usertype==1}" class="hidden-xs">
+									<a th:href="tobankTeacher" id="" class="waves-effect"><i class="glyphicon glyphicon-folder-open nvaIcon"></i>题库</a>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="toGroup" id="" class="waves-effect"><i class="fa fa-users nvaIcon"></i>群组</a>
+								</li>
+								<li th:if="${session.currentUser.usertype != null} and ${session.currentUser.usertype==0}" class="hidden-xs">
+									<a th:href="topapershop"  id="" class="waves-effect"><i class="fa fa-shopping-basket nvaIcon"></i>试卷商城</a>
+								</li>
+								<li th:if="${session.currentUser.usertype != null} and ${session.currentUser.usertype==1}" class="hidden-xs">
+									<a th:href="tobankshop" id="" class="waves-effect"><i class="fa fa-shopping-basket nvaIcon"></i>题库商城</a>
+								</li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right pull-right">
+								<li class="dropdown hidden-xs">
+									<a href="#" data-target="#" class="dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="true">
+										<i class="md md-notifications"></i> <span class="badge badge-xs badge-danger">3</span>
+									</a>
+									<ul class="dropdown-menu dropdown-menu-lg">
+										<li class="text-center notifi-title">通知</li>
+
+										<li class="list-group">
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-user-plus fa-2x text-info"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">New user registered</div>
+														<p class="m-0">
+															<small>You have 10 unread messages</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-diamond fa-2x text-primary"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">New settings</div>
+														<p class="m-0">
+															<small>There are new settings available</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-bell-o fa-2x text-danger"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">Updates</div>
+														<p class="m-0">
+															<small>There are
+                                                          <span class="text-primary">2</span> new updates available</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- last list item -->
+											<a th:href="inform" class="list-group-item">
+												<small>See all notifications</small>
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="hidden-xs">
+									<a href="#" id="btn-fullscreen" class="waves-effect"><i class="md md-crop-free"></i></a>
+								</li>
+								<li class="hidden-xs">
+									
+								</li>
+								<li class="dropdown">
+									<a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="../../img/defalutIcon.png" th:src="@{static/img/defalutIcon.png}" alt="user-img" class="img-circle"> </a>
+									<ul class="dropdown-menu">
+										<li>
+											<a th:href="toExamEntrance"><i class="fa fa-pencil nvaIcon2"></i> 考试入口</a>
+										</li>
+										<li>
+											<a th:href="tochangeUserInfor"><i class="md md-settings nvaIcon2"></i> 我的设置</a>
+										</li>
+										<li>
+											<a th:href="tomymoneyaccount"><i class="fa fa-diamond nvaIcon2"></i> 我的账户</a>
+										</li>
+										<li>
+											<a href="toLogout"><i class="md md-settings-power nvaIcon2"></i> 退出登录</a>
+										</li>
+									</ul>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="switchIdentity" class="waves-effect"><i class="fa fa-exchange"></i></a>
+								</li>
+							</ul>
+						</div>
+						<!--用户选项 -->
+					</div>
+				</div>
+			</div>
+			<!-- 导航栏结束 -->
+
+
+        
+        
+     <div class="content-page" style="margin: 0px 80px;">
+				<!-- 内容开始 -->
+				<div class="content">
+					<div class="container">
+
+						<!-- 页面标题 -->
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="pull-left page-title">
+								<span
+									style="color: green; background-color: green; width: 10px; margin-right: 15px;"><b>|</b></span>通知
+							</h4>
+
+							</div>
+						</div>
+
+						<div class="panel" id="panel" th:type=${currentUser.usertype}>
+
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-6">
+									</div>
+								</div>
+								<table class="table table-bordered table-striped" id="datatable-editable">
+									<thead>
+										<tr>
+											<th>序号</th>
+											<th>通知时间</th>
+											<th>通知类型</th>
+											<th>通知内容</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="gradeA" th:each="inform,status:${notes}"  >
+											<td th:text="${status.count}"></td>
+											<td th:text="${#dates.format(inform.notetime,'yyyy-MM-dd HH:mm:ss')}"></td>
+											<td th:if="${inform.type==0}" class="yellow">审核通知</td>
+											<td th:if="${inform.type==1}" class="green">试卷通知</td>
+											<td th:if="${inform.type==2}" class="green">分数通知</td>
+											<td th:if="${inform.c1==0}"  class="red"></i>您的试卷审核失败了</td>
+											<td th:if="${inform.c1==1}"  class="green">您的试卷审核通过了</td>
+											<td th:if="${inform.type==1}" class="yellow">您的考试中心又有了新的试卷，快去考试吧</td>
+											<td th:if="${inform.type==2}" class="green">您的考试出成绩了</td>
+											<td class="actions">
+												<a href="topublishpaperrecord"  th:if="${inform.type==0}"   class="on-default detail-row green" data-toggle="tooltip" title="查看详情"><i class="fa fa-search"></i></a>
+												<a onclick="shijuan(this.id)" th:id=${currentUser.usertype} th:if="${inform.type==1}"   class="on-default detail-row green" data-toggle="tooltip" title="查看详情"><i class="fa fa-search"></i></a>
+                                                <a onclick="fenshu(this.id)"  th:id=${inform.paperid} th:if="${inform.type==2}"   class="on-default detail-row green" data-toggle="tooltip" title="查看详情"><i class="fa fa-search"></i></a>
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+							<!-- end: page -->
+
+						</div>
+						<!-- end Panel -->
+
+					</div>
+					<!-- container -->
+
+				</div>
+				<!-- content -->
+
+			</div>
+        
+        
+        
+        <script>
+        function shijuan(obj){
+        	if(obj==0)
+        		{
+        		alert("请先切换用户类型未学生");
+        		}
+        	else
+        		{
+        		window.location.href="toStudentPaperIndex";
+        		}
+        };
+        function fenshu(obj){
+        	var usertype=$("#panel").attr("type");
+        	if(usertype==0)
+    		{
+    		alert("请先切换用户类型未学生");
+    		}
+    	else
+    		{
+    		window.location.href="toPaperReport/"+obj;
+    		}
+        }
+        </script>
+      </body>  
+        
+</html>

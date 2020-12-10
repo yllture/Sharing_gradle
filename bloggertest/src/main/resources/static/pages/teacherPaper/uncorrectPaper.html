@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+		<meta name="author" content="Coderthemes">
+
+		<link rel="shortcut icon" href="assets/images/favicon_1.ico">
+
+		<title>我的账户</title>
+
+		<!-- Plugin Css-->
+		<link rel="stylesheet" href="../../css/magnific-popup.css" th:href="@{static/css/magnific-popup.css}">
+		<link rel="stylesheet" href="../../css/shopdatatables.css" th:href="@{static/css/shopdatatables.css}">
+		<link href="../../font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+		<link href="../../css/bootstrap.min.css" th:href="@{static/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/changeUserInfor.css" th:href="@{static/css/changeUserInfor.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/setcore.css" th:href="@{static/css/setcore.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/icons.css" th:href="@{static/css/icons.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/components.css" th:href="@{static/css/components.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/pages.css" th:href="@{static/css/pages.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/menu.css" th:href="@{static/css/menu.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/responsive.css" th:href="@{static/css/responsive.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/alert.css" th:href="@{static/css/alert.css}" rel="stylesheet" type="text/css">
+		<script src="../../js/jquery.min.js" th:src="@{static/js/jquery.min.js}"></script>
+		<script src="../../js/modernizr.min.js" th:src="@{static/js/modernizr.min.js}"></script>
+
+	</head>
+
+	<body class="fixed-left">
+
+		<!-- 页面开始 -->
+		<div id="wrapper">
+
+			<!-- 导航栏开始 -->
+			<div class="topbar">
+				<!-- LOGO -->
+				<div class="topbar-left">
+					<div class="text-center">
+						<a href="toindex" class="logo"><img src="../../img/logo.png" th:src="@{static/img/logo.png}" width="60px" /><span>飞马测试
+					</span></a>
+					</div>
+				</div>
+
+				<div class="navbar navbar-default" role="navigation">
+					<div class="container">
+						<div class="">
+							<div class="pull-left">
+								<button class="button-menu-mobile open-left">
+								<i class="fa fa-bars"></i>
+							</button>
+								<span class="clearfix"></span>
+							</div>
+							<ul class="nav navbar-nav navbar-left pull-left">
+								<li class="hidden-xs">
+									<a href="#" id="" class="waves-effect"><i class="glyphicon glyphicon-education nvaIcon"></i>试卷</a>
+								</li>
+								<li class="hidden-xs">
+									<a href="#" id="" class="waves-effect"><i class="glyphicon glyphicon-folder-open nvaIcon"></i>题库</a>
+								</li>
+								<li class="hidden-xs">
+									<a href="#" id="" class="waves-effect"><i class="fa fa-users nvaIcon"></i>群组</a>
+								</li>
+								<li class="hidden-xs">
+									<a href="#" id="" class="waves-effect"><i class="fa fa-shopping-basket nvaIcon"></i>题库商城</a>
+								</li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right pull-right">
+								<li class="dropdown hidden-xs">
+									<a href="inform" data-target="#" class="dropdown-toggle waves-effect" data-toggle="tooltip" title="通知" aria-expanded="true"> <i class="md md-notifications"></i> 
+									</a>
+								</li>
+
+								<li class="hidden-xs">
+									<a href="#" id="btn-fullscreen" class="waves-effect"><i class="md md-crop-free"></i></a>
+								</li>
+								<li class="hidden-xs">
+									
+								</li>
+								<li class="dropdown">
+									<a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="../../img/defalutIcon.png" th:src="@{static/img/defalutIcon.png}" alt="user-img" class="img-circle"> </a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="javascript:void(0)"><i class="fa fa-pencil nvaIcon2"></i> 考试入口</a>
+										</li>
+										<li>
+											<a href="javascript:void(0)"><i class="md md-settings nvaIcon2"></i> 我的设置</a>
+										</li>
+										<li>
+											<a href="javascript:void(0)"><i class="fa fa-exchange nvaIcon2"></i> 切换身份</a>
+										</li>
+										<!--<li>
+											<a href="javascript:void(0)"><i class="md md-lock nvaIcon2"></i>锁定屏幕</a>
+										</li>-->
+										<li>
+											<a href="toLogout"><i class="md md-settings-power nvaIcon2"></i> 退出登录</a>
+										</li>
+									</ul>
+								</li>
+								<li class="hidden-xs">
+									<a href="#" class="right-bar-toggle waves-effect"><i class="fa fa-exchange"></i></a>
+								</li>
+							</ul>
+						</div>
+						<!--用户选项 -->
+					</div>
+				</div>
+			</div>
+			<!--导航栏结束 -->
+
+			<!-- ========== 左部导航开始 ========== -->
+
+<!-- 			<div class="left side-menu"> -->
+<!-- 				<div class="sidebar-inner slimscrollleft"> -->
+
+<!-- 					左部选择条  -->
+<!-- 					<div id="sidebar-menu"> -->
+<!-- 						<ul> -->
+
+<!-- 							<li > -->
+<!-- 								<a href="tomymoneyaccount" class="waves-effect waves-light"><i class="fa fa-diamond"></i><span>我的积分</span></a> -->
+
+<!-- 							</li> -->
+<!-- 							<li class="has_sub "> -->
+<!-- 								<a  class="waves-effect waves-light active"><i class="md md-publish"></i><span>我的发布</span><span class="pull-right"><i class="md md-add"></i></span></a> -->
+<!-- 								<ul> -->
+<!-- 									<li> -->
+<!-- 										<a href="topublishbankrecord"><i class="fa fa-folder-open"></i>题库</a> -->
+<!-- 									</li> -->
+<!-- 									<li class="active"> -->
+<!-- 										<a href="topublishpaperrecord"><i class="md md-description"></i>试卷</a> -->
+<!-- 									</li> -->
+<!-- 								</ul> -->
+<!-- 							</li> -->
+
+<!-- 							<li class="has_sub"> -->
+<!-- 								<a class="waves-effect waves-light"><i class="fa fa-file-text-o"></i><span>交易记录</span><span class="pull-right"><i class="md md-add"></i></span></a> -->
+<!-- 								<ul> -->
+<!-- 									<li> -->
+<!-- 										<a href="toshopinrecord"><i class="md md-add-shopping-cart"></i>购买记录</a> -->
+<!-- 									</li> -->
+<!-- 									<li> -->
+<!-- 										<a href="toshopoutrecord"><i class="md md-arrow-back"></i>出售记录</a> -->
+<!-- 									</li> -->
+<!-- 								</ul> -->
+<!-- 							</li> -->
+<!-- 						</ul> -->
+<!-- 						<div class="clearfix"></div> -->
+<!-- 					</div> -->
+<!-- 					<div class="clearfix"></div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<!-- 左部bar结束 --> -->
+
+			<!-- ============================================================== -->
+			<!-- 右边表格从这开始 -->
+			<!-- ============================================================== -->
+			<div class="content-page" style="margin: 0px 80px;">
+				<!-- 内容开始 -->
+				<div class="content">
+					<div class="container">
+
+						<!-- 页面标题 -->
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="pull-left page-title">
+								<span
+									style="color: green; background-color: green; width: 10px; margin-right: 15px;"><b>|</b></span>待批改试卷
+							</h4>
+
+							</div>
+						</div>
+
+						<div class="panel">
+
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-6">
+									</div>
+								</div>
+								<table class="table table-bordered table-striped" id="datatable-editable">
+									<thead>
+										<tr>
+											<th>名称</th>
+											<th>考生</th>
+											<th>完成状态</th>
+											<th>试卷分数</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="gradeA" th:each="paper:${uncorrectpapers}"   th:paperid="${paper.paperid}" >
+											<td th:text="${paper.papername}"></td>
+											<td th:text="${paper.examineer.username}"></td>
+											<td th:if="${paper.doflag==0}"   class="yellow"><i class="fa fa-refresh"></i>未作答</td>	
+											<td th:if="${paper.doflag==1}"    class="yellow"><i class="fa fa-refresh">作答中</i></td>	
+											<td th:if="${paper.finscore==null and paper.doflag==2}"   class="yellow"><i class="fa fa-refresh"></i>待批改</td>	
+											<td th:if="${paper.finscore>0 and paper.doflag==2}"    class="yellow"><i class="fa fa-refresh">已批改</i></td>	
+											<td th:if="${paper.doflag==0}"   class="yellow"><i class="fa fa-refresh"></i>暂无</td>	
+											<td th:if="${paper.doflag==1}"    class="yellow"><i class="fa fa-refresh">暂无</i></td>	
+											<td th:if="${paper.finscore==null and paper.doflag==2}"   class="yellow" >暂无</td>	
+											<td th:if="${paper.finscore>0 and paper.doflag==2}"  th:text="${paper.finscore}"  class="yellow"></td>											<!--<td th:if="${publishpaper.checkflag==3}" class="grey"><i class="fa fa-dot-circle-o"></i>已下架</td>-->
+											<td class="actions"> 
+												<!-- 未下架题库状态就可以查看商城详情题库 -->
+<!-- 												<a th:href="@{'/tocorrectPage?paperid='+${paper.paperid}}" th:if="${paper.finscore!=null}"  class="on-default detail-row green" data-toggle="tooltip" title="查看报告"><i class="fa fa-search"></i></a> -->
+												<a th:href="@{'/tocorrectPage?paperid='+${paper.paperid}}" th:if="${paper.finscore==null and paper.doflag==2}"  title="批改试卷"><i class="fa fa-circle-o-notch"></i></a>
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+							<!-- end: page -->
+
+						</div>
+						<!-- end Panel -->
+
+					</div>
+					<!-- container -->
+
+				</div>
+				<!-- content -->
+
+			</div>
+			<!-- ============================================================== -->
+			<!-- 右边表格部分 -->
+			<!-- ============================================================== -->
+
+			<!-- 右侧滑页 -->
+			<div class="side-bar right-bar nicescroll">
+				<h4 class="text-center">Chat</h4>
+				<div class="contact-list nicescroll">
+					<ul class="list-group contacts-list">
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="assets/images/users/avatar-1.jpg" alt="">
+								</div>
+								<span class="name">Chadengle</span>
+								<i class="fa fa-circle online"></i>
+							</a>
+							<span class="clearfix"></span>
+						</li>
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="assets/images/users/avatar-2.jpg" alt="">
+								</div>
+								<span class="name">Tomaslau</span>
+								<i class="fa fa-circle online"></i>
+							</a>
+							<span class="clearfix"></span>
+						</li>
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="assets/images/users/avatar-3.jpg" alt="">
+								</div>
+								<span class="name">Stillnotdavid</span>
+								<i class="fa fa-circle online"></i>
+							</a>
+							<span class="clearfix"></span>
+						</li>
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="assets/images/users/avatar-4.jpg" alt="">
+								</div>
+								<span class="name">Kurafire</span>
+								<i class="fa fa-circle online"></i>
+							</a>
+							<span class="clearfix"></span>
+						</li>
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="assets/images/users/avatar-5.jpg" alt="">
+								</div>
+								<span class="name">Shahedk</span>
+								<i class="fa fa-circle away"></i>
+							</a>
+							<span class="clearfix"></span>
+						</li>
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="assets/images/users/avatar-6.jpg" alt="">
+								</div>
+								<span class="name">Adhamdannaway</span>
+								<i class="fa fa-circle away"></i>
+							</a>
+							<span class="clearfix"></span>
+						</li>
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="assets/images/users/avatar-7.jpg" alt="">
+								</div>
+								<span class="name">Ok</span>
+								<i class="fa fa-circle away"></i>
+							</a>
+							<span class="clearfix"></span>
+						</li>
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="assets/images/users/avatar-8.jpg" alt="">
+								</div>
+								<span class="name">Arashasghari</span>
+								<i class="fa fa-circle offline"></i>
+							</a>
+							<span class="clearfix"></span>
+						</li>
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="assets/images/users/avatar-9.jpg" alt="">
+								</div>
+								<span class="name">Joshaustin</span>
+								<i class="fa fa-circle offline"></i>
+							</a>
+							<span class="clearfix"></span>
+						</li>
+						<li class="list-group-item">
+							<a href="#">
+								<div class="avatar">
+									<img src="assets/images/users/avatar-10.jpg" alt="">
+								</div>
+								<span class="name">Sortino</span>
+								<i class="fa fa-circle offline"></i>
+							</a>
+							<span class="clearfix"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- /Right-bar -->
+
+		
+
+
+		</div>
+		<!-- 容器结束 -->
+
+		<!--警告提示框-->
+		<div class="alert"></div>
+		<script>
+			var resizefunc = [];
+		</script>
+
+		<!-- js导入  -->
+		<script src="../../js/bootstrap.min.js" th:src="@{static/js/bootstrap.min.js}"></script>
+		<script src="../../js/detect.js" th:src="@{static/js/detect.js}"></script>
+		<script src="../../js/fastclick.js" th:src="@{static/js/fastclick.js}"></script>
+		<script src="../../js/jquery.slimscroll.js" th:src="@{static/js/jquery.slimscroll.js}"></script>
+		<script src="../../js/jquery.blockUI.js" th:src="@{static/js/jquery.blockUI.js}"></script>
+		<script src="../../js/waves.js" th:src="@{static/js/waves.js}"></script>
+		<script src="../../js/wow.min.js" th:src="@{static/js/wow.min.js}"></script>
+		<script src="../../js/jquery.nicescroll.js" th:src="@{static/js/jquery.nicescroll.js}"></script>
+		<script src="../../js/jquery.scrollTo.min.js" th:src="@{static/js/jquery.scrollTo.min.js}"></script>
+
+		<script src="../../js/jquery.app.js" th:src="@{static/js/jquery.app.js}"></script>
+
+		<!-- Examples -->
+		<script src="../../js/jquery.magnific-popup.min.js" th:src="@{static/js/jquery.magnific-popup.min.js}"></script>
+		<script src="../../js/jquery.dataTables.js" th:src="@{static/js/jquery.dataTables.js}"></script>
+		<script src="../../js/dataTables.bootstrap.js" th:src="@{static/js/dataTables.bootstrap.js}"></script>
+		<script src="../../js/paperdatatables.editable.init.js" th:src="@{static/js/paperdatatables.editable.init.js}"></script>
+
+	</body>
+
+</html>

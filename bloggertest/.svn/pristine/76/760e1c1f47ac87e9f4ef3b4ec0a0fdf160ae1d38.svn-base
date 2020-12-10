@@ -1,0 +1,15 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.Bank;
+import com.neuedu.entity.Bank_single;
+import com.neuedu.entity.Bank_single;
+
+public interface Bank_singleService {
+	List<Bank_single> getAllbyBankid(Bank b);
+	int addBank_single(Bank_single bs);
+	int updateBank_single(Bank_single bs);
+	int deleteBank_single(Bank_single bs);
+	Bank_single selectBank_single(Bank_single bf);
+}

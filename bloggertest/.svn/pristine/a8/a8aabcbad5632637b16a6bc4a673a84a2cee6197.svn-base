@@ -1,0 +1,653 @@
+package com.neuedu.controller;
+
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.servlet.ServletRequestContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.annotations.JsonAdapter;
+import com.neuedu.Utils.ImgUtils;
+import com.neuedu.entity.Examrecord;
+import com.neuedu.entity.Paper;
+import com.neuedu.entity.Paper_fill;
+import com.neuedu.entity.Paper_fillchoice;
+import com.neuedu.entity.Paper_judge;
+import com.neuedu.entity.Paper_multiple;
+import com.neuedu.entity.Paper_multiplechoice;
+import com.neuedu.entity.Paper_shortanswer;
+import com.neuedu.entity.Paper_shortanswer_pic;
+import com.neuedu.entity.Paper_single;
+import com.neuedu.entity.Paper_singlechoice;
+import com.neuedu.entity.User;
+import com.neuedu.service.ExamrecordService;
+import com.neuedu.service.PaperService;
+import com.neuedu.service.Paper_fillService;
+import com.neuedu.service.Paper_fillchoiceService;
+import com.neuedu.service.Paper_judgeService;
+import com.neuedu.service.Paper_multipleService;
+import com.neuedu.service.Paper_multiplechoiceService;
+import com.neuedu.service.Paper_shortanswerService;
+import com.neuedu.service.Paper_shortanswer_picService;
+import com.neuedu.service.Paper_singleService;
+import com.neuedu.service.Paper_singlechoiceService;
+import com.neuedu.service.UserService;
+@Controller
+public class StudentPaperControl {
+	@Autowired
+	PaperService paperService;
+	@Autowired
+	UserService userService;
+	@Autowired
+	Paper_fillService paper_fillService;
+	@Autowired
+	Paper_judgeService paper_judge_Service;
+	@Autowired
+	Paper_multipleService paper_multipleService;
+	@Autowired
+	Paper_shortanswerService paper_shortanswer_Service;
+	@Autowired
+	Paper_singleService papersingle_Service;
+	@Autowired
+	Paper_singlechoiceService paper_singlechoiceService;
+	@Autowired
+	Paper_multiplechoiceService paper_multiplechoiceService;
+	@Autowired
+	Paper_fillchoiceService paper_fillchoiceService;
+	@Autowired 
+	ExamrecordService examrecordService;
+	
+	
+	//1.跳转到学生考试中心
+	@RequestMapping("/toStudentPaperIndex")
+	public String toStudentPaperIndex() {
+		return "studentPaper/studentPaperIndex";
+		
+	}
+
+	//2.跳转到考试索引页
+	@RequestMapping("/toExam_index/{userid}/{paperid}")
+
+	public String toExam_Index( ModelMap modelMap, @PathVariable Integer userid, @PathVariable Integer paperid
+			,HttpServletRequest req) {
+		User u=new User();
+		u.setUserid(userid);
+		User selectUserByPrimaryKey = userService.selectUserByPrimaryKey(u);
+		Paper p = paperService.selectPaperbyId(paperid);
+		
+		req.getSession().setAttribute("currentExaminee", selectUserByPrimaryKey);
+		req.getSession().setAttribute("currentPaper", p);
+		//将计时器剩余时间设置到session中
+		req.getSession().setAttribute("leftTime", Integer.parseInt(p.getDuration())*60);
+		req.getSession().setAttribute("qiechuNum", 0);
+		
+		return "studentPaper/exam-index";
+	}
+	
+
+	//3.跳转到试题结构页
+	@RequestMapping("/toPaper_contruct")
+	public String toPaper_contruct() {
+		return "studentPaper/paper_contruct";
+	}
+	
+	//4.跳转到试题页
+	@RequestMapping("/toExam_paper")
+	public String toExam_paper(HttpServletRequest req,HttpServletResponse res) throws IOException {
+	
+	return "studentPaper/exam-paper";
+		}
+	
+	// 加载试卷
+	@RequestMapping("/load_paper")
+	public void load_paper(HttpServletRequest req,HttpServletResponse res) throws IOException{
+	
+		if((User)req.getSession().getAttribute("currentUser")!=null){
+			//进入考试添加考试记录
+			Date begintime =new Date();
+			Examrecord examrecord = new Examrecord();
+			examrecord.setPaperid(((Paper)req.getSession().getAttribute("currentPaper")).getPaperid());
+			examrecord.setUserid(((User)req.getSession().getAttribute("currentUser")).getUserid());
+			examrecord.setBegintime(begintime);
+			examrecord.setDothing("进入考试");
+			examrecordService.addExamrecord(examrecord);
+			Paper p = (Paper)req.getSession().getAttribute("currentPaper");
+			//获得单项选择
+			List<Paper_single> singles = papersingle_Service.getAllbyPaperid(p);
+			//多项选择
+			List<Paper_multiple> multiples = paper_multipleService.getAllbyPaperid(p);
+			//判断题
+			List<Paper_judge> judges= paper_judge_Service.getAllbyPaperid(p);
+			//填空题
+			List<Paper_fill> fills = paper_fillService.getAllbyPaperid(p);
+			//简答题
+			List<Paper_shortanswer> shortanswers = paper_shortanswer_Service.getAllbyPaperid(p);
+			Map<String,List> map=new LinkedHashMap<String,List>();
+			map.put("singles", singles);
+			map.put("multiples",multiples);
+			//多项选择
+			
+			map.put("judges", judges);
+			map.put("fills", fills);
+			map.put("shortanswers", shortanswers);
+			Object json = JSON.toJSONString(map);
+			
+			//将map传过去
+			res.setContentType("text/html;charset=utf-8");
+			res.getWriter().print(json);
+			return;
+			
+		}	
+	
+	}
+	
+	//6.跳转到我的考试页面
+	@RequestMapping("/toMyExam")
+	
+	public String toMyExam(HttpServletRequest req) {
+//		User user=new User();
+//		user.setUserid(2);
+//		user.setInundomenum(10);
+//		user.setOutundonenum(20);
+//		user.setDonenum(30);
+//		user.setFuturenum(40);
+//		req.getSession().setAttribute("currentUser", user);
+		return "studentPaper/myExam";
+	}
+	
+	
+	//7.跳转到过期的页面
+	@RequestMapping("/toOutOfdate")
+	public String toOutOfdate(HttpServletRequest req,HttpServletResponse res) {
+		
+		if((User)req.getSession().getAttribute("currentUser")!=null){
+		
+		List<Paper> selectAllPaperOutOfDate = paperService.selectAllPaperOutOfDate((User)req.getSession().getAttribute("currentUser"));
+	
+		req.setAttribute("outOfDate",selectAllPaperOutOfDate);
+        return "studentPaper/outOfdate";
+		}
+		//如果没有登录返回到登陆页面
+		return "forward: /tologin";
+	}
+	//跳转到待测试界面
+	@RequestMapping("/toWaitingTest")
+	public String toWaitingTest(HttpServletRequest req,HttpServletResponse res) {
+		
+				if((User)req.getSession().getAttribute("currentUser")!=null){
+				
+				List<Paper> selectAllPaperWaitingToTest = paperService.selectAllPaperWaitingToTest((User)req.getSession().getAttribute("currentUser"));
+			
+				req.setAttribute("outOfDate",selectAllPaperWaitingToTest);
+				return "studentPaper/WaitingToTest";
+				}
+				//如果没有登录返回到登陆页面
+				return "forward: /tologin";
+		
+		
+	}
+	
+
+	
+	//8.跳转到等待完成答题页面
+	@RequestMapping("/toWaitingFinish")
+	public String toWaitingFinish(HttpServletRequest req,HttpServletResponse res) {
+		
+		if((User)req.getSession().getAttribute("currentUser")!=null){
+		    List<Paper> selectAllPaperWaitingToFinish = paperService.selectAllPaperWaitingToFinish((User)req.getSession().getAttribute("currentUser"));
+			req.setAttribute("waitingToFinishPaper",selectAllPaperWaitingToFinish);
+			
+			return "studentPaper/waitingFinish";
+			
+		}
+		//如果没有登录返回到登陆页面
+		return "forward: /tologin";
+		
+	}
+	
+	//9.跳转到等待开始答题页面
+	@RequestMapping("/toWaitingStart")
+	public String toWaitingStart(HttpServletRequest req,HttpServletResponse res) {
+
+		if((User)req.getSession().getAttribute("currentUser")!=null){
+          List<Paper> selectAllPaperWaitingToStart = paperService.selectAllPaperWaitingToStart((User)req.getSession().getAttribute("currentUser"));
+          req.setAttribute("waitingToStart",selectAllPaperWaitingToStart);
+          return "studentPaper/waitingStart";
+        }
+		//如果没有登录返回到登陆页面
+		return "forward: /tologin";
+				
+	    }
+	
+	//10.跳转到报告页面
+	@RequestMapping("/toReport")
+	public String toReport() {
+		return "studentPaper/report";
+	}
+	
+	//11.跳转到完成的试卷页面
+	@RequestMapping("/toFinishPaper")
+	public String toFinishPaper(HttpServletRequest req,HttpServletResponse res) {
+			
+			if((User)req.getSession().getAttribute("currentUser")!=null){
+			List<Paper> selectAllPaperFinished = paperService.selectAllPaperFinished((User)req.getSession().getAttribute("currentUser"));
+			req.setAttribute("finished",selectAllPaperFinished);
+			System.out.println("大小"+selectAllPaperFinished.size());
+			return "studentPaper/finished";
+			}
+			//如果没有登录返回到登陆页面
+			return "forward: /tologin";
+			
+	}
+	
+	 @RequestMapping("/pictureSaving")
+	 public void pictureSaving(@RequestParam("file") MultipartFile file,HttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException {
+		 
+		     request.setCharacterEncoding("utf-8");
+			 File f =  ResourceUtils.getFile("classpath:static");
+			 String rootPath=f.getPath();
+			 String filePath = rootPath+"\\upload" +File.separator+ "shortAnswerPicture";
+			 ImgUtils.makeSureDirExists(filePath);
+
+			// 解决文件重名问题
+			 UUID randomUUID = UUID.randomUUID();
+			 String newFileName = randomUUID + ".jpg";
+			 String path = filePath+File.separator+newFileName;
+			 InputStream is = file.getInputStream();
+	        FileOutputStream fops=new FileOutputStream(path);
+	        byte[] bytes=new byte[1024];
+	        int cache=0;
+	        while((cache=is.read(bytes))!=-1) {
+	        	fops.write(bytes,0,cache);
+	        }
+	        fops.close();
+	        response.setCharacterEncoding("UTF-8");
+		    response.getWriter().print("static"+File.separator+"upload" +File.separator+ "shortAnswerPicture"+File.separator+newFileName);
+	 }
+	
+	//更新剩余时间的session
+	 
+	 @RequestMapping("/update_leftTime")
+	 public void update_leftTime(HttpServletRequest req,HttpServletResponse res) throws IOException {
+		 String time=req.getParameter("left");
+		 req.getSession().setAttribute("leftTime", time);
+		 res.getWriter().print(1);
+	 }
+	 @RequestMapping("/update_qiechuNum ")
+	 public void update_qiechuNum(HttpServletRequest req,HttpServletResponse res) throws IOException {
+		 String qiechucishu=req.getParameter("qiechuNum");
+		 req.getSession().setAttribute("qiechuNum", qiechucishu);
+		 res.getWriter().print(1);
+		 
+		 
+	}
+	 //保存答案
+
+	@RequestMapping("/saveAnswer")
+	 @ResponseBody
+	 public void saveAnswer(@RequestBody JSONObject obj,HttpServletResponse res,HttpServletRequest req) throws IOException {
+//		     System.out.println("answer:"+obj.toJSONString());
+		     Paper p=(Paper) req.getSession().getAttribute("currentPaper");
+		     Integer paperId=p.getPaperid();
+		     //单选题
+		     JSONArray singleAns = obj.getJSONArray("singleAns");
+//		     System.out.println("单选题:"+ singleAns);
+		     List<Paper_single> allbyPaperid = papersingle_Service.getAllbyPaperid(p);
+		     for(int i=0;i<allbyPaperid.size();i++) {
+		    	 List<Paper_singlechoice> singlelist = allbyPaperid.get(i).getSinglelist();
+		    	 for(int j=0;j<singlelist.size();j++) {
+		    		 
+		    		 Paper_singlechoice choice=singlelist.get(j);
+		    		 if(singleAns.get(i)!=null) { 
+		    		 if(Integer.parseInt((String) singleAns.get(i))==(j+1)) {
+		    			 choice.setIschoose(1);
+		    			
+		    		 }else {
+		    			 choice.setIschoose(0);
+		    		 }
+		    		 paper_singlechoiceService.updatePaper_singlechoice(choice);
+		    		 }
+		    	 }
+		     }
+		     //多选题
+		     JSONArray multipleAns=obj.getJSONArray("multipleAns");
+		     List<Paper_multiple> allbyPaperid2 = paper_multipleService.getAllbyPaperid(p);
+		     for(int i=0;i<allbyPaperid2.size();i++) {
+		    	 List<Paper_multiplechoice> multiplelists = allbyPaperid2.get(i).getMultiplelist();
+		    	 for(int j=0;j<multiplelists.size();j++) {
+		    		 Paper_multiplechoice paper_multiplechoice = multiplelists.get(j);
+		    		 
+		    		 JSONArray jsonArray = multipleAns.getJSONArray(i);
+		    		 if(multipleAns.getJSONArray(i)!=null&&multipleAns.getJSONArray(i).size()!=0) {
+		    		 if(jsonArray.contains(""+(j+1))) {
+		    			 paper_multiplechoice.setIschoose(1);
+		    		 }
+		    		 else {
+		    			 paper_multiplechoice.setIschoose(0); 
+		    		 }
+		    		 paper_multiplechoiceService.updatePaper_multiplechoice(paper_multiplechoice);
+		    		 }
+		    	 }
+		     }
+		     //判断题
+		     JSONArray judgeAns = obj.getJSONArray("judgeAns");
+		     List<Paper_judge> allbyPaperid3 = paper_judge_Service.getAllbyPaperid(p);
+		     for(int i=0;i<allbyPaperid3.size();i++) {
+		    	 if(judgeAns.get(i)!=null) {
+		    	 Paper_judge paper_judge = allbyPaperid3.get(i);
+		    	 
+		    
+		    	 paper_judge.setAnswer(Integer.parseInt((String)judgeAns.get(i))-1);
+		    	 paper_judge_Service.updatePaper_judge(paper_judge);
+		    	 }
+		    	 
+		     }
+		     
+		     //填空题
+		     JSONArray fillAns = obj.getJSONArray("fillAns");
+		     List<Paper_fill> allbyPaperid4 = paper_fillService.getAllbyPaperid(p);
+		     for(int i=0;i<allbyPaperid4.size();i++) {
+		    	 if(fillAns.get(i)!=null) {
+		    	 List<Paper_fillchoice> filllsit = allbyPaperid4.get(i).getFilllist();
+		    	  for(int j=0;j<filllsit.size();j++) {
+		    		  if(fillAns.getJSONArray(i).getString(j)!=null) {
+		    		 Paper_fillchoice paper_fillchoice = filllsit.get(j);
+		    		 paper_fillchoice.setAnswer(fillAns.getJSONArray(i).getString(j));
+		    		 paper_fillchoiceService.updatePaper_fillchoice(paper_fillchoice);
+		    		  }
+		    	  }
+		    	 }
+		     }
+		     
+		     //简答题
+		     JSONArray shortAnswerAns = obj.getJSONArray("shortAnswerAns");
+		     List<Paper_shortanswer> allbyPaperid5 = paper_shortanswer_Service.getAllbyPaperid(p);
+		     
+		     for(int i=0;i<allbyPaperid5.size();i++) {
+		    	
+		    	 Paper_shortanswer paper_shortanswer = allbyPaperid5.get(i);
+		    	 paper_shortanswer.setAnswer(shortAnswerAns.getString(i));
+		    	 paper_shortanswer_Service.updatePaper_shortanswer(paper_shortanswer);
+		    	 
+		      }
+		     //将试卷标志位设为2，表示学生已经做过
+		     p.setDoflag(2);
+		     paperService.updateByPaperId(p);
+		     //添加考试完成报告
+		        Date begintime =new Date();
+				Examrecord examrecord = new Examrecord();
+				examrecord.setPaperid(((Paper)req.getSession().getAttribute("currentPaper")).getPaperid());
+				examrecord.setUserid(((User)req.getSession().getAttribute("currentUser")).getUserid());
+				examrecord.setBegintime(begintime);
+				examrecord.setDothing("交卷,考试结束");
+				List<Examrecord> selectRecordByDoingAndPaperId = examrecordService.selectRecordByDoingAndPaperId(p.getPaperid(),"交卷,考试结束");
+				if(selectRecordByDoingAndPaperId==null||(selectRecordByDoingAndPaperId!=null&&selectRecordByDoingAndPaperId.size()!=0)) {
+					   //表示有相应的记录，这更新
+						examrecord.setRecordid(selectRecordByDoingAndPaperId.get(0).getRecordid());
+						examrecordService.updateExamrecordById(examrecord);
+						
+				}else {
+				examrecordService.addExamrecord(examrecord);
+				}
+		     
+		     //req.getSession().removeAttribute("currentPaper");
+		     res.getWriter().print("1");
+		       
+		    //return "forward:/toWaitingLeap";
+		
+	 }
+	
+	@RequestMapping("/toWaitingLeap")
+	public String toWaitingLeap() {
+		return "studentPaper/waitingLeap";
+	}
+	@RequestMapping("/update_Record")
+	public void update_outRecord(@RequestBody JSONObject obj,HttpServletResponse res,HttpServletRequest req) throws IOException {
+	
+		if((User)req.getSession().getAttribute("currentUser")!=null){
+		Date begintime =new Date();
+		System.out.println("doing"+(String)obj.get("doing"));
+		Examrecord examrecord = new Examrecord();
+		Paper p=paperService.selectPaperbyId(((Paper)req.getSession().getAttribute("currentPaper")).getPaperid());
+		examrecord.setPaperid(p.getPaperid());
+		examrecord.setUserid(p.getExaminee());
+		
+		examrecord.setBegintime(begintime);
+		examrecord.setDothing((String)obj.get("doing"));
+		List<Examrecord> selectRecordByDoingAndPaperId = examrecordService.selectRecordByDoingAndPaperId(p.getPaperid(),(String)obj.get("doing"));
+		if(selectRecordByDoingAndPaperId==null||(selectRecordByDoingAndPaperId!=null&&selectRecordByDoingAndPaperId.size()!=0)) {
+		   //表示有相应的记录，这更新
+			examrecord.setRecordid(selectRecordByDoingAndPaperId.get(0).getRecordid());
+			examrecordService.updateExamrecordById(examrecord);
+			
+		}else {
+			//如果没有找到那么添加记录
+		examrecordService.addExamrecord(examrecord);
+		}
+		res.getWriter().print("");
+		
+		}
+	 }
+	
+	@RequestMapping("/toPaperDetail1/{paperid}")
+	public  String toPaperDetail1(@PathVariable Integer paperid,HttpServletRequest req) {
+		Paper p = paperService.selectPaperbyId(paperid);
+		//获得单项选择
+		List<Paper_single> singles = papersingle_Service.getAllbyPaperid(p);
+		//多项选择
+		List<Paper_multiple> multiples = paper_multipleService.getAllbyPaperid(p);
+		//判断题
+		List<Paper_judge> judges= paper_judge_Service.getAllbyPaperid(p);
+		//填空题
+		List<Paper_fill> fills = paper_fillService.getAllbyPaperid(p);
+		//简答题
+		List<Paper_shortanswer> shortanswers = paper_shortanswer_Service.getAllbyPaperid(p);
+		req.setAttribute("singles", singles);
+		req.setAttribute("multiples", multiples);
+		req.setAttribute("judges", judges);
+		req.setAttribute("fills", fills);
+		req.setAttribute("shortanswers", shortanswers);
+		req.setAttribute("paper", p);
+		return "studentPaper/paperDetail";
+	}
+	
+	
+	
+	@RequestMapping("/toPaperReport/{paperid}")
+	public String toPaperReport(@PathVariable Integer paperid,HttpServletRequest req) throws SocketException {
+		//获取当前用户
+		
+		Paper p = paperService.selectPaperbyId(paperid);
+		Integer examinee = p.getExaminee();
+		User u=new User();
+		u.setUserid(examinee);
+		User selectUserByPrimaryKey = userService.selectUserByPrimaryKey(u);
+		
+		//获得单项选择
+		List<Paper_single> singles = papersingle_Service.getAllbyPaperid(p);
+		//多项选择
+		List<Paper_multiple> multiples = paper_multipleService.getAllbyPaperid(p);
+		//判断题
+		List<Paper_judge> judges= paper_judge_Service.getAllbyPaperid(p);
+		//填空题
+		List<Paper_fill> fills = paper_fillService.getAllbyPaperid(p);
+		//简答题
+		List<Paper_shortanswer> shortanswers = paper_shortanswer_Service.getAllbyPaperid(p);
+		List<Examrecord> selectRecordByPaperId = examrecordService.selectRecordByPaperId(p.getPaperid());
+		String remoteAddr = req.getRemoteAddr();
+        String forwarded = req.getHeader("X-Forwarded-For");
+        String realIp = req.getHeader("X-Real-IP");
+
+        String ip = null;
+        if (realIp == null) {
+            if (forwarded == null) {
+                ip = remoteAddr;
+            } else {
+                ip = remoteAddr + "/" + forwarded.split(",")[0];
+            }
+        } else {
+            if (realIp.equals(forwarded)) {
+                ip = realIp;
+            } else {
+                if(forwarded != null){
+                    forwarded = forwarded.split(",")[0];
+                }
+                ip = realIp + "/" + forwarded;
+            }
+        }
+        
+        
+        //获得操作系统以及浏览器
+        String  browserDetails  =   req.getHeader("User-Agent");
+        String  userAgent       =   browserDetails;
+        String  user            =   userAgent.toLowerCase();
+
+        String os = "";
+        String browser = "";
+
+        //=================OS Info=======================
+        if (userAgent.toLowerCase().indexOf("windows") >= 0 )
+        {
+            os = "Windows";
+        } else if(userAgent.toLowerCase().indexOf("mac") >= 0)
+        {
+            os = "Mac";
+        } else if(userAgent.toLowerCase().indexOf("x11") >= 0)
+        {
+            os = "Unix";
+        } else if(userAgent.toLowerCase().indexOf("android") >= 0)
+        {
+            os = "Android";
+        } else if(userAgent.toLowerCase().indexOf("iphone") >= 0)
+        {
+            os = "IPhone";
+        }else{
+            os = "UnKnown, More-Info: "+userAgent;
+        }
+        //===============Browser===========================
+        if (user.contains("edge"))
+        {
+            browser=(userAgent.substring(userAgent.indexOf("Edge")).split(" ")[0]).replace("/", "-");
+        } else if (user.contains("msie"))
+        {
+            String substring=userAgent.substring(userAgent.indexOf("MSIE")).split(";")[0];
+            browser=substring.split(" ")[0].replace("MSIE", "IE")+"-"+substring.split(" ")[1];
+        } else if (user.contains("safari") && user.contains("version"))
+        {
+            browser=(userAgent.substring(userAgent.indexOf("Safari")).split(" ")[0]).split("/")[0]
+                    + "-" +(userAgent.substring(userAgent.indexOf("Version")).split(" ")[0]).split("/")[1];
+        } else if ( user.contains("opr") || user.contains("opera"))
+        {
+            if(user.contains("opera")){
+                browser=(userAgent.substring(userAgent.indexOf("Opera")).split(" ")[0]).split("/")[0]
+                        +"-"+(userAgent.substring(userAgent.indexOf("Version")).split(" ")[0]).split("/")[1];
+            }else if(user.contains("opr")){
+                browser=((userAgent.substring(userAgent.indexOf("OPR")).split(" ")[0]).replace("/", "-"))
+                        .replace("OPR", "Opera");
+            }
+
+        } else if (user.contains("chrome"))
+        {
+            browser=(userAgent.substring(userAgent.indexOf("Chrome")).split(" ")[0]).replace("/", "-");
+        } else if ((user.indexOf("mozilla/7.0") > -1) || (user.indexOf("netscape6") != -1)  ||
+                (user.indexOf("mozilla/4.7") != -1) || (user.indexOf("mozilla/4.78") != -1) ||
+                (user.indexOf("mozilla/4.08") != -1) || (user.indexOf("mozilla/3") != -1) )
+        {
+            browser = "Netscape-?";
+
+        } else if (user.contains("firefox"))
+        {
+            browser=(userAgent.substring(userAgent.indexOf("Firefox")).split(" ")[0]).replace("/", "-");
+        } else if(user.contains("rv"))
+        {
+            String IEVersion = (userAgent.substring(userAgent.indexOf("rv")).split(" ")[0]).replace("rv:", "-");
+            browser="IE" + IEVersion.substring(0,IEVersion.length() - 1);
+        } else
+        {
+            browser = "UnKnown, More-Info: "+userAgent;
+        }
+        req.setAttribute("os", os);
+        req.setAttribute("browser", browser);
+		req.setAttribute("ip", ip);
+		req.setAttribute("singles", singles);
+		req.setAttribute("multiples", multiples);
+		req.setAttribute("judges", judges);
+		req.setAttribute("fills", fills);
+		req.setAttribute("shortanswers", shortanswers);
+		req.setAttribute("paper", p);
+		req.setAttribute("examinee", selectUserByPrimaryKey);
+		req.setAttribute("records", selectRecordByPaperId);
+		return "studentPaper/paperReport";
+	}
+	
+	@RequestMapping("/toExamEntrance")
+	public String toExamEntrance() {
+		
+		return "studentPaper/Entrance";
+	}
+	//判断口令是否正确
+	@RequestMapping("/checkInvitationcode")
+	public void checkInvitationcode(@RequestBody JSONObject obj,HttpServletResponse res,HttpServletRequest req) throws IOException {
+		String invitationcode=(String)obj.get("invitationcode");
+		JSONObject object=new JSONObject();
+		int userid=((User)req.getSession().getAttribute("cuurentUser")).getUserid();
+		List<Paper> selectPaperByInvitationcode = paperService.selectPaperByInvitationcode(invitationcode,userid);
+		if(selectPaperByInvitationcode!=null&&selectPaperByInvitationcode.size()==1) {
+			int paperid=selectPaperByInvitationcode.get(0).getPaperid();
+			req.setAttribute("paperid", paperid);
+			req.setAttribute("userid", userid);
+			object.put("tag", "1");
+			object.put("paperid", paperid);
+			object.put("userid", userid);
+			
+			
+		}
+		else {
+			object.put("tag", "0");
+		}
+		String jsonString = JSON.toJSONString(object);
+		res.getWriter().print(jsonString);
+		
+		
+		
+		
+	}
+	
+	
+	
+
+}

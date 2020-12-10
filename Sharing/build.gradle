@@ -1,0 +1,47 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'com.neu'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	jcenter()
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	
+	compile ("mysql:mysql-connector-java:5.1.24")
+	
+	//导入web3j和logback依赖
+    compile 'org.web3j:core:3.3.0', 
+            'ch.qos.logback:logback-core:1.2.3',
+            'ch.qos.logback:logback-classic:1.2.3'
+    //实现项目热部署，不需重启  
+    compile ('org.springframework.boot:spring-boot-devtools')
+    
+   
+   
+   
+   compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.2.4.RELEASE'
+   
+   compile 'com.mchange:mchange-commons-java:0.2.3.1'
+   compile 'c3p0:c3p0:0.9.1.2'
+  
+
+   
+   
+}
+
+test {
+	useJUnitPlatform()
+}

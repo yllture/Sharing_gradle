@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" th:href="@{static/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/groupadmin.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/groupview.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/adminwork.css}">
+    <title></title>
+</head>
+<body class="layui-view-body">
+	
+    <div class="layui-content">
+    	
+    	<div class="layui-page-header adg">
+            <div class="pagewrap adg-right" style="display:inline-block;width:50%;left:48%;padding-top:0px;padding-bottom:0px;">
+	            <ul class="layui-nav" style="background-color:#fff">
+				  <li class="layui-nav-item" style="display:inline-block;">
+					  <a href="/toSetWork"><i class="fa fa-plus" style="font-size: 16px;color: #b0dfb3;"></i>
+	            		<span style="font-size: 18px;color: #b0dfb3;">布置作业</span>
+	            	  </a>
+            	  </li>
+            	  <li class="layui-nav-item" style="display:inline-block;">
+		          <a href="/toAddMember"><i class="fa fa-user-plus" style="font-size: 16px;color: #b0dfb3;"></i>
+		           <span style="font-size: 18px;color: #b0dfb3;">添加</span>
+		           </a>
+		           </li>
+		           <li class="layui-nav-item" style="display:inline-block;">
+            	<a href="/toEditGroup"><i class="fa fa-pencil" style="font-size: 16px;color: #b0dfb3;"></i>
+            		<span style="font-size: 18px;color: #b0dfb3;">编辑</span>
+            	</a>
+            	</li> 
+            	<li class="layui-nav-item" style="display:inline-block;">
+            	<div   th:id="${session.group.c1}" class="share" style="padding:0px 20px;text-align:center;"><i class="fa fa-share" style="font-size: 16px;color: #b0dfb3;"></i>
+            		<span style="font-size: 18px;color: #b0dfb3;">分享</span>
+            		<dl class="layui-nav-child">
+            		<span class="" lay-separator="|" style="visibility: visible;" >
+            		
+					  <dd> <a href="javascript:void(0);" onclick="qqFriend();"><i class="fa fa-qq"></i></a></dd>
+					  <dd><a href="javascript:void(0);" onclick="qqZone();"><i class="fa fa-wechat"></i></a></dd>
+					  <dd><a href="javascript:void(0);" onclick="sinaWeiBo();"><i class="fa fa-weibo"></i></a></dd>
+					 
+					</span>
+					</dl>
+            	</div>
+            	</li>
+            	<li class="layui-nav-item" style="display:inline-block;">
+            	<a href="#"><i class="fa fa-gear" style="font-size: 16px;color: #b0dfb3;"></i>
+            		<span style="font-size: 18px;color: #b0dfb3;">设置</span></a>
+            		<dl class="layui-nav-child layui-anim layui-anim-upbit">
+            			<dd><a href="javascript;" onclick="deleteBut();">解散群</a></dd>
+      					<dd><a href="javascript;" onclick="transBut();">转让群</a></dd>
+            		</dl>
+            	
+            	</li>
+				</ul>
+            </div>
+        </div>
+    	
+        <div class="layui-row">
+            <div class="layui-card">
+                <div class="layui-card-header">布置作业</div>
+                <div class="layui-form layui-card-body">
+                  
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">*选择试卷</label>
+                    <div class="layui-input-block">
+                      <select name="paper" lay-verify="required" class="paper-list">
+                          <!-- <option value=""></option> -->
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">作业说明</label>
+                    <div class="layui-input-block">
+                      <textarea name="content" placeholder="请输入内容" class="layui-textarea" id="content"></textarea>
+                    </div>
+                  </div>
+                  
+                  <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">选择时间</label>
+                    <div class="layui-input-block" style="display:inline-block;margin-left:20px;">
+                      <input type="text" class="layui-input test-item" id="starttime">
+                    </div>
+                    <span style="display:inline-block;margin-left:16px">到</span>
+                    <div class="layui-input-block" style="display:inline-block;margin-left:20px;">
+                      <input type="text" class="layui-input test-item" id="endtime">
+                    </div>
+                  </div>
+                  
+                  <!-- <div class="layui-form-item">
+                    <label class="layui-form-label">*选择群组</label>
+                    <div class="layui-input-block">
+                      <select name="city" lay-verify="required">
+                        <option value=""></option>
+                        <option value="0">北京</option>
+                        <option value="1">上海</option>
+                        <option value="2">广州</option>
+                        <option value="3">深圳</option>
+                        <option value="4">杭州</option>
+                      </select>
+                    </div>
+                  </div> -->
+                 
+               
+                  
+                  <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <button class="layui-btn layui-btn-blue" onclick="upbut();" lay-submit lay-filter="formDemo">立即提交</button>
+                      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                  </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <script src="layui/layui.all.js" th:src="@{static/layui/layui.all.js}"></script>
+    <script src="layui/layui.js" th:src="@{static/js/jquery.min.js}"></script>
+    <script>
+      var form = layui.form
+        ,layer = layui.layer;
+      layui.use(['layer', 'form', 'element', 'laydate'], function () {
+          var layer = layui.layer, form = layui.form, element = layui.element, laydate = layui.laydate;;
+          lay('.test-item').each(function () {
+              laydate.render({
+                  elem: '#starttime'
+                  ,type:'datetime'
+                  , format: 'yyyy-MM-dd HH:mm:ss'   
+                  , trigger: 'click'
+              });
+              laydate.render({
+                  elem: '#endtime'
+                  ,type:'datetime'
+                  , format: 'yyyy-MM-dd HH:mm:ss'   
+                  , trigger: 'click'
+              });
+          });
+          form.render();
+      });
+      $(function(){
+			//alert(11);
+			$.ajax({
+				url:'toSetWorkList',
+				type:'post',
+				/* data:{}, */
+				dataType:'text',
+				success:function(res){
+					//alert(1);
+					var obj=JSON.parse(res);
+				    var paper=obj.paperlist;
+				    var code=obj.code;
+				    //alert(paper.length);
+				    if(code==6000){
+				    	alert("权限不够，请先切换到教师角色！");
+						top.location.href="toGroup";
+				    }else{
+					    var addown=' ';
+					    addown="<option value=''></option>"
+					    for(var i=0;i<paper.length;i++){
+					    	//alert(paper[i].papername);
+					    	addown+="<option value='"+i;
+					    	addown+="' id='"+paper[i].paperid+"'>"+paper[i].papername+"</option>";
+					    }
+					    $(".paper-list").append(addown); 
+					    form.render('select');
+				    }
+				   
+				}
+			});
+		});
+      var selected;
+      var content;
+      var starttime;
+      var endtime;
+      form.on('select', function(data){
+    	  selected=$(data.elem).find("option:selected").attr('id'); //得到select原始DOM对象
+  	  }); 
+      
+      function upbut(){
+    	//alert(1);
+    	content=$('#content').val();
+    	starttime=$('#starttime').val();
+    	endtime=$('#endtime').val();
+//     	alert(selected+" "+content+" "+starttime+" "+endtime+" ");
+      	//alert(groupname+" "+type+" "+base64url);
+      	$.ajax({
+              contentType : "application/x-www-form-urlencoded; charset=utf-8",
+              type : "post",
+              url : "setWork",
+              data : {
+                  'selected' : selected,
+                  'content':content,
+                  'starttime':starttime,
+                  'endtime':endtime
+              },
+              dataType : 'text',
+              success : function(res) {
+              	//dconsole.log(res);
+  				var data = JSON.parse(res);
+  				//alert(data.code);
+  				if(data.code=='0000'){
+  					alert("发布成功!");
+  					//$('input').val("");
+  					top.location.href="toGroup";
+  				}else{
+  					alert("发布失败！");
+  				}
+              }
+          })
+      }
+    </script>
+</body>
+</html>

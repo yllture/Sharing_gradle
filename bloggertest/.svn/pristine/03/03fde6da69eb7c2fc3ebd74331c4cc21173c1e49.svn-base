@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+		<meta name="author" content="Coderthemes">
+
+		<link rel="shortcut icon" href="../../img/favicon_1.ico" th:src="@{static/img/favicon_1.ico}">
+
+		<title>我的设置</title>
+
+		<link href="../../css/bootstrap.min.css" th:href="@{static/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/setcore.css" th:href="@{static/css/setcore.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/icons.css" th:href="@{static/css/icons.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/components.css" th:href="@{static/css/components.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/pages.css" th:href="@{static/css/pages.css}" rel="stylesheet" type="text/css">
+		<link href="../../css/menu.css" th:href="@{static/css/menu.css}" rel="stylesheet" type="text/css">
+		<link href="../../font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+		<link href="../../css/changeUserInfor.css" th:href="@{static/css/changeUserInfor.css}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="../../css/build.css" th:href="@{static/css/build.css}">
+		<link rel="stylesheet" type="text/css" href="../../css/alert.css" th:href="@{static/css/alert.css}">
+		<link href="../../css/gloab.css" th:href="@{static/css/gloab.css}" rel="stylesheet">
+		<script src="../../js/jquery.min.js" th:src="@{static/js/jquery.min.js}"></script>
+		<script src="../../js/modernizr.min.js" th:src="@{static/js/modernizr.min.js}"></script>
+		
+
+	<style>
+		.entrance-wrapper{
+			max-width: 500px;
+            margin: 100px auto 0;
+		}
+		.pb5 {
+         padding-bottom: 5px;
+        }
+     p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+       }
+   .input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    }
+    input-group .form-control:first-child {
+    -webkit-border-top-right-radius: 0;
+    -moz-border-radius-topright: 0;
+    border-top-right-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-bottomright: 0;
+    border-bottom-right-radius: 0;
+ }
+.input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group>.btn, .input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn-group:not(:last-child)>.btn, .input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.input-group .form-control, .input-group-addon, .input-group-btn {
+    display: table-cell;
+}
+.input-group-lg>.form-control, .input-group-lg>.input-group-addon, .input-group-lg>.input-group-btn>.btn {
+    height: 46px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+   /*  border-radius: 6px; */
+}
+.input-group .form-control {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+}
+.form-passcode, .testReportCode-input {
+    text-align: center;
+    letter-spacing: 10px;
+    font-size: 1.4em;
+}
+.code-font {
+    font-family: Monaco,Menlo,Consolas,'COURIER NEW',monospace;
+}
+.form-control, .form-control:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.form-control {
+    color: #434a54;
+    border-color: #afc6da;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+button, input, optgroup, option, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+}
+blockquote, body, button, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+}
+.input-group-btn {
+    position: relative;
+    font-size: 0;
+    white-space: nowrap;
+}
+.btn-warning {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+	</style>
+	</head>
+	<body class="fixed-left" style="background-color:white;">
+
+		<!-- 大的页面 -->
+		<div id="wrapper">
+
+			<!-- 导航栏开始 -->
+            <!-- 引入导航栏 -->
+			<div class="topbar">
+				<!-- LOGO -->
+				<div class="topbar-left">
+					<div class="text-center">
+						<a href="toindex" class="logo"><img src="../../img/logo.png" th:src="@{static/img/logo.png}" width="60px" /><span>飞马测试 </span></a>
+					</div>
+				</div>
+
+				<div class="navbar navbar-default" role="navigation">
+					<div class="container">
+						<div class="">
+							<div class="pull-left">
+								<button class="button-menu-mobile open-left">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+								<span class="clearfix"></span>
+							</div>
+							<ul class="nav navbar-nav navbar-left pull-left">
+							
+								<li th:if="${session.currentUser.usertype != null} and ${session.currentUser.usertype==0}" class="hidden-xs">
+									<a th:href="toStudentPaperIndex" id="" class="waves-effect"><i class="glyphicon glyphicon-education nvaIcon"></i>试卷</a>
+								</li>
+								<li th:if="${session.currentUser.usertype != null} and ${session.currentUser.usertype==1}" class="hidden-xs">
+									<a th:href="tounpublishteacherPaper" id="" class="waves-effect"><i class="glyphicon glyphicon-education nvaIcon"></i>试卷</a>
+								</li>
+								<li th:if="${session.currentUser.usertype != null} and ${session.currentUser.usertype==1}" class="hidden-xs">
+									<a th:href="tobankTeacher" id="" class="waves-effect"><i class="glyphicon glyphicon-folder-open nvaIcon"></i>题库</a>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="toGroup" id="" class="waves-effect"><i class="fa fa-users nvaIcon"></i>群组</a>
+								</li>
+								<li th:if="${session.currentUser.usertype != null} and ${session.currentUser.usertype==0}" class="hidden-xs">
+									<a th:href="topapershop"  id="" class="waves-effect"><i class="fa fa-shopping-basket nvaIcon"></i>试卷商城</a>
+								</li>
+								<li th:if="${session.currentUser.usertype != null} and ${session.currentUser.usertype==1}" class="hidden-xs">
+									<a th:href="tobankshop" id="" class="waves-effect"><i class="fa fa-shopping-basket nvaIcon"></i>题库商城</a>
+								</li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right pull-right">
+								<li class="dropdown hidden-xs">
+									<a href="#" data-target="#" class="dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="true">
+										<i class="md md-notifications"></i> <span class="badge badge-xs badge-danger">3</span>
+									</a>
+									<ul class="dropdown-menu dropdown-menu-lg">
+										<li class="text-center notifi-title">通知</li>
+
+										<li class="list-group">
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-user-plus fa-2x text-info"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">New user registered</div>
+														<p class="m-0">
+															<small>You have 10 unread messages</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-diamond fa-2x text-primary"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">New settings</div>
+														<p class="m-0">
+															<small>There are new settings available</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- list item-->
+											<a th:href="inform" class="list-group-item">
+												<div class="media">
+													<div class="pull-left">
+														<em class="fa fa-bell-o fa-2x text-danger"></em>
+													</div>
+													<div class="media-body clearfix">
+														<div class="media-heading">Updates</div>
+														<p class="m-0">
+															<small>There are
+                                                          <span class="text-primary">2</span> new updates available</small>
+														</p>
+													</div>
+												</div>
+											</a>
+											<!-- last list item -->
+											<a th:href="inform" class="list-group-item">
+												<small>See all notifications</small>
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="hidden-xs">
+									<a href="#" id="btn-fullscreen" class="waves-effect"><i class="md md-crop-free"></i></a>
+								</li>
+								<li class="hidden-xs">
+									<a href="#" class="right-bar-toggle waves-effect"><i class="md md-chat"></i></a>
+								</li>
+								<li class="dropdown">
+									<a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="../../img/defalutIcon.png" th:src="@{static/img/defalutIcon.png}" alt="user-img" class="img-circle"> </a>
+									<ul class="dropdown-menu">
+										<li>
+											<a th:href="toExamEntrance"><i class="fa fa-pencil nvaIcon2"></i> 考试入口</a>
+										</li>
+										<li>
+											<a th:href="tochangeUserInfor"><i class="md md-settings nvaIcon2"></i> 我的设置</a>
+										</li>
+										<li>
+											<a th:href="switchIdentity"><i class="fa fa-exchange nvaIcon2"></i> 切换身份</a>
+										</li>
+										<li>
+											<a href="toLogout"><i class="md md-settings-power nvaIcon2"></i> 退出登录</a>
+										</li>
+									</ul>
+								</li>
+								<li class="hidden-xs">
+									<a th:href="switchIdentity" class="waves-effect"><i class="fa fa-exchange"></i></a>
+								</li>
+							</ul>
+						</div>
+						<!--用户选项 -->
+					</div>
+				</div>
+			</div>
+	
+		
+	</div>
+	<div class="entrance-wrapper" style="height: 600px;margin-top: 23%; text-align:center;">
+		<p class="pb5" style="color:gray">如果获得了考试口令，请在下面的框中输入口令进入考试。<br>如果收到了邀请邮件，请直接点击邮件中的考试链接进入考试。</p>
+		<div class="input-group input-group-lg">
+  			<input type="text" class="form-passcode form-control code-font" placeholder="请输入6位考试口令" data-link="class{merge:err toggle='shake'} {:passcode trigger=true:trim}" data-original-title="" title="">
+		    <span class="input-group-btn">
+        		<a class="btn btn-warning btn-room-entrance">进入考试</a>
+			</span>
+		</div>
+		<span class="text-bittersweet mt10 f16 inline-block"><script type="jsv#1^"></script><script type="jsv/1^"></script></span>
+	</div>
+	
+	</body>
+	    <script src="../../js/bootstrap.min.js" th:src="@{static/js/bootstrap.min.js}"></script>
+		<script src="../../js/fastclick.js" th:src="@{static/js/fastclick.js}"></script>
+		<script src="../../js/waves.js" th:src="@{static/js/waves.js}"></script>
+		<script src="../../js/wow.min.js" th:src="@{static/js/wow.min.js}"></script>
+		<script src="../../js/jquery.nicescroll.js" th:src="@{static/js/jquery.nicescroll.js}"></script>
+		<script src="../../js/jquery.scrollTo.min.js" th:src="@{static/js/jquery.scrollTo.min.js}"></script>
+		<script src="../../js/jquery.app.js" th:src="@{static/js/jquery.app.js}"></script>
+		<script type="text/javascript" th:inline="javascript">
+		var resizefunc = [];
+		  $(function(){
+			  $(".btn-room-entrance").click(function(){
+				alert("进来了");
+				  var result;
+				  var invitationcode=$("input[class='form-passcode form-control code-font']").val();
+				  if(invitationcode==''){
+					  alert("请输入口令");
+				  }
+				  else{
+				  $.ajax({
+					  
+					   type : 'post',
+						url : 'checkInvitationcode',
+						data : JSON.stringify({"invitationcode":invitationcode}),
+						contentType: "application/json; charset=utf-8",
+						dataType:'text',
+						async:false,
+						success : function(res) {
+							alert("res:"+res);
+							result=res;
+								
+						},
+						
+			             error:function(e){
+			        	    alert("出错了");
+			        	   
+			             }
+					  
+					  
+				  });
+				   //alert("result:"+result);
+				   var obj=JSON.parse(result);
+				   if(obj.tag=="1"){
+						 var paperid=obj.paperid;
+						 var userid=obj.userid;
+						// alert(paperid);
+						 location="/toExam_index/"+userid+"/"+paperid;
+					}
+					else if(obj.tag=="0"){
+						alert("此邀请码错误");
+						
+					}
+				  
+				  
+				  }
+			 })
+			  
+			  
+	      });
+		
+		</script>
+</html>

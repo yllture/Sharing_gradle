@@ -1,0 +1,14 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.Bank;
+import com.neuedu.entity.Bank_knowledge;
+
+public interface Bank_knowledgeService {
+	int addBank_knowlede(Bank_knowledge bk);
+	
+	List<Bank_knowledge> selectAllbyBankid(Bank b);
+	
+
+}

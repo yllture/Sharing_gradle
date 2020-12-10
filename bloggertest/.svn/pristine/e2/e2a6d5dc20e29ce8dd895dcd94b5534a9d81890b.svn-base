@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>试卷</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" th:href="@{static/css/bootstrap.css}">
+		<link rel="stylesheet" type="text/css" href="css/paper.css" th:href="@{static/css/paper.css}">
+		
+		<!-- 编辑器js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/monokai-sublime.min.css" />
+        <link href="edit/css/themes/quill.snow.css" rel="stylesheet" th:href="@{static/edit/css/themes/quill.snow.css}">
+		<!-- 计时器 -->
+	    <link href="css/timestyle.css" th:href="@{static/css/timestyle.css}" rel="stylesheet" type="text/css"  />
+        
+		 
+	</head>
+	<body onbeforeunload="checkLeave()" onselectstart="return false">
+		<!--head begin-->
+		<div class="headbg position_fixed">
+			<div class="container header">
+				<div class="navheader">
+					<div class="nav-title">
+						在线考试
+					</div>
+					
+					<div class="nav-right">
+					   <!-- 当前的所答题的位置 -->
+					   
+		                <span class="numc">1/</span>
+						<!-- 总题数 -->
+						<span class="numtitle">50题</span>
+						<a type="button" class="answer_panel" data-toggle="modal" data-target="#dtmb"><span>答题面板</span><i class="glyphicon glyphicon-triangle-bottom"></i></a>
+						<div class="border-right"></div>
+						
+						<!-- <input type="text" class="showTime"> -->
+						<!-- Button trigger modal -->
+						<div class="border-right-none"></div>
+						<button type="button" class="btn btn-default btn-lg overtest" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-open gameover"></i><span>交卷</span></button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--head end-->
+		<!-- 计时器 -->
+		 <div class="container timeBar ys1" style="padding-top:90px;padding-left:80%" th:data="${session.leftTime}" ></div>
+		
+		<!--body begin-->
+		<div class="container main" id="div" style="margin_top:20px">
+		
+		   <!-- 这里存放考试题目 -->
+		</div>
+		<div class="confirm">
+				<a class="btn btn-default"  id ="shangyiti" href="javascript:void(0)"  role="button">上一题</a>
+				<a class="btn btn-info"  id="xiayiti" href="javascript:void(0)"  role="button">下一题</a>
+		</div>	
+		<!--body end-->
+	 
+		
+
+	<!-- 提交弹出框 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog mtk-box" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title text-tip" id="myModalLabel">考试提示：</h4>
+				</div>
+				<div class="modal-body bigbox">
+					
+					<p class="text-over">您确认现在交卷么？</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default">取消</button>
+					<a type="button" id="sumbit" class="btn btn-info" ><i class="glyphicon glyphicon-open"></i>确认交卷</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 提交弹出框 -->
+	<!-- 答题面板 -->
+	<div class="modal fade" id="dtmb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> </div>
+	</body>
+	    <script src="js/template.js" th:src="@{static/js/template.js}"></script>
+	    <script src="js/respond.js"  th:src="@{static/js/respond.js}"></script>
+	    <script src="js/textarea.js" th:src="@{static/js/textarea.js}"></script>
+		<script src='js/jquery-1.9.1.min.js' th:src='@{static/js/jquery-1.9.1.min.js}'></script>
+		<script src='js/jquery-2.0.3.min.js' th:src='@{static/js/jquery-2.0.3.min.js}'></script>
+		<script src="js/time.js" th:src="@{static/js/time.js}"></script>
+		<script src="js/bootstrap.min.js" th:src="@{static/js/bootstrap.min.js}"></script>
+		<script src="edit/dist/katex.min.js" th:src="@{static/edit/dist/katex.min.js}"></script>
+	    <script src="edit/dist/highlight.min.js" th:src="@{static/edit/dist/highlight.min.js}"></script>
+	    <script src="edit/dist/quill.js" th:src="@{static/edit/dist/quill.js}"></script>
+	    <script src="js/jquery-2.1.1.min.js"  th:src="@{static/js/jquery-2.1.1.min.js}"></script>
+        <script src="js/countdown.js"  th:src="@{static/js/countdown.js}"></script>
+	    
+	  
+	<script type="text/javascript">
+		
+			/* $(function () {
+				$("[data-toggle='popover']").popover();
+		     }); */
+	</script>
+	
+<script type="text/javascript"  th:inline="javascript">
+	$(function(){
+		$(".timeBar").each(function () {
+			$(this).countdownsync({
+				dayTag: "",
+				hourTag: "<label class='tt hh dib vam'>00</label><span>时</span>",
+				minTag: " <label class='tt mm dib vam'>00</label><span>分</span>",
+				secTag: " <label class='tt ss dib vam'>00</label><span>秒</span>",
+				dayClass: ".dd",
+				hourClass: ".hh",
+				minClass: ".mm",
+				secClass: ".ss",
+				isDefault: false,
+				showTemp:1
+
+			}, function () {
+				//location.reload();
+				 alert("答题时间到了");
+				 submitAnswer();
+			});
+		});
+		
+	
+		
+		var qiechunum=[[${session.quechuNum}]];
+		var outnum=[[${session.currentPaper.outnum}]];
+		var flag=[[${session.currentPaper.winder}]];
+		var paperid=[[${session.currentPaper.paperid}]];
+		if(outnum==null){
+			outnum=3;
+		}
+		// 监听 visibility change 事件
+		document.addEventListener('visibilitychange',function(){
+
+		    var isHidden = document.hidden;
+
+		if(isHidden){
+
+		     
+		      if(outnum<qiechunum-1){
+					alert('切出超过'+outnum+'次，自动提交');
+					submitAnswer();
+				}
+		      else{
+		    	  alert("专心答卷");
+			      qiechunum++;
+			      var s="第"+qiechunum+"次切出页面";
+			      var json={"doing": s};
+			      $.ajax({
+			    	    type : 'post',
+						url :'update_Record',
+						dataType : 'text',
+						 contentType: 'application/json; charset=UTF-8', 
+						data:JSON.stringify(json),
+						async:false,
+						success : function(res) {
+							
+						}
+			    	  
+			      });
+			      var json2={"qiechuNum":qiechuNum};
+		    	  $.ajax({
+		    		    type : 'post',
+						url :'update_qiechuNum',
+						dataType : 'text',
+						contentType: 'application/json; charset=UTF-8', 
+						data:JSON.stringify(json2),
+						async:false,
+						success : function(res) {
+							
+						}
+		    		  
+		    	  })
+		    	  
+		      }
+
+		}
+
+		});
+		window.onbeforeunload=function(e){     
+			　　var e = window.event||e;  
+			　　e.returnValue=("确定离开当前页面吗？离开后您的答题信息不会被保存，请慎重");
+		};
+		
+	  //开始时加载页面
+		   loadPaper();
+		   var nums;
+		   var num=0;
+		   function loadPaper(){
+			   $.ajax({
+				  type : 'post',
+					url :'load_paper',
+					dataType : 'text',
+					async:false,
+					success : function(res) {
+						//将传到的值打印
+				
+						var obj=JSON.parse(res);
+						var html= template('content',obj);
+						document.getElementById('div').innerHTML=html;
+						nums = $(".main .single-box").length;
+						//加载总题数
+						$(".numtitle").text(nums+'题');
+					
+						var singleNum=obj.singles.length;
+						var multipleNum=obj.multiples.length;
+						var judgeNum=obj.judges.length;
+						var fillNum=obj.fills.length;
+						var shortanswerNum=obj.shortanswers.length;
+						var Facehtml= 
+							
+						   '<div class="modal-dialog mtk-box" role="document">'+
+						   '<div class="modal-content">'+
+							'<div class="modal-header">'+
+								'<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+								'<h4 class="modal-title text-tip" id="myModalLabel">&nbsp;</h4>'+
+							'</div>'+
+							'<div class="modal-body bigbox">'+
+								'<ul>'+
+									'<li class="pdtbox border-bottom">'+
+										'<p class="margin-top">单项选择题 '+singleNum+' 道</p>'+
+										'<div class="title_num">';
+			                              for(var i=1;i<singleNum+1;i++){
+			                            	  Facehtml+='<a name="mianban" class="btn btn-default" href="#" id="'+i+'">'+i+'</a>';
+			                               }
+			                              Facehtml+= '</div>'+
+									'</li>'+
+									'<li class="pdtbox border-bottom">'+
+										'<p class="margin-top">多项选择题'+ multipleNum+' 道</p>'+
+										'<div class="title_num">';
+										      for(var i=1;i<multipleNum+1;i++){
+										    	  Facehtml+='<a name="mianban" class="btn btn-default" href="#" id="'+(i+singleNum)+'">'+i+'</a>';
+				                               }
+											
+										Facehtml+='</div>'+
+									'</li>'+
+			                        '<li class="pdtbox border-bottom">'+
+										'<p class="margin-top">判断题' +judgeNum+' 道</p>'+
+										'<div class="title_num">';
+										    for(var i=1;i<judgeNum+1;i++){
+										    	Facehtml+='<a name="mianban" class="btn btn-default" href="#"  id="'+(i+singleNum+multipleNum)+'">'+i+'</a>';
+				                               }
+											
+										    Facehtml+='</div>'+
+									'</li>'+
+									'<li class="pdtbox border-bottom">'+
+										'<p class="margin-top">填空题'+ fillNum+' 道</p>'+
+										'<div class="title_num">';
+										  for(var i=1;i<fillNum+1;i++){
+											  Facehtml+= '<a name="mianban" class="btn btn-default"  href="#" id ="'+(i+singleNum+multipleNum+judgeNum)+'">'+i+'</a>';
+				                               }
+										  Facehtml+='</div>'+
+									'</li>'+
+									
+									'<li class="pdtbox border-bottom">'+
+										'<p class="margin-top">简答题 '+shortanswerNum+' 道</p>'+
+										'<div class="title_num">';
+										 for(var i=1;i<shortanswerNum+1;i++){
+											 Facehtml+= '<a name="mianban" class="btn btn-default" href="#" id="'+(i+singleNum+multipleNum+judgeNum+fillNum)+'">'+i+'</a>';
+				                          }										
+										 Facehtml+='</div>'+
+									'</li>'+
+								'</ul>'+
+								'<div class="mb_tip">'+
+									'<a class="btn btn-success">&nbsp;</a>'+
+									'<span>已做</span>'+
+									'<a class="btn btn-default">&nbsp;</a>'+
+									'<span>未做</span>'+
+									'<a class="btn btn-primary">&nbsp;</a>'+
+									'<span>当前</span>'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>';
+						
+					$("#dtmb").append(Facehtml);
+					$("a[id="+1+"]").addClass('btn-primary');
+					//$("a[id="+1+"]").removeClass('btn-default');
+				    //绑定
+			 }
+		  })
+		};
+		   var editlength=$("[data-Name-edit]").length;
+		   //alert("编译器大小:"+editlength)
+		   var quill=[];
+		   for(var i=0;i<editlength;i++){
+			   quill[i]= new Quill('#editor-container'+(i+1), {
+				    modules: {
+					      formula: true,
+					      syntax: true,
+					      toolbar: '#toolbar-container'
+					    },
+					    placeholder: 'Compose an epic...',
+					    theme: 'snow'
+			       })
+			   
+		   }
+		   
+		   //遍历绑定编辑器
+		   for(var j=0;j<editlength;j++){
+			    var i=j;
+		   quill[j].getModule('toolbar').addHandler('image', function () {  
+			 var fileInput = this.container.querySelector('input.ql-image[type=file]');
+	    	   if (fileInput == null) {
+	                  fileInput = document.createElement('input');
+	                  fileInput.setAttribute('type', 'file');
+	                  fileInput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon');
+	                  fileInput.classList.add('ql-image');
+	                  fileInput.addEventListener('change', function () {
+	                      if (fileInput.files != null && fileInput.files[0] != null) {
+	                         var formData = new FormData();
+	                          formData.append('file', fileInput.files[0]);
+	                          $.ajax({
+	                              url: 'pictureSaving',
+	                              type: 'POST',
+	                              cache: false,
+	                              data: formData,
+	                              processData: false,
+	                              contentType: false,
+	                              success:function(newFileName){
+	                            	  var range =quill[i].getSelection(true);
+	                                   quill[i].insertEmbed(range.index, 'image', newFileName);
+	                                   quill[i].setSelection(range.index + 1);
+	                              
+	                              },
+	                             error:function(e){
+	                            	 alert("错错了");
+	                             }
+		                               
+	                             
+	                            })
+	                        
+	                      }
+	                  });
+	                  this.container.appendChild(fileInput);
+	              }
+	              fileInput.click();
+	          });
+	   
+		   }
+		   
+		   var singleTimes=0;
+		   var multipleTimes=0;
+		   var fillTimes=0;
+		   var judgeTimes=0;
+		   var shortanswerTimes=0;
+		   
+		   //判断题选中事件
+		   $(document).ready(function(){
+		  						$("input[data-Name='optionsRadios2']").change(function(){
+		  							//更改面板颜色
+		  							var f=$(this).parent().parent().parent().attr("data-Num");
+		  							$("a[id="+f+"]").addClass('btn-success');
+		  							$("input[data-Name='optionsRadios2']:checked").each(function() { // 遍历name=test的多选框
+		  							   $("input[data-Name='optionsRadios2']").each(function() { // 遍历name=test的多选框
+		  									
+		  									$(this).parent().css("border","1px solid #ccc");
+		  									$(this).parent().css("background-color","#fff");
+		  								});
+		  								$(this).parent().css("border","1px solid #66ccff");
+		  								$(this).parent().css("background-color","#f9f9f9");
+		  								
+		  								
+		  								    
+		  								    
+		  							});
+		  							judgeTimes++;
+		  						  
+		  							if(judgeTimes==1){
+	  									//发送进入判断题开始时间
+
+	  									$.ajax({
+	  									type : 'post',
+	  									url :'update_Record',
+	  									dataType : 'text',
+	  									contentType: 'application/json; charset=UTF-8', 
+	  									data:JSON.stringify({"doing":"判断题答题开始"}),
+	  									async:false,
+	  									success : function(res) {
+	  										
+	  									}
+	  										
+	  									});
+	  									
+	  								 }
+	  								    //发送进入答判断题结束时间
+  
+  									$.ajax({
+  									type : 'post',
+  									url :'update_Record',
+  									dataType : 'text',
+  									contentType: 'application/json; charset=UTF-8', 
+  									data:JSON.stringify({"doing":"判断题答题结束"}),
+  									async:false,
+  									success : function(res) {
+  										
+  									}
+  										
+  									});
+	  								    
+	  								    
+		  							
+		  							
+		  						});
+		  			});
+		  					
+
+		  //单选题选中事件
+		  $(document).ready(function(){
+		  						$("input[data-Name='optionsRadios1']").change(function(){
+		  							var f=$(this).parent().parent().parent().attr("data-Num");
+		  							
+		  							$("a[id="+f+"]").addClass('btn-success');
+			  						//$("a[id="+f+"]").removeClass('btn-default');
+		  							$("input[data-Name='optionsRadios1']:checked").each(function() { // 遍历name=test的多选框
+		  								// 每一个被选中项的值$(this).attr("id")
+		  								$("input[data-Name='optionsRadios1']").each(function() { // 遍历name=test的多选框
+		  									// 每一个被选中项的值$(this).attr("id")
+		  									$(this).parent().css("border","1px solid #ccc");
+		  									$(this).parent().css("background-color","#fff");
+		  								});
+		  								$(this).parent().css("border","1px solid #66ccff");
+		  								$(this).parent().css("background-color","#f9f9f9");
+		  							});
+		  							
+		  							singleTimes++;
+		  							if(singleTimes==1){
+	  									//发送进入答选择题开始时间
+	  									
+	  									$.ajax({
+	  									type : 'post',
+	  									url :'update_Record',
+	  									dataType : 'text',
+	  									contentType: 'application/json; charset=UTF-8', 
+	  									data:JSON.stringify({"doing":"单选题答题开始"}),
+	  									async:false,
+	  									success : function(res) {
+	  										
+	  									}
+	  										
+	  									});
+	  									
+	  								}
+	  								    //发送进入答选择题结束时间
+
+  									$.ajax({
+  									type : 'post',
+  									url :'update_Record',
+  									dataType : 'text',
+  									contentType: 'application/json; charset=UTF-8', 
+  									data:JSON.stringify({"doing":"单选题答题结束"}),
+  									async:false,
+  									success : function(res) {
+  										
+  									}
+  										
+  									});
+	  								    
+		  							
+		  							
+		  						});
+		  	});
+		  					
+
+		  //多选题选中事件
+		  $(document).ready(function(){
+		  						$("input[data-Name='optionsRadios3']").change(function(){
+		  							var f=$(this).parent().parent().parent().attr("data-Num");
+		  							
+		  							$("a[id="+f+"]").addClass('btn-success');
+			  						//$("a[id="+f+"]").removeClass('btn-default');
+		  							$("input[data-Name='optionsRadios3']").each(function() { // 遍历name=test的多选框
+		  								// 每一个被选中项的值$(this).attr("id")
+		  								$(this).parent().css("border","1px solid #ccc");
+		  								$(this).parent().css("background-color","#fff");
+		  							});
+		  							$("input[data-Name='optionsRadios3']:checked").each(function() { // 遍历name=test的多选框
+		  								// 每一个被选中项的值$(this).attr("id")
+		  								$(this).parent().css("border","1px solid #66ccff");
+		  								$(this).parent().css("background-color","#f9f9f9");
+		  							});
+		  							
+		  							
+		  							multipleTimes++;
+		  							if(multipleTimes==1){
+	  									//发送进入答选择题开始时间
+	  									
+	  									$.ajax({
+	  									type : 'post',
+	  									url :'update_Record',
+	  									dataType : 'text',
+	  									contentType: 'application/json; charset=UTF-8', 
+	  									data:JSON.stringify({"doing":"多选题答题开始"}),
+	  									async:false,
+	  									success : function(res) {
+	  										
+	  									}
+	  										
+	  									});
+	  									
+	  								}
+	  								    //发送进入答选择题结束时间
+
+  									$.ajax({
+  									type : 'post',
+  									url :'update_Record',
+  									dataType : 'text',
+  									contentType: 'application/json; charset=UTF-8', 
+  									data:JSON.stringify({"doing":"多选题答题结束"}),
+  									async:false,
+  									success : function(res) {
+  										
+  									}
+  										
+  									});
+	  								    
+	  								    
+		  						});
+		  					});
+		   
+		  
+		  //填空题作答事件
+		  $(document).ready(function(){
+			  $("input[name='optionsRadios4']").focus(function(){
+				   
+				    var f=$(this).parent().parent().attr("data-Num");
+					$("a[id="+f+"]").addClass('btn-success');
+					fillTimes++;
+						if(fillTimes==1){
+							//发送进入答选择题开始时间
+							
+							$.ajax({
+							type : 'post',
+							url :'update_Record',
+							dataType : 'text',
+							contentType: 'application/json; charset=UTF-8', 
+							data:JSON.stringify({"doing":"填空题答题开始"}),
+							async:false,
+							success : function(res) {
+								
+							}
+								
+							});
+							
+						}
+						    //发送进入答选择题结束时间
+
+						$.ajax({
+						type : 'post',
+						url :'update_Record',
+						dataType : 'text',
+						contentType: 'application/json; charset=UTF-8', 
+						data:JSON.stringify({"doing":"填空题答题结束"}),
+						async:false,
+						success : function(res) {
+							
+						}
+							
+						});
+				  
+				  
+				  
+			  })
+			  
+			  
+		  })
+		  
+		  //简答题作答事件
+		  $(document).ready(function(){
+			  $("[data-Name-edit='edit']").click(function(){
+				  var f=$(this).parent().parent().parent().attr("data-Num");
+					$("a[id="+f+"]").addClass('btn-success');
+					shortanswerTimes++;
+					alert("简答题");
+					if(shortanswerTimes==1){
+						//发送进入答选择题开始时间
+						
+						$.ajax({
+						type : 'post',
+						url :'update_Record',
+						dataType : 'text',
+						contentType: 'application/json; charset=UTF-8', 
+						data:JSON.stringify({"doing":"简答题答题开始"}),
+						async:false,
+						success : function(res) {
+							
+						}
+							
+						});
+						
+					}
+					    //发送进入答选择题结束时间
+
+					$.ajax({
+					type : 'post',
+					url :'update_Record',
+					dataType : 'text',
+					contentType: 'application/json; charset=UTF-8', 
+					data:JSON.stringify({"doing":"简答题答题结束"}),
+					async:false,
+					success : function(res) {
+						
+					}
+						
+					});
+					
+					
+			  })
+			  
+		  
+		  })
+		  
+		  
+		  //当前所在题目事件
+		   $("#dtmb").on('click',"a[name='mianban']",function(){
+			   
+			   //将当前的隐藏掉
+			   //$(".main").children().eq(num).css("display","none");
+			   num=$(this).attr("id")-1;
+			   $(".numc").text(num+1+"/");
+			   
+			   //alert(num);
+			   
+			   for(var i = 0; i<nums; i++){
+				   if(num == i){
+ 						$(".main").children().eq(num).css("display","block");
+ 						$("a[id="+(num+1)+"]").addClass('btn-primary');
+ 						//$("a[id="+(num+1)+"]").removeClass('btn-default');
+ 						
+ 						
+ 					}else{
+ 						$(".main").children().eq(i).css("display","none");
+ 						$("a[id="+(i+1)+"]").removeClass('btn-primary');
+ 						//$("a[id="+(i+1)+"]").addClass('btn-default');
+ 						
+ 					}
+				   
+			   }
+			  
+			   
+			   
+		   })
+		   $("a[id='xiayiti']").click(function(){
+			   
+			   if(num < nums-1){
+	  				num = num+1;
+	  				flag=num+1;
+	  				$(".numc").text(flag+"/");
+	  				for(var i = 0; i<nums; i++){
+	  					if(num == i){
+	  						$(".main").children().eq(num).css("display","block");
+	  						$("a[id="+flag+"]").addClass('btn-primary');
+	  						$("a[id="+flag+"]").removeClass('btn-default');
+	  						
+	  						
+	  					}else{
+	  						$(".main").children().eq(i).css("display","none");
+	  						$("a[id="+(i+1)+"]").removeClass('btn-primary');
+	  						$("a[id="+(i+1)+"]").addClass('btn-default');
+	  						
+	  					}
+	  					
+	  				}
+	  			}
+		   })
+		   $("a[id='shangyiti']").click(function(){
+			   if(num > 0){
+	  				num = num-1;
+	  				$(".numc").text((num+1)+"/");
+	  				for(var i = 0; i<nums; i++){
+	  					if(num == i){
+	  						$(".main").children().eq(num).css("display","block");
+	  						$("a[id="+(num+1)+"]").addClass('btn-primary');
+	  						$("a[id="+(num+1)+"]").removeClass('btn-default');
+	  					}else{
+	  						$(".main").children().eq(i).css("display","none");
+	  						$("a[id="+(i+1)+"]").removeClass('btn-primary');
+	  						$("a[id="+(i+1)+"]").addClass('btn-default');
+	  					}
+	  				}
+	  			}
+		   })
+		   
+		    
+			//提交答案
+			function  submitAnswer(){
+				
+			 	  //获得用于存储答题数据
+		    	  var obj={};
+		    	  //获得选择题数据
+		    	  var singleNum=$("[data-Type='single']").length;
+		    	  var ss=$("[data-Type='single']");
+		           //打印ss的大小
+		          // alert(ss[0]);
+		          var singleAns=[];
+		    	  for(var  i=0;i<singleNum;i++){
+		    		  
+		    		
+		    		  var son=ss.eq(i).find("[data-Index="+(i+1)+"]:checked").attr('data-I');
+		    		 
+		    		  singleAns.push(son);
+		    		  
+		    	  }
+		    	  obj['singleAns']=singleAns;
+		    	  
+		    	  //获得多选题数据
+		    	  var multipleAns=[];
+		    	  var multiNum=$("[data-Type='multiple']").length;
+		    	  var ms=$("[data-Type='multiple']");
+		    	  for(var  i=0;i<multiNum;i++){
+		    		  var temp=ms.eq(i).find("[data-Index="+(i+1)+"]");
+		    		  var son=[];
+		    		  for(var k in temp){
+		    			  if(temp[k].checked)
+		    				  son.push(temp.eq(k).attr('data-I'));
+		    		   }
+		    		  
+		    		   multipleAns.push(son);
+		    		  
+		    		  
+		    	  }
+		    	  obj['multipleAns']=multipleAns;
+		    	  
+		    	  //获得判断题数据
+		    	   var judgeAns=[]; 
+		    	   var judgeNum=$("[data-Type='judge']").length;
+		    	   var js=$("[data-Type='judge']");
+		    	   for(var  i=0;i<judgeNum;i++){
+		    		  var son=js.eq(i).find("[data-Index="+(i+1)+"]:checked").attr('data-I');
+		    		  
+		    		  judgeAns.push(son);
+		    		  
+		    	   }
+		    	   obj['judgeAns']=judgeAns;
+		    	   
+		    	   //获得填空题数据
+		    	   var fillAns=[];
+		    	   var fillNum=$("[data-Type='fill']").length;
+		    	   
+		    	   var fs=$("[data-Type='fill']");
+		    	   for(var  i=0;i<fillNum;i++){
+		    		  var son=[];
+		    		  var temp =fs.eq(i).find("[data-Index="+(i+1)+"]");
+		    		 
+		    		  for(var k=0;k<temp.length;k++){
+		    			  son.push(temp.eq(k).val())
+		    		  }
+		    		 
+		    		  fillAns.push(son);
+		    		  
+		    	   }
+		    	   obj['fillAns']=fillAns;
+		    	  
+		    	   //获得简答题数据
+		    	   
+			   
+			      //获得富文本编辑器的内容
+			      var shortAnswerNum=quill.length;
+		    	  var shortAnswerAns=[];
+			      for(var i=0;i<shortAnswerNum;i++){
+				  var html=quill[i].container.firstChild.innerHTML;
+			      // alert("内容"+html1);
+			       
+			       shortAnswerAns.push(html);
+			      
+			      }
+			      obj['shortAnswerAns']=shortAnswerAns;
+			      //打印以下数据
+			      
+			      //将获得的数据传到后台
+			      
+			      $.ajax({
+						type : 'post',
+						url : 'saveAnswer',
+						data : JSON.stringify(obj),
+						contentType: "application/json; charset=utf-8",
+						dataType:'text',
+						success : function(res) {
+							
+							if(flag==null){
+								location="toTestReport/"+paperid
+							}
+							else{
+							location="/toWaitingLeap"
+							}
+						},
+			           error:function(e){
+			        	    alert("出错了");
+			        	    alert(e.res);
+			            }
+			     
+			      });
+			     
+				
+			}
+		   //开始遍历
+		   //点击提交按钮
+		      $("a[id='sumbit']").click(function(){
+		    	  submitAnswer();
+			   });
+		   
+		   
+		  
+		   
+		  
+		 
+	 })
+		
+	</script>
+	
+  
+	<script id="content" type="text/html"> 
+         
+         {{each singles as value index}}
+              {{if index==0}}
+              <div class="single-box" >
+              {{else if index!=0}}
+              <div class="single-box" style="display:none;">
+              {{/if}}
+				    <div class="single-container" >
+					  <div class="single-title">
+						 <span class="font-title">单选题</span>
+						 <span class="single_score" >{{value.qScore}}分</span>
+					  </div>
+					
+				     </div>
+				<div class="line"></div>
+				<div class="single-main">
+					<p>{{index+1}}.{{value.qTitle}}</p>
+				</div>
+                 
+				<div class="choose-box" data-isAnswered="0"  data-Type="single" data-Num={{index+1}}>
+                {{each value.singlelist as value1 index1 }}
+					<div class="radio">
+						<label class="choose">
+							<input type="radio"  name ="single{{index}}"   data-Name="optionsRadios1" value="option1"  data-Index={{index+1}} data-I={{index1+1}}>
+							<p><span>{{if index1 == 0 }} A. {{else if index1==1}} B. {{else if index1==2}} C. {{else if index1==3}} D.{{/if}}</span>&nbsp;{{value1.content}}</p>
+						</label>
+					</div>
+                 {{/each}}
+					
+				</div>
+			</div>
+        {{/each}}
+
+       
+         {{each multiples as val i}}
+                <div class="single-box"  style="display: none;">
+				  <div class="single-container">
+					   <div class="single-title">
+						 <span class="font-title">多选题</span>
+						 <span class="single_score">{{val.qScore}}分</span>
+					  </div>
+					
+				</div>
+				<div class="line"></div>
+				    <div class="single-main">
+					    <p>{{i+1}} . {{val.qTitle}}</p>
+				    </div>
+                   <div class="choose-box" data-isAnswered="0" data-Type="multiple" data-Num={{singles.length+i+1}} >
+                         {{each val.multiplelist as value1 index1}}
+					    <div class="checkbox">
+						  <label class="choose">
+							 <input type="checkbox"    value="" name="multiple{{i}}"  data-Name="optionsRadios3" data-Index={{i+1}} data-I={{index1+1}}>
+							<p><span>{{if index1 == 0 }} A. {{else if index1==1}} B. {{else if index1==2}} C. {{else if index1==3}} D.{{/if}}</span>&nbsp;{{value1.content}}</p>
+						  </label>
+					 </div>
+					{{/each}}
+				   </div>
+			  </div>
+          {{/each}}
+       
+
+        {{each judges as value index}}
+         <div class="single-box" style="display:none">
+				<div class="single-container">
+					<div class="single-title">
+						<span class="font-title">判断题</span>
+						<span class="single_score">{{value.qScore}}分</span>
+					</div>
+				</div>
+				<div class="line"></div>
+				<div class="single-main">
+					<p>{{index+1}}.{{value.qTitle}}</p>
+				</div>
+				<div class="choose-box" data-isAnswered="0" data-Type="judge" data-Num={{singles.length+multiples.length+index+1}} data-Index={{index+1}}>
+					<div class="radio">
+						<label class="choose">
+							<input type="radio" name="judges{{index}}"  data-Name="optionsRadios2" value="option2" data-Index={{index+1}} data-I="1">
+							<p><span>A</span>&nbsp;正确</p>
+						</label>
+					</div>
+                    <div class="radio">
+						<label class="choose">
+							<input type="radio" name="judges{{index}}"  data-Name="optionsRadios2" data-Index={{index+1}} value="option2" data-I="2">
+							<p><span>B</span>&nbsp;错误</p>
+						</label>
+					</div>
+					
+				</div>
+			</div>
+    {{/each}}
+
+   
+
+
+
+   {{each fills as value index}}
+    <div class="single-box" style="display:none">
+				<div class="single-container">
+					<div class="single-title">
+						<span class="font-title">填空题</span>
+						<span class="single_score">{{value.qScore}}分</span>
+					</div>
+				</div>
+				<div class="line"></div>
+				<div class="single-main">
+					<p>{{index+1}}.{{value.qTitle}}</p>
+				</div>
+              
+				<div class="choose-box" data-isAnswered="0" data-Type="fill" data-Num={{singles.length+multiples.length+judges.length+index+1}} data-Index={{index+1}}>
+                    {{each value.filllist as value1 index1}}
+                      <div>{{index1+1}}.<input type="text" name="optionsRadios4" data-Index={{index+1}}></input></div>
+					
+					{{/each}}
+				</div>
+			</div>
+   {{/each}}
+
+  {{each shortanswers as value index}}
+  
+             <div class="single-box" style="display: none;">
+				     <div class="single-container">
+					    <div class="single-title">
+						   <span class="font-title">简答题</span>
+						   <span class="single_score">{{value.qScore}}分</span>
+					     </div>
+                     </div>
+				     <div class="line"></div>
+				     <div class="single-main">
+					    <p>{{index+1}}.{{value.qTitle}}</p>
+				     </div>
+
+                 <div class="choose-box"  data-isAnswered="0"  data-Type="shortAnswer"  data-Num={{singles.length+multiples.length+judges.length+fills.length+index+1}} >
+					<div style="margin: 20px auto; width: 640px;">
+						<div id="standalone-container">
+							   <div id="toolbar-container">
+								  <span class="ql-formats"> <select class="ql-font"></select>
+									  <select class="ql-size"></select>
+								   </span> 
+                                 <span class="ql-formats">
+									<button class="ql-bold"></button>
+									<button class="ql-italic"></button>
+									<button class="ql-underline"></button>
+									<button class="ql-strike"></button>
+								</span> 
+                                <span class="ql-formats"> <select class="ql-color"></select>
+									<select class="ql-background"></select>
+								</span> 
+                                <span class="ql-formats">
+									<button class="ql-script" value="sub"></button>
+									<button class="ql-script" value="super"></button>
+								</span> 
+                               <span class="ql-formats">
+									<button class="ql-header" value="1"></button>
+									<button class="ql-header" value="2"></button>
+									<button class="ql-blockquote"></button>
+									<button class="ql-code-block"></button>
+								</span> 
+                               <span class="ql-formats">
+									<button class="ql-list" value="ordered"></button>
+									<button class="ql-list" value="bullet"></button>
+									<button class="ql-indent" value="-1"></button>
+									<button class="ql-indent" value="+1"></button>
+								</span> <span class="ql-formats">
+									<button class="ql-direction" value="rtl"></button> <select
+									class="ql-align"></select>
+								</span> <span class="ql-formats">
+									<button class="ql-link"></button>
+									<button class="ql-image"></button>
+									<button class="ql-video"></button>
+									<button class="ql-formula"></button>
+								</span> <span class="ql-formats">
+									<button class="ql-clean"></button>
+								</span>
+							 </div>
+						 <div id="editor-container{{index+1}}"  data-Name-edit='edit' style="height: 250px"></div>
+						  
+
+					</div>
+				</div>
+			</div>	
+       
+				
+            </div>
+      {{/each}}
+
+    </script>
+    
+
+    	
+    	
+	    
+  
+ 
+	
+   
+	
+</html>

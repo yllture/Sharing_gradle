@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>智能组卷</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" th:href="@{static/css/bootstrap.css}"/>
+		<link rel="stylesheet" type="text/css" href="css/smartPaper.css" th:href="@{static/css/smartPaper.css}"/>
+		<!--图标库-->
+		<link rel="stylesheet" type="text/css" href="../../css/alert.css" th:href="@{static/css/alert.css}">
+		<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"/>
+		<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+		<script>
+		var banks=[];
+		</script>
+
+	</head>
+
+	<body>
+		<div class="start-title">
+			<ol class="breadcrumb">
+				<li>
+					<a href="#">我的考试</a>
+				</li>
+				<li class="active">智能组卷</li>
+			</ol>
+		</div>
+<!-- 		<div class="form-slider"> -->
+<!-- 			<div class="title">难度设置：</div> -->
+<!-- 			<div class="slider-difficult"> -->
+<!-- 				<div class="range-slider-wrap"> -->
+<!-- 					<div class="slider"> -->
+<!-- 						<span class="min">0</span> -->
+<!-- 						<span class="max">100</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="right-text"> -->
+<!-- 				<span>易:30%</span> -->
+<!-- 				<span>中:40%</span> -->
+<!-- 				<span>难:30%</span> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+		<div class="form-inner">
+			<div class="form-left">
+				<div class="bank-list">
+					<div class="bank-toolbar">
+						<h4 class="title">
+		                <span class="lock-icon">
+		                    <i class="lock fa fa-lock" v-show="showReChoose" transition="bounce"></i>
+		                </span>请选择出题范围
+		            </h4>
+						<button type="button" class="btn btn-primary btn-confirm" v-show="!showReChoose" :disabled="notChange" onclick="queryQuestions()">确认选择
+		            </button>
+					</div>
+
+					<div id="treeView"></div>
+<!-- 						<ul class="catalog-tree nav nav-pills nav-stacked"> -->
+<!-- 							<li role="presentation"> -->
+<!-- 								<div class="hover-item" style="padding-left: 1.2em;"> -->
+<!-- 									<div class="bank-folder"> -->
+<!-- 										<span class="toggle"> -->
+<!-- 				                            <i class="fa fa-folder"></i>                        	 -->
+<!-- 				                        </span> -->
+<!-- 				                       	 我的题库 -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</li> -->
+<!-- 							<li class="hover-item" role="presentation"> -->
+<!-- 								<label> -->
+<!-- 							    	<input type="checkbox" class="banklist-checkbox">题库1 -->
+<!-- 							    </label> -->
+<!-- 							</li> -->
+<!-- 						</ul> -->
+					
+				</div>
+			</div>
+			<div class="form-right">
+				<div class="type-list">
+					<div class="toolbar">
+						<h4 class="title">
+		                <span class="lock-icon">
+		                    <i class="lock fa fa-lock" v-show="showReChoose" transition="bounce"></i>
+		                </span>根据题型、技能设置出题数量和分值
+		            	</h4>
+		            	<button type="button" class="btn btn-primary btn-confirm" onclick="getquestion()" >抽取题目</button>
+		            	<p class="statistic">共<span id="sumnnum">0</span>道共<span  id="sumscore">0</span>分</p>
+						
+					</div>
+						<div class="list">
+						<div class="list-header">
+							<div style="margin-left: 17px;">
+								<div class="col-lg-5">题型</div>
+								<div class="col-lg-3">题目数</div>
+								<div class="col-lg-3">分值</div>
+							</div>
+						</div>
+						<ul class="list-group list-body">
+							<div id="sig-select">
+							<li class="type-item" >								
+								<div class="col-lg-5" >
+									<a href="javascript:void(0);" onclick="showsingleli();" class="dropdown-toggle" id="dropdownM" data-toggle="dropdown" >单选题
+									<i class="fa fa-angle-down"></i>
+									</a>									
+								</div>
+								
+                                <div id="single"></div>
+							</li>
+							</div>
+							<div id="mul-select">
+							<li class="type-item" >
+								<div class="col-lg-5">
+									<a href="javascript:void(0);" onclick="showmultipleli();" class="dropdown-toggle" id="dropdownM" data-toggle="dropdown" >多选题
+									<i class="fa fa-angle-down"></i>
+									</a>	
+								</div>
+                                <div id="multiple"></div>
+							</li>
+							</div>
+							<div id="fill-ans">
+							<li class="type-item">
+								<div class="col-lg-5">
+									<a href="javascript:void(0);" onclick="showfillli();" class="dropdown-toggle" id="dropdownM" data-toggle="dropdown"  >填空题
+									<i class="fa fa-angle-down"></i>
+									</a>	
+								</div>
+								 <div id="fill"></div>
+							</li>
+							</div>
+							<div id="judge">
+							<li class="type-item" >
+								<div class="col-lg-5">
+									<a href="javascript:void(0);" onclick="showjudgeli();" class="dropdown-toggle" id="dropdownM" data-toggle="dropdown" >判断题
+									<i class="fa fa-angle-down"></i>
+									</a>	
+								</div>
+								 <div id="judg"></div>
+							</li>
+							</div>
+							<div id="short-ans">
+							<li class="type-item" >
+								<div class="col-lg-5">
+									<a href="javascript:void(0);" onclick="showshortanswerli();" class="dropdown-toggle" id="dropdownM" data-toggle="dropdown" >简答题
+									<i class="fa fa-angle-down"></i>
+									</a>	
+								</div>
+							 <div id="shortanswer"></div>
+							</li>
+							</div>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="alert"></div>
+		<script  th:src="@{static/js/jquery.min.js}"></script>
+			<script src="../../js/jquery-2.0.3.min.js"  th:src="@{static/js/jquery-2.0.3.min.js}"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js" th:src="@{static/js/bootstrap.min.js}"></script>
+	<script src='js/smartdata.js' th:src="@{static/js/smartdata.js}"></script>
+    <script src='js/smarttools.js' th:src="@{static/js/smarttools.js}"></script>
+    <script src='js/smarthandledata.js' th:src="@{static/js/smarthandledata.js}"></script>
+    <script src='js/smartIndex.js' th:src="@{static/js/smartIndex.js}"></script>
+    <script>
+    var singles=[];
+    var multiples=[];
+    var shortanswers=[];
+    var fills=[];
+    var judges=[];
+    var allsingle;
+    var allmultiple;
+    var alljudge;
+    var allshortanswer;
+    var allfill;
+    var obj={};
+    </script>
+	<script>
+		function addli(){
+			var addli=' ';				
+			addli+="<li class='skill-item'><div class='col-lg-5 skill-label'>";
+			addli+="<label style='paddin-left:2.5em;'><span>JavaCore</span></label></div>";
+			addli+="<div class='col-lg-3'><input type='number' class='form-control input-sm'>/1</div>"
+			addli+="<div class='col-lg-3'></div></li>"
+			$("#sig-select").append(addli);
+		}
+	</script>
+	<script type="text/javascript">
+		function queryQuestions(){
+			var bankss=document.getElementsByClassName("banklist-checkbox");
+			var flag=0;
+			        banks=[];
+					for(var i=0;i<bankss.length;i++){
+					if(bankss[i].checked==true){
+						var q=bankss[i].parentNode.getAttribute("data-file-id");
+						
+						banks.push(parseInt(q));
+						flag++;
+					}
+					
+					}
+					if(flag==0){
+
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('请选择题库').addClass('alert-danger').show().delay(1000).fadeOut();
+						
+						return;
+					}
+					$('#single').text('');
+					$('#single').empty();
+//					document.getElementsByClassName("col-lg-5 skill-label").innerHTML="";
+			obj['bankid']=banks;
+			$.ajax({
+				url:'getSmartKnowledge',
+				type:'post',
+				data :JSON.stringify(obj),
+				dataType:'json',
+				contentType: "application/json; charset=utf-8",
+				success:function(res){
+					$(".skill-item").remove();
+					//var obj=JSON.parse(res);
+					var obj=res;
+					singles=obj.single;
+					multiples=obj.multiple;
+					judges=obj.judge;
+					shortanswers=obj.shortanswer;
+					fills=obj.fill;
+					allsingle=0;
+					if(singles.length>0){
+						for(i=0;i<singles.length;i++){
+							allsingle+=singles[i].number;
+						}
+					}
+
+// 					document.getElementById("sig-select").innerHTML="";
+// 					$("#sig-select").html('');
+					var adddivsingle="";
+					adddivsingle+='<div class="col-lg-3" >';
+					adddivsingle+='<input type="number" class="form-control input-sm" id="sumsingle" disabled="disabled" />/';
+					adddivsingle+=allsingle;
+					adddivsingle+='</div><div class="col-lg-3"><input type="number" class="form-control input-sm" id="singlescore" onblur="checkscore() "/>分</div>';
+					$("#single").append(adddivsingle);	
+					for(var i=0;i<singles.length;i++){
+						var name=singles[i].name;
+						var number=singles[i].number;
+						var addli=' ';				
+						addli+="<li class='skill-item' name='singleli' ><div class='col-lg-5 skill-label' >";
+						addli+="<label style='paddin-left:2.5em;'><span>";
+						addli+=name;
+						addli+="</span></label></div>";
+						addli+="<div class='col-lg-3'><input type='number' class='form-control input-sm' name='single' onblur='disablesingle()' >/"
+						addli+=number;
+						addli+="</div>"
+						addli+="<div class='col-lg-3'></div></li>"
+						$("#sig-select").append(addli);
+					}
+					var allfill=0;
+					if(fills.length>0){
+						for(i=0;i<fills.length;i++){
+							allfill+=fills[i].number;
+						}
+					}
+					document.getElementById("fill").innerHTML="";
+					$("#fill").text('');
+					var adddivfill="";
+					adddivfill+='<div class="col-lg-3" >';
+					adddivfill+='<input type="number" class="form-control input-sm" id="sumfill" disabled="disabled" />/';
+					adddivfill+=allfill;
+					adddivfill+='</div><div class="col-lg-3"><input type="number" class="form-control input-sm" id="fillscore" onblur="checkscore() " />分</div>';
+					$("#fill").append(adddivfill);	
+					for(var i=0;i<fills.length;i++){
+						var name=fills[i].name;
+						var number=fills[i].number;
+						var addli=' ';				
+						addli+="<li class='skill-item' name='fillli'><div class='col-lg-5 skill-label'>";
+						addli+="<label style='paddin-left:2.5em;'><span>";
+						addli+=name;
+						addli+="</span></label></div>";
+						addli+="<div class='col-lg-3'><input type='number' class='form-control input-sm' name='fill' onblur='disablefill()'>/"
+						addli+=number;
+						addli+="</div>"
+						addli+="<div class='col-lg-3'></div></li>"
+						$("#fill-ans").append(addli);
+					}
+					var allmultiple=0;
+					if(multiples.length>0){
+						for(i=0;i<multiples.length;i++){
+							allmultiple+=multiples[i].number;
+						}
+					}
+					document.getElementById("multiple").innerHTML="";
+					$("#multiple").text('');
+					var adddivmultiple="";
+					adddivmultiple+='<div class="col-lg-3" >';
+					adddivmultiple+='<input type="number" class="form-control input-sm" id="summultiple" disabled="disabled" />/';
+					adddivmultiple+=allmultiple;
+					adddivmultiple+='</div><div class="col-lg-3"><input type="number" class="form-control input-sm"  id="multiplescore" onblur="checkscore() "/>分</div>';
+					$("#multiple").append(adddivmultiple);	
+					for(var i=0;i<multiples.length;i++){
+						var name=multiples[i].name;
+						var number=multiples[i].number;
+						var addli=' ';				
+						addli+="<li class='skill-item' name='multipleli'><div class='col-lg-5 skill-label'>";
+						addli+="<label style='paddin-left:2.5em;'><span>";
+						addli+=name;
+						addli+="</span></label></div>";
+						addli+="<div class='col-lg-3'><input type='number' class='form-control input-sm' name='multiple' onblur='disablemultiple()' >/"
+						addli+=number;
+						addli+="</div>"
+						addli+="<div class='col-lg-3'></div></li>"
+						$("#mul-select").append(addli);
+					}
+					var alljudge=0;
+					if(judges.length>0){
+						for(i=0;i<judges.length;i++){
+							alljudge+=judges[i].number;
+						}
+					}
+					document.getElementById("judg").innerHTML="";
+					$("#judg").html('');
+					var adddivjudge="";
+					adddivjudge+='<div class="col-lg-3" >';
+					adddivjudge+='<input type="number" class="form-control input-sm" id="sumjudge" disabled="disabled"  />/';
+					adddivjudge+=alljudge;
+					adddivjudge+='</div><div class="col-lg-3"><input type="number" class="form-control input-sm" id="judgescore" onblur="checkscore()" />分</div>';
+					$("#judg").append(adddivjudge);	
+					for(var i=0;i<judges.length;i++){
+						var name=judges[i].name;
+						var number=judges[i].number;
+						var addli=' ';				
+						addli+="<li class='skill-item' name='judgeli'><div class='col-lg-5 skill-label'>";
+						addli+="<label style='paddin-left:2.5em;'><span>";
+						addli+=name;
+						addli+="</span></label></div>";
+						addli+="<div class='col-lg-3'><input type='number' class='form-control input-sm' name='judge'onblur='disablejudge()'>/"
+						addli+=number;
+						addli+="</div>"
+						addli+="<div class='col-lg-3'></div></li>"
+						$("#judge").append(addli);
+					}
+					var allshortanswer=0;
+					if(shortanswers.length>0){
+						for(i=0;i<shortanswers.length;i++){
+							allshortanswer+=shortanswers[i].number;
+						}
+					}
+					document.getElementById("shortanswer").innerHTML="";
+					$("#shortanswer").text('');
+					var adddivshortanswer="";
+					adddivshortanswer+='<div class="col-lg-3" >';
+					adddivshortanswer+='<input type="number" class="form-control input-sm" id="sumshortanswer" disabled="disabled"  />/';
+					adddivshortanswer+=allshortanswer;
+					adddivshortanswer+='</div><div class="col-lg-3"><input type="number" class="form-control input-sm" id="shortanswerscore" onblur="checkscore() "/>分</div>';
+					$("#shortanswer").append(adddivshortanswer);	
+					for(var i=0;i<shortanswers.length;i++){
+						var name=shortanswers[i].name;
+						var number=shortanswers[i].number;
+						var addli=' ';				
+						addli+="<li class='skill-item' name='shortanswerli'><div class='col-lg-5 skill-label'>";
+						addli+="<label style='paddin-left:2.5em;'><span>";
+						addli+=name;
+						addli+="</span></label></div>";
+						addli+="<div class='col-lg-3'><input type='number' class='form-control input-sm' name='shortanswer' onblur='disableshortanswer()'>/"
+						addli+=number;
+						addli+="</div>"
+						addli+="<div class='col-lg-3'></div></li>"
+						$("#short-ans").append(addli);
+					}
+				},
+				error:function(res){
+                  alert("error"+res); 
+              }
+			});
+		}
+		function getquestion(){
+			var sumsingle=$('#sumsingle').val();
+			var summultiple=$('#sunmultiple').val();
+			var sumfill=$('#sumfill').val();
+			var sumjudge=$('#sumjudge').val();
+			var sumshortanswer=$('#sumshortanswer').val();
+			var allInputs = document.getElementsByTagName('input');
+			var singleinput=document.getElementsByName("single");
+			var singlescore=document.getElementById("singlescore").value;
+			if(singlescore==''){
+				$('.alert').attr('class', 'alert');
+				$('.alert').html('请输入分数').addClass('alert-danger').show().delay(1000).fadeOut();
+				return;
+			}
+			//获取单选题的各知识点的数目
+			var a=[];
+			var single=document.getElementsByName("single");	
+				for(var i=0;i<single.length;i++){
+
+					if(single[i].value==''){
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('试题数不能为空').addClass('alert-danger').show().delay(1000).fadeOut();
+						single[i].value=0;
+						return;
+					}
+					a.push(single[i].value);
+				}
+				//将单选分装成a1对象（hashmap）
+				var aa=[];
+				for(var i=0;i<singles.length;i++){
+					aa.push(singles[i].name);
+				}
+
+			var multiplescore=document.getElementById("multiplescore").value;
+			if(multiplescore==''){
+				$('.alert').attr('class', 'alert');
+				$('.alert').html('请输入多选题分数').addClass('alert-danger').show().delay(1000).fadeOut();
+				return;
+			}
+			//获取多选题的各知识点的数目
+			var b=[];
+			var multiple=document.getElementsByName("multiple");	
+				for(var i=0;i<multiple.length;i++){
+					if(multiple[i].value==''){
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('试题数不能为空').addClass('alert-danger').show().delay(1000).fadeOut();
+						multiple[i].value=0;
+						return;
+					}
+					b.push(multiple[i].value);
+				}
+				var bb=[];
+				for(var i=0;i<multiples.length;i++){
+					bb.push(multiples[i].name);
+					//alert(multiples[i].name);
+				}
+				var fillscore=document.getElementById("fillscore").value;
+				if(fillscore==''){
+				$('.alert').attr('class', 'alert');
+				$('.alert').html('请输入填空题分数').addClass('alert-danger').show().delay(1000).fadeOut();
+				return;
+			}
+				//获取填空题的各知识点的数目
+				var c=[];
+				var fill=document.getElementsByName("fill");	
+					for(var i=0;i<fill.length;i++){
+						if(fill[i].value==''){
+							$('.alert').attr('class', 'alert');
+							$('.alert').html('试题数不能为空').addClass('alert-danger').show().delay(1000).fadeOut();
+
+							fill[i].value=0;
+							return;
+						}
+						c.push(fill[i].value);
+					}
+					var cc=[];
+					for(var i=0;i<fills.length;i++){
+						cc.push(fills[i].name);
+					}
+					var judgescore=document.getElementById("judgescore").value;
+				if(judgescore==''){
+				$('.alert').attr('class', 'alert');
+				$('.alert').html('请输入判断题分数').addClass('alert-danger').show().delay(1000).fadeOut();
+
+				return;
+				}
+					//获取多选题的各知识点的数目
+					var d=[];
+					var judge=document.getElementsByName("judge");	
+						for(var i=0;i<judge.length;i++){
+							if(judge[i].value==''){
+								$('.alert').attr('class', 'alert');
+								$('.alert').html('试题数不能为空').addClass('alert-danger').show().delay(1000).fadeOut();
+
+								judge[i].value=0;
+								return;
+							}
+							d.push(judge[i].value);
+						}
+						var dd=[];
+						for(var i=0;i<judges.length;i++){
+							dd.push(judges[i].name);
+						}
+			var shortanswerscore=document.getElementById("shortanswerscore").value;
+				if(fillscore==''){
+				$('.alert').attr('class', 'alert');
+				$('.alert').html('请输入简答题分数').addClass('alert-danger').show().delay(1000).fadeOut();
+
+				return;
+				}
+			//获取简答题的各知识点的数目
+			var e=[];
+			var shortanswer=document.getElementsByName("shortanswer");	
+				for(var i=0;i<shortanswer.length;i++){
+					if(shortanswer[i].value==''){
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('试题数不能为空').addClass('alert-danger').show().delay(1000).fadeOut();
+						shortanswer[i].value=0;
+						return;
+					}
+					e.push(shortanswer[i].value);
+				}
+				var ee=[];
+				for(var i=0;i<shortanswers.length;i++){
+					ee.push(shortanswers[i].name);
+				}
+				var score=[];
+				score.push(parseInt(singlescore));
+				score.push(parseInt(multiplescore));
+				score.push(parseInt(fillscore));
+				score.push(parseInt(judgescore));
+				score.push(parseInt(shortanswerscore));
+				obj['singleknowledge']=aa;
+				obj['multipleknowledge']=bb;
+				obj['fillknowledge']=cc;
+				obj['judgeknowledge']=dd;
+				obj['shortanswerknowledge']=ee;
+				obj['singlenumber']=a;
+				obj['multiplenumber']=b;
+				obj['fillnumber']=c;
+				obj['judgenumber']=d;
+				obj['shortanswernumber']=e;
+				obj['score']=score;
+				$.ajax({
+					type :'post',
+					url:'makesmartpaper',
+					data :JSON.stringify(obj),
+					dataType:'json',
+					contentType: "application/json; charset=utf-8",
+					success:function(res){
+						window.location.href="editorPaper?paperid="+res;
+					}
+				});
+		}
+		function disablesingle(){
+			var single=document.getElementsByName("single");	
+			var sum=0;
+				for(var i=0;i<single.length;i++){
+					if(parseInt(single[i].value)>singles[i].number){
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('超过含有试题数').addClass('alert-danger').show().delay(1000).fadeOut();
+						single[i].value=0;
+						return;
+					}
+// 					if(single[i].value==''){
+// 						alert("试题数不能为空");
+// 						single[i].value=0;
+// 						return;
+// 					}
+					if(parseInt(single[i].value)<0){
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('试题数必须大于等于0').addClass('alert-danger').show().delay(1000).fadeOut();
+						
+						single[i].value=0;
+						return;
+					}
+					sum+=parseInt(single[i].value);
+					//alert(sum);
+					document.getElementById("sumsingle").value=sum;
+					document.getElementById("sumsingle").disabled="disabled";
+					var temp=0;
+					temp=parseInt(document.getElementById("sumshortanswer").value)+
+					parseInt(document.getElementById("sumsingle").value)+
+					parseInt(document.getElementById("sumfill").value)+
+					parseInt(document.getElementById("summultiple").value)+
+					parseInt(document.getElementById("sumjudge").value);
+//					document.getElementById("sumnnum").value=temp;
+					var sumscore=parseInt(document.getElementById("sumshortanswer").value)*parseInt(document.getElementById("shortanswerscore").value)+
+					parseInt(document.getElementById("sumsingle").value)*parseInt(document.getElementById("singlescore").value)+
+					parseInt(document.getElementById("sumfill").value)*parseInt(document.getElementById("fillscore").value)+
+					parseInt(document.getElementById("summultiple").value)*parseInt(document.getElementById("multiplescore").value)+
+					parseInt(document.getElementById("sumjudge").value)*parseInt(document.getElementById("judgescore").value);
+					if(isNaN(temp)){	
+					}else{	
+						$("#sumnnum").text(temp);
+						if(isNaN(sumscore)){
+							
+						}else{
+							$("#sumscore").text(sumscore);
+						}
+						
+					}
+				}
+// 				var x=parseInt(document.getElementById("sumsingle").value)+parseInt(document.getElementById("summultiple").value)+parseInt(document.getElementById("sumfill").value)+parseInt(document.getElementById("sumjudge").value)+parseInt(document.getElementById("sumshortanswer").value)
+// 				$('span-id').html();
+			
+		}
+		function disablefill(){
+			var fill=document.getElementsByName("fill");	
+			var sum=0;
+				for(var i=0;i<fill.length;i++){
+					if(parseInt(fill[i].value)>fills[i].number){
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('超过含有试题数').addClass('alert-danger').show().delay(1000).fadeOut();
+						fill[i].value=0;
+						return;
+					}
+// 					if(fill[i].value==''){
+// 						alert("试题数不能为空");
+// 						fill[i].value=0;
+// 						return;
+// 					}
+					if(parseInt(fill[i].value)<0){
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('试题数必须大于等于0').addClass('alert-danger').show().delay(1000).fadeOut();
+						fill[i].value=0;
+						return;
+					}
+					sum+=parseInt(fill[i].value);
+					//alert(sum);
+					document.getElementById("sumfill").value=sum;
+					document.getElementById("sumfill").disabled="disabled";
+					var temp=0;
+					temp=parseInt(document.getElementById("sumshortanswer").value)+
+					parseInt(document.getElementById("sumsingle").value)+
+					parseInt(document.getElementById("sumfill").value)+
+					parseInt(document.getElementById("summultiple").value)+
+					parseInt(document.getElementById("sumjudge").value);
+					var sumscore=parseInt(document.getElementById("sumshortanswer").value)*parseInt(document.getElementById("shortanswerscore").value)+
+					parseInt(document.getElementById("sumsingle").value)*parseInt(document.getElementById("singlescore").value)+
+					parseInt(document.getElementById("sumfill").value)*parseInt(document.getElementById("fillscore").value)+
+					parseInt(document.getElementById("summultiple").value)*parseInt(document.getElementById("multiplescore").value)+
+					parseInt(document.getElementById("sumjudge").value)*parseInt(document.getElementById("judgescore").value);
+					if(isNaN(temp)){	
+					}else{	
+						$("#sumnnum").text(temp);
+						if(isNaN(sumscore)){
+							
+						}else{
+							$("#sumscore").text(sumscore);
+						}
+						
+					}
+//					document.getElementById("sumnnum").value=temp;
+					
+				}
+			
+		}
+		function disablejudge(){
+			var judge=document.getElementsByName("judge");	
+			var sum=0;
+				for(var i=0;i<judge.length;i++){
+					if(parseInt(judge[i].value)>judges[i].number){
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('超过含有试题数').addClass('alert-danger').show().delay(1000).fadeOut();
+						judge[i].value=0;
+						return;
+					}
+// 					if(judge[i].value==''){
+// 						alert("试题数不能为空");
+// 						judge[i].value=0;
+// 						return;
+// 					}
+					if(parseInt(judge[i].value)<0){
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('试题数必须大于等于0').addClass('alert-danger').show().delay(1000).fadeOut();
+						judge[i].value=0;
+						return;
+					}
+					sum+=parseInt(judge[i].value);
+					//alert(sum);
+					document.getElementById("sumjudge").value=sum;
+					document.getElementById("sumjudge").disabled="disabled";
+					var temp=0;
+//					if(!document.getElementById("sumshortanswer").value.isNaN()){
+//						temp=temp+parseInt(document.getElementById("sumshortanswer").value);
+//					}else{
+//						if(!document.getElementById("sumsingle").value.isNaN()){
+//							temp=temp+parseInt(document.getElementById("sumsingle").value);
+//						}else{
+//							if(!document.getElementById("sumfill").value.isNaN()){
+//							temp=temp+parseInt(document.getElementById("sumfill").value);
+//							}else{
+//								if(!document.getElementById("summultiple").value.isNaN()){
+//								temp=temp+parseInt(document.getElementById("summultiple").value);
+//								}else{
+//									if(!document.getElementById("sumjudge").value.isNaN()){
+//								temp=temp+parseInt(document.getElementById("sumjudge").value);
+//								}
+//							}
+//						}
+//					}
+//					}
+					temp=parseInt(document.getElementById("sumshortanswer").value)+
+					parseInt(document.getElementById("sumsingle").value)+
+					parseInt(document.getElementById("sumfill").value)+
+					parseInt(document.getElementById("summultiple").value)+
+					parseInt(document.getElementById("sumjudge").value);
+					var sumscore=parseInt(document.getElementById("sumshortanswer").value)*parseInt(document.getElementById("shortanswerscore").value)+
+					parseInt(document.getElementById("sumsingle").value)*parseInt(document.getElementById("singlescore").value)+
+					parseInt(document.getElementById("sumfill").value)*parseInt(document.getElementById("fillscore").value)+
+					parseInt(document.getElementById("summultiple").value)*parseInt(document.getElementById("multiplescore").value)+
+					parseInt(document.getElementById("sumjudge").value)*parseInt(document.getElementById("judgescore").value);
+					if(isNaN(temp)){	
+					}else{	
+						$("#sumnnum").text(temp);
+						if(isNaN(sumscore)){
+							
+						}else{
+							$("#sumscore").text(sumscore);
+						}
+						
+					}
+				}
+			
+		}
+		function disableshortanswer(){
+			var shortanswer=document.getElementsByName("shortanswer");	
+			var sum=0;
+				for(var i=0;i<shortanswer.length;i++){
+					if(parseInt(shortanswer[i].value)>shortanswers[i].number){
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('超过含有试题数').addClass('alert-danger').show().delay(1000).fadeOut();
+						shortanswer[i].value=0;
+						return;
+					}
+// 					if(shortanswer[i].value==''){
+// 						alert("试题数不能为空");
+// 						shortanswer[i].value=0;
+// 						return;
+// 					}
+					if(parseInt(shortanswer[i].value)<0){
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('试题数必须大于等于0').addClass('alert-danger').show().delay(1000).fadeOut();
+						shortanswer[i].value=0;
+						return;
+					}
+					sum+=parseInt(shortanswer[i].value);
+					//alert(sum);
+					document.getElementById("sumshortanswer").value=sum;
+					document.getElementById("sumshortanswer").disabled="disabled";
+					var temp=0;
+					temp=parseInt(document.getElementById("sumshortanswer").value)+
+					parseInt(document.getElementById("sumsingle").value)+
+					parseInt(document.getElementById("sumfill").value)+
+					parseInt(document.getElementById("summultiple").value)+
+					parseInt(document.getElementById("sumjudge").value);
+					//document.getElementById("sumnnum").value=temp;
+					var sumscore=parseInt(document.getElementById("sumshortanswer").value)*parseInt(document.getElementById("shortanswerscore").value)+
+					parseInt(document.getElementById("sumsingle").value)*parseInt(document.getElementById("singlescore").value)+
+					parseInt(document.getElementById("sumfill").value)*parseInt(document.getElementById("fillscore").value)+
+					parseInt(document.getElementById("summultiple").value)*parseInt(document.getElementById("multiplescore").value)+
+					parseInt(document.getElementById("sumjudge").value)*parseInt(document.getElementById("judgescore").value);
+					if(isNaN(temp)){	
+					}else{	
+						$("#sumnnum").text(temp);
+						if(isNaN(sumscore)){
+							
+						}else{
+							$("#sumscore").text(sumscore);
+						}
+						
+					}
+					
+				}
+			
+		}
+		function disablemultiple(){
+			var multiple=document.getElementsByName("multiple");	
+			var sum=0;
+				for(var i=0;i<multiple.length;i++){
+					if(parseInt(multiple[i].value)>multiples[i].number){
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('超过含有试题数').addClass('alert-danger').show().delay(1000).fadeOut();
+						multiple[i].value=0;
+						return;
+					}
+// 					if(multiple[i].value==''){
+// 						alert("试题数不能为空");
+// 						multiple[i].value=0;
+// 						return;
+// 					}
+					if(parseInt(multiple[i].value)<0){
+						$('.alert').attr('class', 'alert');
+						$('.alert').html('试题数必须大于等于0').addClass('alert-danger').show().delay(1000).fadeOut();
+						multiple[i].value=0;
+						return;
+					}
+					sum+=parseInt(multiple[i].value);
+					//alert(sum);
+					document.getElementById("summultiple").value=sum;
+					document.getElementById("summultiple").disabled="disabled";
+					var temp=0;
+					temp=parseInt(document.getElementById("sumshortanswer").value)+
+					parseInt(document.getElementById("sumsingle").value)+
+					parseInt(document.getElementById("sumfill").value)+
+					parseInt(document.getElementById("summultiple").value)+
+					parseInt(document.getElementById("sumjudge").value);
+					//document.getElementById("sumnnum").value=temp;
+					var sumscore=parseInt(document.getElementById("sumshortanswer").value)*parseInt(document.getElementById("shortanswerscore").value)+
+					parseInt(document.getElementById("sumsingle").value)*parseInt(document.getElementById("singlescore").value)+
+					parseInt(document.getElementById("sumfill").value)*parseInt(document.getElementById("fillscore").value)+
+					parseInt(document.getElementById("summultiple").value)*parseInt(document.getElementById("multiplescore").value)+
+					parseInt(document.getElementById("sumjudge").value)*parseInt(document.getElementById("judgescore").value);
+					if(isNaN(temp)){	
+					}else{	
+						$("#sumnnum").text(temp);
+						if(isNaN(sumscore)){
+							
+						}else{
+							$("#sumscore").text(sumscore);
+						}
+						
+					}
+				}
+			
+		}
+		function sendKnowledge(){
+			var singlescore=document.getElementById("singlesccore").value;
+			//alert(singlescore);
+		}
+		function showmultipleli(){
+
+			if($("li[name='multipleli']").is(":hidden")){
+				$("li[name='multipleli']").show();
+			}else{
+				$("li[name='multipleli']").hide();
+			}
+		}
+		function showsingleli(){
+
+			if($("li[name='singleli']").is(":hidden")){
+				$("li[name='singleli']").show();
+			}else{
+				$("li[name='singleli']").hide();
+			}
+		}
+		function showjudgeli(){
+
+			if($("li[name='judgeli']").is(":hidden")){
+				$("li[name='judgeli']").show();
+			}else{
+				$("li[name='judgeli']").hide();
+			}
+		}
+		function showfillli(){
+
+			if($("li[name='fillli']").is(":hidden")){
+				$("li[name='fillli']").show();
+			}else{
+				$("li[name='fillli']").hide();
+			}
+		}
+		function showshortanswerli(){
+
+			if($("li[name='shortanswerli']").is(":hidden")){
+				$("li[name='shortanswerli']").show();
+			}else{
+				$("li[name='shortanswerli']").hide();
+			}
+		}
+		function checkscore(){
+			var sumscore=parseInt(document.getElementById("sumshortanswer").value)*parseInt(document.getElementById("shortanswerscore").value)+
+					parseInt(document.getElementById("sumsingle").value)*parseInt(document.getElementById("singlescore").value)+
+					parseInt(document.getElementById("sumfill").value)*parseInt(document.getElementById("fillscore").value)+
+					parseInt(document.getElementById("summultiple").value)*parseInt(document.getElementById("multiplescore").value)+
+					parseInt(document.getElementById("sumjudge").value)*parseInt(document.getElementById("judgescore").value);
+					if(isNaN(sumscore)){	
+					}else{	
+						$("#sumscore").text(sumscore); 
+					}
+		}
+
+		/* $("div[id='treeView']").on('click',"div[class='treeNode']",function(){
+			alert(1);
+			$(this).children(i).css("display","inline-block");
+		}) */
+		/* $("div[id='treeView']").on("click","div[class='treeNode']",function(){
+			alert(1);
+			alert($(this).attr("data-file-id"));
+		}) */
+	</script>
+	</body>
+
+</html>

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.dao.Paper_judgeMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.entity.Paper_judge" >
+    <id column="Q_id" property="qId" jdbcType="INTEGER" />
+    <result column="Q_title" property="qTitle" jdbcType="VARCHAR" />
+    <result column="paperid" property="paperid" jdbcType="INTEGER" />
+    <result column="isture" property="isture" jdbcType="INTEGER" />
+    <result column="Q_knowledge" property="qKnowledge" jdbcType="VARCHAR" />
+    <result column="Q_analysis" property="qAnalysis" jdbcType="VARCHAR" />
+    <result column="Q_difficulty" property="qDifficulty" jdbcType="INTEGER" />
+    <result column="examinee" property="examinee" jdbcType="INTEGER" />
+    <result column="answer" property="answer" jdbcType="INTEGER" />
+    <result column="Q_score" property="qScore" jdbcType="INTEGER" />
+    <result column="examineescore" property="examineescore" jdbcType="INTEGER" />
+    <result column="c1" property="c1" jdbcType="VARCHAR" />
+    <result column="c2" property="c2" jdbcType="VARCHAR" />
+    <result column="c3" property="c3" jdbcType="INTEGER" />
+    <result column="c4" property="c4" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Q_id, Q_title, paperid, isture, Q_knowledge, Q_analysis, Q_difficulty, examinee, 
+    answer, Q_score, examineescore, c1, c2, c3, c4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.entity.Paper_judgeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from paper_judge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from paper_judge
+    where Q_id = #{qId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from paper_judge
+    where Q_id = #{qId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.entity.Paper_judgeExample" >
+    delete from paper_judge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="qId"  keyColumn="qId" parameterType="com.neuedu.entity.Paper_judge" >
+    insert into paper_judge (Q_id, Q_title, paperid, 
+      isture, Q_knowledge, Q_analysis, 
+      Q_difficulty, examinee, answer, 
+      Q_score, examineescore, c1, 
+      c2, c3, c4)
+    values (#{qId,jdbcType=INTEGER}, #{qTitle,jdbcType=VARCHAR}, #{paperid,jdbcType=INTEGER}, 
+      #{isture,jdbcType=INTEGER}, #{qKnowledge,jdbcType=VARCHAR}, #{qAnalysis,jdbcType=VARCHAR}, 
+      #{qDifficulty,jdbcType=INTEGER}, #{examinee,jdbcType=INTEGER}, #{answer,jdbcType=INTEGER}, 
+      #{qScore,jdbcType=INTEGER}, #{examineescore,jdbcType=INTEGER}, #{c1,jdbcType=VARCHAR}, 
+      #{c2,jdbcType=VARCHAR}, #{c3,jdbcType=INTEGER}, #{c4,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="qId"  keyColumn="qId" parameterType="com.neuedu.entity.Paper_judge" >
+    insert into paper_judge
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="qId != null" >
+        Q_id,
+      </if>
+      <if test="qTitle != null" >
+        Q_title,
+      </if>
+      <if test="paperid != null" >
+        paperid,
+      </if>
+      <if test="isture != null" >
+        isture,
+      </if>
+      <if test="qKnowledge != null" >
+        Q_knowledge,
+      </if>
+      <if test="qAnalysis != null" >
+        Q_analysis,
+      </if>
+      <if test="qDifficulty != null" >
+        Q_difficulty,
+      </if>
+      <if test="examinee != null" >
+        examinee,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="qScore != null" >
+        Q_score,
+      </if>
+      <if test="examineescore != null" >
+        examineescore,
+      </if>
+      <if test="c1 != null" >
+        c1,
+      </if>
+      <if test="c2 != null" >
+        c2,
+      </if>
+      <if test="c3 != null" >
+        c3,
+      </if>
+      <if test="c4 != null" >
+        c4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="qId != null" >
+        #{qId,jdbcType=INTEGER},
+      </if>
+      <if test="qTitle != null" >
+        #{qTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="paperid != null" >
+        #{paperid,jdbcType=INTEGER},
+      </if>
+      <if test="isture != null" >
+        #{isture,jdbcType=INTEGER},
+      </if>
+      <if test="qKnowledge != null" >
+        #{qKnowledge,jdbcType=VARCHAR},
+      </if>
+      <if test="qAnalysis != null" >
+        #{qAnalysis,jdbcType=VARCHAR},
+      </if>
+      <if test="qDifficulty != null" >
+        #{qDifficulty,jdbcType=INTEGER},
+      </if>
+      <if test="examinee != null" >
+        #{examinee,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=INTEGER},
+      </if>
+      <if test="qScore != null" >
+        #{qScore,jdbcType=INTEGER},
+      </if>
+      <if test="examineescore != null" >
+        #{examineescore,jdbcType=INTEGER},
+      </if>
+      <if test="c1 != null" >
+        #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null" >
+        #{c3,jdbcType=INTEGER},
+      </if>
+      <if test="c4 != null" >
+        #{c4,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.entity.Paper_judgeExample" resultType="java.lang.Integer" >
+    select count(*) from paper_judge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update paper_judge
+    <set >
+      <if test="record.qId != null" >
+        Q_id = #{record.qId,jdbcType=INTEGER},
+      </if>
+      <if test="record.qTitle != null" >
+        Q_title = #{record.qTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paperid != null" >
+        paperid = #{record.paperid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isture != null" >
+        isture = #{record.isture,jdbcType=INTEGER},
+      </if>
+      <if test="record.qKnowledge != null" >
+        Q_knowledge = #{record.qKnowledge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qAnalysis != null" >
+        Q_analysis = #{record.qAnalysis,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qDifficulty != null" >
+        Q_difficulty = #{record.qDifficulty,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinee != null" >
+        examinee = #{record.examinee,jdbcType=INTEGER},
+      </if>
+      <if test="record.answer != null" >
+        answer = #{record.answer,jdbcType=INTEGER},
+      </if>
+      <if test="record.qScore != null" >
+        Q_score = #{record.qScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.examineescore != null" >
+        examineescore = #{record.examineescore,jdbcType=INTEGER},
+      </if>
+      <if test="record.c1 != null" >
+        c1 = #{record.c1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c2 != null" >
+        c2 = #{record.c2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c3 != null" >
+        c3 = #{record.c3,jdbcType=INTEGER},
+      </if>
+      <if test="record.c4 != null" >
+        c4 = #{record.c4,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update paper_judge
+    set Q_id = #{record.qId,jdbcType=INTEGER},
+      Q_title = #{record.qTitle,jdbcType=VARCHAR},
+      paperid = #{record.paperid,jdbcType=INTEGER},
+      isture = #{record.isture,jdbcType=INTEGER},
+      Q_knowledge = #{record.qKnowledge,jdbcType=VARCHAR},
+      Q_analysis = #{record.qAnalysis,jdbcType=VARCHAR},
+      Q_difficulty = #{record.qDifficulty,jdbcType=INTEGER},
+      examinee = #{record.examinee,jdbcType=INTEGER},
+      answer = #{record.answer,jdbcType=INTEGER},
+      Q_score = #{record.qScore,jdbcType=INTEGER},
+      examineescore = #{record.examineescore,jdbcType=INTEGER},
+      c1 = #{record.c1,jdbcType=VARCHAR},
+      c2 = #{record.c2,jdbcType=VARCHAR},
+      c3 = #{record.c3,jdbcType=INTEGER},
+      c4 = #{record.c4,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.entity.Paper_judge" >
+    update paper_judge
+    <set >
+      <if test="qTitle != null" >
+        Q_title = #{qTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="paperid != null" >
+        paperid = #{paperid,jdbcType=INTEGER},
+      </if>
+      <if test="isture != null" >
+        isture = #{isture,jdbcType=INTEGER},
+      </if>
+      <if test="qKnowledge != null" >
+        Q_knowledge = #{qKnowledge,jdbcType=VARCHAR},
+      </if>
+      <if test="qAnalysis != null" >
+        Q_analysis = #{qAnalysis,jdbcType=VARCHAR},
+      </if>
+      <if test="qDifficulty != null" >
+        Q_difficulty = #{qDifficulty,jdbcType=INTEGER},
+      </if>
+      <if test="examinee != null" >
+        examinee = #{examinee,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=INTEGER},
+      </if>
+      <if test="qScore != null" >
+        Q_score = #{qScore,jdbcType=INTEGER},
+      </if>
+      <if test="examineescore != null" >
+        examineescore = #{examineescore,jdbcType=INTEGER},
+      </if>
+      <if test="c1 != null" >
+        c1 = #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null" >
+        c2 = #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null" >
+        c3 = #{c3,jdbcType=INTEGER},
+      </if>
+      <if test="c4 != null" >
+        c4 = #{c4,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Q_id = #{qId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.entity.Paper_judge" >
+    update paper_judge
+    set Q_title = #{qTitle,jdbcType=VARCHAR},
+      paperid = #{paperid,jdbcType=INTEGER},
+      isture = #{isture,jdbcType=INTEGER},
+      Q_knowledge = #{qKnowledge,jdbcType=VARCHAR},
+      Q_analysis = #{qAnalysis,jdbcType=VARCHAR},
+      Q_difficulty = #{qDifficulty,jdbcType=INTEGER},
+      examinee = #{examinee,jdbcType=INTEGER},
+      answer = #{answer,jdbcType=INTEGER},
+      Q_score = #{qScore,jdbcType=INTEGER},
+      examineescore = #{examineescore,jdbcType=INTEGER},
+      c1 = #{c1,jdbcType=VARCHAR},
+      c2 = #{c2,jdbcType=VARCHAR},
+      c3 = #{c3,jdbcType=INTEGER},
+      c4 = #{c4,jdbcType=INTEGER}
+    where Q_id = #{qId,jdbcType=INTEGER}
+  </update>
+    <select id ="getAllbyPaperid" parameterType="Integer" resultMap="BaseResultMap">
+  	select pj.*
+  	from paper_judge pj
+  	where pj.paperid = #{paperid}
+  </select>
+</mapper>

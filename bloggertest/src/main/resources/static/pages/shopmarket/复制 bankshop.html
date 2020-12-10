@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>飞马商城</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Favicon -->
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+
+		<!-- All css here -->
+		<link rel="stylesheet" href="../../css/bootstrap.css" th:href="@{static/css/bootstrap.css}">
+		<link rel="stylesheet" href="../../css/papershop.css" th:href="@{static/css/papershop.css}">
+		<link rel="stylesheet" href="../../css/font-awesome.min.css" th:href="@{static/css/font-awesome.min.css}">
+		<link rel="stylesheet" href="../../css/ie7.css" th:href="@{static/css/ie7.css}">
+		<link rel="stylesheet" href="../../css/plugins.css" th:href="@{static/css/plugins.css}">
+		<link href="../../css/icons.css" th:href="@{static/css/icons.css}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="../../css/shopstyle.css" th:href="@{static/css/shopstyle.css}">
+		<script src="../../js/modernizr-3.5.0.min.js" th:src="@{static/js/modernizr-3.5.0.min.js}"></script>
+	</head>
+
+	<body>
+
+		<!-- 头部导航栏开始 -->
+		<header class="header-area header-sticky">
+			<div class="header-container">
+
+				<div class="row">
+					<div class="col-lg-5 display-none-md display-none-xs">
+
+						<div class="ht-main-menu">
+							<nav>
+								<ul>
+									<li class="active">
+										<a href="index.html">首页</a>
+									</li>
+									<li>
+										<a href="shop.html">商店</a>
+									</li>
+									<li>
+										<a href="shop.html">考试中心</a>
+									</li>
+									<li>
+										<a href="contact.html">联系我们</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<div class="col-lg-2 col-sm-4">
+						<div class="logo text-center">
+							<a href="index.html"><img src="../../img/logo_black.png"  th:src="@{static/img/logo_black.png}" alt="NatureCircle"></a>
+						</div>
+					</div>
+					<div class="col-lg-5 col-sm-8">
+						<div class="header-content d-flex justify-content-end">
+							<div class="search-wrapper">
+								<a href="#"><span class="icon icon-Search"></span></a>
+								<form action="#" class="search-form">
+									<input type="text" placeholder="输入关键字搜一搜">
+									<button type="button">搜索</button>
+								</form>
+							</div>
+							<div class="inform-wrapper">
+								<a href="#"><i class="fa fa-bell"></i>
+									<span>2</span>
+								</a>
+
+								<!-- <div class="settings-content">
+									<h4>用户设置<i class="fa fa-angle-down"></i></h4>
+									<ul>
+										<li>
+											<a href="#" class="modal-view button" data-toggle="modal" data-target="#register_box">切换身份</a>
+										</li>
+										<li>
+											<a href="#" class="modal-view button" data-toggle="modal" data-target="#register_box">我的设置</a>
+										</li>
+										<li>
+											<a href="#" class="modal-view button" data-toggle="modal" data-target="#login_box">退出登录</a>
+										</li>
+									</ul>
+									<h4>我的账户<i class="fa fa-angle-down"></i></h4>
+									<ul>
+										<li>
+											<a href="#">€ Euro</a>
+										</li>
+										<li>
+											<a href="#">£ Pound Sterling</a>
+										</li>
+										<li>
+											<a href="#">$ Us Dollar</a>
+										</li>
+									</ul>
+									<h4>Language: en-gb <i class="fa fa-angle-down"></i></h4>
+									<ul>
+										<li>
+											<a href="#"><img src="../../img/box.png"  th:src="@{static/img/box.png}" alt="">English</a>
+										</li>
+										<li>
+											<a href="#"><img src="../../img/box.png"  th:src="@{static/img/box.png}" alt="">Germany</a>
+										</li>
+									</ul>
+								</div> -->
+							</div>
+							<div class="cart-wrapper">
+							<a href="#" class="headerUserIcon">
+									<img class='img-circle' src="assets/img/banner/2.jpg" th:src="@{static/img/box.png}">
+								</a>
+								<div class="cart-item-wrapper">
+									<div class="single-cart-item">
+										<ul class="dropdown-menu">
+										<li>
+											<a href="javascript:void(0)"><i class="fa fa-pencil nvaIcon2"></i> 考试入口</a>
+										</li>
+										<li>
+											<a href="javascript:void(0)"><i class="md md-settings nvaIcon2"></i> 我的设置</a>
+										</li>
+										<li>
+											<a href="javascript:void(0)"><i class="fa fa-exchange nvaIcon2"></i> 切换身份</a>
+										</li>
+										<li>
+											<a href="toLogout"><i class="md md-settings-power nvaIcon2"></i> 退出登录</a>
+										</li>
+									</ul>
+									</div>
+									
+									<div class="cart-links">
+										<a href="cart.html"><i class="md md-settings nvaIcon2"></i>我的设置</a>
+										<a href="checkout.html"><i class="fa fa-exchange nvaIcon2"></i>切换身份</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 头部导航栏结束 -->
+		</header>
+		<!-- 头部导航栏结束 -->
+		<!-- 头部背景字幕导航 -->
+		<div class="breadcrumb-area bg-13 text-center">
+
+		</div>
+		<!-- 头部背景字幕导航结束 -->
+		<!-- 商店开始 -->
+		<div class="shop-area pt-80 bg-gray">
+			<div class="container">
+				<div class="row">
+					<div class="order-xl-2 order-lg-2 col-xl-9 col-lg-8">
+						<div class="ht-product-tab">
+							<div class="ht-tab-content">
+								<div class="nav" role="tablist">
+									<a class="active grid" href="#grid" data-toggle="tab" role="tab" aria-selected="true" aria-controls="grid"><i class="fa fa-th"></i></a>
+
+								</div>
+							</div>
+							<div class="shop-results-wrapper">
+								<div class="shop-results"><span>条数:</span>
+									<div class="shop-select"   >
+										<select name="number" id="number"  onchange="selectpagesize(this.value)">
+											<option value="15" th:text="${session.pagesize}"></option>
+											<option value="3" th:if="${session.pagesize} ne '3'">3</option>
+											<option value="6" th:if="${session.pagesize} ne '6'">6</option>
+											<option value="9" th:if="${session.pagesize} ne '9'">9</option>
+											<option value="12" th:if="${session.pagesize} ne '12'">12</option>
+											<option value="15" th:if="${session.pagesize} ne '15'">15</option>
+										</select>
+										<input id="pagesize" type="hidden" th:value="${session.pagesize}" />
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="shop-product-tab">
+							<div class="res-filter">
+								<div class="filter-title">排列方式</div>
+								<div class="filter-values">
+									<a id="0" onclick="sort(this.id)">最新</a> 
+									<a id="1" onclick="sort(this.id)">最热</a>
+									
+								</div>
+							</div> 
+							<div class="res-filter">
+								<div class="filter-title">收费方式</div>
+								<div class="filter-values"> 
+									<a href="/tobankshop?chargetype=1">免费</a> 
+									<a href="/tobankshop?chargetype=2">收费</a>
+								
+								</div> 
+							</div> 
+						</div>
+						<div class="ht-product-shop tab-content text-center">
+							<div class="tab-pane active show fade" id="grid" role="tabpanel">
+								<div class="custom-row"   >
+									<div class="custom-col"  th:each="bank:${banks }">
+										<div class="single-product-item">
+											<div class="product-image">
+												<div class="product-hover">
+													<div class="product-mask"></div>
+													<ul class="hover-icon-list">
+														<li>
+															<a href="wishlist.html"><i class="icon icon-Heart"></i></a>
+														</li>
+														<li>
+															<a href="" data-toggle="modal" data-target="#productModal"><i class="icon icon-Search"></i></a>
+														</li>
+													</ul>
+													<button type="button" class="p-cart-btn" onclick="buybank(this.id)" th:id=${bank.bankid}>购买试题</button>
+												</div>
+											</div>
+											<div class="product-text">
+												<!-- 试卷题目 -->
+												<h5><a href="product-details.html"  th:text=${bank.bankname}></a></h5>
+												<h6><a th:text=${#dates.format(bank.time,'yyyy-MM-dd-HH：mm')}></a></h6>
+												
+												<div class="product-number">
+													<!-- 题量(题目总数量) -->
+													<span class="new-info" title="题量"><h4  th:text=${bank.questionnum}></h4>道题</span>
+												</div>
+
+												<div class="pro-price">
+													<span class="new-price" ><i class="fa fa-diamond" >积分:</i><i th:text=${bank.price}></i></span>
+												</div>
+												<div class="pro-info">
+													<div class="float-left">
+												<!-- 试卷评分星级 -->
+												<div class="product-rating">
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star color"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+													<!-- 销量 -->
+													<a class="new-info" data-toggle="tooltip" title="销量"><i class="fa fa-shopping-cart" th:text=${bank.paynum}></i></a>
+													
+													</div>
+													<div class="float-right">
+													<!-- 卖家 -->
+													<a class="new-info pro-sold-user" data-toggle="tooltip"  th:title="${bank.user.username}"  ><i class="fa fa-user"  ></i></a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									
+								</div>
+							</div>
+						</div>
+						
+						
+						
+						
+						
+						
+						<div class="pagination-wrapper">
+							<p>这里是<span>1</span>-<span>12</span>(共2页)</p>
+							<nav aria-label="navigation">
+
+								<ul class="pagination">
+
+									<input class="toPageInput" placeholder="跳转到..." />
+									<li class="page-item">
+										<a class="page-link" href="#">|
+											<</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">
+											<</a>
+									</li>
+									<li class="page-item active">
+										<a class="page-link" href="#">1</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">2</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">></a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">>|</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<div class="col-xl-3 col-lg-4">
+						<div class="sidebar-wrapper">
+							<h3>IT技术</h3>
+							<div class="sidebar-widget">
+								<div class="sidebar-widget-option-wrapper">
+									<div class="sidebar-widget-option">
+										<a for="cat1">软件开发</a>
+									</div>
+									|
+									<div class="sidebar-widget-option">
+										<a for="cat2">测试/运维</a>
+									</div>
+									|
+									<div class="sidebar-widget-option">
+										<a for="cat3">产品/运营</a>
+									</div>
+								</div>
+							</div>
+							<h3>IQ&EQ</h3>
+							<div class="sidebar-widget">
+								<div class="sidebar-widget-option-wrapper">
+									<div class="sidebar-widget-option">
+										<a for="black">综合能力</a>
+									</div>
+									|
+									<div class="sidebar-widget-option">
+										<a for="blue">性格气质</a>
+									</div>
+									|
+									<div class="sidebar-widget-option">
+										<a for="brown">职业发展</a>
+									</div>
+								</div>
+							</div>
+							<h3>招聘真题</h3>
+							<div class="sidebar-widget">
+								<div class="sidebar-widget-option-wrapper">
+									<div class="sidebar-widget-option">
+										<a for="dior">互联网/软件</a>
+									</div>
+									|
+									<div class="sidebar-widget-option">
+										<a for="ferragamo">通信/电子</a>
+									</div>
+								</div>
+							</div>
+							<h3>学历教育</h3>
+							<div class="sidebar-widget">
+								<div class="sidebar-widget-option-wrapper">
+									<div class="sidebar-widget-option">
+										<a for="dior">小学</a>
+									</div>
+									|
+									<div class="sidebar-widget-option">
+										<a for="ferragamo">初中</a>
+									</div>
+									|
+									<div class="sidebar-widget-option">
+										<a for="ferragamo">高中</a>
+									</div>
+									|
+									<div class="sidebar-widget-option">
+										<a for="ferragamo">大学</a>
+									</div>
+									|
+									<div class="sidebar-widget-option">
+										<a for="ferragamo">研究生</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 商店结束 -->
+
+		<!-- 所有的js -->
+		<script src="../../js/jquery-2.0.3.min.js" th:src="@{static/js/jquery-2.0.3.min.js}"></script>
+		<script src="../../js/popper.min.js" th:src="@{static/js/popper.min.js}"></script>
+		<script src="../../js/bootstrap.min.js" th:src="@{static/js/bootstrap.min.js}"></script>
+		<script src="../../js/plugins.js" th:src="@{static/js/plugins.js}"></script>
+		<script src="../../js/ajax-mail.js" th:src="@{static/js/ajax-mail.js}"></script>
+		<script src="../../js/papershop.js" th:src="@{static/js/papershop.js}"></script>
+		<script src="../../js/papershop.js" th:src="@{static/js/papershop.js}"></script>
+		<script src="../../js/bootstrap.min-3.3.7.js" th:src="@{static/js/bootstrap.min-3.3.7.js}"></script>
+		<script>
+			$(function() {
+                $("[data-toggle='tooltip']").tooltip(); 
+                
+				$('.single-product-item').hover(function() {
+					$(this).find('.product-mask').show();
+				},function(){
+					$(this).find('.product-mask').hide();
+				})
+			})
+		</script>
+		<script type="text/javascript">
+    function selectpagesize(obj){
+        window.location.href="/tobankshop?pagesize="+obj;
+    }
+ $(document).ready(function (){
+     if("${pagesize }"){                                   //重点是这个判断
+         $("option[value='${pagesize }']").attr("selected",true);
+     }else{
+         $("option[value='3']").attr("selected",true);               
+     }
+ });
+     function buybank(obj){ 
+    	 
+    	 window.location.href="/bankshopdetail?shop_bankid="+obj;
+     }
+     function sort(obj){
+    	 var url="/tobankshop?sorttype="+obj;
+    	 if($(session.chargetype))
+    		 {
+    		 url+="chargetype="+${session.chargetype}
+    		 }
+    	 
+    	 window.location.href=url;
+     }
+</script>
+	</body>
+
+</html>

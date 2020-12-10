@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>身份验证</title>
+<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css"  th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"/>
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" th:href="@{static/css/bootstrap.css}">
+<link rel="stylesheet" href="../../css/cat.css"   th:href="@{static/css/cat.css}"/>
+<script type="text/javascript" src="../../js/cat.js"  th:src="@{static/js/cat.js}"></script>
+<script th:src="@{static/js/jquery.min.js}"></script>
+<script th:src="@{static/js/jquery.webcam.min.js}"></script>
+</head>
+<body>
+	<div class="panel panel-success">
+		
+    <div class="panel-heading" style="   background-color: #e4ebf4;  height: 60px;">
+        <div style="margin-left: 90%;margin-top:7px;">
+	    <center>身份验证</center>
+		</div>
+    </div>
+     <div class="panel-body" style="padding-left: 80px;">
+        <div class="col-md-6"  style="padding-top:50px">
+		 <div class="row">
+		 	 <button class="play">拍照</button>
+             <div id="status"></div>
+             <div id="webcam"></div> 
+             <div id="picture"></div> 
+             <label id="tip" style="color:red"></label>  
+		</div>
+		  
+		 </div>
+	    <div class="col-md-6">
+	    	
+<div class="cat" >
+    <div class="head_content">
+        <div class="ear_left"></div>
+        <div class="ear_right"></div>
+        <div class="head"></div>
+        <div class="brow_left"></div>
+        <div class="brow_right"></div>
+        <div class="eye_left">
+            <div id="pL" class="pupil"></div>
+        </div>
+        <div class="eye_right">
+            <div id="pR" class="pupil"></div>
+        </div>
+        <div class="beard_left1"></div>
+        <div class="beard_left2"></div>
+        <div class="beard_left3"></div>
+        <div class="beard_right1"></div>
+        <div class="beard_right2"></div>
+        <div class="beard_right3"></div>
+        <div class="nose"></div>
+        <div class="mouse">
+            <div class="mouse_top"></div>
+            <div class="mouse_left"></div>
+            <div class="mouse_right"></div>
+            <div class="mouse_bottom"></div>
+            <div class="mouse_bottom_show"></div>
+            <div class="miao">喵</div>
+        </div>
+    </div>
+    <div class="body_content">
+        <div class="body"></div>
+        <div class="arm_left"></div>
+        <div class="arm_right"></div>
+        <div class="leg_left"></div>
+        <div class="leg_right"></div>
+        <div class="tail">
+            <div class="tail1"></div>
+            <div class="tail2"></div>
+            <div class="tail3"></div>
+        </div>
+    </div>
+</div>
+
+		 
+	
+	
+	</div>
+    </div>
+</div>
+         
+</body>
+<script>
+    var w = 320, h = 240;                                       //摄像头配置,创建canvas
+    var pos = 0, ctx = null, saveCB, image = [];
+    var canvas = document.createElement("canvas");
+    $("#picture").append(canvas);
+    canvas.setAttribute('width', w);
+    canvas.setAttribute('height', h);
+    ctx = canvas.getContext("2d");
+    image = ctx.getImageData(0, 0, w, h);
+    
+    $("#webcam").webcam({
+        width: w,
+        height: h,
+        mode: "callback",                       //stream,save，回调模式,流模式和保存模式
+        swffile: "static/js/jscam_canvas_only.swf",
+        onTick: function(remain) { 
+            if (0 == remain) {
+                $("#status").text("拍照成功!");
+            } else {
+                $("#status").text("倒计时"+remain + "秒钟...");
+            }
+        },
+        onSave: function(data){              //保存图像
+            var col = data.split(";");
+            var img = image;
+            for(var i = 0; i < w; i++) {
+                var tmp = parseInt(col[i]);
+                img.data[pos + 0] = (tmp >> 16) & 0xff;
+                img.data[pos + 1] = (tmp >> 8) & 0xff;
+                img.data[pos + 2] = tmp & 0xff;
+                img.data[pos + 3] = 0xff;
+                pos+= 4;
+            }
+            if (pos >= 4 * w * h) {
+                ctx.putImageData(img,0,0);      //转换图像数据，渲染canvas
+                pos = 0;
+                $.ajax({
+                	type :'post',
+					url :'toSave',
+					dataType : 'text',
+					contentType: 'application/json; charset=UTF-8', 
+					data:JSON.stringify({val: "data",w:w,h:h,image: canvas.toDataURL("image/png")}),
+					async:false,
+					success : function(res) {
+						if(res=="0"){
+							$("#tip").text("采集成功");
+							//跳转页面
+							
+							window.location.href="toPaper_contruct";
+							
+						}
+						else if(res=="1"){
+							$("#tip").text("人脸匹配成功");
+							window.location.href="toPaper_contruct";
+						}
+						else if(res=="2"){
+							$("#tip").text("人脸匹配不成功,点击拍照继续匹配");
+							//跳转页面
+						}
+						
+					}
+                	
+                })
+                Imagedata=canvas.toDataURL().substring(22);  //上传给后台的图片数据
+                
+                //alert(Imagedata);
+                $("#webcam").hide();
+                $("#picture").show();
+            }
+        },
+        onCapture: function () {               //捕获图像
+            webcam.save();      
+        },
+        debug: function (type, string) {       //控制台信息
+            //alert(type + ": " + string);
+        },
+        onLoad: function() {    //flash 加载完毕执行
+            //alert('加载完毕！')
+            var cams = webcam.getCameraList();
+            for(var i in cams) {
+              //  $("body").append("<p>" + cams[i] + "</p>");
+            }
+        }
+       });
+       //开始拍照
+    
+      $(".play").click(function(){
+    	
+        $("#webcam").show();
+        $("#picture").hide();
+        
+        webcam.capture(2);        //拍照，参数5是倒计时
+       
+      });
+
+</script>
+
+</html>

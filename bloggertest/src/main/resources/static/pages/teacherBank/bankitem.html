@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="layui/css/layui.css" th:href="@{static/layui/css/layui.css}">
+		<link rel="stylesheet" type="text/css" href="css/header.css" th:href="@{static/css/header.css}"/>
+		<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"/>
+		<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+		
+		
+		<link rel="stylesheet" type="text/css" href="css/examMng.css" th:href="@{static/css/examMng.css}"/> 
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" th:href="@{static/css/bootstrap.css}"/>
+		<link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{static/css/common.css}"/>
+<!-- 		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" th:href="@{static/css/font-awesome.min.css}"/> -->
+<!-- 		<link rel="stylesheet" type="text/css" href="css/core.css" th:href="@{static/css/core.css}"/> -->
+		
+		<script src="js/jqeury.js" th:src="@{static/js/jquery-2.0.3.min.js}"></script>
+		
+		<title>题库列表界面</title>
+	</head>
+
+	<body class="layui-view-body">
+		
+		<div th:replace="teacherHead :: html"></div>
+		     <div class="layui-container">  
+		  <div class="layui-row">
+		    <div class="layui-col-md3">
+	        	<ul class="layui-nav layui-nav-tree" lay-filter="test">
+				<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+				  <li class="layui-nav-item layui-nav-itemed">
+				    <a href="javascript:;">我的题库</a>
+<!-- 				    <dl class="layui-nav-child"> -->
+<!-- 				      <dd><a href="javascript:;">选项1</a></dd> -->
+<!-- 				      <dd><a href="javascript:;">选项2</a></dd> -->
+				     
+<!-- 				    </dl> -->
+				  </li>
+<!-- 				  <li class="layui-nav-item"> -->
+<!-- 				    <a href="javascript:;">我的考试</a> -->
+<!-- 				    <dl class="layui-nav-child"> -->
+<!-- 				      <dd><a href="">未开始</a></dd> -->
+<!-- 				      <dd><a href="">进行中</a></dd> -->
+<!-- 				      <dd><a href="">已结束</a></dd> -->
+<!-- 				    </dl> -->
+<!-- 				  </li> -->
+				</ul>
+		    </div>
+		    <div class="layui-col-md8">
+		    	
+		    	<!--body begin-->
+		
+			<div class="container body-box">
+				<div class="row content-box">
+				<li th:each="bank: ${allbank}">
+					<div class="col-lg-3 col-md-3 content-border">
+						
+<!-- 						<a href="tobankdetail?bankid=1"> -->
+						<a  th:href="@{tobankdetail?bankid={bankid}(bankid=${bank.bankid})}">
+							<img src="img/{bankicon}(bankicon=${bank.bankicon})" th:src="@{static/img/{bankicon}(bankicon=${bank.bankicon})}">
+							<p class="title text-center" th:text="${bank.bankname}"></p>
+						</a>
+						
+					</div>
+				</li>
+					<div class="col-lg-3 col-md-3 content-border">
+						<a href="toaddbank">
+							<img src="img/toggle-expand-alt.png" th:src="@{static/img/toggle-expand-alt.png}">
+							<p class="title text-center">新增题库</p>
+						</a>
+					</div>
+					
+					
+				</div>
+			
+		</div>
+		<!--body end-->
+		
+		    	
+		    	
+	<script src="layui/layui.js" th:src="@{static/layui/layui.js}"></script>
+	<script src="js/index.js" data-main="home" th:src="@{static/js/index.js}"></script>    	
+		<script src="js/home.js"  th:src="@{static/js/home.js}"></script>   	
+		   
+		 
+		<script>
+		//Demo
+		layui.use('form', function(){
+		  var form = layui.form;
+		  form.render();
+		  //监听提交
+		  form.on('submit(formDemo)', function(data){
+		    layer.msg(JSON.stringify(data.field));
+		    return false;
+		  });
+		});
+		</script>
+		    </div>
+		  </div>
+
+	</body>
+	
+	<script>
+		//注意：导航 依赖 element 模块，否则无法进行功能性操作
+		layui.use('element', function() {
+			var element = layui.element;
+
+			//…
+		});
+	</script>
+	
+	<script>
+			var nums = 0;
+			$(document).ready(function(){
+				nums = $(".main-container .info-add").length;
+				footer_position();
+				//当浏览器窗口大小改变时，设置显示内容的高度  
+				$(window).resize(function(){
+					footer_position();
+				});
+			});
+			function footer_position(){
+				var winHeight = $(window).height();
+				var myHeight = winHeight-60-82-20;
+				//alert(myHeight+"-"+$(".main").height());
+				if($(".main-container").height() <= myHeight){
+					$(".kw-footer").css("position","fixed");
+					$(".kw-footer").css("bottom","0");
+					$(".main-container").css("min-height",myHeight+"px");
+				}else{
+					$(".kw-footer").css("position","initial");
+				}
+			}
+		</script>
+
+</html>

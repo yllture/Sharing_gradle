@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+.user-right-n .photo-mask {
+	/* margin-left:130px; */
+	display: none;
+	margin-top:-80px;
+	margin-left:114px;
+	padding: 0px 0px;
+	text-align: center;
+	vertical-align: center;
+	width: 80px;
+	height: 80px;
+	border-radius: 40px;
+	background-color: #CCCCCC;
+	opacity: 0;
+	display: -moz-box; /*兼容Firefox*/
+	display: -webkit-box; /*兼容FSafari、Chrome*/
+	-moz-box-align: center; /*兼容Firefox*/
+	-webkit-box-align: center; /*兼容FSafari、Chrome */
+	-moz-box-pack: center; /*兼容Firefox*/
+	-webkit-box-pack: center; /*兼容FSafari、Chrome */
+}
+.user-right{
+	background-color:#ffffff;
+}
+.user-photo img {
+	display: inline;
+	width: 80px;
+	height: 80px;
+	border-radius: 40px;
+}
+
+.user-right-n h1, .user-right-n h2, .user-right-n h3, .user-right-n h4,
+	.user-right-n h5, .user-right-n h6 {
+	display: inline;
+}
+
+.user-right-n div {
+	padding: 20px 5px 40px 5px;
+}
+
+.user-right-n h5 {
+	padding-right: 50px;
+}
+.photo-editor{
+	display: inline;
+}
+#upload-userPhoto{
+	position:absolute;
+	z-index:999;
+	    width: 80px;
+    height: 80px;
+    margin-top: -80px;
+    margin-left: 115px;
+    opacity: 0;
+	
+}

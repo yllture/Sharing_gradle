@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <link rel="stylesheet" th:href="@{static/layui/css/layui.css}">
+	    <link rel="stylesheet" th:href="@{static/css/groupview.css}">
+	    <link rel="stylesheet" th:href="@{static/css/joinGroup.css}">
+	     <link rel="stylesheet" type="text/css" th:href="@{static/css/adminwork.css}">
+	     <link rel="stylesheet" type="text/css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"/>
+		<link rel="stylesheet" type="text/css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+ 	    <title></title>
+	</head>
+	<body class="layui-view-body">
+	    <div class="layui-content">
+	        <div class="layui-page-header" style="margin:-10px -10px -10px;">
+	            <div class="pagewrap">
+	                <span class="layui-breadcrumb">
+	                  <a href="#">首页</a>
+	                  <a><cite>加入群</cite></a>
+	                </span>
+	                <h2 class="title">加入群</h2>
+	            </div>
+	        </div>
+	        <div class="layui-row">
+	            <div class="layui-card">
+	                <div class="layui-card-body">
+	                	<div class="group-search-box">
+		                    <i class="fa fa-search"></i>
+	                    	<input type="text" placeholder="输入群编号加入群" class="form-control"/>
+	                    	<button type="button" class="group-search-button sg-button">加入</button>
+                    	</div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <script src="layui/layui.js" th:src="@{static/layui/layui.js}"></script>
+	    <script src="layui/layui.js" th:src="@{static/js/jquery.min.js}"></script>
+	    <script>
+		//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+		layui.use('element', function(){
+		  var element = layui.element;
+		  
+		  //…
+		});
+		$(function(){
+			$(".sg-button").click(function(){
+				var groupcode=$(".form-control").val();
+				//alert(groupcode);
+				if(groupcode!=""){
+					$.ajax({			
+						url:'JoinGroup',
+						type:'post',
+						data:{"groupcode":groupcode},
+						dataType:'text',
+						success:function(e){
+							alert(e);
+							$(".form-control").val("");
+						}
+					});
+				}else{
+					alert("请输入用户账号");
+				}
+				
+			});
+		});
+		</script>
+	</body>
+</html>

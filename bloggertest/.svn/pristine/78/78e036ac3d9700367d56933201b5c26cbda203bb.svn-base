@@ -1,0 +1,15 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.Bank_multiplechoice;
+import com.neuedu.entity.Bank_singlechoice;
+
+public interface Bank_singlechoiceService {
+	int updateBank_singlechoice(Bank_singlechoice bsc);
+	int deleteBank_singlechoice(Bank_singlechoice bsc);
+	int addBank_singlechoice(Bank_singlechoice choice);
+	List<Bank_singlechoice> selectByqid(Bank_singlechoice choice);
+
+
+}

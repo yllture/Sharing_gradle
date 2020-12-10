@@ -1,0 +1,103 @@
+package com.neuedu.service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
+
+import com.neuedu.entity.*;
+import com.neuedu.entity.Bank_fill;
+import com.neuedu.entity.Bankfolder;
+
+public interface BankService {
+	
+	@Cacheable(value="BankByid",key="'Bank_'+#b.bankid")
+	Bank selectBankByID(Bank b);
+	/**
+	 * 通过userid查找所有未在文件中的题库
+	 * @param b
+	 * @return
+	 */
+	@Cacheable(value="AllBankByuser",key="'Banklist_'+#b.userid")
+	List<Bank> selectAllBank(Bank b);
+	
+	@Caching(evict={@CacheEvict(value="AllBankByuser",key="'Banklist_'+#b.userid"),
+			@CacheEvict(value="AllBankByfolder", allEntries=true,beforeInvocation=true),
+			@CacheEvict(value="BankByid", allEntries=true,beforeInvocation=true)
+			})
+	int addBank(Bank b);
+	@Caching(evict={@CacheEvict(value="AllBankByuser",key="'Banklist_'+#b.userid"),
+			@CacheEvict(value="AllBankByfolder", allEntries=true,beforeInvocation=true),
+			@CacheEvict(value="BankByid",key="'Bank_'+#b.bankid")
+			})
+	int updateBank(Bank b);
+	
+	@Caching(evict={@CacheEvict(value="AllBankByuser",key="'Banklist_'+#b.userid"),
+			@CacheEvict(value="AllBankByfolder", allEntries=true,beforeInvocation=true),
+			@CacheEvict(value="AllBankKnowledge",key="'Knowledgelist_'+#b.bankid"),
+			@CacheEvict(value="BankByid",key="'Bank_'+#b.bankid")
+			})
+	int deleteBank(Bank b);
+
+	/**
+	 *  通过excel先题库中添加单选、多选、判断、填空
+	 * @param map
+	 * @param bankid
+	 * @return
+	 */
+	@Caching(evict={@CacheEvict(value="AllBankByuser", allEntries=true,beforeInvocation=true),
+			@CacheEvict(value="AllBankByfolder", allEntries=true,beforeInvocation=true),
+			@CacheEvict(value="AllBankKnowledge", allEntries=true,beforeInvocation=true),
+			@CacheEvict(value="BankByid",allEntries=true,beforeInvocation=true)})
+	int addQuestionByExcel(HashMap<String,List<String>> map ,int bankid);
+	
+	@Caching(evict={@CacheEvict(value="AllBankByuser", allEntries=true,beforeInvocation=true),
+			@CacheEvict(value="AllBankByfolder", allEntries=true,beforeInvocation=true),
+			@CacheEvict(value="AllBankKnowledge", allEntries=true,beforeInvocation=true),
+			@CacheEvict(value="BankByid",allEntries=true,beforeInvocation=true)})
+	int addChoiceByExcel(List<Object> list,int bankid);
+	@Caching(evict={@CacheEvict(value="AllBankByuser", allEntries=true,beforeInvocation=true),
+			@CacheEvict(value="AllBankByfolder", allEntries=true,beforeInvocation=true),
+			@CacheEvict(value="AllBankKnowledge", allEntries=true,beforeInvocation=true),
+			@CacheEvict(value="BankByid",allEntries=true,beforeInvocation=true)})
+	int addFillByExcel(List<Object> list,int bankid);
+	
+	@Cacheable(value="AllBankByfolder",key="'Banklist_'+#bf.folderid")
+	List<Bank> getAllByFolderid(Bankfolder bf);
+	
+	@Cacheable(value="AllBankKnowledge",key="'Knowledgelist_'+#bank.bankid")
+	List<String> getKnowledge(Bank bank);
+	@Caching(evict={@CacheEvict(value="AllBankByuser",key="'Banklist_'+#userid")})
+	int BuyBank(Bank b,int userid);
+	//通过知识点获得题目数
+	int getFillnumByknowledge(Bank_fill bf);
+	int getSinglenumByknowledge(Bank_single bs);
+	int getMultiplenumByknowledge(Bank_multiple bm);
+	int getJudgenumByknowledge(Bank_judge bj);
+	int getShortanswernumByknowledge(Bank_shortanswer bs);
+	
+	//按知识点删题
+	@Caching(evict={@CacheEvict(value="AllBankKnowledge",key="'Knowledgelist_'+#bf.bankid"),
+			@CacheEvict(value="BankByid",key="'Bank_'+#bf.bankid")
+			})
+	int deleteFillByknowledge(Bank_fill bf);
+	@Caching(evict={@CacheEvict(value="AllBankKnowledge",key="'Knowledgelist_'+#bs.bankid"),
+			@CacheEvict(value="BankByid",key="'Bank_'+#bs.bankid")
+			})
+	int deleteSingleByknowledge(Bank_single bs);
+	@Caching(evict={@CacheEvict(value="AllBankKnowledge",key="'Knowledgelist_'+#bm.bankid"),
+			@CacheEvict(value="BankByid",key="'Bank_'+#bm.bankid")
+			})
+	int deleteMultipleByknowledge(Bank_multiple bm);
+	@Caching(evict={@CacheEvict(value="AllBankKnowledge",key="'Knowledgelist_'+#bj.bankid"),
+			@CacheEvict(value="BankByid",key="'Bank_'+#bj.bankid")
+			})
+	int deleteJudgeByknowledge(Bank_judge bj);
+	@Caching(evict={@CacheEvict(value="AllBankKnowledge",key="'Knowledgelist_'+#bs.bankid"),
+			@CacheEvict(value="BankByid",key="'Bank_'+#bs.bankid")
+			})
+	int deleteShortanswerByknowledge(Bank_shortanswer bs);
+}

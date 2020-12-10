@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css"  th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"/>
+	<link rel="stylesheet" type="text/css" href="css/waitingFinished.css" th:href="@{static/css/waitingFinished.css}"/>
+	
+	
+    <title>待完成</title>
+</head>
+<body class="layui-view-body" style="background-color: white;">
+
+	<ul class="wapper-list undo">
+	
+		<li th:each="list:${waitingToFinishPaper}"class="list-item">
+			<div class="test-detail">
+				<p th:text="${list.papername}"></p>
+				<p class="pager-time">
+					<i class="fa fa-calendar" ></i>
+					<label th:text="${#dates.format(list.begintime,'yyyy-MM-dd')+' To '+#dates.format(list.endtime,'yyyy-MM-dd')}"></label>
+					<div style="color: #94b4ce;">
+					<i class="fa fa-hourglass-start"> </i> 
+				    <label th:text="${list.duration+'分钟'}"></label>
+				    </div>
+					
+				</p>
+				<div class="paper-desc">
+					<i class="fa fa-exclamation-circle"></i>
+                    <p th:if="list.type1 eq 1 ">公开</p>
+                    <p th:if="list.type1 eq 0 ">私有</p>
+			   </div>
+			</div>
+			<div class="test-state">
+				<!-- <p class="alert alert-info"> -->
+					<a th:href="${'toExam_index/'+ list.winder+'/'+ list.paperid }">
+					 "未作答"
+					<i class="fa fa-pencil-square-o"></i></a>
+					</a>
+					
+				<!-- </p> -->
+			</div>
+			<div class="bottom-tip">
+				<p th:text="${'来源:'+list.resource}"> 
+				</p>
+			</div>
+		</li>
+	</div>
+</body>
+
+</html>

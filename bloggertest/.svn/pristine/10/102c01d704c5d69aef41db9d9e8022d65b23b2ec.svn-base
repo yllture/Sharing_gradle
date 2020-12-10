@@ -1,0 +1,19 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.Homework;
+import com.neuedu.entity.Paper;
+import com.neuedu.entity.User;
+
+public interface HomeworkService {
+
+	int addHomework(Homework homework);
+
+	List<Homework> selectHomeworkByGroupid(int groupid);
+	
+	List<Paper> selectPaperFromHomework(int groupid);
+	
+	List<Integer> selectIfDo(int groupid);
+	//User seleceUserFromHomework(int groupid);
+}

@@ -1,0 +1,15 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.Bank;
+import com.neuedu.entity.Bank_multiple;
+
+public interface Bank_multipleService {
+	
+	List<Bank_multiple> getAllbyBankid(Bank b);
+	int addBank_multiple(Bank_multiple bm);
+	int updateBank_multiple(Bank_multiple bm);
+	int deleteBank_multiple(Bank_multiple bm);
+	Bank_multiple selectBank_multiple(Bank_multiple bf);
+}

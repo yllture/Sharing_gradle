@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.dao.PayrecordMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.entity.Payrecord" >
+    <id column="recordid" property="recordid" jdbcType="INTEGER" />
+    <result column="buyid" property="buyid" jdbcType="INTEGER" />
+    <result column="newpaperid" property="newpaperid" jdbcType="INTEGER" />
+    <result column="newbankid" property="newbankid" jdbcType="INTEGER" />
+    <result column="paperid" property="paperid" jdbcType="INTEGER" />
+    <result column="bankid" property="bankid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="solderid" property="solderid" jdbcType="INTEGER" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="commentscore" property="commentscore" jdbcType="INTEGER" />
+    <result column="commenttime" property="commenttime" jdbcType="TIMESTAMP" />
+    <result column="c1" property="c1" jdbcType="INTEGER" />
+    <result column="c2" property="c2" jdbcType="INTEGER" />
+    <result column="c3" property="c3" jdbcType="VARCHAR" />
+    <result column="c4" property="c4" jdbcType="VARCHAR" />
+    
+    <association property="buyuser" javaType="com.neuedu.entity.User">
+    <id column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="useraccount" property="useraccount" jdbcType="VARCHAR" />
+    <result column="usermail" property="usermail" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="userposition" property="userposition" jdbcType="VARCHAR" />
+    <result column="usercompany" property="usercompany" jdbcType="VARCHAR" />
+    <result column="usercompanylogo" property="usercompanylogo" jdbcType="VARCHAR" />
+    <result column="usertype" property="usertype" jdbcType="INTEGER" />
+    <result column="userpassword" property="userpassword" jdbcType="VARCHAR" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="outundonenum" property="outundonenum" jdbcType="INTEGER" />
+    <result column="donenum" property="donenum" jdbcType="INTEGER" />
+    <result column="inundomenum" property="inundomenum" jdbcType="INTEGER" />
+    <result column="futurenum" property="futurenum" jdbcType="INTEGER" />
+ 
+    </association>
+    
+    <association property="solderuser" javaType="com.neuedu.entity.User">
+    <id column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="useraccount" property="useraccount" jdbcType="VARCHAR" />
+    <result column="usermail" property="usermail" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="userposition" property="userposition" jdbcType="VARCHAR" />
+    <result column="usercompany" property="usercompany" jdbcType="VARCHAR" />
+    <result column="usercompanylogo" property="usercompanylogo" jdbcType="VARCHAR" />
+    <result column="usertype" property="usertype" jdbcType="INTEGER" />
+    <result column="userpassword" property="userpassword" jdbcType="VARCHAR" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="outundonenum" property="outundonenum" jdbcType="INTEGER" />
+    <result column="donenum" property="donenum" jdbcType="INTEGER" />
+    <result column="inundomenum" property="inundomenum" jdbcType="INTEGER" />
+    <result column="futurenum" property="futurenum" jdbcType="INTEGER" />
+   
+    </association>  
+    
+  </resultMap>
+  
+  
+   
+ <resultMap id="BaseResultMap1" type="com.neuedu.entity.Payrecord" >
+    <id column="recordid" property="recordid" jdbcType="INTEGER" />
+    <result column="buyid" property="buyid" jdbcType="INTEGER" />
+    <result column="newpaperid" property="newpaperid" jdbcType="INTEGER" />
+    <result column="newbankid" property="newbankid" jdbcType="INTEGER" />
+    <result column="paperid" property="paperid" jdbcType="INTEGER" />
+    <result column="bankid" property="bankid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="solderid" property="solderid" jdbcType="INTEGER" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="commentscore" property="commentscore" jdbcType="INTEGER" />
+    <result column="commenttime" property="commenttime" jdbcType="TIMESTAMP" />
+    <result column="c1" property="c1" jdbcType="INTEGER" />
+    <result column="c2" property="c2" jdbcType="INTEGER" />
+    <result column="c3" property="c3" jdbcType="VARCHAR" />
+    <result column="c4" property="c4" jdbcType="VARCHAR" />
+     <association property="buyuser" javaType="com.neuedu.entity.User">
+    <id column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="useraccount" property="useraccount" jdbcType="VARCHAR" />
+    <result column="usermail" property="usermail" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="userposition" property="userposition" jdbcType="VARCHAR" />
+    <result column="usercompany" property="usercompany" jdbcType="VARCHAR" />
+    <result column="usercompanylogo" property="usercompanylogo" jdbcType="VARCHAR" />
+    <result column="usertype" property="usertype" jdbcType="INTEGER" />
+    <result column="userpassword" property="userpassword" jdbcType="VARCHAR" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="outundonenum" property="outundonenum" jdbcType="INTEGER" />
+    <result column="donenum" property="donenum" jdbcType="INTEGER" />
+    <result column="inundomenum" property="inundomenum" jdbcType="INTEGER" />
+    <result column="futurenum" property="futurenum" jdbcType="INTEGER" />
+    
+    
+    </association>
+ </resultMap>
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    recordid, buyid, newpaperid, newbankid, paperid, bankid, name, solderid, integral, 
+    time, commentscore, commenttime, c1, c2, c3, c4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neuedu.entity.PayrecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from payrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from payrecord
+    where recordid = #{recordid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from payrecord
+    where recordid = #{recordid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neuedu.entity.PayrecordExample" >
+    delete from payrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.entity.Payrecord" >
+    insert into payrecord (recordid, buyid, newpaperid, 
+      newbankid, paperid, bankid, 
+      name, solderid, integral, 
+      time, commentscore, commenttime, 
+      c1, c2, c3, c4
+      )
+    values (#{recordid,jdbcType=INTEGER}, #{buyid,jdbcType=INTEGER}, #{newpaperid,jdbcType=INTEGER}, 
+      #{newbankid,jdbcType=INTEGER}, #{paperid,jdbcType=INTEGER}, #{bankid,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{solderid,jdbcType=INTEGER}, #{integral,jdbcType=INTEGER}, 
+      #{time,jdbcType=TIMESTAMP}, #{commentscore,jdbcType=INTEGER}, #{commenttime,jdbcType=TIMESTAMP}, 
+      #{c1,jdbcType=INTEGER}, #{c2,jdbcType=INTEGER}, #{c3,jdbcType=VARCHAR}, #{c4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.entity.Payrecord" >
+    insert into payrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        recordid,
+      </if>
+      <if test="buyid != null" >
+        buyid,
+      </if>
+      <if test="newpaperid != null" >
+        newpaperid,
+      </if>
+      <if test="newbankid != null" >
+        newbankid,
+      </if>
+      <if test="paperid != null" >
+        paperid,
+      </if>
+      <if test="bankid != null" >
+        bankid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="solderid != null" >
+        solderid,
+      </if>
+      <if test="integral != null" >
+        integral,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="commentscore != null" >
+        commentscore,
+      </if>
+      <if test="commenttime != null" >
+        commenttime,
+      </if>
+      <if test="c1 != null" >
+        c1,
+      </if>
+      <if test="c2 != null" >
+        c2,
+      </if>
+      <if test="c3 != null" >
+        c3,
+      </if>
+      <if test="c4 != null" >
+        c4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="buyid != null" >
+        #{buyid,jdbcType=INTEGER},
+      </if>
+      <if test="newpaperid != null" >
+        #{newpaperid,jdbcType=INTEGER},
+      </if>
+      <if test="newbankid != null" >
+        #{newbankid,jdbcType=INTEGER},
+      </if>
+      <if test="paperid != null" >
+        #{paperid,jdbcType=INTEGER},
+      </if>
+      <if test="bankid != null" >
+        #{bankid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="solderid != null" >
+        #{solderid,jdbcType=INTEGER},
+      </if>
+      <if test="integral != null" >
+        #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentscore != null" >
+        #{commentscore,jdbcType=INTEGER},
+      </if>
+      <if test="commenttime != null" >
+        #{commenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="c1 != null" >
+        #{c1,jdbcType=INTEGER},
+      </if>
+      <if test="c2 != null" >
+        #{c2,jdbcType=INTEGER},
+      </if>
+      <if test="c3 != null" >
+        #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null" >
+        #{c4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neuedu.entity.PayrecordExample" resultType="java.lang.Integer" >
+    select count(*) from payrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update payrecord
+    <set >
+      <if test="record.recordid != null" >
+        recordid = #{record.recordid,jdbcType=INTEGER},
+      </if>
+      <if test="record.buyid != null" >
+        buyid = #{record.buyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.newpaperid != null" >
+        newpaperid = #{record.newpaperid,jdbcType=INTEGER},
+      </if>
+      <if test="record.newbankid != null" >
+        newbankid = #{record.newbankid,jdbcType=INTEGER},
+      </if>
+      <if test="record.paperid != null" >
+        paperid = #{record.paperid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bankid != null" >
+        bankid = #{record.bankid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.solderid != null" >
+        solderid = #{record.solderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.integral != null" >
+        integral = #{record.integral,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.commentscore != null" >
+        commentscore = #{record.commentscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.commenttime != null" >
+        commenttime = #{record.commenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.c1 != null" >
+        c1 = #{record.c1,jdbcType=INTEGER},
+      </if>
+      <if test="record.c2 != null" >
+        c2 = #{record.c2,jdbcType=INTEGER},
+      </if>
+      <if test="record.c3 != null" >
+        c3 = #{record.c3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.c4 != null" >
+        c4 = #{record.c4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update payrecord
+    set recordid = #{record.recordid,jdbcType=INTEGER},
+      buyid = #{record.buyid,jdbcType=INTEGER},
+      newpaperid = #{record.newpaperid,jdbcType=INTEGER},
+      newbankid = #{record.newbankid,jdbcType=INTEGER},
+      paperid = #{record.paperid,jdbcType=INTEGER},
+      bankid = #{record.bankid,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      solderid = #{record.solderid,jdbcType=INTEGER},
+      integral = #{record.integral,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      commentscore = #{record.commentscore,jdbcType=INTEGER},
+      commenttime = #{record.commenttime,jdbcType=TIMESTAMP},
+      c1 = #{record.c1,jdbcType=INTEGER},
+      c2 = #{record.c2,jdbcType=INTEGER},
+      c3 = #{record.c3,jdbcType=VARCHAR},
+      c4 = #{record.c4,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.entity.Payrecord" >
+    update payrecord
+    <set >
+      <if test="buyid != null" >
+        buyid = #{buyid,jdbcType=INTEGER},
+      </if>
+      <if test="newpaperid != null" >
+        newpaperid = #{newpaperid,jdbcType=INTEGER},
+      </if>
+      <if test="newbankid != null" >
+        newbankid = #{newbankid,jdbcType=INTEGER},
+      </if>
+      <if test="paperid != null" >
+        paperid = #{paperid,jdbcType=INTEGER},
+      </if>
+      <if test="bankid != null" >
+        bankid = #{bankid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="solderid != null" >
+        solderid = #{solderid,jdbcType=INTEGER},
+      </if>
+      <if test="integral != null" >
+        integral = #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentscore != null" >
+        commentscore = #{commentscore,jdbcType=INTEGER},
+      </if>
+      <if test="commenttime != null" >
+        commenttime = #{commenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="c1 != null" >
+        c1 = #{c1,jdbcType=INTEGER},
+      </if>
+      <if test="c2 != null" >
+        c2 = #{c2,jdbcType=INTEGER},
+      </if>
+      <if test="c3 != null" >
+        c3 = #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null" >
+        c4 = #{c4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where recordid = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.entity.Payrecord" >
+    update payrecord
+    set buyid = #{buyid,jdbcType=INTEGER},
+      newpaperid = #{newpaperid,jdbcType=INTEGER},
+      newbankid = #{newbankid,jdbcType=INTEGER},
+      paperid = #{paperid,jdbcType=INTEGER},
+      bankid = #{bankid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      solderid = #{solderid,jdbcType=INTEGER},
+      integral = #{integral,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      commentscore = #{commentscore,jdbcType=INTEGER},
+      commenttime = #{commenttime,jdbcType=TIMESTAMP},
+      c1 = #{c1,jdbcType=INTEGER},
+      c2 = #{c2,jdbcType=INTEGER},
+      c3 = #{c3,jdbcType=VARCHAR},
+      c4 = #{c4,jdbcType=VARCHAR}
+    where recordid = #{recordid,jdbcType=INTEGER}
+  </update>
+  
+  
+  <select id="getallSoldRecord" resultMap="BaseResultMap">
+  	select *
+  	 from payrecord p,user u
+  	 where p.solderid = #{solderid}
+  	 and p.buyid=u.userid
+  </select>
+  
+  <select id="getallBuyRecord" resultMap="BaseResultMap">
+  	select *
+  	 from payrecord p,user u 
+  	where buyid = #{buyid} and p.solderid=u.userid 
+  </select>
+  <select id="getallBankRecord" resultMap="BaseResultMap1">
+  	select *
+  	 from payrecord p,user u 
+  	where  p.bankid = #{bankid} and p.buyid=u.userid
+  </select>
+  
+  <select id="getallPaperRecord" resultMap="BaseResultMap1">
+  	select *
+  	 from payrecord p,user u 
+  	where  p.paperid = #{paperid} and p.buyid=u.userid
+  </select>
+  
+  <select id="isPurchaseBank" resultMap="BaseResultMap1">
+  	select *
+  	 from payrecord 
+  	where  payrecord.bankid=#{bankid} and payrecord.buyid = #{buyid}
+  </select>
+  
+   <select id="isPurchasePaper" resultMap="BaseResultMap1">
+  	select *
+  	 from payrecord 
+  	where  payrecord.paperid=#{paperid} and payrecord.buyid = #{buyid}
+  </select>
+   <update id="papercancelupload" parameterType="com.neuedu.entity.Shop_bank" >
+  	update payrecord
+  	set paperid = null
+  	where paperid = #{paperid}
+  </update>
+  
+  <update id="bankcancelupload" parameterType="com.neuedu.entity.Shop_bank" >
+  	update payrecord
+  	set bankid = null
+  	where bankid = #{bankid}
+  </update>
+  
+</mapper>

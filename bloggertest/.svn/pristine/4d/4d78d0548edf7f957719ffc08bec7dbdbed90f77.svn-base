@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="layui/css/layui.css" th:href="@{static/layui/css/layui.css}">
+		<link rel="stylesheet" type="text/css" href="css/header.css" th:href="@{static/css/header.css}"/>
+		<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"/>
+		<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" th:href="@{static/css/bootstrap.css}"/>
+		<link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{static/css/common.css}"/>
+		<title>管理后台</title>
+	</head>
+
+	<body class="layui-view-body">
+		
+
+		<div th:replace="teacherHead :: html"></div>
+		     <div class="layui-container">  
+		  <div class="layui-row">
+		    <div class="layui-col-md3">
+	        	<ul class="layui-nav layui-nav-tree" lay-filter="test">
+				<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+				  <li class="layui-nav-item layui-nav-itemed">
+				    <a href="javascript:;">我的试卷</a>
+				    <dl class="layui-nav-child">
+				      <dd><a href="addPaper.html">添加试卷</a></dd>
+				      <dd><a href="javascript:;">选项2</a></dd>
+				     
+				    </dl>
+				  </li>
+				  <li class="layui-nav-item">
+				    <a href="javascript:;">我的考试</a>
+				    <dl class="layui-nav-child">
+				      <dd><a href="">未开始</a></dd>
+				      <dd><a href="">进行中</a></dd>
+				      <dd><a href="">已结束</a></dd>
+				    </dl>
+				  </li>
+				</ul>
+		    </div>
+		    <div class="layui-col-md8">
+		    	第一部分：单选题
+		<form class="layui-form" action="addQuestion" method="post">
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">说明</label>
+		    <div class="layui-input-block">
+		      <input type="text" name="retroduce" required  lay-verify="required" placeholder="请输入考试说明" autocomplete="off" class="layui-input">
+		    </div>
+		  </div>
+
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">设置</label>
+		    <div class="layui-input-block">
+		    	<input type="checkbox" name="" title="题目乱序" lay-skin="primary">
+				<input type="checkbox" name="" title="选项乱序" lay-skin="primary" checked> 
+				<input type="checkbox" name="" title="显示技能" lay-skin="primary"> 
+			
+<!-- 		      <input type="checkbox" name="like[write]" title="写作"> -->
+<!-- 		      <input type="checkbox" name="like[read]" title="阅读" checked> -->
+<!-- 		      <input type="checkbox" name="like[dai]" title="发呆"> -->
+		    </div>
+		  </div>
+	
+<!-- 		  <div class="layui-form-item"> -->
+<!-- 		    <label class="layui-form-label">单选框</label> -->
+<!-- 		    <div class="layui-input-block"> -->
+<!-- 		      <input type="radio" name="sex" value="男" title="男"> -->
+<!-- 		      <input type="radio" name="sex" value="女" title="女" checked> -->
+<!-- 		    </div> -->
+<!-- 		  </div> -->
+		  <div class="layui-form-item layui-form-text">
+		    <label class="layui-form-label">题目统计</label>
+		    <div class="layui-input-block">
+		      <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+		    </div>
+		  </div>
+		   <div class="layui-form-item layui-form-text">
+		    <label class="layui-form-label">题目详情</label>
+		    <div class="layui-input-block">
+<!-- 		      <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea> -->
+		      <table class="layui-table">
+<!-- 				  <thead> -->
+				    <tr>
+				    	<th lay-data="{field:'id', width:80, sort: true}"></th>
+				      <th lay-data="{field:'id', width:80, sort: true}">单选</th>
+				      <th lay-data="{field:'username', width:80}">多选</th>
+				      <th lay-data="{field:'sex', width:80, sort: true}">判断</th>
+				      <th lay-data="{field:'city'}">填空</th>
+				      <th lay-data="{field:'sign'}">简答</th>
+				    </tr>
+				     <tr>
+				      <th lay-data="{field:'id', width:80, sort: true}">数目</th>
+				      <th lay-data="{field:'username', width:80}">多选</th>
+				      <th lay-data="{field:'sex', width:80, sort: true}">判断</th>
+				      <th lay-data="{field:'city'}">填空</th>
+				      <th lay-data="{field:'sign'}">简答</th>
+				      <th lay-data="{field:'id', width:80, sort: true}"></th>
+				    </tr>
+				     <tr>
+				      <th lay-data="{field:'id', width:80, sort: true}">分值</th>
+				      <th lay-data="{field:'username', width:80}">多选</th>
+				      <th lay-data="{field:'sex', width:80, sort: true}">判断</th>
+				      <th lay-data="{field:'city'}">填空</th>
+				      <th lay-data="{field:'sign'}">简答</th>
+				      <th lay-data="{field:'id', width:80, sort: true}"></th>
+				    </tr>
+<!-- 				  </thead> -->
+				</table>
+		    </div>
+		  </div>
+		  <div class="layui-form-item">
+		    
+		      <button class="layui-btn" action="addQuestion">添加题目</button>
+		    </div>
+		  </div>
+		   <div class="layui-form-item">
+		    <div class="layui-input-block">
+		      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+<!-- 		      <button type="reset" class="layui-btn layui-btn-primary">重置</button> -->
+		    </div>
+		  </div>
+		</form>
+			<!-- yulaingliang -->
+<!-- 			<input type="text" name="tijiao" class="refer-input" placeholder="请输入知识点名称" onblur="tijiao(this)"> -->
+<!-- 				<span class="input-group-btn"> -->
+<!-- 					<a href="yuliangliang" class="layui-btn layui-btn-normal">余量朗</a> -->
+<!-- 				</span> -->
+		
+		    </div>
+		  </div>
+		  <form action="" method="post" id="creatPaper">
+				<input type="text" name="paperName" id="paperName" />
+				<input type="text" name="userid" id="userid" />
+				<input type="text" name="label" id="label" />
+				<button id="check" >创建试卷</button>
+				<br>
+				<button id="check2" >@RequestParam的用法</button>
+				</form>
+
+	</body>
+	<script src="layui/layui.js" th:src="@{static/layui/layui.js}"></script>
+	<script src="index.js" data-main="home" th:src="@{static/index.js}"></script>
+	<script>
+		//注意：导航 依赖 element 模块，否则无法进行功能性操作
+		layui.use('element', function() {
+			var element = layui.element;
+
+			//…
+		});
+	</script>
+	<script>
+		//Demo
+		layui.use('form', function(){
+		  var form = layui.form;
+		  form.render();
+		  //监听提交
+		  form.on('submit(formDemo)', function(data){
+		    layer.msg(JSON.stringify(data.field));
+		    return false;
+		  });
+		});
+		</script>
+<!-- 		<script type="text/javascript" src="js/jquery-1.8.3.min.js" th:src="@{static/js/jquery-1.8.3.min.js}"></script> -->
+		<script type="text/javascript">
+		$(function(){
+
+			
+			$('#check').click(function(){
+				alert("yulaingliang")
+				var p1 = $('#paperName').val();
+				var p2 = $('#userid').val();
+				var p3 = $('#label').val();
+				var u = {'papername':p1,'winder':p2,'paperlabel':p3};//包装成一个js对象
+				$.ajax({
+					url:'addPaper',
+					type:'post',
+					contentType:'application/json;charset=utf-8',//请求的字符编码
+					data:JSON.stringify(u),//转换成json格式字符串
+					dateType:"text",//返回类型
+					success:function(e){
+						alert(e);
+					},
+					error:function(){
+						alert('异步提交失败');
+					}
+				});
+			});
+		});
+		</script>
+
+</html>

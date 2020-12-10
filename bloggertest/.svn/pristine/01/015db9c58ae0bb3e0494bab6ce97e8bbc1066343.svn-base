@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="title" content="ScoopThemes">
+<meta name="ROBOTS" content="">
+<meta name="description" content="">
+<meta name="abstract" content="">
+
+<title>黑马工厂</title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" th:href="@{static/css/bootstrap.css}"
+	rel="stylesheet">
+<link href="font-awesome-4.7.0/css/font-awesome.css"
+	th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"
+	rel="stylesheet">
+<link href="font-awesome-4.7.0/css/font-awesome.min.css"
+	th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}"
+	rel="stylesheet">
+<link href="css/bootstrap-theme.css"
+	th:href="@{static/css/bootstrap-theme.css}" rel="stylesheet">
+<link rel="stylesheet" href="css/animations.css"
+	th:href="@{static/css/animations.css}">
+
+<!-- siimple style -->
+<link href="css/index.css" th:href="@{static/css/index.css}"
+	rel="stylesheet">
+<link href="css/dmaku.css" th:href="@{static/css/dmaku.css}"
+	rel="stylesheet" />
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+	<div class="cloud floating">
+		<img src="img/cloud.png" th:src="@{static/img/cloud.png}"
+			alt="Scoop Themes">
+	</div>
+
+	<div class="cloud pos1 fliped floating">
+		<img src="img/cloud.png" th:src="@{static/img/cloud.png}"
+			alt="Scoop Themes">
+	</div>
+
+	<div class="cloud pos2 floating">
+		<img src="img/cloud.png" th:src="@{static/img/cloud.png}"
+			alt="Scoop Themes">
+	</div>
+
+	<div class="cloud pos3 fliped floating">
+		<img src="img/cloud.png" th:src="@{static/img/cloud.png}"
+			alt="Scoop Themes">
+	</div>
+
+	<div class="index-nav collapse navbar-collapse"
+		id="bs-example-navbar-collapse-1">
+
+		<ul class="nav navbar-nav navbar-right">
+
+			<li><a href="toregister">注册</a></li>
+
+			<li><a href="toindex">首页</a></li>
+		</ul>
+	</div>
+
+	<div id="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+					<img class="logoimg" src="img/logo.png"
+						th:src="@{static/img/logo.png}" alt="Scoop Themes Logo">
+					<h2 class="subtitle">黑马考试夹平台Dark horse factory</h2>
+					<br />
+					<div class="htmleaf-container">
+
+						<div id="wrapperlogin" class="login-page">
+							<div id="login_form" class="form">
+								<div class="login-form">
+									<input type="text" placeholder="账号/手机号" id="number" /> 
+									<label class="focus hide" id="numbermsg">账号不能为空</label>
+										 <input type="password" placeholder="密码" id="password" />
+										 <label class="focus hide" id="passwordmsg">密码不能为空</label>
+										 <input type="text" id="captchainput" class="input-code" placeholder="验证码点击可切换"/>
+										 <label class="focus hide" id="capthamsg">验证码不正确</label>
+										 <span class="code" title='点击切换'></span>
+										 <label id="loginmsg" class="hide"><span class="glyphicon glyphicon-remove-sign"></span>登录账户和密码不匹配</label>
+									<button id="login">登 录</button>
+									<p class="message">
+										还没有账户? <a href="toregister">立刻创建</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<ul class="social-network social-circle">
+						<li><a href="#" class="icoFacebook" title="QQ"><i
+								class="fa fa-qq" aria-hidden="true"></i></a></li>
+						<li><a href="#" class="icoTwitter" title="微信"><i
+								class="fa fa-weixin" aria-hidden="true"></i></a></li>
+						<li><a href="#" class="icoGit" title="新浪微博"><i
+								class="fa fa-weibo" aria-hidden="true"></i></a></li>
+					</ul>
+				</div>
+				<div class="col-sm-12 align-center"></div>
+			</div>
+			<div class="row"></div>
+		</div>
+	</div>
+
+	<script src="js/jquery.min.js" th:src="@{static/js/jquery.min.js}"
+		type="text/javascript"></script>
+	<script src="js/jquery.form-n-validate.js"
+		th:src="@{static/js/jquery.form-n-validate.js}" type="text/javascript"></script>
+	<script src="js/jquery.code.js" th:src="@{static/js/jquery.code.js}"
+		type="text/javascript"></script>
+	<script type="text/javascript">
+
+		function check_login() {
+			//alert(111);
+			$('#loginmsg').addClass('hide');
+			var number = $("#number").val();
+			var password = $("#password").val();
+			if(check_number()&&check_password()&&check_code()){
+				//alert("111");
+				$.ajax({
+					url: "login",
+				//	async: true,
+					type: "post",
+					data:{
+						"number":number,
+						"userpassword":password
+					},
+					//  dataType: "json",
+					success: function(data) {
+						//alert(data);
+						if(data.code == '1001'||data.code=="1000") {
+							$('.code').createCode({
+							      len:6
+							});
+							var code = $('.input-code').val('');
+							$("#capthamsg").addClass("hide");
+							$('#loginmsg').removeClass('hide');
+							$("#login_form").removeClass('shake_effect');
+							setTimeout(function() {
+								$("#login_form").addClass('shake_effect')
+							}, 1);
+						}
+						//登录成功
+						else if(data.code == '0000') {
+							
+							$('#loginmsg').addClass('hide');
+							//alert("登录成功");
+							//跳转到个人中心
+							if(data.statusPage=="toStudent"){
+								window.location.href="toStudentPaperIndex";
+							}
+							if(data.statusPage=="toTeacher"){
+								window.location.href="tounpublishteacherPaper";
+							}
+							
+						}
+					}
+				})
+			}
+		}
+
+		function check_number(){
+			//alert(111);
+			var number = $("#number").val();
+			if (number == null || number == '') {
+				$("#numbermsg").removeClass("hide");
+				return false;
+			} else {
+				$("#numbermsg").addClass("hide");
+				return true;
+			}
+		}
+		function check_password(){
+			//alert(111);
+			var password = $("#password").val();
+			if (password == null || password == '') {
+				$("#passwordmsg").removeClass("hide");
+				return false;
+			} else {
+				$("#passwordmsg").addClass("hide");
+				return true;
+			}
+		}
+		function check_code(){
+			//alert(111);
+			var code = $('.input-code').val();
+			
+			//alert(code+"   "+$('.code').children('input').val());
+			
+			if(code==null||code==''){
+				$("#capthamsg").removeClass("hide");
+		    	$("#capthamsg").html('验证码不能为空');
+		    	return false;
+			}
+		    else if(code!==$('.code').children('input').val()){			    	
+		    	$("#capthamsg").removeClass("hide");
+		    	$("#capthamsg").html('验证码不正确');
+		    	$("#capthamsg").css("color","#D9534F");
+		    	return false;
+		    }else{
+		    	$("#capthamsg").removeClass("hide");
+		    	$("#capthamsg").html('<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>'+'验证码正确');
+		    	$("#capthamsg").css("color","#7abd54");
+		    	return true;
+		    }
+			return false;
+		}
+		$(function() {
+			$('.code').createCode({
+			      len:6
+			});
+			$('.input-code').blur(function () {
+				check_code();
+			  });
+			$(".input-code").focus(function() {
+
+				$("#capthamsg").addClass("hide");
+
+			})
+			$("#number").blur(function() {
+				check_number();
+			})
+			$("#number").focus(function() {
+
+				$("#numbermsg").addClass("hide");
+
+			})
+			$("#password").blur(function() {
+				check_password();
+			})
+			$("#password").focus(function() {
+
+				$("#passwordmsg").addClass("hide");
+
+			})
+			$("#login").click(function() {
+				check_login();
+			})
+			
+		})
+	</script>
+
+</body>
+
+</html>

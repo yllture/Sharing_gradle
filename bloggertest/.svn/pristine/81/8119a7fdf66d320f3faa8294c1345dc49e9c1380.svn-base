@@ -1,0 +1,13 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.Paper_fillchoice;
+
+public interface Paper_fillchoiceService {
+	int addPaper_fillchoice(Paper_fillchoice choice);
+	int deletePaper_fillchoice(Paper_fillchoice choice);
+	int updatePaper_fillchoice(Paper_fillchoice choice);
+	List<Paper_fillchoice> selectByqid(Paper_fillchoice choice);
+
+}

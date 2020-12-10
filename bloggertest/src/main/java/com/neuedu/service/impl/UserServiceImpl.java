@@ -1,0 +1,80 @@
+package com.neuedu.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.neuedu.dao.UserMapper;
+import com.neuedu.entity.User;
+import com.neuedu.entity.UserExample;
+import com.neuedu.entity.UserExample.Criteria;
+import com.neuedu.entity.UsersessionExample;
+import com.neuedu.service.UserService;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	UserMapper userMapper;
+
+	
+	
+	@Override
+	public User selectUserByPrimaryKey(User u) {
+		// TODO Auto-generated method stub
+		User current = userMapper.selectByPrimaryKey(u.getUserid());
+		
+		return current;
+	}
+	
+	@Override
+	public User selectUserByAccount(User u) {
+		// TODO Auto-generated method stub
+		UserExample userExample = new UserExample();
+		Criteria c1 = userExample.createCriteria();
+		c1.andUseraccountEqualTo(u.getUseraccount());
+		List<User> resu = userMapper.selectByExample(userExample);
+		User ru = null;
+		if(resu !=null&&resu.size()!=0) {
+			ru = resu.get(0);
+		}
+		return ru;
+	}
+
+	@Override
+	public User selectUserByTel(User u) {
+		// TODO Auto-generated method stub
+		UserExample userExample = new UserExample();
+		Criteria c1 = userExample.createCriteria();
+		c1.andTelEqualTo(u.getTel());
+	//	System.out.println("cc"+u.getTel());
+		List<User> resu = userMapper.selectByExample(userExample);
+		User ru=null;
+		if(resu !=null&&resu.size()!=0) {
+			ru = resu.get(0);
+		}
+		return ru;
+	}
+	
+	@Override
+	public int addUser(User u) {
+		// TODO Auto-generated method stub
+		int i = userMapper.insert(u);
+		return i;
+	}
+	
+	@Override
+	public int updateUser(User u) {
+		// TODO Auto-generated method stub
+		int i = userMapper.updateByPrimaryKey(u);
+	
+		return i;
+	}
+
+	@Override
+	public int updateUserSelective(User reuser) {
+		int updateByPrimaryKeySelective = userMapper.updateByPrimaryKeySelective(reuser);
+		return updateByPrimaryKeySelective;
+	}
+}

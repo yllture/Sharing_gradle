@@ -1,0 +1,20 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.Bank_fill;
+import com.neuedu.entity.Bank_judge;
+import com.neuedu.entity.Paper;
+import com.neuedu.entity.Paper_fill;
+import com.neuedu.entity.Paper_judge;
+
+public interface Paper_judgeService {
+	List<Paper_judge> getAllbyPaperid(Paper paper);
+	int addPaper_judge(Paper_judge pf);
+	int deletePaper_judge(Paper_judge pf);
+	int updatePaper_judge(Paper_judge pf);
+	
+	int addPaper_judge2(Bank_judge bankjudge,Integer score,Paper paper);
+	Paper_judge selectPaper_judge(Paper_judge pf);
+
+}

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" th:href="@{static/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/groupview.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/userEditor.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/component.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/cropper.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/ImgCropping.css}">
+    <title></title>
+    <style type="text/css">
+    	.user-photo img{
+    		width: 80px;
+		    height: 80px;
+		    border-radius: 50%;
+		    margin-right: 4px;
+		    margin-bottom: 4px;
+    	}
+    </style>
+</head>
+<body class="layui-view-body">
+    <div class="layui-content">
+        <div class="layui-row">
+            <div class="layui-card">
+                <div class="layui-card-header">创建群</div>
+                <div class="layui-form layui-card-body">
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">*群组名称</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="groupname" required  lay-verify="required" placeholder="请填写群组名称" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+                  <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">群组描述</label>
+                    <div class="layui-input-block">
+                    <textarea name="c1" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">*权限设置</label>
+                    <div class="layui-input-block">
+                      <input type="radio" name="type" value="0" title="允许任何人">
+                      <input type="radio" name="type" value="1" title="需要身份验证" checked>
+                      <input type="radio" name="type" value="2" title="不允许任何人">
+                    </div>
+                  </div>
+                  <div class="layui-form-item user-photo">
+                    <label class="layui-form-label">群组封面</label>
+                    
+                    <div class="layui-input-block photo-editor">
+                    	<img  id="initImg"/>
+                        <input type="file" name="files" accept="image/jpg,image/jpeg,image/png" id="upload-userPhoto" onChange="selectImgupload(this)"/>
+                        <div class="photo-mask">
+								<a><b>编辑</b></a>
+						</div>
+                    </div>
+                    
+                  </div>
+                  <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <button class="layui-btn layui-btn-blue" onclick="upbut();">立即提交</button>
+                      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                  </div>
+                </div>
+                <!--图片裁剪框 start-->
+				<div style="display: none;top: 10px;" class="tailoring-container">
+					<div class="black-cloth" onClick="closeTailor(this)"></div>
+					<div class="tailoring-content" style="height:460px;">
+						<div class="tailoring-content-one" >
+							<label id="imageKTitle">上传头像</label>
+							<div class="close-tailoring" onclick="closeTailor(this)">×</div>
+						</div>
+						<div class="tailoring-content-two" style="height:360px;">
+							<div class="tailoring-box-parcel" style="height:350px;">
+								<img id="tailoringImg">
+							</div>
+							<div class="preview-box-parcel" style="height:350px;">
+			
+								<!-- <div class="square previewImg"></div> -->
+								<center>
+									<div class="circular previewImg"></div>
+									<p>
+										图片预览<br />108px × 108px
+									</p>
+									<br/>
+									<label title="上传图片" for="chooseImg" class="l-btn choose-btn"> 上传图片
+										<!--选择图片-->
+										<input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onChange="selectImg(this)" />
+										
+									</label>
+								</center>
+							</div>
+						</div>
+						<div class="tailoring-content-three">
+							<button class="l-btn cropper-reset-btn">复位</button>
+							<button class="l-btn cropper-rotate-btn">旋转</button>
+							<button class="l-btn cropper-scaleX-btn">换向</button>
+							<button class="l-btn sureCut" id="sureCut">确认上传</button>
+						</div>
+					</div>
+				</div>
+				<!--图片裁剪框 end-->
+            </div>
+        </div>
+    </div>
+    <script src="layui/layui.all.js" th:src="@{static/layui/layui.all.js}"></script>
+    <script src="js/jquery.min.js" th:src="@{static/js/jquery.min.js}"></script>
+    <script src="js/groupImg.js" th:src="@{static/js/groupImg.js}"></script>
+    <script src="js/cropper.min.js" th:src="@{static/js/cropper.min.js}"></script>
+    
+    <script>
+      var form = layui.form
+        ,layer = layui.layer;
+       
+     
+     //弹出框水平垂直居中
+    (window.onresize = function () {
+        var win_height = $(window).height();
+        var win_width = $(window).width();
+        if (win_width <= 768){
+            $(".tailoring-content").css({
+                "top": (win_height - $(".tailoring-content").outerHeight())/2,
+                "left": 0
+            });
+        }else{
+            $(".tailoring-content").css({
+                "top": (win_height - $(".tailoring-content").outerHeight())/2,
+                "left": (win_width - $(".tailoring-content").outerWidth())/2
+            });
+        }
+    })();
+
+     
+    $(function(){
+  	  $.ajax({			
+						url:'/loadImg',
+						type:'post',
+						/* data:{"groupcode":groupcode}, */
+						dataType:'text',
+						success:function(data){
+							var obj=JSON.parse(data);
+							//alert(obj.icon);
+							var owni=obj.icon.replace(/\\/g,"/");
+						    var ownicon="static/"+owni; 
+							$("#initImg").attr("src",ownicon);
+						}
+					});
+    })
+    
+    //弹出图片裁剪框
+ /*    $("#replaceImg").on("click",function () {
+        $(".tailoring-container").toggle();
+    }); */
+  //图像上传
+     var cas;
+     var base64url;
+     var groupname;
+     var type;
+     var image;
+     function selectImgupload(file) {
+    	$(".tailoring-container").toggle();
+        if (!file.files || !file.files[0]){
+            return;
+        }
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            var replaceSrc = evt.target.result;
+            //更换cropper的图片
+            $('#tailoringImg').cropper('replace', replaceSrc,false);//默认false，适应高度，不失真
+           /*  alert(base64url);
+            $("#upload-userPhoto").attr('src',base64url); */
+        }
+        reader.readAsDataURL(file.files[0]);
+    } 
+    //图像上传
+     function selectImg(file) {
+        if (!file.files || !file.files[0]){
+            return;
+        }
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            var replaceSrc = evt.target.result;
+            //更换cropper的图片
+            $('#tailoringImg').cropper('replace', replaceSrc,false);//默认false，适应高度，不失真
+        }
+        reader.readAsDataURL(file.files[0]);
+    }; 
+    //cropper图片裁剪
+    $('#tailoringImg').cropper({
+        aspectRatio:1/1,//默认比例
+        preview: '.previewImg',//预览视图
+        guides: false,  //裁剪框的虚线(九宫格)
+        autoCropArea: 0.5,  //0-1之间的数值，定义自动剪裁区域的大小，默认0.8
+        movable: false, //是否允许移动图片
+        dragCrop: true,  //是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域
+        movable: true,  //是否允许移动剪裁框
+        resizable: true,  //是否允许改变裁剪框的大小
+        zoomable: false,  //是否允许缩放图片大小
+        mouseWheelZoom: false,  //是否允许通过鼠标滚轮来缩放图片
+        touchDragZoom: true,  //是否允许通过触摸移动来缩放图片
+        rotatable: true,  //是否允许旋转图片
+        crop: function(e) {
+            // 输出结果数据裁剪图像。
+        }
+    });
+    //旋转
+    $(".cropper-rotate-btn").on("click",function () {
+        $('#tailoringImg').cropper("rotate", 45);
+    });
+    //复位
+    $(".cropper-reset-btn").on("click",function () {
+        $('#tailoringImg').cropper("reset");
+    });
+    //换向
+    var flagX = true;
+    $(".cropper-scaleX-btn").on("click",function () {
+        if(flagX){
+            $('#tailoringImg').cropper("scaleX", -1);
+            flagX = false;
+        }else{
+            $('#tailoringImg').cropper("scaleX", 1);
+            flagX = true;
+        }
+        flagX != flagX;
+    });
+
+    //裁剪后的处理
+    $("#sureCut").on("click",function () {
+    	alert(1);
+        if ($("#tailoringImg").attr("src") == null ){
+            return false;
+        }else{
+            cas = $('#tailoringImg').cropper('getCroppedCanvas');//获取被裁剪后的canvas
+            base64url = cas.toDataURL('image/png'); //转换为base64地址形式
+            $("#initImg").prop("src",base64url);//显示为图片的形式
+            var start = base64url.indexOf('base64,') + 7;
+            base64url = base64url.substring(start, base64url.length);
+            base64url = base64url.replace(/\+/g, "%2B");
+            image=base64url;
+            //alert(base64url);
+			//${"#upload-userPhoto"}.val()=base64url;
+			//alert(base64url);
+           // $("#upload-userPhoto").attr('src',base64url);
+            /* $.ajax({
+                contentType : "application/x-www-form-urlencoded; charset=utf-8",
+                type : "post",
+                url : "createGroup",
+                data : {
+                    image : base64url
+                },
+                dataType : 'text',
+                success : function(res) {
+                	console.log(res);
+					var data = JSON.parse(res);
+					if(data.flag=='200'){
+						$(".headimg img").attr("src",data.iconImage);
+						$("#headerimg").attr("src",data.iconImage);
+					}
+                }
+            }) */
+            //关闭裁剪框
+            closeTailor();
+        }
+    });
+    //关闭裁剪框
+    function closeTailor() {
+        $(".tailoring-container").toggle();
+    }
+    function upbut(){
+    	groupname=$('input[name="groupname"]').val();
+    	if(groupname==''){
+    		alert("群名称不能为空！");
+    		return;
+    	}
+    	if(base64url==null){
+    		//var url=$("#initImg").attr("src");
+    		type=$('input[name="type"]:checked').val();
+    		image="init";
+    		$.ajax({
+                contentType : "application/x-www-form-urlencoded; charset=utf-8",
+                type : "post",
+                url : "createGroup",
+                data : {
+                    'image' : image,
+                    'groupname':groupname,
+                    'type':type
+                },
+                dataType : 'text',
+                success : function(res) {
+                	//dconsole.log(res);
+    				var data = JSON.parse(res);
+    				//alert(data.code);
+    				if(data.code==0000){
+    					alert("创建成功!群账号为："+data.groupcode);
+    					//$('input').val("");
+    					top.location.href="toGroup";
+    				}else if(data.code==6000){
+    					alert("权限不够，请先切换到教师角色！");
+    					top.location.href="toGroup";
+    				}else{
+    					alert("创建失败！");
+    					top.location.href="toGroup";
+    				}
+                }
+            })
+            return;
+    	}
+    	type=$('input[name="type"]:checked').val();
+    	//alert(groupname+" "+type+" "+base64url);
+    	$.ajax({
+            contentType : "application/x-www-form-urlencoded; charset=utf-8",
+            type : "post",
+            url : "createGroup",
+            data : {
+                'image' : base64url,
+                'groupname':groupname,
+                'type':type
+            },
+            dataType : 'text',
+            success : function(res) {
+            	//dconsole.log(res);
+				var data = JSON.parse(res);
+				//alert(data.code);
+				if(data.code==0000){
+					alert("创建成功!群账号为："+data.groupcode);
+					//$('input').val("");
+					top.location.href="toGroup";
+				}else if(data.code==6000){
+					alert("权限不够，请先切换到教师角色！");
+					top.location.href="toGroup";
+				}else{
+					alert("创建失败！");
+					top.location.href="toGroup";
+				}
+            }
+        })
+    }
+    </script>
+</body>
+</html>

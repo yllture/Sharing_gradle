@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="icon" href="../assets/images/favicon.png">
+
+    <!-- CSS 
+    ================================================== -->
+    <link rel="stylesheet" href="../assets/css/style.css" th:href="@{statics/assets/css/style.css}">
+    <link rel="stylesheet" href="../assets/css/night-mode.css" th:href="@{statics/assets/css/night-mode.css}">
+    <link rel="stylesheet" href="../assets/css/framework.css" th:href="@{statics/assets/css/framework.css}">
+	
+	
+    <!-- icons
+    ================================================== -->
+    <link rel="stylesheet" href="../assets/css/icons.css" th:href="@{statics/assets/css/icons.css}">
+
+
+	 <link rel="stylesheet" href="../assets/layui/css/layui.css" media="all">
+
+
+
+    <!-- Google font
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- sidebar -->
+        <div class="main_sidebar">
+            <div class="side-overlay" uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible"></div>
+
+            <!-- sidebar header -->
+            <div class="sidebar-header">
+                <h4> Navigation</h4>
+                <span class="btn-close" uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible"></span>
+            </div>	
+
+            <!-- sidebar Menu -->
+            <div class="sidebar">
+                <div class="sidebar_innr" data-simplebar>
+
+                    <div class="sections">
+                        <h3> 数据共享 </h3>
+                        <ul>
+                            <li > <a href="applydata.html"> <i class="uil-home-alt"></i> 数据申请 </a></li>
+                            <li> <a href="authorizationdata.html"> <i class="uil-users-alt"></i> 数据授权 </a></li>
+                            <li > <a href="getdata.html"> <i class="uil-layers"></i> 数据获取 </a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="sections">
+                        <h3> 记录查看 </h3>
+                        <ul>
+                            <li > <a href="authorizationrecord.html"> <i class="uil-home-alt"></i> 授权记录 </a></li>
+                            <li> <a href="userecord.html"> <i class="uil-users-alt"></i> 使用记录 </a></li>
+                            <li> <a href="revokerecord.html"> <i class="uil-layers"></i> 撤销记录 </a></li>
+                      
+                        </ul>
+                    </div>
+				</div>
+
+
+            </div>
+
+        </div>
+
+        <!-- header -->
+        <div id="main_header">
+            <header>
+
+                <!-- Logo-->
+                <i class="header-traiger uil-bars"
+                    uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible"></i>
+
+                <!-- Logo-->
+                <div id="logo">
+                    <a href="#"> <img src="../assets/images/logo.png" th:src="@{statics/assets/images/logo.png}"  alt style="max-width:20%; ">GoSharing</a>
+                    <a href="#"> <img src="../assets/images/logo-light.png" th:src="@{statics/assets/images/logo-light-icon.png}" class="logo-inverse" alt=""></a>
+                
+                </div>
+
+               
+                <!-- user icons -->
+                <div class="head_user">
+					  <!-- profile -image -->
+                    <a class="opts_account"> <img src="../assets/images/avatars/avatar-1.jpg" th:src="@{statics/assets/images/avatars/avatar-1.jpg}" alt="">张三</a>
+
+                 
+
+                    </div>
+
+                </div>
+
+            </header>
+
+        </div>
+
+        <!-- contents -->
+        <div class="main_content">
+            <div class="main_content_inner">
+
+ 		
+ 		<div style="float: right;">
+ 			<button  class="button outline-warning" >发出申请</button>
+		
+ 		</div>
+ 		<div>
+ 			<h3> 申请列表 </h3> 
+ 		</div>
+		
+		<table class="layui-table">
+		  <colgroup>
+		    <col width="150">
+		    <col width="200">
+		    <col>
+		    <col width="100">
+		  </colgroup>
+		  <thead>
+		    <tr>
+		      <th>申请人</th>
+		      <th>申请时间</th>
+		      <th>申请说明</th>
+		      <th></th>
+		    </tr> 
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td>贤心</td>
+		      <td>2016-11-29</td>
+		      <td>人生就像是一场修行</td>
+		      <td><a>授权</a><a>拒绝</a></td>
+		    </tr>
+		    <tr>
+		      <td>许闲心</td>
+		      <td>2016-11-28</td>
+		      <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+		      <td><a>授权 </a> <a>拒绝</a></td>
+		      <td><a>授权 </a> <a>拒绝</a></td>
+		    </tr>
+		  </tbody>
+		</table>
+          
+          
+          
+          
+            </div>
+        </div>
+
+
+    <!--</div>-->
+    
+    
+
+
+    <!-- For Night mode -->
+    <script>
+        (function (window, document, undefined) {
+            'use strict';
+            if (!('localStorage' in window)) return;
+            var nightMode = localStorage.getItem('gmtNightMode');
+            if (nightMode) {
+                document.documentElement.className += ' night-mode';
+            }
+        })(window, document);
+
+
+        (function (window, document, undefined) {
+
+            'use strict';
+
+            // Feature test
+            if (!('localStorage' in window)) return;
+
+            // Get our newly insert toggle
+            var nightMode = document.querySelector('#night-mode');
+            if (!nightMode) return;
+
+            // When clicked, toggle night mode on or off
+            nightMode.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.documentElement.classList.toggle('night-mode');
+                if (document.documentElement.classList.contains('night-mode')) {
+                    localStorage.setItem('gmtNightMode', true);
+                    return;
+                }
+                localStorage.removeItem('gmtNightMode');
+            }, false);
+
+        })(window, document);
+    </script>
+
+
+    <!-- javaScripts
+                ================================================== -->
+    
+	<script src="../assets/js/framework.js" th:src="@{statics/assets/js/framework.js}"></script>
+    <script src="../assets/js/jquery-3.3.1.min.js" th:src="@{statics/assets/js/jquery-3.3.1.min.js}" ></script>
+    <script src="../assets/js/simplebar.js" th:src="@{statics/assets/js/simplebar.js}"></script>
+    <script src="../assets/js/main.js" th:src="@{statics/assets/js/main.js}"></script>
+	
+	
+	<script src="../assets/layui/layui.js"></script>
+	
+</body>
+
+</html>

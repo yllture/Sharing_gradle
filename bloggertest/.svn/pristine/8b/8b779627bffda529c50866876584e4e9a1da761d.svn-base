@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="renderer" content="webkit">
+		<title>考务管理</title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" th:href="@{static/css/bootstrap.css}">
+		<link rel="stylesheet" type="text/css" href="../font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}">
+		<!--[if IE 7]><link rel="stylesheet" href="../../css/font/font-awesome-ie7.min.css"><![endif]-->
+		<link rel="stylesheet" type="text/css" href="../css/common.css" th:href="@{static/css/common.css}">
+		<link rel="stylesheet" type="text/css" href="../css/core.css" th:href="@{static/css/core.css}">
+		<link rel="stylesheet" href="../css/examMng.css" th:href="@{static/css/examMng.css}"/>
+		<link rel="stylesheet" type="text/css" href="../css/paper-look.css" th:href="@{static/css/paper-look.css}">
+		<script src="../js/respond.js" th:src="@{static/js/respond.js}"></script>
+		<script src="../js/jquery-1.8.3.min.js" th:src="@{static/js/jquery-1.8.3.min.js}"></script>
+		<script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{static/js/bootstrap.min.js}"></script>
+		<script src="../js/right-btn.js" th:src="@{static/js/right-btn.js}"></script>
+	</head>
+	<body>
+		
+		<!--head begin-->
+		<nav class="navbar headbg">
+		  	<div class="container header">
+		  		<p class="additem-title text-center">试卷内容查看</p>
+  			</div>
+		</nav>
+		<!--head end-->
+		
+		<!--body begin-->
+		<div class="main-container">
+			<div class="container info-add body-box">
+				<div class="info-add-box">
+					<p>大学生六级英语考试卷</p>
+		  			<a href="javascript:history.go(-1);"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp;返回</a>
+				</div>
+				
+				
+				<!--         单选题               -->
+				<div class="view-container">
+					<div class="container-title">
+						<span class="font-weight">第一部分单选题</span>
+						<span class="fbt">（共3道）</span>
+					</div>
+					<div class="view-content">
+						<div class="view-box blue-box">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.社会主义法治理念的基本含义就是社会主义法制的精神和灵魂，是立法、执法、司法、守法和法律监督等法制领域的基本指导思想守法和法律监督等法制领域的基本指导思想。</span>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+							</div>
+							<div class="view-choose-box">
+								<div class="radio">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>A</span>&nbsp;<video autoplay="autoplay" controls="controls">
+										<source src="video/马云开讲啦.mp4" th:src="@{static/视频路径}" type="video/mp4"></source>
+									</video></p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>B</span>&nbsp;周恩来</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>C</span>&nbsp;棚里有</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>D</span>&nbsp;做殷勤</p>
+									</label>
+								</div>
+							</div>
+							<div class="answer-box" id="right-answer">
+								<span class="right-line"></span>
+								<span>正确答案：<b>B</b></span>
+							</div>
+							<div class="answer-box" id="answer-analy">
+								<span class="right-line"></span>
+								<span>答案解析：<b>以为ACD是错的，所以B是对</b></span>
+							</div>
+						</div>
+						<div class="view-box border-top-none">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.社会主义法治理念的基本含义就是社会主义法制的精神和灵魂，是立法、执法、司法、守法和法律监督等法制领域的基本指导思想守法和法律监督等法制领域的基本指导思想。</span>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+							</div>
+							<div class="view-choose-box">
+								<div class="radio">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>A</span>&nbsp;毛泽东</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>B</span>&nbsp;周恩来</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>C</span>&nbsp;棚里有</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>D</span>&nbsp;做殷勤</p>
+									</label>
+								</div>
+							</div>
+							<div class="answer-box" id="right-answer">
+								<span class="right-line"></span>
+								<span>正确答案：<b>B</b></span>
+							</div>
+							<div class="answer-box" id="answer-analy">
+								<span class="right-line"></span>
+								<span>答案解析：<b>以为ACD是错的，所以B是对</b></span>
+							</div>
+						</div>
+						<div class="view-box blue-box border-top-none">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.社会主义法治理念的基本含义就是社会主义法制的精神和灵魂，是立法、执法、司法、守法和法律监督等法制领域的基本指导思想守法和法律监督等法制领域的基本指导思想。</span>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+							</div>
+							<div class="view-choose-box">
+								<div class="radio">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>A</span>&nbsp;毛泽东</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>B</span>&nbsp;周恩来</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>C</span>&nbsp;棚里有</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>D</span>&nbsp;做殷勤</p>
+									</label>
+								</div>
+							</div>
+							<div class="answer-box" id="right-answer">
+								<span class="right-line"></span>
+								<span>正确答案：<b>B</b></span>
+							</div>
+							<div class="answer-box" id="answer-analy">
+								<span class="right-line"></span>
+								<span>答案解析：<b>以为ACD是错的，所以B是对</b></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+				<!--         多选题               -->
+				<div class="view-container">
+					<div class="container-title">
+						<span class="font-weight">第二部分多选题</span>
+						<span class="fbt">（共3道）</span>
+					</div>
+					<div class="view-content">
+						<div class="view-box blue-box">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.社会主义法治理念的基本含义就是社会主义法制的精神和灵魂，是立法、执法、司法、守法和法律监督等法制领域的基本指导思想守法和法律监督等法制领域的基本指导思想。</span>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+							</div>
+							<div class="view-choose-box">
+								<div class="radio">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>A</span>&nbsp;<img src="img/main-bg-compressor.jpg" /></p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>B</span>&nbsp;周恩来</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>C</span>&nbsp;棚里有</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>D</span>&nbsp;做殷勤</p>
+									</label>
+								</div>
+							</div>
+							<div class="answer-box" id="right-answer">
+								<span class="right-line"></span>
+								<span>正确答案：<b>B</b></span>
+							</div>
+							<div class="answer-box" id="answer-analy">
+								<span class="right-line"></span>
+								<span>答案解析：<b>以为ACD是错的，所以B是对</b></span>
+							</div>
+						</div>
+						<div class="view-box border-top-none">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.社会主义法治理念的基本含义就是社会主义法制的精神和灵魂，是立法、执法、司法、守法和法律监督等法制领域的基本指导思想守法和法律监督等法制领域的基本指导思想。</span>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+							</div>
+							<div class="view-choose-box">
+								<div class="radio">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>A</span>&nbsp;毛泽东</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>B</span>&nbsp;周恩来</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>C</span>&nbsp;棚里有</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>D</span>&nbsp;做殷勤</p>
+									</label>
+								</div>
+							</div>
+							<div class="answer-box" id="right-answer">
+								<span class="right-line"></span>
+								<span>正确答案：<b>B</b></span>
+							</div>
+							<div class="answer-box" id="answer-analy">
+								<span class="right-line"></span>
+								<span>答案解析：<b>以为ACD是错的，所以B是对</b></span>
+							</div>
+						</div>
+						<div class="view-box blue-box border-top-none">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.社会主义法治理念的基本含义就是社会主义法制的精神和灵魂，是立法、执法、司法、守法和法律监督等法制领域的基本指导思想守法和法律监督等法制领域的基本指导思想。</span>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+							</div>
+							<div class="view-choose-box">
+								<div class="radio">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>A</span>&nbsp;毛泽东</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>B</span>&nbsp;周恩来</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>C</span>&nbsp;棚里有</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>D</span>&nbsp;做殷勤</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>E</span>&nbsp;我是E</p>
+									</label>
+								</div>
+							</div>
+							<div class="answer-box" id="right-answer">
+								<span class="right-line"></span>
+								<span>正确答案：<b>B</b></span>
+							</div>
+							<div class="answer-box" id="answer-analy">
+								<span class="right-line"></span>
+								<span>答案解析：<b>以为ACD是错的，所以B是对</b></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--         判断题               -->
+				<div class="view-container">
+					<div class="container-title">
+						<span class="font-weight">第三部分判断题</span>
+						<span class="fbt">（共12道）</span>
+					</div>
+					<div class="view-content">
+						<div class="view-box blue-box">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.社会主义法治理念的基本含义就是社会主义法制的精神和灵魂，是立法、执法、司法、守法和法律监督等法制领域的基本指导思想守法和法律监督等法制领域的基本指导思想。</span>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+							</div>
+							<div class="view-choose-box">
+								<div class="radio">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>A</span>&nbsp;正确</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>B</span>&nbsp;错误</p>
+									</label>
+								</div>
+							</div>
+							<div class="answer-box" id="right-answer">
+								<span class="right-line"></span>
+								<span>正确答案：<b>B</b></span>
+							</div>
+							<div class="answer-box" id="answer-analy">
+								<span class="right-line"></span>
+								<span>答案解析：<b>以为ACD是错的，所以B是对</b></span>
+							</div>
+						</div>
+						<div class="view-box border-top-none">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.社会主义法治理念的基本含义就是社会主义法制的精神和灵魂，是立法、执法、司法、守法和法律监督等法制领域的基本指导思想守法和法律监督等法制领域的基本指导思想。</span>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+							</div>
+							<div class="view-choose-box">
+								<div class="radio">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>A</span>&nbsp;正确</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>B</span>&nbsp;错误</p>
+									</label>
+								</div>
+							</div>
+							<div class="answer-box" id="right-answer">
+								<span class="right-line"></span>
+								<span>正确答案：<b>B</b></span>
+							</div>
+							<div class="answer-box" id="answer-analy">
+								<span class="right-line"></span>
+								<span>答案解析：<b>以为ACD是错的，所以B是对</b></span>
+							</div>
+						</div>
+						<div class="view-box blue-box border-top-none">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.社会主义法治理念的基本含义就是社会主义法制的精神和灵魂，是立法、执法、司法、守法和法律监督等法制领域的基本指导思想守法和法律监督等法制领域的基本指导思想。</span>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+							</div>
+							<div class="view-choose-box">
+								<div class="radio">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>A</span>&nbsp;正确</p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										<input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2" disabled>
+										<p><span>B</span>&nbsp;错误</p>
+									</label>
+								</div>
+							</div>
+							<div class="answer-box" id="right-answer">
+								<span class="right-line"></span>
+								<span>正确答案：<b>B</b></span>
+							</div>
+							<div class="answer-box" id="answer-analy">
+								<span class="right-line"></span>
+								<span>答案解析：<b>以为ACD是错的，所以B是对</b></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!--         填空题               -->
+				<div class="view-container">
+					<div class="container-title">
+						<span class="font-weight">第四部分填空题</span>
+						<span class="fbt">（共12道）</span>
+					</div>
+					<div class="view-content">
+						<div class="view-box blue-box">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.社会主义法治理念的基本含义就是社会主义法制的精神和灵魂，是___,___,___,____等法制领域的基本指导思想守法和法律监督等法制领域的基本指导思想。</span>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+								
+								
+							</div>
+							<div class="view-choose-box">
+								<div class="radio">
+									<label class="choose">
+										
+										<p><span>1.</span>&nbsp;<input type="text" disabled/></p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										
+										<p><span>2.</span>&nbsp;<input type="text" disabled/></p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										
+										<p><span>3.</span>&nbsp;<input type="text" disabled/></p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										
+										<p><span>4.</span>&nbsp;<input type="text" disabled/></p>
+									</label>
+								</div>
+							</div>
+							<div class="answer-box" id="right-answer">
+								<span class="right-line"></span>
+								<span>正确答案：<b>以为</b><b>自由</b><b>诚信</b><b>发送至</b></span>
+							</div>
+							<div class="answer-box" id="answer-analy">
+								<span class="right-line"></span>
+								<span>答案解析：<b>以为ACD是错的，所以B是对</b></span>
+							</div>
+						</div>
+						<div class="view-box border-top-none">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.社会主义法治理念的基本含义就是社会主义法制的精神和灵魂，是___,___,___,____等法制领域的基本指导思想守法和法律监督等法制领域的基本指导思想。</span>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+								
+								
+							</div>
+							<div class="view-choose-box">
+								<div class="radio">
+									<label class="choose">
+										
+										<p><span>1.</span>&nbsp;<input type="text" disabled/></p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										
+										<p><span>2.</span>&nbsp;<input type="text" disabled/></p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										
+										<p><span>3.</span>&nbsp;<input type="text" disabled/></p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										
+										<p><span>4.</span>&nbsp;<input type="text" disabled/></p>
+									</label>
+								</div>
+							</div>
+							<div class="answer-box" id="right-answer">
+								<span class="right-line"></span>
+								<span>正确答案：<b>以为</b><b>自由</b><b>诚信</b><b>发送至</b></span>
+							</div>
+							<div class="answer-box" id="answer-analy">
+								<span class="right-line"></span>
+								<span>答案解析：<b>以为ACD是错的，所以B是对</b></span>
+							</div>
+						</div>
+						<div class="view-box blue-box border-top-none">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.社会主义法治理念的基本含义就是社会主义法制的精神和灵魂，是___,___,___,____等法制领域的基本指导思想守法和法律监督等法制领域的基本指导思想。</span>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+								
+								
+							</div>
+							<div class="view-choose-box">
+								<div class="radio">
+									<label class="choose">
+										
+										<p><span>1.</span>&nbsp;<input type="text" disabled/></p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										
+										<p><span>2.</span>&nbsp;<input type="text" disabled/></p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										
+										<p><span>3.</span>&nbsp;<input type="text" disabled/></p>
+									</label>
+								</div>
+								<div class="radio" style="margin-top: 6px;">
+									<label class="choose">
+										
+										<p><span>4.</span>&nbsp;<input type="text" disabled/></p>
+									</label>
+								</div>
+							</div>
+							<div class="answer-box" id="right-answer">
+								<span class="right-line"></span>
+								<span>正确答案：<b>1、以为</b><b>2、自由</b><b>3、诚信</b><b>4、发送至</b></span>
+							</div>
+							<div class="answer-box" id="answer-analy">
+								<span class="right-line"></span>
+								<span>答案解析：<b>以为ACD是错的，所以B是对</b></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!--         简答题               -->
+				<div class="view-container">
+					<div class="container-title">
+						<span class="font-weight">第五部分简答题</span>
+						<span class="fbt">（共3道）</span>
+					</div>
+					<div class="view-content">
+						<div class="view-box blue-box">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.一下视频中的事件发生在什么时候</span>
+									<video autoplay="autoplay" controls="controls">
+										<source src="video/马云开讲啦.mp4" type="video/mp4"></source>
+									</video>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+							</div>
+							<div class="view-choose-box">
+								<textarea class="form-control" rows="3" style="resize : none;">
+									</textarea>
+							</div>
+							<div class="answer-box">
+								<span class="right-line"></span>
+								<span>参考答案：<b>围欧杰佛违法欧锦发我欸放假啊我发觉奥法我费劲啊发文件哦阿姐为偶发i我</b></span>
+							</div>
+						</div>
+						<div class="view-box border-top-none">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.简述下面的图片的中心思想和想表达的内容</span>
+									<img src="img/main-bg-compressor.jpg" />
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								<div class="bjbtn_content">
+									<a href="#"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+									<a href="#close-cn" data-toggle="modal"><i class="glyphicon glyphicon-trash"></i>删除</a>
+								</div>
+							</div>
+							<div class="view-choose-box">
+								<textarea class="form-control" rows="3" style="resize : none;">
+									</textarea>
+							</div>
+							<div class="answer-box">
+								<span class="right-line"></span>
+								<span>参考答案：<b>B</b></span>
+							</div>
+						</div>
+						<div class="view-box blue-box border-top-none">
+							<div class="view-title">
+								 	
+								<div class="word">
+									<span>1.社会主义法治理念的基本含义就是社会主义法制的精神和灵魂，是立法、执法、司法、守法和法律监督等法制领域的基本指导思想守法和法律监督等法制领域的基本指导思想。</span>
+								</div>
+								<div class="rtitle">
+									<div class="ico-btn" href="#"><i class="glyphicon glyphicon-th-list"></i></div>
+								</div>
+							</div>
+							<div class="bjbtn" style="display: none;">
+								<div class="bjbtn_top"></div>
+								
+							</div>
+							<div class="view-choose-box">
+								<textarea class="form-control" rows="3" style="resize : none;">
+									</textarea>
+							</div>
+							<div class="answer-box">
+								<span class="right-line"></span>
+								<span>参考答案：<b>B</b></span>
+							</div>
+						</div>
+						<div style="height: 60px;"></div>
+					</div>
+				</div>
+			</div>
+									
+			<!--删除按钮弹窗-->
+			<div id="close-cn" class="modal fade" tabindex="-1">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			        	<!--删除header开始-->
+			            <div class="modal-header">
+			                <div class="table-header border-top-radius">
+			                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			                        <span class="white">&times;</span>
+			                    </button>
+			                    	删除
+			                </div>
+			            </div>
+			        	<!--删除header结束-->
+			        	<!--删除body开始-->
+			            <div class="modal-body">
+			            	<div class="text-center">
+			            		点击确定按钮会删除当前题库知识点信息，您确定要删除么吗？
+			                </div>
+			            </div>
+			        	<!--删除body结束-->
+			        	<!--删除footer开始-->
+			            <div class="modal-footer">
+			            	<button class="btn btn-sm btn-success" data-dismiss="modal" id="sure-close">
+			                    <i class="icon-ok"></i>确定
+			                </button>
+			                <button class="btn btn-sm btn-danger" data-dismiss="modal">
+			                    <i class="icon-remove"></i>取消
+			                </button>
+			            </div>
+			        	<!--删除footer结束-->
+			        </div>
+			    </div>
+			</div>
+			<!--删除按钮弹窗-->
+			
+			<!--footer begin-->
+			<div class="footer">
+			</div>
+			<!--footer end-->
+		</div>
+		<!--body end-->
+		
+	</body>
+</html>

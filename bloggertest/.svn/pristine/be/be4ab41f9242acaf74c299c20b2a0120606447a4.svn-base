@@ -1,0 +1,17 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.*;
+
+public interface Paper_singleService {
+	
+	List<Paper_single> getAllbyPaperid(Paper paper);
+	int addPaper_single(Paper_single ps);
+	int deletePaper_single(Paper_single ps);
+	int updatePaper_single(Paper_single ps);
+	
+	int addPaper_single(Bank_single ps,Integer score,Paper paper);
+	Paper_single selectPaper_single(Paper_single ps);
+
+}

@@ -1,0 +1,17 @@
+.choose img{
+    width: 300px;
+    }
+.word img{
+	width: 300px;
+	margin-bottom: 20px;
+    display: block;
+}
+.word video{
+    width: 400px;
+    margin-bottom: 20px;
+    display: block;
+}
+.choose video{
+    width: 400px;
+    display: block;
+    }

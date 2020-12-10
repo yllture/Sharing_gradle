@@ -1,0 +1,18 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.Bank_fill;
+import com.neuedu.entity.Paper;
+import com.neuedu.entity.Paper_fill;
+
+public interface Paper_fillService {
+	List<Paper_fill> getAllbyPaperid(Paper paper);
+	int addPaper_fill(Paper_fill pf);
+	int deletePaper_fill(Paper_fill pf);
+	int updatePaper_fill(Paper_fill pf);
+	Paper_fill selectPaper_fill(Paper_fill pf);
+	//从题库导出
+	int addPaper_fill2(Bank_fill bankfill,Integer score,Paper paper);
+	
+}

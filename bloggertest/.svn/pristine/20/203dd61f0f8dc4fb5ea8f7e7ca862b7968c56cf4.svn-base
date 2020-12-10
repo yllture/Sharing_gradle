@@ -1,0 +1,15 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.Bank;
+import com.neuedu.entity.Bank_shortanswer;
+import com.neuedu.entity.Bank_shortanswer;
+
+public interface Bank_shortanswerService {
+	List<Bank_shortanswer> getAllbyBankid(Bank b );
+	int addBank_shortanswer(Bank_shortanswer bsa);
+	int updateBank_shortanswer(Bank_shortanswer bsa);
+	int deleteBank_shortanswer(Bank_shortanswer bsa);
+	Bank_shortanswer selectBank_shortanswer(Bank_shortanswer bf);
+}

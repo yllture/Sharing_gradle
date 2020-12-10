@@ -1,0 +1,75 @@
+ <!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>试卷结构</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" th:href="@{../../static/css/bootstrap.css}">
+
+		<link type="text/css" rel="stylesheet" href="css/paper.css" th:href="@{../../static/css/paper.css}" />
+        <script src="js/jquery-1.8.3.min.js" th:src="@{../../static/js/jquery-1.8.3.min.js}" ></script>
+		
+		<script type="text/javascript" src="js/bootstrap.min.js" th:src="@{../../static/js/bootstrap.min.js}"  ></script>
+	</head>
+	<body>
+		
+		<nav class="navbar headbg" style="position:fixed">
+		  	<div class="container header">
+		  		   <!--  <img class="nav-logo" src="img/logo.png" style="width: 50px;height: 50px;margin-right: 10px;border-radius: 50%;"></img> -->
+			 	    <p class="nav-title" th:text="${session.currentPaper.papername+'试卷'}"></p>
+  			</div>
+		</nav>
+
+		
+	
+		<div class="main-container" style="padding-top:100px">
+			<div class="container info-add body-box">
+				<div class="additem-main">
+					<div class="row additem-caption-box">
+						<p class="additem-caption" th:text="${'即将作答，限时'+session.currentPaper.duration}"></p>
+						
+					</div>
+					<div id="sttypechoose" class="additem-content row">
+						
+							<div class="firstbox" th:if="${session.currentPaper.judgenum!=null}">
+									<div class="col-lg-2 col-md-2 col-sm-3 col-xs-5 additem-content-title" >一、判断题</div>
+									<div class="col-lg-9 col-md-8 col-sm-6 col-xs-3 dottedline"></div>
+									<div class="col-lg-1 col-md-2 col-sm-3 col-xs-4 additem-content-num" th:text="${session.currentPaper.judgenum+'题'}"></div>
+							</div>
+						
+						
+							<div class="firstbox" th:if="${session.currentPaper.singlenum!=null}">
+								<div class="col-lg-2 col-md-2 col-sm-3 col-xs-5 additem-content-title">二、单项选择</div>
+								<div class="col-lg-9 col-md-8 col-sm-6 col-xs-3 dottedline"></div>
+								<div class="col-lg-1 col-md-2 col-sm-3 col-xs-4 additem-content-num" th:text="${session.currentPaper.singlenum+'题'}"></div>
+							</div>
+						
+						
+							<div class="firstbox" th:if="${session.currentPaper.multiplenum!=null}">
+								<div class="col-lg-2 col-md-2 col-sm-3 col-xs-5 additem-content-title" >三、多项选择</div>
+								<div class="col-lg-9 col-md-8 col-sm-6 col-xs-3 dottedline"></div>
+								<div class="col-lg-1 col-md-2 col-sm-3 col-xs-4 additem-content-num" th:text="${session.currentPaper.multiplenum+'题'}"></div>
+							</div>
+						
+					
+							<div class="firstbox" th:if="${session.currentPaper.fillnum!=null}">
+								<div class="col-lg-2 col-md-2 col-sm-3 col-xs-5 additem-content-title">四、填空题</div>
+								<div class="col-lg-9 col-md-8 col-sm-6 col-xs-3 dottedline"></div>
+								<div class="col-lg-1 col-md-2 col-sm-3 col-xs-4 additem-content-num" th:text="${session.currentPaper.fillnum+'题'}" ></div>
+							</div>
+						
+							<div class="firstbox" th:if="${session.currentPaper.shortanswernum!=null}">
+								<div class="col-lg-2 col-md-2 col-sm-3 col-xs-5 additem-content-title">五、简答题</div>
+								<div class="col-lg-9 col-md-9 col-sm-7 col-xs-3 dottedline"></div>
+								<div class="col-lg-1 col-md-1 col-sm-2 col-xs-4 additem-content-num" th:text="${session.currentPaper.shortanswernum+'题'}" ></div>
+							</div>
+						
+					</div>
+				</div>
+			</div>
+		<center><button class="btn btn-default"> <a  style="color: black;" href="toExam_paper">我知道了，开始作答</a></button></center>
+		
+	</body>
+</html>

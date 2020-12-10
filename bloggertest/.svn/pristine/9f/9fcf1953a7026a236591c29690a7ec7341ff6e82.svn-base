@@ -1,0 +1,21 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.Bank;
+import com.neuedu.entity.Bank_judge;
+
+public interface Bank_judgeService {
+	
+	List<Bank_judge> getAllbyBankid(Bank b);
+	
+	int addBank_judge(Bank_judge bj);
+	
+	int updateBank_judge(Bank_judge bj);
+	
+	int deleteBank_judge(Bank_judge bj);
+	
+	Bank_judge selectBank_judge(Bank_judge bf);
+	
+
+}

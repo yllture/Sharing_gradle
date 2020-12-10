@@ -1,0 +1,13 @@
+package com.neuedu.service;
+
+import java.util.List;
+
+import com.neuedu.entity.Paper_shortanswer_mov;
+
+public interface Paper_shortanswer_movService {
+
+	int addPaper_shortanswer_mov(Paper_shortanswer_mov psm);
+	int updatePaper_shortanswer_mov(Paper_shortanswer_mov psm);
+	int deletePaper_shortanswer_mov(Paper_shortanswer_mov psm);
+	List<Paper_shortanswer_mov> getAllByid(Paper_shortanswer_mov psm);
+}

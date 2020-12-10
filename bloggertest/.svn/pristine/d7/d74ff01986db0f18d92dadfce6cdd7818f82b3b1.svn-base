@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="title" content="ScoopThemes">
+<meta name="ROBOTS" content="">
+<meta name="description" content="">
+<meta name="abstract" content="">
+
+<title>黑马工厂</title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" th:href="@{static/css/bootstrap.css}" rel="stylesheet">
+<link href="font-awesome-4.7.0/css/font-awesome.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}" rel="stylesheet">
+<link href="font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+<link href="css/bootstrap-theme.css" th:href="@{static/css/bootstrap-theme.css}" rel="stylesheet">
+<link rel="stylesheet" href="css/animations.css" th:href="@{static/css/animations.css}">
+
+<!-- siimple style -->
+<link href="css/index.css" th:href="@{static/css/index.css}" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+<div class="cloud floating">
+	<img src="img/cloud.png"  th:src="@{static/img/cloud.png}" alt="Scoop Themes">
+</div>
+
+<div class="cloud pos1 fliped floating">
+	<img src="img/cloud.png" th:src="@{static/img/cloud.png}" alt="Scoop Themes">
+</div>
+
+<div class="cloud pos2 floating">
+	<img src="img/cloud.png" th:src="@{static/img/cloud.png}" alt="Scoop Themes">
+</div>
+
+<div class="cloud pos3 fliped floating">
+	<img src="img/cloud.png" th:src="@{static/img/cloud.png}" alt="Scoop Themes">
+</div>
+
+
+
+<div class="index-nav collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+ 
+      <ul class="nav navbar-nav navbar-right">
+        <li><a th:if="${session.currentUser}==null" href="tologin">登录</a></li>
+						
+          <li><a th:if="${session.currentUser}==null" href="toregister">注册</a></li>
+		  <li><a th:if="${session.currentUser}!=null and ${session.currentUser.usertype}=='0' " href="toStudentPaperIndex">进入应用</a></li>
+		  <li><a th:if="${session.currentUser}!=null and ${session.currentUser.usertype}=='1' " href="tounpublishteacherPaper">进入应用</a></li>
+      	  <li><a th:if="${session.currentUser}!=null" href="toExamEntrance">考试入口</a></li>
+      	 	
+      </ul>
+  
+</div>
+
+<div id="wrapper" style="display:none">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<img class="logoimg"  th:src="@{static/img/logo.png}" alt="Scoop Themes Logo">
+				<br/>
+				<br/>
+				<h2 class="subtitle">飞马测试</h2>
+				<br/>
+		 
+				<form class="form-inline validate signup" action="" method="get" role="form">
+					<div name="subscribe" value="Get notified!" class="btn btn-theme">用在企业</div>
+					<div name="subscribe" value="Get notified!" class="btn btn-theme">用在学校</div>
+					<div name="subscribe" value="Get notified!" class="btn btn-theme">资格证冲刺</div>
+				</form>
+				<br/>
+			</div>
+			<div class="col-sm-12 align-center">
+				<ul class="social-network social-circle">
+					<li><a href="#" class="icoFacebook" title="QQ"><i class="fa fa-qq" aria-hidden="true"></i></a>
+					</li>
+					<li><a href="#" class="icoTwitter" title="微信"><i class="fa fa-weixin" aria-hidden="true"></i></a>
+					</li>
+					<li><a href="#" class="icoGit" title="新浪微博"><i class="fa fa-weibo" aria-hidden="true"></i></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			
+		</div>
+	</div>
+</div>
+
+
+<script src="js/jquery-1.8.3.min.js"  th:src="@{static/js/jquery-1.8.3.min.js}"></script>
+<script src="js/jquery.form-n-validate.js" th:src="@{static/js/jquery.form-n-validate.js}"></script>
+<script>
+	
+$(document).ready( function () {
+$('#wrapper').height($(document).height());
+$('#wrapper').show("slow");
+// I only have one form on the page but you can be more specific if need be.
+var $form = $('form');
+
+if ( $form.length > 0 ) {
+	$('form input[type="submit"]').bind('click', function ( event ) {
+		if ( event ) event.preventDefault();
+		// validate_input() is a validation function I wrote, you'll have to substitute this with your own.
+		if ( $form.validate() ) { register($form); }
+	});
+}
+});
+
+function appendResult(userText , className, iconClass){
+var resultHTML = "<div class='stretchLeft result "+ className + "'>" + userText + " <span class='fa fa-" + iconClass + "'></span>" + "</div>";
+$('body').append(resultHTML);
+$('.result').delay(10000).fadeOut('1000');
+}
+
+
+function register($form) {
+$.ajax({
+	type: $form.attr('method'),
+	url: $form.attr('action'),
+	data: $form.serialize(),
+	cache       : false,
+	dataType    : 'json',
+	contentType: "application/json; charset=utf-8",
+	error       : function(err) { alert("Could not connect to the registration server. Please try again later."); },
+	success     : function(data) {
+		if (data.result != "success") {
+			appendResult('Wrong Email Or You Are Already Registered, Try Again', 'error', 'exclamation');
+		} else {
+			// It worked, carry on...
+			appendResult('Successful, Check Your Email For Confirmation ', 'success', 'check');
+		}
+	}
+});
+}
+</script>
+
+</body>
+</html>

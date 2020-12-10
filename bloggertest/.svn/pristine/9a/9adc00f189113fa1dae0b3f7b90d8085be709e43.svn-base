@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" th:href="@{static/layui/css/layui.css}">
+	    <link rel="stylesheet" type="text/css" th:href="@{static/css/header.css}"/>
+	    <link rel="stylesheet" type="text/css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.css}"/>
+		<link rel="stylesheet" type="text/css" th:href="@{static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+	    <link rel="stylesheet" type="text/css" th:href="@{static/css/groupview.css}"/>
+	    <link rel="stylesheet" type="text/css" th:href="@{static/css/groupadmin.css}" />
+	    <link rel="stylesheet" type="text/css" th:href="@{static/css/adminwork.css}">
+
+ 	    <title></title>
+	</head>
+	<body class="layui-view-body">
+	    <div class="layui-content">
+	        <div class="layui-page-header adg">
+           <div class="pagewrap adg-right" style="display:inline-block;width:50%;left:48%;padding-top:0px;padding-bottom:0px;">
+	            <ul class="layui-nav" style="background-color:#fff">
+				  <li class="layui-nav-item" style="display:inline-block;">
+					  <a href="/toSetWork"><i class="fa fa-plus" style="font-size: 16px;color: #b0dfb3;"></i>
+	            		<span style="font-size: 18px;color: #b0dfb3;">布置作业</span>
+	            	  </a>
+            	  </li>
+            	  <li class="layui-nav-item" style="display:inline-block;">
+		          <a href="/toAddMember"><i class="fa fa-user-plus" style="font-size: 16px;color: #b0dfb3;"></i>
+		           <span style="font-size: 18px;color: #b0dfb3;">添加</span>
+		           </a>
+		           </li>
+		           <li class="layui-nav-item" style="display:inline-block;">
+            	<a href="/toEditGroup"><i class="fa fa-pencil" style="font-size: 16px;color: #b0dfb3;"></i>
+            		<span style="font-size: 18px;color: #b0dfb3;">编辑</span>
+            	</a>
+            	</li> 
+            	<li class="layui-nav-item" style="display:inline-block;">
+            	<div   th:id="${session.group.c1}" class="share" style="padding:0px 20px;text-align:center;"><i class="fa fa-share" style="font-size: 16px;color: #b0dfb3;"></i>
+            		<span style="font-size: 18px;color: #b0dfb3;">分享</span>
+            		<dl class="layui-nav-child">
+            		<span class="" lay-separator="|" style="visibility: visible;" >
+            		
+					  <dd> <a href="javascript:void(0);" onclick="qqFriend();"><i class="fa fa-qq"></i></a></dd>
+					  <dd><a href="javascript:void(0);" onclick="qqZone();"><i class="fa fa-wechat"></i></a></dd>
+					  <dd><a href="javascript:void(0);" onclick="sinaWeiBo();"><i class="fa fa-weibo"></i></a></dd>
+					 
+					</span>
+					</dl>
+            	</div>
+            	</li>
+            	<li class="layui-nav-item" style="display:inline-block;">
+            	<a href="#"><i class="fa fa-gear" style="font-size: 16px;color: #b0dfb3;"></i>
+            		<span style="font-size: 18px;color: #b0dfb3;">设置</span></a>
+            		<dl class="layui-nav-child layui-anim layui-anim-upbit">
+            			<dd><a href="javascript;" onclick="deleteBut();">解散群</a></dd>
+      					<dd><a href="javascript;" onclick="transBut();">转让群</a></dd>
+            		</dl>
+            	
+            	</li>
+				</ul>
+            </div>
+        </div>
+        <div class="layui-tab">
+		  <ul class="layui-tab-title" style="background-color: #fff;">
+		    <li class="layui-this">批量添加</li>
+		    <li>搜索添加</li>
+		  </ul>
+		  <div class="layui-tab-content">
+		    <div class="layui-tab-item layui-show">
+		    <form action="addMemberlByExcel" method="post" enctype="multipart/form-data">
+		    	<input type="file" id="excelFile" name="file"/>
+		    	<button type="submit" class="layui-btn" id="test1">
+				  <i class="layui-icon">&#xe67c;</i>导入文件
+				</button>
+			</form>
+		    </div>
+		    <div class="layui-tab-item">
+		    	<div class="layui-row">
+		            <div class="layui-card">
+		                <div class="layui-card-body">
+		                	<div class="group-search-box">
+			                    <i class="fa fa-search"></i>
+		                    	<input type="text" placeholder="输入群编号加入群" class="form-control"/>
+		                    	<button type="button" class="group-search-button sig-button">查询</button>
+	                    	</div>
+		                </div>
+		            </div>
+	        	</div>
+		    </div>
+		  </div>
+		</div>
+	        
+	    </div>
+	    <script src="layui/layui.js" th:src="@{static/layui/layui.js}"></script>
+	    <script src="layui/layui.js" th:src="@{static/js/jquery.min.js}"></script>
+	    <script>
+		//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+		layui.use('element', function(){
+		  var element = layui.element;
+		  
+		  //…
+		});
+		$(function(){
+			$(".sig-button").click(function(){
+				var useraccount=$(".form-control").val();
+				//alert(useraccount);
+				if(useraccount!=""){
+					$.ajax({			
+						url:'AddMember',
+						type:'post',
+						data:{"account":useraccount},
+						dataType:'text',
+						success:function(e){
+							alert(e);
+							$(".form-control").val("");
+						}
+					});
+				}else{
+					alert("请输入用户账号");
+				}
+				
+			});
+		});
+		</script>
+	</body>
+</html>
